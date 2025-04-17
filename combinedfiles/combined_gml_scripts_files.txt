@@ -1,85 +1,3 @@
-Folder: D:\PenguinIsleProject\Penguin Isles\scripts\add_to_inventory
-File: add_to_inventory.gml
-/// @function add_to_inventory(item_name)
-/// @param {string} item_name The name of the item to add to the inventory
-function add_to_inventory(item_name) {
-    for (var i = 0; i < array_length(global.inventory); i++) {
-        if (global.inventory[i] == -1) {
-            global.inventory[i] = item_name;
-            show_debug_message("Added " + item_name + " to inventory in slot " + string(i));
-            return;
-        }
-    }
-    show_debug_message("Inventory is full. Cannot add " + item_name);
-}
-Folder: D:\PenguinIsleProject\Penguin Isles\scripts\apply_equipped_items
-File: apply_equipped_items.gml
-function apply_equipped_items() {
-    if (!ds_exists(global.equipped_items, ds_type_map)) {
-        show_debug_message("WARNING: global.equipped_items not initialized.");
-        return;
-    }
-
-    var head_item = ds_map_find_value(global.equipped_items, "head");
-    show_debug_message("Applying equipped items. Head item: " + string(head_item));
-    if (head_item != -1 && head_item != undefined) {
-        skeleton_attachment_set("head_slot", ds_map_find_value(global.item_index_map, head_item));
-        show_debug_message("Equipped head item: " + string(head_item));
-    } else {
-        skeleton_attachment_set("head_slot", -1); // Remove head item
-        show_debug_message("No head item equipped.");
-    }
-
-    var face_item = ds_map_find_value(global.equipped_items, "face");
-    show_debug_message("Applying equipped items. Face item: " + string(face_item));
-    if (face_item != -1 && face_item != undefined) {
-        skeleton_attachment_set("face_slot", ds_map_find_value(global.item_index_map, face_item));
-        show_debug_message("Equipped face item: " + string(face_item));
-    } else {
-        skeleton_attachment_set("face_slot", -1); // Remove face item
-        show_debug_message("No face item equipped.");
-    }
-
-    var neck_item = ds_map_find_value(global.equipped_items, "neck");
-    show_debug_message("Applying equipped items. Neck item: " + string(neck_item));
-    if (neck_item != -1 && neck_item != undefined) {
-        skeleton_attachment_set("neck_slot", ds_map_find_value(global.item_index_map, neck_item));
-        show_debug_message("Equipped neck item: " + string(neck_item));
-    } else {
-        skeleton_attachment_set("neck_slot", -1); // Remove neck item
-        show_debug_message("No neck item equipped.");
-    }
-
-    var body_item = ds_map_find_value(global.equipped_items, "body");
-    show_debug_message("Applying equipped items. Body item: " + string(body_item));
-    if (body_item != -1 && body_item != undefined) {
-        skeleton_attachment_set("body_slot", ds_map_find_value(global.item_index_map, body_item));
-        show_debug_message("Equipped body item: " + string(body_item));
-    } else {
-        skeleton_attachment_set("body_slot", -1); // Remove body item
-        show_debug_message("No body item equipped.");
-    }
-
-    var hand_item = ds_map_find_value(global.equipped_items, "hand");
-    show_debug_message("Applying equipped items. Hand item: " + string(hand_item));
-    if (hand_item != -1 && hand_item != undefined) {
-        skeleton_attachment_set("hand_slot", ds_map_find_value(global.item_index_map, hand_item));
-        show_debug_message("Equipped hand item: " + string(hand_item));
-    } else {
-        skeleton_attachment_set("hand_slot", -1); // Remove hand item
-        show_debug_message("No hand item equipped.");
-    }
-
-    var feet_item = ds_map_find_value(global.equipped_items, "feet");
-    show_debug_message("Applying equipped items. Feet item: " + string(feet_item));
-    if (feet_item != -1 && feet_item != undefined) {
-        skeleton_attachment_set("feet_slot", ds_map_find_value(global.item_index_map, feet_item));
-        show_debug_message("Equipped feet item: " + string(feet_item));
-    } else {
-        skeleton_attachment_set("feet_slot", -1); // Remove feet item
-        show_debug_message("No feet item equipped.");
-    }
-}
 Folder: D:\PenguinIsleProject\Penguin Isles\scripts\draw_equipped_items
 File: draw_equipped_items.gml
 /// @function update_equipped_items_display()
@@ -103,19 +21,7 @@ function update_equipped_items_display() {
         var slot_x = start_x + (i mod 3) * slot_size;
         var slot_y = start_y + (i div 3) * slot_size;
 
-        // Draw slot background
-        draw_set_color(c_gray);
-        draw_rectangle(slot_x, slot_y, slot_x + slot_size, slot_y + slot_size, false);
-
-        if (item_name != -1 && item_name != undefined) {
-            var sprite = ds_map_find_value(global.item_sprite_map, item_name);
-            if (sprite != undefined) {
-                draw_sprite_stretched(sprite, 0, slot_x, slot_y, slot_size, slot_size);
-            } else {
-                show_debug_message("Warning: No sprite defined for " + item_name);
-            }
-        }
-    }
+	}
 }
 Folder: D:\PenguinIsleProject\Penguin Isles\scripts\draw_item_card
 File: draw_item_card.gml
@@ -172,55 +78,29 @@ File: equip_item.gml
 /// @param {string} slot The name of the slot to equip the item to (e.g., "head", "body").
 /// @param {string} item_name The name of the item to equip.
 function equip_item(slot, item_name) {
-    show_debug_message("Attempting to equip item: " + item_name + " to slot: " + slot);
+    show_debug_message("Attempting to equip item: '" + item_name + "' to slot: '" + slot + "'");
+
+    // Ensure the global map exists
+    if (!ds_exists(global.equipped_items, ds_type_map)) {
+        show_debug_message("ERROR: global.equipped_items map does not exist!");
+        // Optionally re-initialize it here if needed, but it should be done in obj_initializer
+        return;
+    }
+
+    // Ensure the slot key exists in the map
     if (ds_map_exists(global.equipped_items, slot)) {
+        // Update the map with the item name
         global.equipped_items[? slot] = item_name;
-        show_debug_message("Equipped " + item_name + " to " + slot);
-        apply_equipped_items(); // Apply immediately
+        show_debug_message("Equipped '" + item_name + "' to slot '" + slot + "'.");
+        // Display the current state of the map for debugging
+        // show_debug_message("Current global.equipped_items: " + ds_map_write(global.equipped_items));
+
+        // NOTE: Removed call to apply_equipped_items();
+        // The player object's Draw event handles the visual update.
+
     } else {
-        show_debug_message("Invalid slot: " + slot);
+        show_debug_message("ERROR: Invalid equipment slot specified: '" + slot + "'");
     }
-}
-Folder: D:\PenguinIsleProject\Penguin Isles\scripts\inventory_click_handle
-File: inventory_click_handle.gml
-/// @function inventory_click_handler(item_index)
-/// @param {real} item_index The index of the item in the inventory array.
-function inventory_click_handler(item_index) {
-    var item_name = global.inventory[item_index];
-    if (item_name != -1) {
-        var item_type = ds_map_find_value(global.item_type_map, item_name);
-        if (item_type != undefined) {
-            // Check if the slot is occupied
-            var current_item = ds_map_find_value(global.equipped_items, item_type);
-            if (current_item != -1 && current_item != undefined) {
-                unequip_item(item_type);
-                add_to_inventory(current_item);
-                show_debug_message("Unequipped " + current_item + " from " + item_type + " and returned to inventory.");
-            }
-            // Equip the new item and remove from inventory
-            equip_item(item_type, item_name);
-            remove_from_inventory(item_name);
-            show_debug_message("Equipped " + item_name + " to " + item_type + " slot.");
-        } else {
-            show_debug_message("Error: Item type for " + item_name + " is undefined.");
-        }
-    } else {
-        show_debug_message("Error: No item in slot " + string(item_index));
-    }
-}
-Folder: D:\PenguinIsleProject\Penguin Isles\scripts\remove_from_inventory
-File: remove_from_inventory.gml
-/// @function remove_from_inventory(item_name)
-/// @param {string} item_name The name of the item to remove from the inventory
-function remove_from_inventory(item_name) {
-    for (var i = 0; i < array_length(global.inventory); i++) {
-        if (global.inventory[i] == item_name) {
-            global.inventory[i] = -1;
-            show_debug_message("Removed " + item_name + " from inventory slot " + string(i));
-            return;
-        }
-    }
-    show_debug_message(item_name + " not found in inventory");
 }
 Folder: D:\PenguinIsleProject\Penguin Isles\scripts\scr_camera_easing
 File: scr_camera_easing.gml
@@ -239,163 +119,245 @@ return [world_x, world_y];
 
 Folder: D:\PenguinIsleProject\Penguin Isles\scripts\scr_handle_collision
 File: scr_handle_collision.gml
+// scripts/scr_handle_collision/scr_handle_collision.gml
 function handle_collision(axis, speed) {
     var sign_speed = sign(speed);
     var abs_speed = abs(speed);
     var move_dist = 0;
-    var step = abs_speed;
-    
-    if (abs_speed == 0) return 0;
-    
-    while (step > 0.5) {  // Precision threshold
+    var step = abs_speed; // Start step size based on absolute speed
+
+    if (abs_speed == 0) return 0; // No speed, no movement needed
+
+    // Iteratively check smaller steps for precision
+    while (step > 0.5) {  // Precision threshold (adjust if needed)
+        var check_x = x;
+        var check_y = y;
         if (axis == "x") {
-            if (!place_meeting(x + (move_dist + step) * sign_speed, y, obj_wall)) {
-                move_dist += step;
-            }
-        } else {
-            if (!place_meeting(x, y + (move_dist + step) * sign_speed, obj_wall)) {
-                move_dist += step;
-            }
+            check_x += (move_dist + step) * sign_speed;
+        } else { // axis == "y"
+            check_y += (move_dist + step) * sign_speed;
         }
+
+        if (!place_meeting(check_x, check_y, obj_wall)) {
+            // If this step is clear, add it to the distance we can move
+            move_dist += step;
+        }
+        // Halve the step size for the next iteration
         step /= 2;
     }
-    
-    if (axis == "x") x += move_dist * sign_speed;
-    else y += move_dist * sign_speed;
-    
+
+    // Apply the final calculated movement directly to the instance's coordinates
+    if (axis == "x") {
+        x += move_dist * sign_speed;
+    } else { // axis == "y"
+        y += move_dist * sign_speed;
+    }
+
+    // Return the actual distance moved (can be useful, but we won't use it for direct position update)
     return move_dist * sign_speed;
 }
-Folder: D:\PenguinIsleProject\Penguin Isles\scripts\scr_has_item
-File: scr_has_item.gml
-function has_item(item_name) {
-    if (!variable_global_exists("inventory") || !is_array(global.inventory)) {
-        show_debug_message("Warning: global.inventory is not initialized or not an array.");
-        global.inventory = []; // Reinitialize if invalid
-        return false;
-    }
-    for (var i = 0; i < array_length(global.inventory); i++) {
-        if (global.inventory[i] == item_name) {
-            return true;
+Folder: D:\PenguinIsleProject\Penguin Isles\scripts\scr_initialize_item_data
+File: scr_initialize_item_data.gml
+/// @function scr_initialize_item_data()
+/// @description Defines all static item properties and populates the lookup maps.
+///              Should be called ONLY ONCE at game start.
+function scr_initialize_item_data() {
+
+    show_debug_message("--- Running scr_initialize_item_data ---");
+
+    // 1. Define Master Item Data Structure
+    //    Using a struct where keys are item names. Each item has its properties.
+    //    index: Numerical ID for inventory arrays/saving. MUST BE UNIQUE.
+    //    type:  Equipment slot ("head", "face", "body", etc.) or "none" if not equippable.
+    //    sprite: Sprite used when EQUIPPED (e.g., spr_player_betahat). Use 'undefined' or a placeholder for non-equippables if needed.
+    //    object: Object created when DROPPED (e.g., obj_beta_hat). Use 'undefined' if item cannot be dropped as an object.
+    //    inv_sprite: (Optional) Sprite specifically for inventory display (if different from equipped/drop). Defaults to using index on spr_inventory_items.
+    //    price: (Optional) Cost in coins for shop system.
+    //    description: (Optional) Text description for UI.
+    global.item_definitions = {
+        // Name             : { index: #, type: "slot/none", sprite: spr_,                object: obj_, /* optional... */ }
+        "Beta Hat"          : { index: 0,  type: "head", sprite: spr_player_betahat,     object: obj_beta_hat },
+        "Party Hat"         : { index: 1,  type: "head", sprite: spr_player_partyhat,    object: obj_party_hat },
+        "Wrench"            : { index: 2,  type: "none", sprite: undefined,              object: obj_wrench_item },
+        "Tube"              : { index: 3,  type: "none", sprite: undefined,              object: obj_tube },
+        "Toboggan"          : { index: 4,  type: "none", sprite: undefined,              object: obj_toboggan },
+        "Battery"           : { index: 5,  type: "none", sprite: undefined,              object: obj_battery },
+        "Spy Phone"         : { index: 6,  type: "none", sprite: undefined,              object: obj_spyphone_item },
+        "Broken Spy Phone"  : { index: 7,  type: "none", sprite: undefined,              object: obj_broken_spyphone_item },
+        "EPF Phone"         : { index: 8,  type: "none", sprite: undefined,              object: obj_epfphone_item },
+        "Fishing Rod"       : { index: 9,  type: "none", sprite: undefined,              object: obj_fishing_rod },
+        "Jackhammer"        : { index: 10, type: "none", sprite: undefined,              object: obj_Jackhammer_item },
+        "Snow Shovel"       : { index: 11, type: "none", sprite: undefined,              object: obj_snowshovel_item },
+        "Pizza Slice"       : { index: 12, type: "none", sprite: undefined,              object: obj_pizzaslice_item },
+        "Puffle O"          : { index: 13, type: "none", sprite: undefined,              object: obj_puffleo_item },
+        "Box Puffle O"      : { index: 14, type: "none", sprite: undefined,              object: obj_boxpuffleo_item },
+        "Fish"              : { index: 15, type: "none", sprite: undefined,              object: undefined },
+        "Mullet"            : { index: 16, type: "none", sprite: undefined,              object: undefined },
+        "Wood"              : { index: 17, type: "none", sprite: undefined,              object: obj_wood_item },
+        "Snow"              : { index: 18, type: "none", sprite: undefined,              object: undefined },
+        "Snow Blaster"      : { index: 19, type: "none", sprite: undefined,              object: obj_snowblaster_item },
+        "Ghost Costume"     : { index: 20, type: "body", sprite: spr_ghostcostume_sheet, object: obj_ghostcostume_item },
+        "Black Sun Glasses" : { index: 21, type: "face", sprite: spr_blkglasses_sheet,   object: obj_blacksunglasses_item },
+        "Black Hoodie"      : { index: 22, type: "body", sprite: spr_blkhoodie_sheet,    object: obj_blackhoodie_item },
+        "Miners Hard Hat"   : { index: 23, type: "head", sprite: spr_minerhat_sheet,     object: obj_minershardhat_item },
+        "Tour Hat"          : { index: 24, type: "head", sprite: spr_tourhat_sheet,      object: obj_tourhat_item },
+        // Add future items here following the { index: #, type: "", sprite: spr_, object: obj_ } format
+    };
+    show_debug_message("Defined global.item_definitions struct.");
+
+    // 2. Ensure Helper Lookup Maps Exist (Create if they don't)
+    //    These provide faster lookups and are used by existing code.
+    if (!variable_global_exists("item_index_map") || !ds_exists(global.item_index_map, ds_type_map)) { global.item_index_map = ds_map_create(); show_debug_message("Created global.item_index_map");}
+    if (!variable_global_exists("item_type_map") || !ds_exists(global.item_type_map, ds_type_map)) { global.item_type_map = ds_map_create(); show_debug_message("Created global.item_type_map");}
+    if (!variable_global_exists("item_sprite_map") || !ds_exists(global.item_sprite_map, ds_type_map)) { global.item_sprite_map = ds_map_create(); show_debug_message("Created global.item_sprite_map");}
+    if (!variable_global_exists("item_object_map") || !ds_exists(global.item_object_map, ds_type_map)) { global.item_object_map = ds_map_create(); show_debug_message("Created global.item_object_map");}
+    show_debug_message("Ensured item lookup maps exist.");
+
+    // 3. Clear and Populate Helper Maps from the Master Definition
+    ds_map_clear(global.item_index_map);
+    ds_map_clear(global.item_type_map);
+    ds_map_clear(global.item_sprite_map);
+    ds_map_clear(global.item_object_map);
+
+    var item_names = variable_struct_get_names(global.item_definitions);
+    for (var i = 0; i < array_length(item_names); i++) {
+        var name = item_names[i];
+        var data = global.item_definitions[$ name]; // Get the struct for this item
+
+        // Populate index map (Name -> Index)
+        // Essential for inventory array which stores indices
+        if (variable_struct_exists(data, "index")) {
+            ds_map_add(global.item_index_map, name, data.index);
+        } else {
+            show_debug_message("CRITICAL WARNING: Item '" + name + "' missing 'index' property!");
+        }
+
+        // Populate type map (Name -> Slot Type)
+        // Used for equipping items to the correct slot
+        if (variable_struct_exists(data, "type") && data.type != "none") {
+            ds_map_add(global.item_type_map, name, data.type);
+        }
+
+        // Populate sprite map (Name -> Sprite Resource for EQUIPPED view)
+        // Used by player draw event
+        if (variable_struct_exists(data, "sprite") && !is_undefined(data.sprite)) {
+            if (sprite_exists(data.sprite)) {
+                 ds_map_add(global.item_sprite_map, name, data.sprite);
+            } else {
+                 show_debug_message("WARNING: Sprite " + string(data.sprite) + " for item '" + name + "' does not exist!");
+                 // Maybe add a default/placeholder sprite here?
+                 // ds_map_add(global.item_sprite_map, name, spr_placeholder_item);
+            }
+        }
+
+        // Populate object map (Name -> Object Resource for DROPPED view)
+        // Used by inventory_drop_active_item
+        if (variable_struct_exists(data, "object") && !is_undefined(data.object)) {
+            if (object_exists(data.object)) {
+                 ds_map_add(global.item_object_map, name, data.object);
+            } else {
+                show_debug_message("WARNING: Object " + object_get_name(data.object) + " for item '" + name + "' does not exist!");
+                 // Maybe add a default/placeholder object?
+                 // ds_map_add(global.item_object_map, name, obj_generic_dropped_item);
+            }
         }
     }
-    return false;
+    show_debug_message("Populated item lookup maps (Index, Type, Sprite, Object).");
+    show_debug_message("--- Finished scr_initialize_item_data ---");
 }
 Folder: D:\PenguinIsleProject\Penguin Isles\scripts\scr_init_globals
 File: scr_init_globals.gml
+/// @function init_globals()
+/// @description Initializes global variables and ensures essential DYNAMIC structures exist.
+///              Only sets default *game state* values for a new game.
+///              Static item data is handled separately by scr_initialize_item_data().
 function init_globals() {
+    show_debug_message("--- Running init_globals (Refactored) ---");
+
+    // --- Section 1: Ensure Essential Flags/Variables Exist (Run Always) ---
+    if (!variable_global_exists("is_loading_game")) { global.is_loading_game = false; }
+    if (!variable_global_exists("player_instance")) { global.player_instance = noone; }
+    if (!variable_global_exists("inventory_expanded")) { global.inventory_expanded = false; show_debug_message("Ensured global.inventory_expanded exists."); }
+    if (!variable_global_exists("game_paused")) { global.game_paused = false; show_debug_message("Ensured global.game_paused exists."); }
+    if (!variable_global_exists("is_pause_menu_active")) { global.is_pause_menu_active = false; show_debug_message("Ensured global.is_pause_menu_active exists."); }
+    if (!variable_global_exists("player_controls_enabled")) { global.player_controls_enabled = true; show_debug_message("Ensured global.player_controls_enabled exists."); }
+    if (!variable_global_exists("colour_picker_active")) { global.colour_picker_active = false; show_debug_message("Ensured global.colour_picker_active exists."); }
+    // Keep party_hat_visible/beta_hat_visible for now, but they might be redundant if relying purely on equipped_items
+    if (!variable_global_exists("party_hat_visible")) { global.party_hat_visible = false; show_debug_message("Ensured global.party_hat_visible exists."); }
+    if (!variable_global_exists("beta_hat_visible")) { global.beta_hat_visible = false; show_debug_message("Ensured global.beta_hat_visible exists."); }
+    if (!variable_global_exists("skin_switching")) { global.skin_switching = false; show_debug_message("Ensured global.skin_switching exists."); }
+
+    // --- Section 2: Ensure Core DYNAMIC Data Structures Exist (Run Always) ---
+    //                 (Don't clear here if loading, only ensure existence)
+    //                 Item lookup maps (item_index_map etc.) are handled by scr_initialize_item_data
+    if (!variable_global_exists("following_puffles") || !ds_exists(global.following_puffles, ds_type_list)) { if (variable_global_exists("following_puffles") && ds_exists(global.following_puffles, ds_type_list)) ds_list_destroy(global.following_puffles); global.following_puffles = ds_list_create(); show_debug_message("Ensured global.following_puffles list exists."); }
+    if (!variable_global_exists("room_states") || !ds_exists(global.room_states, ds_type_map)) { if (variable_global_exists("room_states") && ds_exists(global.room_states, ds_type_map)) ds_map_destroy(global.room_states); global.room_states = ds_map_create(); show_debug_message("Ensured global.room_states map exists."); }
+    if (!variable_global_exists("active_quests") || !ds_exists(global.active_quests, ds_type_list)) { if (variable_global_exists("active_quests") && ds_exists(global.active_quests, ds_type_list)) ds_list_destroy(global.active_quests); global.active_quests = ds_list_create(); show_debug_message("Ensured global.active_quests list exists."); }
+    if (!variable_global_exists("completed_quests") || !ds_exists(global.completed_quests, ds_type_list)) { if (variable_global_exists("completed_quests") && ds_exists(global.completed_quests, ds_type_list)) ds_list_destroy(global.completed_quests); global.completed_quests = ds_list_create(); show_debug_message("Ensured global.completed_quests list exists."); }
+    // Inventory array (ensure it exists, size might be set here or defaults later)
+    if (!variable_global_exists("inventory") || !is_array(global.inventory)) {
+	    global.inventory = array_create(INVENTORY_SIZE, -1); // Use macro
+	    show_debug_message("Ensured global.inventory array exists (Size " + string(INVENTORY_SIZE) + ").");
+	}
+    // Equipped items map (ensure it exists with base slots)
+    if (!variable_global_exists("equipped_items") || !ds_exists(global.equipped_items, ds_type_map)) { if (variable_global_exists("equipped_items") && ds_exists(global.equipped_items, ds_type_map)) ds_map_destroy(global.equipped_items); global.equipped_items = ds_map_create(); ds_map_add(global.equipped_items, "head", -1); ds_map_add(global.equipped_items, "face", -1); ds_map_add(global.equipped_items, "neck", -1); ds_map_add(global.equipped_items, "body", -1); ds_map_add(global.equipped_items, "hand", -1); ds_map_add(global.equipped_items, "feet", -1); show_debug_message("Ensured global.equipped_items map exists with slots."); }
+
+    // --- Camera Initialization (Run Always) ---
+    if (!variable_global_exists("camera") || !is_real(global.camera) || global.camera < 0) {
+        if (variable_global_exists("camera")) { show_debug_message("init_globals: global.camera holds invalid value (" + string(global.camera) + "). Recreating camera."); }
+        else { show_debug_message("init_globals: global.camera variable does not exist. Creating camera."); }
+        global.camera = camera_create();
+        view_set_camera(0, global.camera);
+        show_debug_message("init_globals: Created new global.camera. ID: " + string(global.camera));
+    } else {
+        show_debug_message("init_globals: Valid global.camera already exists. ID: " + string(global.camera));
+        if (view_get_camera(0) != global.camera) {
+            view_set_camera(0, global.camera);
+            show_debug_message("init_globals: Ensured view 0 uses existing global.camera.");
+        }
+    }
+
+    // --- Section 3: Loading Check ---
+    if (variable_global_exists("is_loading_game") && global.is_loading_game == true) {
+        show_debug_message("init_globals: Skipping NEW GAME default value assignments during game load.");
+        exit; // Don't set new game defaults if loading
+    }
+
+    // --- Section 4: Default Value Assignments (Only for NEW GAME) ---
+    show_debug_message("init_globals: Setting default values for NEW GAME.");
     global.player_x = 170;
     global.player_y = 154;
     global.warp_target_x = undefined;
     global.warp_target_y = undefined;
     global.warp_target_face = undefined;
-    global.is_pause_menu_active = false;
-    global.player_instance = noone;
     global.player_health = 100;
     global.score = 0;
-    global.is_game_paused = false;
-    global.inventory_open = false;
-    global.repair_complete = false;
-    global.is_loading_game = false;
-    global.expanded_hud_open = false;
+    global.repair_complete = false; // Used by obj_inventory check
+    global.player_color = make_color_rgb(7, 167, 163); // Default starting color (Cyan)
+	global.inventory = array_create(INVENTORY_SIZE, -1); // Use macro
 
-    if (!variable_global_exists("following_puffles") || !ds_exists(global.following_puffles, ds_type_list)) {
-        global.following_puffles = ds_list_create();
-        show_debug_message("Initialized global.following_puffles.");
-    }
-    if (!variable_global_exists("room_states") || !ds_exists(global.room_states, ds_type_map)) {
-        global.room_states = ds_map_create();
-        show_debug_message("Initialized global.room_states.");
-    }
-    if (!variable_global_exists("active_quests") || !ds_exists(global.active_quests, ds_type_list)) {
-        global.active_quests = ds_list_create();
-        show_debug_message("Initialized global.active_quests.");
-    }
-    if (!variable_global_exists("completed_quests") || !ds_exists(global.completed_quests, ds_type_list)) {
-        global.completed_quests = ds_list_create();
-        show_debug_message("Initialized global.completed_quests.");
-    }
-
-    global.player_instance = noone; // Reset to noone, set later
-    global.camera = instance_exists(obj_camera) ? obj_camera : instance_create_layer(0, 0, "Instances", obj_camera);
-    show_debug_message("Initialized global.camera with ID: " + string(global.camera));
-
-    if (!variable_global_exists("inventory") || !is_array(global.inventory)) {
-        global.inventory = array_create(42, -1); // Assuming inventory size is 42
-        show_debug_message("Initialized global.inventory as an array of size 42.");
+    // Clear DYNAMIC data structures specifically for a NEW game
+    if (ds_exists(global.following_puffles, ds_type_list)) { ds_list_clear(global.following_puffles); }
+    // Clear room_states map and destroy any contained lists
+    if (ds_exists(global.room_states, ds_type_map)) {
+         var _keys = ds_map_keys_to_array(global.room_states);
+         for (var i = 0; i < array_length(_keys); i++) {
+             var _list = global.room_states[? _keys[i]];
+             if (ds_exists(_list, ds_type_list)) { ds_list_destroy(_list); }
+         }
+         ds_map_clear(global.room_states);
+     }
+    if (ds_exists(global.active_quests, ds_type_list)) { ds_list_clear(global.active_quests); }
+    if (ds_exists(global.completed_quests, ds_type_list)) { ds_list_clear(global.completed_quests); }
+    // Reset inventory array
+    global.inventory = array_create(42, -1);
+    // Reset equipped items map
+    if (ds_exists(global.equipped_items, ds_type_map)) {
+        ds_map_clear(global.equipped_items);
+        ds_map_add(global.equipped_items, "head", -1); ds_map_add(global.equipped_items, "face", -1); ds_map_add(global.equipped_items, "neck", -1); ds_map_add(global.equipped_items, "body", -1); ds_map_add(global.equipped_items, "hand", -1); ds_map_add(global.equipped_items, "feet", -1);
     }
 
-    // Initialize equipped_items (Initialization Check Step)
-    if (!variable_global_exists("equipped_items") || !ds_exists(global.equipped_items, ds_type_map)) {
-        global.equipped_items = ds_map_create();
-        ds_map_add(global.equipped_items, "head", -1);
-        ds_map_add(global.equipped_items, "face", -1);
-        ds_map_add(global.equipped_items, "neck", -1);
-        ds_map_add(global.equipped_items, "body", -1);
-        ds_map_add(global.equipped_items, "hand", -1);
-        ds_map_add(global.equipped_items, "feet", -1);
-        show_debug_message("Initialized global.equipped_items as ds_map with slots set to -1.");
-    } else {
-        show_debug_message("global.equipped_items already initialized.");
-    }
-
-    // Initialize item_index_map
-    if (!variable_global_exists("item_index_map") || !ds_exists(global.item_index_map, ds_type_map)) {
-        global.item_index_map = ds_map_create();
-        ds_map_add(global.item_index_map, "Beta Hat", 0);
-        ds_map_add(global.item_index_map, "Party Hat", 1);
-        ds_map_add(global.item_index_map, "Wrench", 2);
-        ds_map_add(global.item_index_map, "Tube", 3);
-        ds_map_add(global.item_index_map, "Toboggan", 4);
-        ds_map_add(global.item_index_map, "Battery", 5);
-        ds_map_add(global.item_index_map, "Spy Phone", 6);
-        ds_map_add(global.item_index_map, "Broken Spy Phone", 7);
-        ds_map_add(global.item_index_map, "EPF Phone", 8);
-        ds_map_add(global.item_index_map, "Fishing Rod", 9);
-        ds_map_add(global.item_index_map, "Jackhammer", 10);
-        ds_map_add(global.item_index_map, "Snow Shovel", 11);
-        ds_map_add(global.item_index_map, "Pizza Slice", 12);
-        ds_map_add(global.item_index_map, "Puffle O", 13);
-        ds_map_add(global.item_index_map, "Box Puffle O", 14);
-        ds_map_add(global.item_index_map, "Fish", 15);
-        ds_map_add(global.item_index_map, "Mullet", 16);
-        ds_map_add(global.item_index_map, "Wood", 17);
-        ds_map_add(global.item_index_map, "Snow", 18);
-        ds_map_add(global.item_index_map, "Snow Blaster", 19);
-        ds_map_add(global.item_index_map, "Ghost Costume", 20);
-        ds_map_add(global.item_index_map, "Black Sun Glasses", 21);
-        ds_map_add(global.item_index_map, "Black Hoodie", 22);
-        ds_map_add(global.item_index_map, "Miners Hard Hat", 23);
-        ds_map_add(global.item_index_map, "Tour Hat", 24);
-        show_debug_message("Initialized global.item_index_map with item mappings.");
-    }
-
-    // Initialize item_type_map
-    if (!variable_global_exists("item_type_map") || !ds_exists(global.item_type_map, ds_type_map)) {
-        global.item_type_map = ds_map_create();
-        ds_map_add(global.item_type_map, "Beta Hat", "head");
-        ds_map_add(global.item_type_map, "Party Hat", "head");
-        ds_map_add(global.item_type_map, "Black Sun Glasses", "face");
-        ds_map_add(global.item_type_map, "Black Hoodie", "body");
-        ds_map_add(global.item_type_map, "Miners Hard Hat", "head");
-        ds_map_add(global.item_type_map, "Tour Hat", "head");
-        ds_map_add(global.item_type_map, "Ghost Costume", "body");
-        show_debug_message("Initialized global.item_type_map.");
-    }
-
-    // Initialize item_sprite_map
-    if (!variable_global_exists("item_sprite_map") || !ds_exists(global.item_sprite_map, ds_type_map)) {
-        global.item_sprite_map = ds_map_create();
-        ds_map_add(global.item_sprite_map, "Beta Hat", spr_player_betahat);
-        ds_map_add(global.item_sprite_map, "Party Hat", spr_player_partyhat);
-        //ds_map_add(global.item_sprite_map, "Ghost Costume", spr_ghostcostume_sheet); // Ensure this sprite exists
-        ds_map_add(global.item_sprite_map, "Black Sun Glasses", spr_blkglasses_sheet);
-        ds_map_add(global.item_sprite_map, "Black Hoodie", spr_blkhoodie_sheet);
-        ds_map_add(global.item_sprite_map, "Miners Hard Hat", spr_minerhat_sheet);
-        ds_map_add(global.item_sprite_map, "Tour Hat", spr_tourhat_sheet);
-        show_debug_message("Initialized global.item_sprite_map.");
-    }
-
-    show_debug_message("Global variables initialized via init_globals.");
+    show_debug_message("Finished setting default values via init_globals.");
 }
 Folder: D:\PenguinIsleProject\Penguin Isles\scripts\scr_init_sprites
 File: scr_init_sprites.gml
@@ -411,140 +373,258 @@ function init_sprites(right, up, left, down, up_right, up_left, down_right, down
 }
 Folder: D:\PenguinIsleProject\Penguin Isles\scripts\scr_load_game
 File: scr_load_game.gml
-// Load Game Function
+/// @function load_game()
+/// @description Loads the game state from savegame.sav
 function load_game() {
-    init_globals();
-    
+    show_debug_message("--- Running load_game ---");
+
     // Check for save file
     if (!file_exists("savegame.sav")) {
-        show_debug_message("No save file found.");
+        show_debug_message("Load Game: No save file found.");
         return false;
     }
 
     // Read save file
     var file = file_text_open_read("savegame.sav");
     if (file == -1) {
-        show_debug_message("ERROR: Failed to open save file.");
+        show_debug_message("Load Game ERROR: Failed to open save file.");
         return false;
     }
-
-    var json = file_text_read_string(file);
+    var json_string = file_text_read_string(file);
     file_text_close(file);
-    
+
+    var save_data = noone; // Initialize save_data
+
+    // --- Attempt to Parse JSON ---
     try {
-        var save_data = json_parse(json);
-        
+        save_data = json_parse(json_string);
+        if (!is_struct(save_data)) {
+             throw "Parsed data is not a struct.";
+        }
+    } catch (_error) {
+        show_debug_message("Load Game FATAL ERROR: Failed to parse save file JSON: " + string(_error));
+        // Optionally attempt backup load here
+        return false; // Stop loading
+    }
+
+    // --- Load Data within Try/Catch for robustness ---
+    try {
         // Validate save data version
         if (!variable_struct_exists(save_data, "version")) {
             throw "Save file missing version information";
         }
-        
-        // Version compatibility check (can be expanded for future versions)
         if (save_data.version != "1.0.0") {
-            show_debug_message("WARNING: Save file version mismatch. Attempting to load anyway.");
+            show_debug_message("Load Game WARNING: Save file version mismatch. Attempting to load anyway.");
+            // Add version migration logic here in the future if needed
         }
 
+        // *** Set Loading Flag ***
         global.is_loading_game = true;
-        
-        // Load player data
-        if (variable_struct_exists(save_data, "player")) {
-            var player_data = save_data.player;
-            
-            // Load basic player properties
-            global.player_x = player_data.x;
-            global.player_y = player_data.y;
-            global.current_skin = player_data.skin;
-            global.player_color = player_data.color;
-            global.last_player_face = player_data.face;
-            global.expanded_hud_open = player_data.expanded_hud_open;
-            
-            // Load inventory
-            if (variable_struct_exists(player_data, "inventory")) {
-                if (is_array(player_data.inventory)) {
-                    global.inventory = player_data.inventory;
-                } else {
-                    show_debug_message("WARNING: Invalid inventory data format");
-                    global.inventory = array_create(42, -1);
-                }
-            }
-            
-            // Load equipped items
-            if (variable_struct_exists(player_data, "equipped_items")) {
-                var equipped_string = player_data.equipped_items;
-                if (is_string(equipped_string)) {
-                    var equipped_buffer = buffer_create(32, buffer_grow, 1);
-                    buffer_base64_decode_ext(equipped_buffer, equipped_string, 0);
-                    buffer_seek(equipped_buffer, buffer_seek_start, 0);
-                    
-                    // Clear and repopulate equipped items
-                    ds_map_clear(global.equipped_items);
-                    var slots = ["head", "face", "neck", "body", "hand", "feet"];
-                    for (var i = 0; i < array_length(slots); i++) {
-                        var item = buffer_read(equipped_buffer, buffer_s32);
-                        ds_map_add(global.equipped_items, slots[i], item);
-                    }
-                    
-                    buffer_delete(equipped_buffer);
-                } else {
-                    show_debug_message("WARNING: Invalid equipped_items format");
-                }
-            }
-        }
-        
-        // Load game state
+        show_debug_message("Load Game: Set global.is_loading_game = true");
+
+        // --- Ensure Global Structures Exist (Crucial before loading into them) ---
+        // (These should ideally also be checked/created in init_globals, but good safety here)
+        if (!variable_global_exists("room_states") || !ds_exists(global.room_states, ds_type_map)) { global.room_states = ds_map_create(); }
+        if (!variable_global_exists("active_quests") || !ds_exists(global.active_quests, ds_type_list)) { global.active_quests = ds_list_create(); }
+        if (!variable_global_exists("completed_quests") || !ds_exists(global.completed_quests, ds_type_list)) { global.completed_quests = ds_list_create(); }
+        if (!variable_global_exists("equipped_items") || !ds_exists(global.equipped_items, ds_type_map)) { global.equipped_items = ds_map_create(); /* Add default empty slots */ }
+        if (!variable_global_exists("inventory") || !is_array(global.inventory)) { global.inventory = array_create(42, -1); }
+
+        // Default target room if loading fails partially
+        global.target_room = rm_welcome_room;
+
+        // --- Load Game State ---
         if (variable_struct_exists(save_data, "game_state")) {
             var game_state = save_data.game_state;
-            
-            // Load room states
-            if (variable_struct_exists(game_state, "room_states")) {
-                ds_map_clear(global.room_states);
-                var room_states = game_state.room_states;
-                var keys = variable_struct_get_names(room_states);
-                for (var i = 0; i < array_length(keys); i++) {
-                    ds_map_add(global.room_states, keys[i], room_states[$ keys[i]]);
+
+            // Load target room
+            if (variable_struct_exists(game_state, "current_room")) {
+                var loaded_room = game_state.current_room;
+                if (room_exists(loaded_room)) {
+                    global.target_room = loaded_room;
+                    show_debug_message("Load Game: Target room set to " + room_get_name(global.target_room));
+                } else {
+                    show_debug_message("Load Game WARNING: Saved room ID " + string(loaded_room) + " does not exist! Defaulting to Welcome Room.");
+                    global.target_room = rm_welcome_room;
                 }
+            } else {
+                show_debug_message("Load Game WARNING: current_room missing from save data. Defaulting to Welcome Room.");
+                global.target_room = rm_welcome_room;
             }
-            
-            // Load quests
-            if (variable_struct_exists(game_state, "active_quests")) {
-                ds_list_clear(global.active_quests);
-                array_copy_to_list(game_state.active_quests, global.active_quests);
-            }
-            if (variable_struct_exists(game_state, "completed_quests")) {
-                ds_list_clear(global.completed_quests);
-                array_copy_to_list(game_state.completed_quests, global.completed_quests);
-            }
-            
-            // Set target room for loading
-            global.target_room = game_state.current_room;
+
+            // Load Room States (Load the entire map now)
+            if (variable_struct_exists(game_state, "room_states")) {
+                var room_states_struct = game_state.room_states;
+                if (is_struct(room_states_struct)) {
+                    // Clear existing room states map carefully
+                    var _old_keys = ds_map_keys_to_array(global.room_states);
+                    for (var i = 0; i < array_length(_old_keys); i++) {
+                         var _list_id = global.room_states[? _old_keys[i]];
+                         if (ds_exists(_list_id, ds_type_list)) ds_list_destroy(_list_id);
+                    }
+                    ds_map_clear(global.room_states);
+
+                    // Populate from loaded struct
+                    var room_names = variable_struct_get_names(room_states_struct);
+                    for (var i = 0; i < array_length(room_names); i++) {
+                         var room_name = room_names[i];
+                         var state_list_array = room_states_struct[$ room_name];
+                         if (is_array(state_list_array)) {
+                             var state_ds_list = ds_list_create();
+                             for (var j = 0; j < array_length(state_list_array); j++) {
+                                  if (is_struct(state_list_array[j])) {
+                                      ds_list_add(state_ds_list, state_list_array[j]);
+                                  }
+                             }
+                             ds_map_add(global.room_states, room_name, state_ds_list);
+                         } else { show_debug_message("Load Game WARNING: Room state data for '" + room_name + "' is not an array."); }
+                    }
+                    show_debug_message("Load Game: Loaded " + string(array_length(room_names)) + " room states into global.room_states.");
+                } else { show_debug_message("Load Game WARNING: room_states data in save is not a struct."); ds_map_clear(global.room_states); }
+            } else { show_debug_message("Load Game: No room_states found in save data."); ds_map_clear(global.room_states); }
+
+
+            // Load Quests
+            ds_list_clear(global.active_quests);
+            if (variable_struct_exists(game_state, "active_quests") && is_array(game_state.active_quests)) {
+                 array_copy_to_list(game_state.active_quests, global.active_quests);
+                 show_debug_message("Load Game: Loaded " + string(ds_list_size(global.active_quests)) + " active quests.");
+            } else { show_debug_message("Load Game: No valid active_quests array found in save data."); }
+
+            ds_list_clear(global.completed_quests);
+             if (variable_struct_exists(game_state, "completed_quests") && is_array(game_state.completed_quests)) {
+                 array_copy_to_list(game_state.completed_quests, global.completed_quests);
+                 show_debug_message("Load Game: Loaded " + string(ds_list_size(global.completed_quests)) + " completed quests.");
+             } else { show_debug_message("Load Game: No valid completed_quests array found in save data."); }
+
+             // Add other game state variables here if needed
+
+        } else {
+             throw "Required 'game_state' struct missing from save data.";
         }
-        
-        // Transition to initialization room
-        room_goto(rm_init);
-        show_debug_message("Game loaded successfully.");
+
+        // --- Load Player Data ---
+         if (variable_struct_exists(save_data, "player")) {
+             var player_data = save_data.player;
+
+             global.player_x = player_data.x ?? 170; // Use nullish coalescing for defaults
+             global.player_y = player_data.y ?? 154;
+             global.current_skin = player_data.skin ?? "player";
+             global.last_player_face = player_data.face ?? DOWN;
+             global.expanded_hud_open = player_data.expanded_hud_open ?? false; // Assuming this was saved
+
+             // Load Color
+             if (variable_struct_exists(player_data, "color") && is_struct(player_data.color)) {
+                var c = player_data.color;
+                global.player_color = make_color_rgb(c.r ?? 255, c.g ?? 255, c.b ?? 255);
+             } else { global.player_color = make_color_rgb(51, 51, 51); } // Default color
+
+             // Load Inventory
+             // Ensure global.inventory exists and is an array *before* loading
+             if (!variable_global_exists("inventory") || !is_array(global.inventory)) {
+                show_debug_message("Load Game WARNING: global.inventory invalid before load! Re-creating.");
+                global.inventory = array_create(INVENTORY_SIZE, -1); // Use Macro for default size
+             } else {
+                 // If it exists, make sure it has the correct size (in case it was somehow altered)
+                 if (array_length(global.inventory) != INVENTORY_SIZE) {
+                     array_resize(global.inventory, INVENTORY_SIZE);
+                     // Fill potentially new slots with -1 (or however you handle empty)
+                     for(var i=0; i<INVENTORY_SIZE; i++) { if (is_undefined(global.inventory[i])) global.inventory[i] = -1;}
+                     show_debug_message("Load Game WARNING: Resized global.inventory to " + string(INVENTORY_SIZE));
+                 }
+             }
+
+
+             if (variable_struct_exists(player_data, "inventory") && is_array(player_data.inventory)) {
+                var loaded_inv = player_data.inventory;
+                // Check size against the *expected* size defined by the macro
+                if (array_length(loaded_inv) == INVENTORY_SIZE) {
+                    // Explicitly check if loaded_inv is *really* an array before cloning
+                    if (is_array(loaded_inv)){
+                         global.inventory = array_clone(loaded_inv); // Clone the loaded data
+                         show_debug_message("Load Game: Loaded inventory from save data.");
+                    } else {
+                         show_debug_message("Load Game ERROR: player_data.inventory was not truly an array despite passing first check! Resetting inventory.");
+                         global.inventory = array_create(INVENTORY_SIZE, -1);
+                    }
+                } else {
+                     show_debug_message("Load Game WARNING: Saved inventory size mismatch! Resetting inventory.");
+                      global.inventory = array_create(INVENTORY_SIZE, -1);
+                }
+             } else {
+                 global.inventory = array_create(INVENTORY_SIZE, -1);
+                 show_debug_message("Load Game: No valid inventory array found in save data. Resetting.");
+             }
+
+             // Load Equipped Items
+             ds_map_clear(global.equipped_items);
+             // Add default empty slots FIRST
+             ds_map_add(global.equipped_items, "head", -1); ds_map_add(global.equipped_items, "face", -1); /* etc. for all slots */
+             ds_map_add(global.equipped_items, "neck", -1); ds_map_add(global.equipped_items, "body", -1);
+             ds_map_add(global.equipped_items, "hand", -1); ds_map_add(global.equipped_items, "feet", -1);
+             if (variable_struct_exists(player_data, "equipped_items") && is_struct(player_data.equipped_items)) {
+                var equipped_struct = player_data.equipped_items;
+                var keys = variable_struct_get_names(equipped_struct);
+                for (var i = 0; i < array_length(keys); i++) {
+                     var key = keys[i];
+                     // IMPORTANT: Only add if the key is a valid slot in the game's current definition
+                     if (ds_map_exists(global.equipped_items, key)) {
+                        global.equipped_items[? key] = equipped_struct[$ key];
+                     } else {
+                         show_debug_message("Load Game WARNING: Ignoring unknown equipped slot '" + key + "' from save data.");
+                     }
+                }
+                show_debug_message("Load Game: Loaded equipped items.");
+             } else { show_debug_message("Load Game: No valid equipped_items struct found."); }
+
+             show_debug_message("Load Game: Loaded Player Data - Skin: " + global.current_skin + ", Color: " + string(global.player_color));
+
+			// Load Following Puffles
+			if (variable_struct_exists(save_data, "following_puffles") && is_array(save_data.following_puffles)) {
+			    ds_list_clear(global.following_puffles);
+			    var puffle_array = save_data.following_puffles;
+			    for (var i = 0; i < array_length(puffle_array); i++) {
+			        var puffle_data = puffle_array[i];
+			        if (is_struct(puffle_data)) {
+			            var puffle_inst = instance_create_layer(puffle_data.x, puffle_data.y, "Instances", obj_puffle);
+			            puffle_inst.following_player = true;
+			            puffle_inst.persistent = true;
+			            puffle_inst.color = puffle_data.color ?? "white";
+			            puffle_inst.state = puffle_data.state ?? PuffleState.FOLLOWING;
+			            switch (puffle_inst.color) {
+			                case "red": puffle_inst.image_blend = make_color_rgb(255, 0, 0); break;
+			                case "blue": puffle_inst.image_blend = make_color_rgb(0, 0, 255); break;
+			                // Add other colors as per obj_puffle Create event
+			                default: puffle_inst.image_blend = c_white;
+			            }
+			            ds_list_add(global.following_puffles, puffle_inst);
+			            show_debug_message("Loaded following puffle at (" + string(puffle_data.x) + ", " + string(puffle_data.y) + ")");
+			        }
+			    }
+			    show_debug_message("Load Game: Loaded " + string(ds_list_size(global.following_puffles)) + " following puffles.");
+			} else {
+			    show_debug_message("Load Game: No following puffles found in save data.");
+			}
+         } else {
+              throw "Required 'player' struct missing from save data.";
+         }
+
+        // *** CHANGE: Transition directly to the TARGET room ***
+        show_debug_message("Load Game: Successfully loaded data. Transitioning to target room: " + room_get_name(global.target_room));
+        room_goto(global.target_room);
         return true;
-        
-    } catch (error) {
-        show_debug_message("ERROR loading save file: " + string(error));
-        
-        // Try to load backup if available
-        if (file_exists("savegame.bak")) {
-            show_debug_message("Attempting to load backup save file...");
-            file = file_text_open_read("savegame.bak");
-            if (file != -1) {
-                json = file_text_read_string(file);
-                file_text_close(file);
-                save_data = json_parse(json);
-                // ... (same loading logic as above)
-                show_debug_message("Backup save file loaded successfully.");
-                return true;
-            }
-        }
+
+    } catch (_error) {
+        show_debug_message("Load Game ERROR during data loading: " + string(_error));
+        global.is_loading_game = false; // Reset flag on error
+         // Optionally try backup load here
+         // Optionally reset to a default state or go to main menu
+        // room_goto(rm_main_menu);
         return false;
     }
 }
 
-// Helper function to copy array to ds_list
+// Helper function to copy array to ds_list (Keep as is)
 function array_copy_to_list(arr, list) {
     if (!is_array(arr) || !ds_exists(list, ds_type_list)) return;
     for (var i = 0; i < array_length(arr); i++) {
@@ -561,6 +641,8 @@ File: scr_macros.gml
 #macro UP_LEFT 5
 #macro DOWN_RIGHT 6
 #macro DOWN_LEFT 7
+
+#macro INVENTORY_SIZE 42
 Folder: D:\PenguinIsleProject\Penguin Isles\scripts\scr_music_function
 File: scr_music_function.gml
 function set_song_ingame( _song, _fadeOutCurrentSong = 0, _fadeIn = 0 )
@@ -597,8 +679,8 @@ function get_puffle_sprite_data(direction) {
 Folder: D:\PenguinIsleProject\Penguin Isles\scripts\scr_room_state
 File: scr_room_state.gml
 function save_room_state(room_id) {
-    show_debug_message("Saving state for room: " + room_get_name(room_id));
     var room_name = room_get_name(room_id);
+    show_debug_message("Saving state for room: " + room_name);
     if (ds_map_exists(global.room_states, room_name)) {
         var old_list = ds_map_find_value(global.room_states, room_name);
         if (ds_exists(old_list, ds_type_list)) {
@@ -640,145 +722,218 @@ function save_room_state(room_id) {
 
 function load_room_state(room_id) {
     var room_name = room_get_name(room_id);
+    show_debug_message("Attempting to load state for room: " + room_name);
+
+    // Check if saved state exists for this room
     if (ds_map_exists(global.room_states, room_name)) {
         var state_list = ds_map_find_value(global.room_states, room_name);
+
         if (ds_exists(state_list, ds_type_list)) {
+            show_debug_message("Found state list for " + room_name + ". Size: " + string(ds_list_size(state_list)));
+
+            // --- Destroy existing savable instances CAREFULLY ---
+            show_debug_message("Destroying existing savable instances in " + room_name + "...");
             with (all) {
-                if (variable_instance_exists(id, "is_savable") && is_savable && object_index != obj_player && object_index != obj_player_tube) {
-                    if (object_index == obj_puffle && variable_instance_get(id, "following_player") == true) {
-                        continue;
-                    }
+                // Check if instance is savable AND not the current player instance AND not a globally managed following puffle
+                if (variable_instance_exists(id, "is_savable") && is_savable &&
+                    id != global.player_instance && // Don't destroy the current player <<<--- THIS IS THE KEY CHECK
+                    (object_index != obj_puffle || ds_list_find_index(global.following_puffles, id) == -1)) // Don't destroy globally tracked puffles
+                {
+                    show_debug_message("Destroying instance " + string(id) + " (" + object_get_name(object_index) + ")");
                     instance_destroy();
                 }
             }
+            show_debug_message("Finished destroying old instances.");
+
+            // --- Create instances from saved state ---
+            show_debug_message("Creating instances from saved state...");
             for (var i = 0; i < ds_list_size(state_list); i++) {
                 var state = state_list[| i];
-                var inst;
-                if (state.object_index == obj_puffle && state.following_player) {
-                    if (ds_list_find_index(global.following_puffles, id) == -1) {
-                        inst = instance_create_layer(state.x, state.y, "Instances", state.object_index);
-                        ds_list_add(global.following_puffles, inst);
+                var inst = noone; // Initialize inst
+
+                // Validate object index before creating
+                if (!object_exists(state.object_index)) {
+                     show_debug_message("Load State WARNING: Saved object index " + string(state.object_index) + " does not exist! Skipping instance.");
+                     continue; // Skip this state entry
+                }
+
+                // Special handling for puffles that should be following vs. room-specific ones
+                if (state.object_index == obj_puffle) {
+                    if (variable_struct_exists(state, "following_player") && state.following_player) {
+                         // This state represents a puffle that *should* be following.
+                         // Don't recreate it here; it should persist or be managed globally.
+                         // Check if it's *already* in the global list - if not, maybe add it? (Complex case)
+                         show_debug_message("Load State: Skipping creation of following puffle state - should be persistent.");
+                         continue; // Skip creating this puffle from room state
                     } else {
-                        continue;
+                        // This is a puffle that was *not* following, create it normally
+                        inst = instance_create_layer(state.x, state.y, "Instances", state.object_index);
                     }
                 } else {
-                    inst = instance_create_layer(state.x, state.y, "Instances", state.object_index);
+                     // Create non-puffle instances normally
+                     inst = instance_create_layer(state.x, state.y, "Instances", state.object_index);
                 }
-                if (variable_instance_exists(inst, "face")) {
-                    inst.face = state.direction;
-                }
-                if (state.object_index == obj_icetruck || state.object_index == obj_icetruck_broken) {
-                    inst.repair_required = state.repair_required;
-                    inst.is_driveable = state.is_driveable;
-                } else if (state.object_index == obj_dropped_item) {
-                    inst.item_type = state.item_type;
-                } else if (state.object_index == obj_puffle) {
-                    inst.following_player = state.following_player;
-                    inst.color = state.color;
-                    inst.state = state.state;
-                    switch (inst.color) {
-                        case "red": inst.image_blend = make_color_rgb(255, 0, 0); break;
-                        case "blue": inst.image_blend = make_color_rgb(0, 0, 255); break;
-                        case "green": inst.image_blend = make_color_rgb(0, 255, 0); break;
-                        case "yellow": inst.image_blend = make_color_rgb(255, 255, 0); break;
-                        default: inst.image_blend = c_white;
+
+                // Apply common state if instance was created
+                if (instance_exists(inst)) {
+                    if (variable_instance_exists(inst, "face")) {
+                        inst.face = state.direction ?? DOWN; // Default to DOWN if direction missing
                     }
-                    if (inst.following_player) {
-                        inst.state = PuffleState.FOLLOWING;
-                        inst.persistent = true;
-                    }
-                }
-                show_debug_message("Loaded " + object_get_name(state.object_index) + " at (" + string(state.x) + ", " + string(state.y) + ")");
-            }
-            show_debug_message("Loaded state for room: " + room_name);
+
+                    // Apply specific object states
+                     if (state.object_index == obj_icetruck || state.object_index == obj_icetruck_broken) {
+                         if (variable_instance_exists(inst,"repair_required")) inst.repair_required = state.repair_required ?? true; // Default to requiring repair if missing
+                         if (variable_instance_exists(inst,"is_driveable")) inst.is_driveable = state.is_driveable ?? false; // Default to not driveable
+                     } else if (state.object_index == obj_dropped_item) {
+                         if (variable_instance_exists(inst,"item_type")) inst.item_type = state.item_type ?? "Unknown";
+                     } else if (state.object_index == obj_puffle) { // This applies to non-following puffles created above
+                         if (variable_instance_exists(inst,"following_player")) inst.following_player = false; // Ensure it's false
+                         if (variable_instance_exists(inst,"color")) inst.color = state.color ?? "white";
+                         if (variable_instance_exists(inst,"state")) inst.state = state.state ?? PuffleState.IDLE;
+                         // Apply color blend based on state.color
+                         switch (inst.color) {
+                             case "red": inst.image_blend = make_color_rgb(255, 0, 0); break;
+                             case "blue": inst.image_blend = make_color_rgb(0, 0, 255); break;
+                             case "green": inst.image_blend = make_color_rgb(0, 255, 0); break;
+                             case "yellow": inst.image_blend = make_color_rgb(255, 255, 0); break;
+                             default: inst.image_blend = c_white;
+                         }
+                     }
+                     show_debug_message("Loaded " + object_get_name(state.object_index) + " at (" + string(state.x) + ", " + string(state.y) + ")");
+                } // end if instance_exists(inst)
+            } // end for loop
+            show_debug_message("Finished creating instances for " + room_name);
+        } else {
+            show_debug_message("Saved state list for " + room_name + " is invalid or empty.");
         }
     } else {
         show_debug_message("No saved state found for room: " + room_name);
+        // Destroy existing savable items even if no save state is found, to ensure a clean room? (Optional)
+        // with(all) { /* ... destroy logic ... */ }
     }
 }
 Folder: D:\PenguinIsleProject\Penguin Isles\scripts\scr_save_game
 File: scr_save_game.gml
 // Save Game Function
 function save_game() {
+    // --- Pre-checks (Good practice) ---
     if (!instance_exists(global.player_instance)) {
         show_debug_message("Error: Cannot save - player instance not found.");
         return;
     }
-
     if (!variable_global_exists("inventory")) {
-        global.inventory = [];
-        show_debug_message("Warning: global.inventory was not initialized. Set to empty array.");
+        show_debug_message("Warning: global.inventory not initialized before save. Creating empty.");
+        global.inventory = array_create(42, -1); // Or your defined size
     }
-    
     if (!ds_exists(global.equipped_items, ds_type_map)) {
-        show_debug_message("ERROR: global.equipped_items is not a DS map. Reinitializing.");
-        global.equipped_items = ds_map_create();
+        show_debug_message("ERROR: global.equipped_items map does not exist before save. Cannot save items.");
+        // Decide how to handle this - maybe create an empty map?
+        global.equipped_items = ds_map_create(); // Create empty map to avoid crash
+        // Add default empty slots if desired
         ds_map_add(global.equipped_items, "head", -1);
+        ds_map_add(global.equipped_items, "face", -1);
+        ds_map_add(global.equipped_items, "neck", -1);
         ds_map_add(global.equipped_items, "body", -1);
+        ds_map_add(global.equipped_items, "hand", -1);
         ds_map_add(global.equipped_items, "feet", -1);
     }
+     if (!ds_exists(global.room_states, ds_type_map)) {
+         show_debug_message("Warning: global.room_states map does not exist before save. Creating empty.");
+         global.room_states = ds_map_create();
+     }
+     if (!ds_exists(global.active_quests, ds_type_list)) {
+         show_debug_message("Warning: global.active_quests list does not exist before save. Creating empty.");
+         global.active_quests = ds_list_create();
+     }
+     if (!ds_exists(global.completed_quests, ds_type_list)) {
+         show_debug_message("Warning: global.completed_quests list does not exist before save. Creating empty.");
+         global.completed_quests = ds_list_create();
+     }
 
+    save_room_state(room); // Ensure the current room's state is saved
+    // --- Construct Save Data Struct ---
     var save_data = {
-        version: "1.0.0", // Add versioning information
-        player: {
-            x: global.player_x,
-            y: global.player_y,
-            skin: global.current_skin,
-            color: global.player_color,
-            face: global.player_instance.face,
-            inventory: global.inventory,
-            expanded_hud_open: global.expanded_hud_open,
-            equipped_items: ds_map_write(global.equipped_items)
+        version: "1.0.0",
+
+		player: {
+		    x: global.player_instance.x,
+		    y: global.player_instance.y,
+		    skin: global.current_skin,
+		    color: {
+		        r: color_get_red(global.player_color),
+		        g: color_get_green(global.player_color),
+		        b: color_get_blue(global.player_color)
+		    },
+		    face: variable_instance_get(global.player_instance, "face"),
+		    inventory: global.inventory,
+		    expanded_hud_open: variable_global_exists("expanded_hud_open") ? global.expanded_hud_open : false,
+		    equipped_items: ds_map_to_struct(global.equipped_items)
+		},
+
+// Ensure game_state is created correctly
+    game_state: {
+         current_room: room, // Save the current room ID
+
+         // Convert room_states map (of ds_lists) to a struct (of arrays) for JSON
+         room_states: (function() {
+             var _rooms_struct = {}; // Renamed for clarity
+             if (ds_exists(global.room_states, ds_type_map)) {
+                 var _room_key = ds_map_find_first(global.room_states);
+                 while (!is_undefined(_room_key)) {
+                     var _state_list_id = ds_map_find_value(global.room_states, _room_key);
+                     if (ds_exists(_state_list_id, ds_type_list)) {
+                         // Convert the ds_list of instance state structs into an array of structs
+                         _rooms_struct[$ _room_key] = ds_list_to_array(_state_list_id);
+                     } else {
+                         show_debug_message("Save Warning: Invalid ds_list found in room_states for key: " + string(_room_key));
+                         _rooms_struct[$ _room_key] = []; // Save empty array as fallback
+                     }
+                     _room_key = ds_map_find_next(global.room_states, _room_key);
+                 }
+             } else {
+                  show_debug_message("Save Warning: global.room_states map does not exist during save.");
+             }
+             return _rooms_struct; // Return the fully built struct
+         })(), // Immediately call the inline function
+
+         // Convert lists to arrays for JSON compatibility
+         active_quests: ds_list_to_array(global.active_quests),
+         completed_quests: ds_list_to_array(global.completed_quests)
+             // Add other game state vars here if needed
         },
-        current_room: room,
-        room_states: ds_map_write(global.room_states),
-        following_puffles: [],
-        quests: {
-            active: ds_list_write(global.active_quests),
-            completed: ds_list_write(global.completed_quests)
-        },
-        objects: {}
+
+        following_puffles: [], // Keep this structure for puffles
+
+        objects: {} // Keep this structure for specific objects
     };
+    
+    show_debug_message("Saving current_room: " + room_get_name(save_data.game_state.current_room) + " (ID: " + string(save_data.game_state.current_room) + ")");
 
-    // Populate objects with existence checks
-    if (instance_exists(obj_icetruck)) {
-        var icetruck_inst = instance_find(obj_icetruck, 0);
-        save_data.objects.icetruck = {
-            x: icetruck_inst.x,
-            y: icetruck_inst.y,
-            exists: true
-        };
-    } else {
-        save_data.objects.icetruck = {
-            exists: false
-        };
-    }
-
-    if (instance_exists(obj_tube)) {
-        var tube_inst = instance_find(obj_tube, 0);
-        save_data.objects.tube = {
-            x: tube_inst.x,
-            y: tube_inst.y,
-            exists: true
-        };
-    } else {
-        save_data.objects.tube = {
-            exists: false
-        };
-    }
-
-    if (instance_exists(obj_toboggan)) {
-        var toboggan_inst = instance_find(obj_toboggan, 0);
-        save_data.objects.toboggan = {
-            x: toboggan_inst.x,
-            y: toboggan_inst.y,
-            exists: true
-        };
-    } else {
-        save_data.objects.toboggan = {
-            exists: false
-        };
-    }
+	// Populate objects with existence and removal checks
+	save_data.objects = {};
+	var object_types = [
+	    { name: "icetruck", obj: obj_icetruck },
+	    { name: "tube", obj: obj_tube },
+	    { name: "toboggan", obj: obj_toboggan }
+	];
+	for (var i = 0; i < array_length(object_types); i++) {
+	    var ot = object_types[i];
+	    if (object_exists(ot.obj)) {
+	        var inst = instance_find(ot.obj, 0);
+	        if (instance_exists(inst)) {
+	            save_data.objects[$ ot.name] = {
+	                x: inst.x,
+	                y: inst.y,
+	                exists: true
+	            };
+	        } else {
+	            save_data.objects[$ ot.name] = { exists: false };
+	        }
+	    } else {
+	        save_data.objects[$ ot.name] = { exists: false };
+	        show_debug_message("Save Game: Object " + ot.name + " no longer exists in project.");
+	    }
+	}
 
     // Handle following puffles
     for (var i = 0; i < ds_list_size(global.following_puffles); i++) {
@@ -794,16 +949,60 @@ function save_game() {
         }
     }
 
-    // Convert to JSON and save
+    // --- Convert to JSON and Save ---
     var json = json_stringify(save_data);
     var file = file_text_open_write("savegame.sav");
     if (file != -1) {
         file_text_write_string(file, json);
         file_text_close(file);
         show_debug_message("Game saved successfully.");
+        // Optional: Create a backup
+        // file_copy("savegame.sav", "savegame.bak");
     } else {
-        show_debug_message("Error: Failed to save game.");
+        show_debug_message("Error: Failed to open savegame.sav for writing.");
     }
+}
+
+// --- Helper Functions (Ensure these are defined HERE or globally, but not duplicated) ---
+function ds_map_to_struct(map_id) {
+    var _struct = {};
+    if (ds_exists(map_id, ds_type_map)) {
+        var _key = ds_map_find_first(map_id);
+        while (!is_undefined(_key)) {
+            var _value = ds_map_find_value(map_id, _key);
+             // Ensure value is JSON-compatible
+             if (is_struct(_value) || is_array(_value) || is_real(_value) || is_string(_value) || is_bool(_value) || is_undefined(_value)) {
+                 _struct[$ _key] = _value;
+             } else {
+                 show_debug_message("ds_map_to_struct: Converting unsupported value type for key '" + string(_key) + "' to string.");
+                 _struct[$ _key] = string(_value); // Convert unsupported to string as fallback
+             }
+            _key = ds_map_find_next(map_id, _key);
+        }
+    } else {
+        show_debug_message("Warning: ds_map_to_struct called with non-existent map ID: " + string(map_id));
+    }
+    return _struct;
+}
+
+// Add this helper function if it's missing from scr_save_game.gml
+function ds_list_to_array(list_id) {
+    var _arr = [];
+    if (ds_exists(list_id, ds_type_list)) {
+        for (var i = 0; i < ds_list_size(list_id); i++) {
+            var _value = ds_list_find_value(list_id, i);
+            // Ensure value is JSON-compatible (structs/arrays/primitives)
+            if (is_struct(_value) || is_array(_value) || is_real(_value) || is_string(_value) || is_bool(_value) || is_undefined(_value)) {
+               array_push(_arr, _value);
+           } else {
+               show_debug_message("ds_list_to_array: Converting unsupported value type at index " + string(i) + " to string.");
+               array_push(_arr, string(_value)); // Convert unsupported to string as fallback
+           }
+        }
+    } else {
+        show_debug_message("Warning: ds_list_to_array called with non-existent list ID: " + string(list_id));
+    }
+    return _arr;
 }
 Folder: D:\PenguinIsleProject\Penguin Isles\scripts\scr_set_depth
 File: scr_set_depth.gml
@@ -811,54 +1010,33 @@ File: scr_set_depth.gml
 function set_depth() {
     depth = -bbox_bottom;
 }
-Folder: D:\PenguinIsleProject\Penguin Isles\scripts\scr_skin_switch
-File: scr_skin_switch.gml
-function switch_skin(new_skin) {
-    if (global.skin_switching) return;
-    global.skin_switching = true;
-
-    var player_x = global.player_instance != noone ? global.player_instance.x : global.last_player_x;
-    var player_y = global.player_instance != noone ? global.player_instance.y : global.last_player_y;
-    var player_face = DOWN;
-
-    if (instance_exists(global.player_instance)) {
-        if (variable_instance_exists(global.player_instance, "face")) {
-            player_face = global.player_instance.face;
-        }
-        instance_destroy(global.player_instance);
-    }
-
-    var new_instance = noone;
-    for (var i = 0; i < array_length(global.skins); i++) {
-        if (global.skins[i].name == new_skin) {
-            new_instance = instance_create_layer(player_x, player_y, "Instances", global.skins[i].object);
-            global.current_skin = new_skin;
-            break;
-        }
-    }
-
-    if (new_instance == noone) {
-        new_instance = instance_create_layer(player_x, player_y, "Instances", obj_player);
-        global.current_skin = "player";
-    }
-
-    if (variable_instance_exists(new_instance, "face")) {
-        new_instance.face = player_face;
-    }
-
-    global.player_instance = new_instance;
-    camera_set_view_target(global.camera, global.player_instance);
-    global.skin_switching = false;
-}
 Folder: D:\PenguinIsleProject\Penguin Isles\scripts\unequip_item
 File: unequip_item.gml
 /// @function unequip_item(slot)
 /// @param {string} slot The name of the slot to unequip the item from
 function unequip_item(slot) {
+    // Ensure the global map exists
+    if (!ds_exists(global.equipped_items, ds_type_map)) {
+        show_debug_message("ERROR: global.equipped_items map does not exist!");
+        return;
+    }
+
+    // Ensure the slot key exists in the map
     if (ds_map_exists(global.equipped_items, slot)) {
-        global.equipped_items[? slot] = -1;
-        show_debug_message("Unequipped item from " + slot);
+        var current_item = global.equipped_items[? slot];
+        if (current_item != -1 && !is_undefined(current_item)) {
+            global.equipped_items[? slot] = -1; // Set slot to empty (-1)
+            show_debug_message("Unequipped item from slot '" + slot + "'.");
+            // Display the current state of the map for debugging
+            // show_debug_message("Current global.equipped_items: " + ds_map_write(global.equipped_items));
+
+             // NOTE: Removed call to apply_equipped_items();
+             // The player object's Draw event handles the visual update.
+
+        } else {
+            show_debug_message("Slot '" + slot + "' was already empty.");
+        }
     } else {
-        show_debug_message("Invalid slot: " + slot);
+        show_debug_message("ERROR: Invalid equipment slot specified: '" + slot + "'");
     }
 }

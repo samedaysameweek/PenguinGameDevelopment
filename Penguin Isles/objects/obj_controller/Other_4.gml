@@ -116,26 +116,12 @@ if (variable_global_exists("is_loading_game") && global.is_loading_game) {
     global.is_loading_game = false;
 }
 
-// --- 6. Camera Setup ---
-show_debug_message("CONTROLLER ROOM START: Setting up camera...");
-
-// Basic Safety Check before USE
-if (!variable_global_exists("camera") || !is_real(global.camera) || global.camera < 0) {
-    show_debug_message("CONTROLLER ROOM START FATAL ERROR: global.camera is not a valid camera ID at setup time! Value: " + (variable_global_exists("camera") ? string(global.camera) : "N/A") + ". Check init_globals.");
-    global.camera = camera_create();
-    if (!is_real(global.camera) || global.camera < 0) {
-        show_debug_message("FATAL: Last ditch camera creation failed.");
-        game_end();
-        exit;
-    } else {
-        show_debug_message("INFO: Recreated camera as a last resort.");
-    }
-}
-
-// Assign camera to view 0
+// --- CAMERA AND VIEW SETUP ---
+// --- CAMERA AND VIEW SETUP ---
+// Assign camera to view 0 *first*
 view_set_camera(0, global.camera);
 view_enabled = true;
-view_visible[0] = true;
+view_visible[0] = true; // Ensure Viewport 0 is visible
 show_debug_message("CONTROLLER ROOM START: Set view[0] to use global.camera (ID: " + string(global.camera) + ")");
 
 // Define intended view size
@@ -152,24 +138,47 @@ show_debug_message("Set camera view size to " + string(view_width) + "x" + strin
 camera_set_view_border(global.camera, 0, 0);
 show_debug_message("Set camera view border to (0, 0)");
 
+// --- REMOVED Explicit Viewport Settings ---
+// view_set_hborder(0, 0); // REMOVED
+// view_set_vborder(0, 0); // REMOVED
+// view_set_xport(0, 0);   // REMOVED (These port settings are likely fine at default anyway)
+// view_set_yport(0, 0);   // REMOVED
+// view_set_wport(0, display_get_gui_width()); // REMOVED
+// view_set_hport(0, display_get_gui_height()); // REMOVED
+// show_debug_message("Explicitly set Viewport 0 border=(0,0) and port settings."); // REMOVED
+// --- END REMOVED SECTION ---
+
 // Determine camera behavior based on room size vs. view size
 if (room_width <= view_width && room_height <= view_height) {
     // Room fits entirely within view, fix camera at (0, 0)
-    camera_set_view_pos(global.camera, 0, 0);
-    camera_set_view_target(global.camera, noone); // Disable following
+    camera_set_view_target(global.camera, noone);
     camera_set_view_speed(global.camera, -1, -1);
+    camera_set_view_pos(global.camera, 0, 0);
     show_debug_message("Camera fixed at (0, 0) for small room.");
 } else {
     // Room is larger than view, follow the player
     if (instance_exists(global.player_instance)) {
+        // Set Target FIRST
         camera_set_view_target(global.camera, global.player_instance);
-        camera_set_view_speed(global.camera, 10, 10); // Smooth follow (10 pixels/frame)
-        show_debug_message("Camera set to follow player (ID: " + string(global.player_instance) + ") with smooth speed (10, 10)");
+
+        // Set Speed SECOND
+        camera_set_view_speed(global.camera, -1, -1); // Instant follow (centered)
+        show_debug_message("Camera set to follow player (ID: " + string(global.player_instance) + ") with INSTANT speed (-1, -1)");
+
+        // Set Initial Position THIRD (Calculated based on target and view size)
+        var cam_x = global.player_instance.x - (view_width / 2);
+        var cam_y = global.player_instance.y - (view_height / 2);
+        cam_x = clamp(cam_x, 0, max(0, room_width - view_width));
+        cam_y = clamp(cam_y, 0, max(0, room_height - view_height));
+        camera_set_view_pos(global.camera, cam_x, cam_y);
+        show_debug_message("Camera initial position set to (" + string(cam_x) + ", " + string(cam_y) + ")");
+
     } else {
+        // Fallback if no player
         show_debug_message("CONTROLLER ROOM START WARNING: No player instance exists to follow! Fixing camera at (0,0).");
-        camera_set_view_pos(global.camera, 0, 0);
         camera_set_view_target(global.camera, noone);
         camera_set_view_speed(global.camera, -1, -1);
+        camera_set_view_pos(global.camera, 0, 0);
     }
 }
 
