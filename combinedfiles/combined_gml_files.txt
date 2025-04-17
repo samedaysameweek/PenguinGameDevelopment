@@ -1186,28 +1186,25 @@ show_debug_message("Saved state for room: " + room_get_name(room));
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_controller
 File: Step_0.gml
 /// Step Event for obj_controller
-// Log camera settings every ~60 steps (approx 1 second) to avoid spam
-if ((current_time div 1000) mod 60 == 0) { // Rough check every 60 frames
-    if (variable_global_exists("camera") && camera_exists(global.camera)) {
-        var _border_x = camera_get_view_border_x(global.camera);
-        var _border_y = camera_get_view_border_y(global.camera);
-        var _speed_x = camera_get_view_speed_x(global.camera);
-        var _speed_y = camera_get_view_speed_y(global.camera);
 
-        if (_border_x != 0 || _border_y != 0 || _speed_x != -1 || _speed_y != -1) {
-            show_debug_message("CONTROLLER STEP CHECK (WARNING): Camera border=(" + string(_border_x) + "," + string(_border_y) + "), Speed=(" + string(_speed_x) + "," + string(_speed_y) + ")");
-        } else {
-            // Optional: Log confirmation that settings are correct
-            // show_debug_message("CONTROLLER STEP CHECK (OK): Camera border/speed correct.");
-        }
-         // Also check the legacy view borders for view 0
-         if(view_get_hborder(0) != 0 || view_get_vborder(0) != 0) {
-              show_debug_message("CONTROLLER STEP CHECK (WARNING): Legacy view_border[0] is NOT zero! H=" + string(view_get_hborder(0)) + ", V=" + string(view_get_vborder(0)) );
-         }
+if (instance_exists(global.player_instance)) {
+    // Determine target camera position based on player instance
+    var target_x = global.player_instance.x - (camera_get_view_width(global.camera) / 2);
+    var target_y = global.player_instance.y - (camera_get_view_height(global.camera) / 2);
 
-    } else {
-         show_debug_message("CONTROLLER STEP CHECK (ERROR): Global camera invalid/missing in Step!");
-    }
+    // Clamp camera position to ensure it doesn't go out of room bounds
+    target_x = clamp(target_x, 0, room_width - camera_get_view_width(global.camera));
+    target_y = clamp(target_y, 0, room_height - camera_get_view_height(global.camera));
+
+    // Smoothly transition the camera to the target position using linear interpolation
+    camera_set_view_pos(
+        global.camera,
+        lerp(camera_get_view_x(global.camera), target_x, 0.1),
+        lerp(camera_get_view_y(global.camera), target_y, 0.1)
+    );
+} else {
+    // Log warning if no player instance exists
+    show_debug_message("WARNING: Player instance not found. Camera cannot follow.");
 }
 
 global.click_handled = false;
@@ -1354,10 +1351,6 @@ function complete_quest(quest_id) {
     }
 }
 
-if (instance_exists(global.player_instance)) {
-    show_debug_message("Player: (" + string(global.player_instance.x) + ", " + string(global.player_instance.y) + ")");
-    show_debug_message("Camera: (" + string(camera_get_view_x(global.camera)) + ", " + string(camera_get_view_y(global.camera)) + ")");
-}
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_crates
 File: Create_0.gml
 //depth
