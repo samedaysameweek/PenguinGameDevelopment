@@ -1,0 +1,1 @@
+camera_set_view_size(global.camera, room_width, room_height);

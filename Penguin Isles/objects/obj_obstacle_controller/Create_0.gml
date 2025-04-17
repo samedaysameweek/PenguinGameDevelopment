@@ -1,0 +1,1 @@
+alarm[0] = 30; // Spawn obstacle every 30 steps (adjust for difficulty)

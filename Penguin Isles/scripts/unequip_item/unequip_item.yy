@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"unequip_item",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"unequip_item",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

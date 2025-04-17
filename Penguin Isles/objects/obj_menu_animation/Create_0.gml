@@ -1,0 +1,14 @@
+offset_y = 0;
+scroll_distance = sprite_get_height(spr_main_menu) - room_height;
+move_speed = 2;
+animation_complete = false;
+button_alpha = 0;
+fade_speed = 0.02;
+button_ids = [];
+delay_timer = 120;
+jetpack_y = 80;
+puffle_y = 80;
+jetpack_frame_speed = 0.5;
+puffle_frame_speed = 0.5;
+jetpack_image_index = 0;
+puffle_image_index = 0;
