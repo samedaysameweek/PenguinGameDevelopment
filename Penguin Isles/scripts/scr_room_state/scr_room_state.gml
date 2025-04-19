@@ -1,134 +1,118 @@
-function save_room_state(room_id) {
+/// @function load_room_state(room_id, is_fresh_load)
+/// @description Loads and restores the state of objects in a given room.
+/// @param {Asset.GMRoom} room_id The ID of the room to load state for.
+/// @param {Bool} is_fresh_load True if loading from save file, false if just entering room.
+function load_room_state(room_id, is_fresh_load) {
     var room_name = room_get_name(room_id);
-    show_debug_message("Saving state for room: " + room_name);
-    if (ds_map_exists(global.room_states, room_name)) {
-        var old_list = ds_map_find_value(global.room_states, room_name);
-        if (ds_exists(old_list, ds_type_list)) {
-            ds_list_destroy(old_list);
-        }
+    show_debug_message("Attempting to load state for room: " + room_name + " (Fresh Load: " + string(is_fresh_load) + ")");
+
+    // Ensure global map exists
+    if (!ds_exists(global.room_states, ds_type_map)) {
+         show_debug_message("Load State ERROR: global.room_states DS Map does not exist!");
+         return; // Cannot load state
     }
-    var state_list = ds_list_create();
-    ds_map_replace(global.room_states, room_name, state_list);
 
-    with (all) {
-        if (variable_instance_exists(id, "is_savable") && is_savable && object_index != obj_player && object_index != obj_player_tube) {
-            if (object_index == obj_puffle && variable_instance_get(id, "following_player") == true) {
-                continue;
-            }
-            var state = {
-                object_index: object_index,
-                x: x,
-                y: y,
-                direction: variable_instance_exists(id, "face") ? variable_instance_get(id, "face") : 0
-            };
-            if (object_index == obj_icetruck || object_index == obj_icetruck_broken) {
-                state.repair_required = variable_instance_exists(id, "repair_required") ? variable_instance_get(id, "repair_required") : false;
-                state.is_driveable = variable_instance_exists(id, "is_driveable") ? variable_instance_get(id, "is_driveable") : false;
-            } else if (object_index == obj_dropped_item) {
-                var item_type = variable_instance_get(id, "item_type");
-                state.item_type = (item_type != undefined) ? item_type : "";
-            } else if (object_index == obj_puffle) {
-                state.following_player = variable_instance_exists(id, "following_player") ? variable_instance_get(id, "following_player") : false;
-                var color = variable_instance_get(id, "color");
-                state.color = (color != undefined) ? color : "";
-                var puffle_state = variable_instance_get(id, "state");
-                state.state = (puffle_state != undefined) ? puffle_state : "";
-            }
-            ds_list_add(state_list, state);
+    // --- Destroy existing savable instances ONLY IF LOADING FROM SAVE ---
+    if (is_fresh_load) {
+        show_debug_message("Destroying existing savable instances (Fresh Load)...");
+        with (all) {
+            if (variable_instance_exists(id, "is_savable") && is_savable &&
+                 id != global.player_instance && object_index != obj_controller && object_index != obj_ui_manager &&
+                 (object_index != obj_puffle || ds_list_find_index(global.following_puffles, id) == -1))
+             { instance_destroy(); /* Log if needed */ }
         }
+        show_debug_message("Finished destroying old instances (Fresh Load).");
+    } else {
+         show_debug_message("Skipping instance destruction (Normal Room Entry).");
     }
-    show_debug_message("Saved state for room: " + room_name + " with " + string(ds_list_size(state_list)) + " objects.");
-}
-
-function load_room_state(room_id) {
-    var room_name = room_get_name(room_id);
-    show_debug_message("Attempting to load state for room: " + room_name);
-
+    // --- End Conditional Destruction ---
+	
     // Check if saved state exists for this room
     if (ds_map_exists(global.room_states, room_name)) {
-        var state_list = ds_map_find_value(global.room_states, room_name);
+        var state_array = ds_map_find_value(global.room_states, room_name);
 
-        if (ds_exists(state_list, ds_type_list)) {
-            show_debug_message("Found state list for " + room_name + ". Size: " + string(ds_list_size(state_list)));
+        // Check if valid state array exists
+        if (is_array(state_array)) {
+            show_debug_message("Found state array for " + room_name + ". Size: " + string(array_length(state_array)));
 
-            // --- Destroy existing savable instances CAREFULLY ---
-            show_debug_message("Destroying existing savable instances in " + room_name + "...");
-            with (all) {
-                // Check if instance is savable AND not the current player instance AND not a globally managed following puffle
-                if (variable_instance_exists(id, "is_savable") && is_savable &&
-                    id != global.player_instance && // Don't destroy the current player <<<--- THIS IS THE KEY CHECK
-                    (object_index != obj_puffle || ds_list_find_index(global.following_puffles, id) == -1)) // Don't destroy globally tracked puffles
-                {
-                    show_debug_message("Destroying instance " + string(id) + " (" + object_get_name(object_index) + ")");
-                    instance_destroy();
+             // --- Create instances from saved state ARRAY ---
+             // --- IF FRESH LOAD: Destroy Existing (already done above) & Create From Saved ---
+             if (is_fresh_load) {
+                  show_debug_message("Recreating instances from saved state array (Fresh Load)...");
+                  // Existing loop to create instances from state_array
+                  for (var i = 0; i < array_length(state_array); i++) {
+                         var state = state_array[i];
+                         if (!is_struct(state)) { continue; }
+                         if (!variable_struct_exists(state, "object_index_name")) { continue; }
+                         var _obj_index_to_load = asset_get_index(state.object_index_name);
+                         if (_obj_index_to_load == -1 || !object_exists(_obj_index_to_load)) { continue; }
+                         if (object_is_ancestor(_obj_index_to_load, obj_player_base) || _obj_index_to_load == obj_controller || _obj_index_to_load == obj_ui_manager) {
+                    show_debug_message("Load State: Skipping creation of reserved object (" + object_get_name(_obj_index_to_load) + ") found in save data.");
+                    continue;
                 }
+
+                 // Skip creating follower puffles from save state (they are persistent)
+                var is_follower = (_obj_index_to_load == obj_puffle && variable_struct_exists(state, "following_player") && state.following_player);
+                if (is_follower) { continue; }
+
+                 // Create instance (Non-followers or other objects)
+                        var inst = instance_create_layer(state.x, state.y, "Instances", _obj_index_to_load);
+                        if (instance_exists(inst)) { try {
+                        inst.is_savable = true; // Mark loaded instance as savable
+
+                        // Apply common properties if they exist in the struct AND the instance
+                        if (variable_struct_exists(state, "face") && variable_instance_exists(inst, "face")) { inst.face = state.face; } else if(variable_instance_exists(inst, "face")) {inst.face = DOWN;} // default face if missing
+                        if (variable_struct_exists(state, "image_xscale") && variable_instance_exists(inst, "image_xscale")) inst.image_xscale = state.image_xscale; else inst.image_xscale = 1;
+                        if (variable_struct_exists(state, "image_yscale") && variable_instance_exists(inst, "image_yscale")) inst.image_yscale = state.image_yscale; else inst.image_yscale = 1;
+                        if (variable_struct_exists(state, "image_blend") && variable_instance_exists(inst, "image_blend")) inst.image_blend = state.image_blend; else inst.image_blend = c_white;
+                        if (variable_struct_exists(state, "image_alpha") && variable_instance_exists(inst, "image_alpha")) inst.image_alpha = state.image_alpha; else inst.image_alpha = 1;
+
+
+                        // Object-specific properties
+                        if (_obj_index_to_load == obj_icetruck || _obj_index_to_load == obj_icetruck_broken) {
+                            if(variable_struct_exists(state, "icetruck_tint") && variable_instance_exists(inst,"icetruck_tint")) inst.icetruck_tint = state.icetruck_tint;
+                            if(variable_struct_exists(state, "is_driveable") && variable_instance_exists(inst,"is_driveable")) inst.is_driveable = state.is_driveable;
+                             // Ensure broken truck state aligns correctly
+                            if (_obj_index_to_load == obj_icetruck_broken && variable_instance_exists(inst, "repair_required")) inst.repair_required = true;
+                            if (_obj_index_to_load == obj_icetruck && variable_instance_exists(inst, "repair_required")) inst.repair_required = false;
+
+                        } else if (object_get_parent(inst.object_index) == obj_pickup_item || inst.object_index == obj_dropped_item) { // General check for pickup items
+                             if(variable_struct_exists(state, "item_name") && variable_instance_exists(inst,"item_name")) inst.item_name = state.item_name;
+                        } else if (_obj_index_to_load == obj_puffle) { // Non-following puffles
+                             if (variable_instance_exists(inst,"following_player")) inst.following_player = false;
+                             if (variable_struct_exists(state, "puffle_color") && variable_instance_exists(inst,"color")) inst.color = state.puffle_color; // Apply color NAME
+                             if (variable_struct_exists(state, "puffle_state") && variable_instance_exists(inst,"state")) inst.state = state.puffle_state;
+
+                             // Apply blend from saved color name
+                             if (variable_instance_exists(inst,"color")) {
+                                switch (inst.color) {
+                                    // Add color cases here to match names to colors
+                                    case "red": inst.image_blend = make_color_rgb(255, 0, 0); break;
+                                    // ... other colors ...
+                                    default: inst.image_blend = c_white; break;
+                                }
+                             }
+                        } else if (object_is_ancestor(_obj_index_to_load, obj_toboggan) || object_is_ancestor(_obj_index_to_load, obj_tube)) { // For Toboggan/Tube ITEMS
+                             if(variable_struct_exists(state, "item_name") && variable_instance_exists(inst,"item_name")) inst.item_name = state.item_name;
+                             if(variable_struct_exists(state, "face") && variable_instance_exists(inst,"face")) inst.face = state.face; // Restore item facing
+                        }
+                        // ... Add checks for other specific objects if needed ...
+
+                         show_debug_message("Loaded " + state.object_index_name + " at (" + string(state.x) + ", " + string(state.y) + ")");
+
+                     } catch (_err) {} }
+                  }
+                  show_debug_message("Finished creating instances for " + room_name + " (Fresh Load).");
+            } else {
+                 // If not a fresh load, we don't recreate everything from the save state,
+                 // we just keep the instances that already exist in the room.
+                                    show_debug_message("Normal Room Entry: Assuming instances persist or were recreated by GM.");
             }
-            show_debug_message("Finished destroying old instances.");
-
-            // --- Create instances from saved state ---
-            show_debug_message("Creating instances from saved state...");
-            for (var i = 0; i < ds_list_size(state_list); i++) {
-                var state = state_list[| i];
-                var inst = noone; // Initialize inst
-
-                // Validate object index before creating
-                if (!object_exists(state.object_index)) {
-                     show_debug_message("Load State WARNING: Saved object index " + string(state.object_index) + " does not exist! Skipping instance.");
-                     continue; // Skip this state entry
-                }
-
-                // Special handling for puffles that should be following vs. room-specific ones
-                if (state.object_index == obj_puffle) {
-                    if (variable_struct_exists(state, "following_player") && state.following_player) {
-                         // This state represents a puffle that *should* be following.
-                         // Don't recreate it here; it should persist or be managed globally.
-                         // Check if it's *already* in the global list - if not, maybe add it? (Complex case)
-                         show_debug_message("Load State: Skipping creation of following puffle state - should be persistent.");
-                         continue; // Skip creating this puffle from room state
-                    } else {
-                        // This is a puffle that was *not* following, create it normally
-                        inst = instance_create_layer(state.x, state.y, "Instances", state.object_index);
-                    }
-                } else {
-                     // Create non-puffle instances normally
-                     inst = instance_create_layer(state.x, state.y, "Instances", state.object_index);
-                }
-
-                // Apply common state if instance was created
-                if (instance_exists(inst)) {
-                    if (variable_instance_exists(inst, "face")) {
-                        inst.face = state.direction ?? DOWN; // Default to DOWN if direction missing
-                    }
-
-                    // Apply specific object states
-                     if (state.object_index == obj_icetruck || state.object_index == obj_icetruck_broken) {
-                         if (variable_instance_exists(inst,"repair_required")) inst.repair_required = state.repair_required ?? true; // Default to requiring repair if missing
-                         if (variable_instance_exists(inst,"is_driveable")) inst.is_driveable = state.is_driveable ?? false; // Default to not driveable
-                     } else if (state.object_index == obj_dropped_item) {
-                         if (variable_instance_exists(inst,"item_type")) inst.item_type = state.item_type ?? "Unknown";
-                     } else if (state.object_index == obj_puffle) { // This applies to non-following puffles created above
-                         if (variable_instance_exists(inst,"following_player")) inst.following_player = false; // Ensure it's false
-                         if (variable_instance_exists(inst,"color")) inst.color = state.color ?? "white";
-                         if (variable_instance_exists(inst,"state")) inst.state = state.state ?? PuffleState.IDLE;
-                         // Apply color blend based on state.color
-                         switch (inst.color) {
-                             case "red": inst.image_blend = make_color_rgb(255, 0, 0); break;
-                             case "blue": inst.image_blend = make_color_rgb(0, 0, 255); break;
-                             case "green": inst.image_blend = make_color_rgb(0, 255, 0); break;
-                             case "yellow": inst.image_blend = make_color_rgb(255, 255, 0); break;
-                             default: inst.image_blend = c_white;
-                         }
-                     }
-                     show_debug_message("Loaded " + object_get_name(state.object_index) + " at (" + string(state.x) + ", " + string(state.y) + ")");
-                } // end if instance_exists(inst)
-            } // end for loop
-            show_debug_message("Finished creating instances for " + room_name);
-        } else {
-            show_debug_message("Saved state list for " + room_name + " is invalid or empty.");
+} else {
+             show_debug_message("Load State WARNING: Saved state for " + room_name + " is invalid (not an array).");
         }
     } else {
-        show_debug_message("No saved state found for room: " + room_name);
-        // Destroy existing savable items even if no save state is found, to ensure a clean room? (Optional)
-        // with(all) { /* ... destroy logic ... */ }
+        show_debug_message("No state found for room: " + room_name + " in global.room_states.");
+         // If fresh load, room is default empty. If normal entry, existing instances remain.
     }
 }

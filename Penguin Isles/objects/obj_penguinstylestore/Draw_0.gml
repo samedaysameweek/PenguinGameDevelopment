@@ -12,10 +12,10 @@ switch (current_page) {
         draw_sprite(spr_penguinstyle_cover, 0, center_x - sprite_get_width(spr_penguinstyle_cover) / 2, center_y - sprite_get_height(spr_penguinstyle_cover) / 2);
         break;
     case 1:
-        draw_sprite(spr_penguinstyle_page1, 0, center_x - sprite_get_width(spr_penguinstyle_page1) / 2, center_y - sprite_get_height(spr_penguinstyle_page1) / 2);
-        draw_sprite(spr_penguinstyle_page1_colour, 0, center_x + color_picker_area[0], center_y + color_picker_area[1]);
+        draw_sprite(spr_penguinstyle_page2_3, 0, center_x - sprite_get_width(spr_penguinstyle_page2_3) / 2, center_y - sprite_get_height(spr_penguinstyle_page2_3) / 2);
+        draw_sprite(spr_penguinstyle_page12_13_colour, 0, center_x + color_picker_area[0], center_y + color_picker_area[1]);
         break;
     case 2:
-        draw_sprite(spr_penguinstyle_page2, 0, center_x - sprite_get_width(spr_penguinstyle_page2) / 2, center_y - sprite_get_height(spr_penguinstyle_page2) / 2);
+        draw_sprite(spr_penguinstyle_page12_13, 0, center_x - sprite_get_width(spr_penguinstyle_page12_13) / 2, center_y - sprite_get_height(spr_penguinstyle_page12_13) / 2);
         break;
 }

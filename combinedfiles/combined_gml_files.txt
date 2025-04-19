@@ -613,13 +613,9 @@ if (mouse_check_button_pressed(mb_left)) {
     
     // Color picker buttons
     if (point_in_rectangle(mx, my, panel_x + 220, panel_y + 40, panel_x + 320, panel_y + 70)) {
-        instance_create_layer(0, 0, "Instances", obj_player_colourpicker);
-        global.ui_manager.close_ui();
-        if (instance_exists(obj_inventory)) {
-            obj_inventory.visible = true;  // Restore inventory
-            show_debug_message("Inventory visibility set to true after player colour picker.");
-        }
-    } else if (point_in_rectangle(mx, my, panel_x + 220, panel_y + 80, panel_x + 320, panel_y + 110)) {
+    instance_create_layer(0, 0, "Instances", obj_player_colourpicker);
+    global.ui_manager.close_ui(); // Only call this
+	} else if (point_in_rectangle(mx, my, panel_x + 220, panel_y + 80, panel_x + 320, panel_y + 110)) {
         instance_create_layer(0, 0, "Instances", obj_icetruck_colourpicker);
         global.ui_manager.close_ui();
         if (instance_exists(obj_inventory)) {
@@ -991,17 +987,18 @@ var is_non_gameplay_room = (room == rm_init || room == rm_main_menu || room == r
                             room == rm_pause_menu || room == rm_settings_menu || room == rm_saveload ||
                             room == rm_colorpicker_menu); // Add any other non-gameplay rooms here
 
-// --- Exit immediately if it's a non-gameplay room ---
+// *** Store the loading state temporarily ***
+var _is_fresh_load = (variable_global_exists("is_loading_game") && global.is_loading_game == true);
+
 if (is_non_gameplay_room) {
-    show_debug_message("CONTROLLER ROOM START: Non-gameplay room detected. Skipping player creation and state load.");
+    show_debug_message("CONTROLLER ROOM START: Non-gameplay room detected...");
     if (!instance_exists(obj_ui_manager)) {
-        if (!layer_exists("UI")) { layer_create(-10000, "UI"); }
-        instance_create_layer(0, 0, "UI", obj_ui_manager);
-        show_debug_message("CONTROLLER ROOM START: Created obj_ui_manager in UI room.");
+         /* create UI manager */
     }
-    if (variable_global_exists("is_loading_game") && global.is_loading_game) {
-        show_debug_message("CONTROLLER ROOM START: Resetting global.is_loading_game flag (in UI room).");
+    // Reset loading flag here if needed for UI rooms
+    if (_is_fresh_load) {
         global.is_loading_game = false;
+        show_debug_message("CONTROLLER ROOM START: Reset global.is_loading_game (in UI room).");
     }
     exit;
 }
@@ -1010,19 +1007,17 @@ if (is_non_gameplay_room) {
 
 // --- 1. Determine Player Start Position & Facing ---
 var start_x, start_y, start_face;
-if (variable_global_exists("is_loading_game") && global.is_loading_game) {
+if (_is_fresh_load) {
+    // Use saved position if fresh load
     start_x = global.player_x;
     start_y = global.player_y;
     start_face = global.last_player_face ?? DOWN;
-    show_debug_message("CONTROLLER ROOM START (Load): Using saved player pos (" + string(start_x) + "," + string(start_y) + ") Face: " + string(start_face));
+     show_debug_message("CONTROLLER ROOM START (Load): Using saved player pos...");
 } else if (variable_global_exists("warp_target_x") && !is_undefined(global.warp_target_x)) {
-    start_x = global.warp_target_x;
-    start_y = global.warp_target_y;
-    start_face = global.warp_target_face ?? DOWN;
-    global.warp_target_x = undefined; // Clear warp targets
-    global.warp_target_y = undefined;
-    global.warp_target_face = undefined;
-    show_debug_message("CONTROLLER ROOM START (Warp): Using warp target pos (" + string(start_x) + "," + string(start_y) + ") Face: " + string(start_face));
+    // Use warp position if warping
+     start_x = global.warp_target_x; start_y = global.warp_target_y; start_face = global.warp_target_face ?? DOWN;
+     global.warp_target_x = undefined; global.warp_target_y = undefined; global.warp_target_face = undefined;
+     show_debug_message("CONTROLLER ROOM START (Warp): Using warp target pos...");
 } else {
     show_debug_message("CONTROLLER ROOM START (Default): Looking for obj_spawn_point...");
     var default_spawn = instance_find(obj_spawn_point, 0);
@@ -1072,6 +1067,7 @@ if (!object_exists(player_obj)) {
           exit;
      }
 }
+
 if (!layer_exists("Instances")) { layer_create(0, "Instances"); }
 global.player_instance = instance_create_layer(start_x, start_y, "Instances", player_obj);
 if (instance_exists(global.player_instance)) {
@@ -1085,21 +1081,17 @@ if (instance_exists(global.player_instance)) {
     exit;
 }
 
-// --- 4. Load Room State ---
-if (ds_map_exists(global.room_states, _current_room_name)) {
-    show_debug_message("CONTROLLER ROOM START: Loading saved state for room: " + _current_room_name);
-    load_room_state(room);
-} else {
-    show_debug_message("CONTROLLER ROOM START: No saved state found for room: " + _current_room_name);
-}
+// --- 4. Load Room State - Pass the flag ---
+// Call load_room_state *BEFORE* resetting global.is_loading_game
+show_debug_message("CONTROLLER ROOM START: Calling load_room_state for: " + _current_room_name + " (Is Fresh Load: " + string(_is_fresh_load) + ")");
+load_room_state(room, _is_fresh_load); // <<< PASS THE FLAG
 
-// --- 5. Final Setup (Reset loading flag) ---
-if (variable_global_exists("is_loading_game") && global.is_loading_game) {
+// --- 5. Final Setup (Reset loading flag AFTER load_room_state) ---
+if (_is_fresh_load) {
     show_debug_message("CONTROLLER ROOM START: Resetting global.is_loading_game flag.");
     global.is_loading_game = false;
 }
 
-// --- CAMERA AND VIEW SETUP ---
 // --- CAMERA AND VIEW SETUP ---
 // Assign camera to view 0 *first*
 view_set_camera(0, global.camera);
@@ -1178,11 +1170,62 @@ if (!instance_exists(obj_ui_manager)) {
 show_debug_message("CONTROLLER ROOM START: Finished setup for room: " + _current_room_name);
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_controller
 File: Other_5.gml
+// obj_controller -> Other Event: Room End (Other_5.gml)
 
-if (!global.is_loading_game) {
-    save_room_state(room);
-show_debug_message("Saved state for room: " + room_get_name(room));
+var _leaving_room_name = room_get_name(room);
+show_debug_message("obj_controller Room End: Transitioning from room: " + _leaving_room_name);
+
+// --- NEW: Save state of the room being left ---
+if (!global.is_loading_game) { // Don't save state when we are in the middle of loading
+    show_debug_message("Saving runtime state for leaving room: " + _leaving_room_name);
+
+    var _state_array = []; // Temporary array for this room's state
+
+    with (all) { // Collect state from savable instances in the leaving room
+        var _inst_id = id;
+         // Same skip conditions as save_game
+        if (_inst_id == global.player_instance || object_index == obj_controller || object_index == obj_ui_manager ||
+            (object_index == obj_puffle && ds_list_find_index(global.following_puffles, _inst_id) != -1)) {
+            continue;
+        }
+        var _is_savable = (variable_instance_exists(_inst_id, "is_savable") && is_savable);
+        if (_is_savable) {
+           var _state_data = {
+                 object_index_name: object_get_name(object_index),
+                 x: x, y: y,
+                 image_xscale: image_xscale ?? 1, image_yscale: image_yscale ?? 1,
+                 image_blend: image_blend ?? c_white, image_alpha: image_alpha ?? 1,
+                 face: variable_instance_exists(_inst_id, "face") ? face : undefined,
+                 icetruck_tint: variable_instance_exists(_inst_id, "icetruck_tint") ? icetruck_tint : undefined,
+                 is_driveable: variable_instance_exists(_inst_id, "is_driveable") ? is_driveable : undefined,
+                 item_name: variable_instance_exists(_inst_id, "item_name") ? item_name : undefined,
+                 following_player: false,
+                 puffle_color: variable_instance_exists(_inst_id, "color") ? color : undefined,
+                 puffle_state: variable_instance_exists(_inst_id, "state") ? state : undefined,
+            };
+            array_push(_state_array, _state_data);
+       }
+    }
+
+    // Update global.room_states (overwrite existing state for this room)
+    if (ds_exists(global.room_states, ds_type_map)) { // Ensure map exists
+         // Destroy old DS List if it was there from a previous save version (safety)
+         if (ds_map_exists(global.room_states, _leaving_room_name)) {
+             var _old_data = ds_map_find_value(global.room_states, _leaving_room_name);
+             if (ds_exists(_old_data, ds_type_list)) {
+                 ds_list_destroy(_old_data);
+                 show_debug_message("Destroyed legacy DS List for room: " + _leaving_room_name + " during runtime save.");
+             }
+             ds_map_delete(global.room_states, _leaving_room_name); // Remove old entry regardless of type
+         }
+         // Add the new GML array
+         ds_map_add(global.room_states, _leaving_room_name, _state_array);
+         show_debug_message("Stored runtime state ARRAY for room: " + _leaving_room_name + " (Size: " + string(array_length(_state_array)) + ")");
+    } else {
+        show_debug_message("ERROR: global.room_states map doesn't exist during Room End state save!");
+    }
 }
+// --- END Runtime State Saving ---
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_controller
 File: Step_0.gml
 /// Step Event for obj_controller
@@ -1245,13 +1288,7 @@ if (keyboard_check_pressed(ord("C")) && global.current_skin == "icetruck") {
     }
 }
 
-// Ensure inventory visibility in non-UI rooms
 var is_ui_room = (room == rm_init || room == rm_main_menu || room == rm_map || room == rm_pause_menu || room == rm_settings_menu);
-if (!is_ui_room && instance_exists(obj_inventory)) {
-    if (!global.is_pause_menu_active) {  // Only show when not paused
-        obj_inventory.visible = false;
-    }
-}
 
 // Hide or show the player in UI rooms
 if (is_ui_room) {
@@ -2466,7 +2503,7 @@ if (global.inventory_visible) {
         }
 
         // ** ADDED DEBUGGING **
-        show_debug_message("Draw GUI: Checking slot '" + current_slot_type + "'. Found item name: " + string(item_name));
+        //show_debug_message("Draw GUI: Checking slot '" + current_slot_type + "'. Found item name: " + string(item_name));
 
         if (!is_undefined(item_name) && item_name != -1) { // Check if slot has an item name
             var item_index_val = -1;
@@ -3404,20 +3441,65 @@ hover = false;
 
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_menu_button
 File: Mouse_4.gml
-// Left Pressed Event in obj_menu_button
+// Mouse Left Pressed Event in obj_menu_button
+
+// --- New Game Actions ---
 if (btn_action == "new_game") {
-    room_goto(rm_colorpicker_menu);  // Go to color picker for new game
-} else if (btn_action == "continue") {
-    load_game();                  // Call the load_game function to resume saved game
-} else if (btn_action == "play") {
-    room_goto(rm_init);           // Existing action for play
-} else if (btn_action == "start") {
-    room_goto(rm_saveload);  // Redirect to rm_saveload instead of rm_colour_picker
-} else if (btn_action == "settings") {
-    room_goto(rm_settings_menu);  // Existing action for settings
-} else if (btn_action == "exit") {
-    game_end();                   // Existing action for exit
+    // Set loading flag to false explicitly for a new game start
+    global.is_loading_game = false;
+    show_debug_message("obj_menu_button: New Game selected. Setting is_loading_game=false.");
+    // Go to the first step of new game (e.g., color picker or init room)
+    room_goto(rm_colorpicker_menu); // Or potentially rm_init if color picker is skipped
+    exit; // Exit event after handling action
 }
+else if (btn_action == "start") { // Assuming 'start' is also a new game variant
+    global.is_loading_game = false;
+    show_debug_message("obj_menu_button: Start button selected. Setting is_loading_game=false.");
+    room_goto(rm_saveload); // Go to init room directly
+    exit; // Exit event after handling action
+}
+
+// --- Continue Game Action ---
+else if (btn_action == "continue") {
+    // Ensure loading flag is set *before* calling load_game
+    global.is_loading_game = true;
+    show_debug_message("obj_menu_button: Continue selected. Setting is_loading_game=true.");
+
+    var _load_result = load_game(); // Call the load_game function
+
+    // *** ADDED TRANSITION LOGIC ***
+    if (_load_result == true) {
+        // If loading succeeded, go to rm_init which will handle the actual room jump
+        show_debug_message("obj_menu_button: load_game successful. Transitioning to rm_init...");
+        room_goto(rm_init);
+    } else {
+        // If loading failed, show a message and reset the flag
+        show_debug_message("obj_menu_button: load_game failed. Staying in current room.");
+        // CORRECTED LINE BELOW: Removed the second argument
+        show_message_async("Failed to load save game."); // User feedback
+        global.is_loading_game = false; // Reset flag if load failed
+    }
+    exit; // Exit event after handling action
+}
+
+// --- Other Menu Actions ---
+else if (btn_action == "play") { // This might be obsolete if "start" or "new_game" are used
+    global.is_loading_game = false;
+     show_debug_message("obj_menu_button: Play button selected. Setting is_loading_game=false.");
+    room_goto(rm_init);
+    exit; // Exit event after handling action
+}
+else if (btn_action == "settings") {
+    room_goto(rm_settings_menu);
+    exit; // Exit event after handling action
+}
+else if (btn_action == "exit") {
+    game_end();
+    exit; // Exit event after handling action
+}
+
+// Fallback if btn_action isn't recognized (shouldn't happen ideally)
+show_debug_message("obj_menu_button: Unrecognized action: " + string(btn_action));
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_menu_controller
 File: Create_0.gml
 global.menu_state = "none"; // Possible values: "none", "puffle_menu", "name_puffle"
@@ -4082,21 +4164,10 @@ Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_pause_menu
 File: Step_2.gml
 // End Step Event in obj_pause_menu
 // Only process inputs when the pause menu is active
-if (!global.is_pause_menu_active) {
-    exit;
-}
+if (!global.is_pause_menu_active) exit;
+if (global.click_handled) exit;
+if (global.inventory_visible || global.is_expanded) exit;
 
-// Skip if click was already handled by another UI element
-if (global.click_handled) {
-    exit;
-}
-
-// Skip input processing if inventory or expanded HUD is visible
-if (global.inventory_visible || global.is_expanded) {
-    exit;
-}
-
-// Update menu options dynamically
 op_length = array_length(option[menu_level]);
 
 // Mouse Position Adjusted to GUI Coordinates
@@ -4116,6 +4187,17 @@ if (pos < 0 || pos >= op_length) pos = -1;
 
 // Handle menu selection with mouse click
 if (mouse_check_button_pressed(mb_left) && pos >= 0) {
+	     // *** ADD DEBUG LOGGING BEFORE SAVE ***
+     if (menu_level == 0 && pos == 3) { // IF "Save Game" is about to be chosen
+         var _inv_debug_str = "Pause Menu DEBUG: Inventory state JUST BEFORE save call: [";
+         if (variable_global_exists("inventory") && is_array(global.inventory)) {
+            for(var i=0; i<min(10, array_length(global.inventory)); i++) { _inv_debug_str += string(global.inventory[i]) + ","; }
+            if(array_length(global.inventory) > 10) _inv_debug_str += "...";
+         } else { _inv_debug_str += "ERROR: global.inventory missing or not array!"; }
+         _inv_debug_str += "]";
+         show_debug_message(_inv_debug_str);
+     }
+     // *** END DEBUG LOGGING ***
     switch (menu_level) {
         case 0: // Main Pause Menu
             switch (pos) {
@@ -4150,9 +4232,10 @@ if (mouse_check_button_pressed(mb_left) && pos >= 0) {
             }
             break;
     }
+	     global.click_handled = true;
 }
 
-show_debug_message("Pause menu active: " + string(global.is_pause_menu_active) + ", Click handled: " + string(global.click_handled));
+//show_debug_message("Pause menu active: " + string(global.is_pause_menu_active) + ", Click handled: " + string(global.click_handled));
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_penguinstylestore
 File: Create_0.gml
 // obj_penguinstylestore: Create Event
@@ -4183,11 +4266,11 @@ switch (current_page) {
         draw_sprite(spr_penguinstyle_cover, 0, center_x - sprite_get_width(spr_penguinstyle_cover) / 2, center_y - sprite_get_height(spr_penguinstyle_cover) / 2);
         break;
     case 1:
-        draw_sprite(spr_penguinstyle_page1, 0, center_x - sprite_get_width(spr_penguinstyle_page1) / 2, center_y - sprite_get_height(spr_penguinstyle_page1) / 2);
-        draw_sprite(spr_penguinstyle_page1_colour, 0, center_x + color_picker_area[0], center_y + color_picker_area[1]);
+        draw_sprite(spr_penguinstyle_page2_3, 0, center_x - sprite_get_width(spr_penguinstyle_page2_3) / 2, center_y - sprite_get_height(spr_penguinstyle_page2_3) / 2);
+        draw_sprite(spr_penguinstyle_page12_13_colour, 0, center_x + color_picker_area[0], center_y + color_picker_area[1]);
         break;
     case 2:
-        draw_sprite(spr_penguinstyle_page2, 0, center_x - sprite_get_width(spr_penguinstyle_page2) / 2, center_y - sprite_get_height(spr_penguinstyle_page2) / 2);
+        draw_sprite(spr_penguinstyle_page12_13, 0, center_x - sprite_get_width(spr_penguinstyle_page12_13) / 2, center_y - sprite_get_height(spr_penguinstyle_page12_13) / 2);
         break;
 }
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_penguinstylestore
@@ -6493,23 +6576,8 @@ active_ui = noone;  // Current UI instance
 inventory_instance = instance_exists(obj_inventory) ? obj_inventory : instance_create_layer(0, 0, "UI", obj_inventory);
 depth = -1000;  // Above all UI elements
 show_debug_message("UI Manager initialized.");
-Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_ui_manager
-File: Step_0.gml
-// obj_ui_manager Step Event
-var is_ui_room = (room == rm_init || room == rm_main_menu || room == rm_map || room == rm_pause_menu || room == rm_settings_menu);
-if (!is_ui_room && !global.is_pause_menu_active) {
-    if (instance_exists(inventory_instance) && active_ui == noone) {
-        inventory_instance.visible = true;
-    }
-}
-if (active_ui != noone && !instance_exists(active_ui)) {
-    active_ui = noone;  // Clear if destroyed
-    if (instance_exists(inventory_instance)) {
-        inventory_instance.visible = true;
-        show_debug_message("UI Manager restored inventory visibility.");
-    }
-}
 
+// Add this inside obj_ui_manager Create Event
 // Function to open UI (within obj_ui_manager Step Event)
 open_ui = function(ui_object) {
     show_debug_message("UI Manager: Request to open UI object: " + object_get_name(ui_object));
@@ -6550,6 +6618,42 @@ open_ui = function(ui_object) {
 
     return active_ui; // Return the new instance ID (or noone if failed)
 } // End open_ui function definition
+
+close_ui = function() {
+    show_debug_message("UI Manager: Request to close active UI.");
+    if (active_ui != noone && instance_exists(active_ui)) {
+        show_debug_message("UI Manager: Destroying active UI (" + string(active_ui) + ")");
+        instance_destroy(active_ui);
+    } else if (active_ui != noone) {
+        show_debug_message("UI Manager: Clearing stale active_ui reference.");
+    }
+    active_ui = noone; // Clear reference
+
+    // Restore inventory visibility IF not paused and not in a UI room
+    var is_ui_room = (room == rm_init || room == rm_main_menu || room == rm_map || room == rm_pause_menu || room == rm_settings_menu);
+	if (instance_exists(inventory_instance) && !global.is_pause_menu_active && !is_ui_room) {
+		inventory_instance.visible = true;
+        show_debug_message("UI Manager: Restored inventory visibility after UI close.");
+	}
+} // End close_ui function definition
+Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_ui_manager
+File: Step_0.gml
+// obj_ui_manager Step Event
+var is_ui_room = (room == rm_init || room == rm_main_menu || room == rm_map || room == rm_pause_menu || room == rm_settings_menu);
+if (!is_ui_room && !global.is_pause_menu_active) {
+    if (instance_exists(inventory_instance) && active_ui == noone) {
+        inventory_instance.visible = true;
+    }
+}
+if (active_ui != noone && !instance_exists(active_ui)) {
+    active_ui = noone;  // Clear if destroyed
+    if (instance_exists(inventory_instance)) {
+        inventory_instance.visible = true;
+        show_debug_message("UI Manager restored inventory visibility.");
+    }
+}
+
+
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_wall
 File: Step_0.gml
 set_depth();

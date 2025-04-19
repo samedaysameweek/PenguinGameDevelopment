@@ -8,17 +8,18 @@ var is_non_gameplay_room = (room == rm_init || room == rm_main_menu || room == r
                             room == rm_pause_menu || room == rm_settings_menu || room == rm_saveload ||
                             room == rm_colorpicker_menu); // Add any other non-gameplay rooms here
 
-// --- Exit immediately if it's a non-gameplay room ---
+// *** Store the loading state temporarily ***
+var _is_fresh_load = (variable_global_exists("is_loading_game") && global.is_loading_game == true);
+
 if (is_non_gameplay_room) {
-    show_debug_message("CONTROLLER ROOM START: Non-gameplay room detected. Skipping player creation and state load.");
+    show_debug_message("CONTROLLER ROOM START: Non-gameplay room detected...");
     if (!instance_exists(obj_ui_manager)) {
-        if (!layer_exists("UI")) { layer_create(-10000, "UI"); }
-        instance_create_layer(0, 0, "UI", obj_ui_manager);
-        show_debug_message("CONTROLLER ROOM START: Created obj_ui_manager in UI room.");
+         /* create UI manager */
     }
-    if (variable_global_exists("is_loading_game") && global.is_loading_game) {
-        show_debug_message("CONTROLLER ROOM START: Resetting global.is_loading_game flag (in UI room).");
+    // Reset loading flag here if needed for UI rooms
+    if (_is_fresh_load) {
         global.is_loading_game = false;
+        show_debug_message("CONTROLLER ROOM START: Reset global.is_loading_game (in UI room).");
     }
     exit;
 }
@@ -27,19 +28,17 @@ if (is_non_gameplay_room) {
 
 // --- 1. Determine Player Start Position & Facing ---
 var start_x, start_y, start_face;
-if (variable_global_exists("is_loading_game") && global.is_loading_game) {
+if (_is_fresh_load) {
+    // Use saved position if fresh load
     start_x = global.player_x;
     start_y = global.player_y;
     start_face = global.last_player_face ?? DOWN;
-    show_debug_message("CONTROLLER ROOM START (Load): Using saved player pos (" + string(start_x) + "," + string(start_y) + ") Face: " + string(start_face));
+     show_debug_message("CONTROLLER ROOM START (Load): Using saved player pos...");
 } else if (variable_global_exists("warp_target_x") && !is_undefined(global.warp_target_x)) {
-    start_x = global.warp_target_x;
-    start_y = global.warp_target_y;
-    start_face = global.warp_target_face ?? DOWN;
-    global.warp_target_x = undefined; // Clear warp targets
-    global.warp_target_y = undefined;
-    global.warp_target_face = undefined;
-    show_debug_message("CONTROLLER ROOM START (Warp): Using warp target pos (" + string(start_x) + "," + string(start_y) + ") Face: " + string(start_face));
+    // Use warp position if warping
+     start_x = global.warp_target_x; start_y = global.warp_target_y; start_face = global.warp_target_face ?? DOWN;
+     global.warp_target_x = undefined; global.warp_target_y = undefined; global.warp_target_face = undefined;
+     show_debug_message("CONTROLLER ROOM START (Warp): Using warp target pos...");
 } else {
     show_debug_message("CONTROLLER ROOM START (Default): Looking for obj_spawn_point...");
     var default_spawn = instance_find(obj_spawn_point, 0);
@@ -89,6 +88,7 @@ if (!object_exists(player_obj)) {
           exit;
      }
 }
+
 if (!layer_exists("Instances")) { layer_create(0, "Instances"); }
 global.player_instance = instance_create_layer(start_x, start_y, "Instances", player_obj);
 if (instance_exists(global.player_instance)) {
@@ -102,21 +102,17 @@ if (instance_exists(global.player_instance)) {
     exit;
 }
 
-// --- 4. Load Room State ---
-if (ds_map_exists(global.room_states, _current_room_name)) {
-    show_debug_message("CONTROLLER ROOM START: Loading saved state for room: " + _current_room_name);
-    load_room_state(room);
-} else {
-    show_debug_message("CONTROLLER ROOM START: No saved state found for room: " + _current_room_name);
-}
+// --- 4. Load Room State - Pass the flag ---
+// Call load_room_state *BEFORE* resetting global.is_loading_game
+show_debug_message("CONTROLLER ROOM START: Calling load_room_state for: " + _current_room_name + " (Is Fresh Load: " + string(_is_fresh_load) + ")");
+load_room_state(room, _is_fresh_load); // <<< PASS THE FLAG
 
-// --- 5. Final Setup (Reset loading flag) ---
-if (variable_global_exists("is_loading_game") && global.is_loading_game) {
+// --- 5. Final Setup (Reset loading flag AFTER load_room_state) ---
+if (_is_fresh_load) {
     show_debug_message("CONTROLLER ROOM START: Resetting global.is_loading_game flag.");
     global.is_loading_game = false;
 }
 
-// --- CAMERA AND VIEW SETUP ---
 // --- CAMERA AND VIEW SETUP ---
 // Assign camera to view 0 *first*
 view_set_camera(0, global.camera);

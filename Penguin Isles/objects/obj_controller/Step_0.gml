@@ -58,13 +58,7 @@ if (keyboard_check_pressed(ord("C")) && global.current_skin == "icetruck") {
     }
 }
 
-// Ensure inventory visibility in non-UI rooms
 var is_ui_room = (room == rm_init || room == rm_main_menu || room == rm_map || room == rm_pause_menu || room == rm_settings_menu);
-if (!is_ui_room && instance_exists(obj_inventory)) {
-    if (!global.is_pause_menu_active) {  // Only show when not paused
-        obj_inventory.visible = false;
-    }
-}
 
 // Hide or show the player in UI rooms
 if (is_ui_room) {

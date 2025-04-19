@@ -51,7 +51,7 @@ if (global.inventory_visible) {
         }
 
         // ** ADDED DEBUGGING **
-        show_debug_message("Draw GUI: Checking slot '" + current_slot_type + "'. Found item name: " + string(item_name));
+        //show_debug_message("Draw GUI: Checking slot '" + current_slot_type + "'. Found item name: " + string(item_name));
 
         if (!is_undefined(item_name) && item_name != -1) { // Check if slot has an item name
             var item_index_val = -1;

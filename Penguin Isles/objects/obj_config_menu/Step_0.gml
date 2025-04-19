@@ -43,13 +43,9 @@ if (mouse_check_button_pressed(mb_left)) {
     
     // Color picker buttons
     if (point_in_rectangle(mx, my, panel_x + 220, panel_y + 40, panel_x + 320, panel_y + 70)) {
-        instance_create_layer(0, 0, "Instances", obj_player_colourpicker);
-        global.ui_manager.close_ui();
-        if (instance_exists(obj_inventory)) {
-            obj_inventory.visible = true;  // Restore inventory
-            show_debug_message("Inventory visibility set to true after player colour picker.");
-        }
-    } else if (point_in_rectangle(mx, my, panel_x + 220, panel_y + 80, panel_x + 320, panel_y + 110)) {
+    instance_create_layer(0, 0, "Instances", obj_player_colourpicker);
+    global.ui_manager.close_ui(); // Only call this
+	} else if (point_in_rectangle(mx, my, panel_x + 220, panel_y + 80, panel_x + 320, panel_y + 110)) {
         instance_create_layer(0, 0, "Instances", obj_icetruck_colourpicker);
         global.ui_manager.close_ui();
         if (instance_exists(obj_inventory)) {
