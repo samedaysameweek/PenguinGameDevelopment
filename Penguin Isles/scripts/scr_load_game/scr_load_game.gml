@@ -16,11 +16,12 @@ function load_game() {
         show_debug_message("Load Game ERROR: Failed to open save file.");
         return false;
     }
-	var _json_string = "";
-	while (!file_text_eof(_file)) {
-	    _json_string += file_text_readln(_file);
-	}
-	file_text_close(_file);
+
+    var _json_string = "";
+    while (!file_text_eof(_file)) {
+        _json_string += file_text_readln(_file);
+    }
+    file_text_close(_file);
 
     if (_json_string == "") {
         show_debug_message("Load Game ERROR: Save file is empty.");
@@ -28,11 +29,12 @@ function load_game() {
     }
 
     // --- 2. Parse JSON Data ---
-	var _load_data = json_parse(_json_string);
-	if (is_struct(_load_data) && is_array(_load_data.inventory)) {
-	    global.inventory = array_copy(_load_data.inventory);
-	    show_debug_message("Inventory loaded: " + string(global.inventory));
-	}
+    var _load_data = json_parse(_json_string);
+    if (is_struct(_load_data) && is_array(_load_data.inventory)) {
+        global.inventory = array_duplicate(_load_data.inventory); // Fixed deep copy
+        show_debug_message("Inventory loaded: " + string(global.inventory));
+    }
+	
     // --- 3. Validate Save Data Structure and Version ---
     try {
         if (!variable_struct_exists(_load_data, "save_format_version")) throw "Save data missing 'save_format_version'.";

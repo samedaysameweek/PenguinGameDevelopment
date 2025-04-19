@@ -70,7 +70,7 @@ function save_game() {
         save_format_version: "1.3.2", // Increment version for inventory fix
         save_timestamp: date_current_datetime(),
         game_state: {
-            inventory: array_copy(global.inventory),
+            inventory: array_duplicate(global.inventory),
 			room_states: ds_map_to_struct_recursive(global.room_states),
             player_data: {
                 x: global.player_instance.x,

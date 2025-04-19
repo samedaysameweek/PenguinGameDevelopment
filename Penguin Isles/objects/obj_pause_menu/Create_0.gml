@@ -1,6 +1,6 @@
 // Create Event in obj_pause_menu
 depth = -99990; // Ensure pause menu is drawn on top
-global.is_pause_menu_active = true;
+global.is_pause_menu_active = false;
 global.inventory_visible = false; 
 
 image_speed = 0.5; // Menu animation speed
