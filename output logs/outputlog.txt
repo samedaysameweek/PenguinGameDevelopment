@@ -16,14 +16,14 @@ Finished PrepareGame()
 Run_Start
 Done g_EffectsManager.Init()
 Done RenderStateManager
-CreateColPairs took 0.000000s 4 usecs for 125 object types obj_col_numb=0 physobjcount=0 resizes 0 final size 0
+CreateColPairs took 0.000000s 3 usecs for 125 object types obj_col_numb=0 physobjcount=0 resizes 0 final size 0
 Done ObjectLists
 Done Extension_Initialize
 About to startroom
 Number of buttons found: 3
-Total memory used = 12274273 (0x00bb4a61) bytes 11.71MB
+Total memory used = 12269323 (0x00bb370b) bytes 11.70MB
 Free memory = 6003920 (0x005b9cd0) bytes 5.73MB
-Peak memory used = 13097538 (0x00c7da42) bytes 12.49MB
+Peak memory used = 13091261 (0x00c7c1bd) bytes 12.48MB
 **********************************.
 Entering main loop.
 **********************************.
@@ -80,7 +80,6 @@ rm_init: Not loading game. Proceeding to next room (New Game).
 rm_init: Creation Code Finished.
 obj_controller Room End: Transitioning from room: rm_init
 Saving runtime state for leaving room: rm_init
-Stored runtime state ARRAY for room: rm_init (Size: 2)
 Spawn Point marker created at (146, 155)
 CONTROLLER ROOM START: Entering room: rm_welcome_room
 CONTROLLER ROOM START (Default): Looking for obj_spawn_point...
@@ -103,40 +102,28 @@ CONTROLLER ROOM START: Finished setup for room: rm_welcome_room
 DEBUG: Resetting repair flag...
 Inventory: Added 'Battery' (Index: 5) to slot 0
 'Battery' added to inventory via obj_inventory.
+Puffle User Event 0: Interaction triggered.
+Player needs a Puffle O or Box Puffle O to befriend the puffle.
 Inventory: Added 'Toboggan' (Index: 4) to slot 1
 'Toboggan' added to inventory via obj_inventory.
-Attempting to switch to skin: toboggan
-Destroying old player instance (ref instance 100661, skin: player)
-obj_player_toboggan: Initialized. Player instance ID: ref instance 100662
-Skin switched to: toboggan. New instance ID: ref instance 100662
-Inventory: Removed 'Toboggan' (Index: 4) from slot 1
-Inventory: Removed Toboggan after switching to toboggan skin.
-Inventory: Added 'Black Hoodie' (Index: 22) to slot 1
+Inventory: Added 'Black Hoodie' (Index: 22) to slot 2
 'Black Hoodie' added to inventory via obj_inventory.
-Inventory: Added 'Black Sun Glasses' (Index: 21) to slot 2
+Inventory: Added 'Black Sun Glasses' (Index: 21) to slot 3
 'Black Sun Glasses' added to inventory via obj_inventory.
-Inventory: Added 'Tube' (Index: 3) to slot 3
-'Tube' added to inventory via obj_inventory.
-Attempting to switch to skin: player
-Destroying old player instance (ref instance 100662, skin: toboggan)
-obj_player Create: Applying initial player color: 52479
-obj_player: Initialized. Driving state: 0
-Skin switched to: player. New instance ID: ref instance 100663
-Inventory: Added 'Toboggan' (Index: 4) to slot 4
-Inventory: Added Toboggan back after switching to player skin.
+Inventory: Added 'Tour Hat' (Index: 24) to slot 4
+'Tour Hat' added to inventory via obj_inventory.
 DEBUG: obj_player detected on obj_warp_block. Warping...
 obj_warp initialized. Target Room: 0
 DEBUG: obj_warp transition initiated. Moving player before room transition.
 Player successfully moved to new position.
 obj_controller Room End: Transitioning from room: rm_welcome_room
 Saving runtime state for leaving room: rm_welcome_room
-Stored runtime state ARRAY for room: rm_welcome_room (Size: 13)
 CONTROLLER ROOM START: Entering room: rm_shore
 CONTROLLER ROOM START (Warp): Using warp target pos...
-CONTROLLER ROOM START WARNING: Found unexpected player instance (ref instance 100663, obj: obj_player). Destroying it.
+CONTROLLER ROOM START WARNING: Found unexpected player instance (ref instance 100661, obj: obj_player). Destroying it.
 obj_player Create: Applying initial player color: 52479
 obj_player: Initialized. Driving state: 0
-Created/Positioned player instance: ref instance 100665 with skin: player
+Created/Positioned player instance: ref instance 100663 with skin: player
 CONTROLLER ROOM START: Calling load_room_state for: rm_shore (Is Fresh Load: 0)
 Attempting to load state for room: rm_shore (Fresh Load: 0)
 Skipping instance destruction (Normal Room Entry).
@@ -144,179 +131,18 @@ No state found for room: rm_shore in global.room_states.
 CONTROLLER ROOM START: Set view[0] to use global.camera (ID: 193)
 Set camera view size to 288x216
 Set camera view border to (0, 0)
-Camera set to follow player (ID: ref instance 100665) with INSTANT speed (-1, -1)
+Camera set to follow player (ID: ref instance 100663) with INSTANT speed (-1, -1)
 Camera initial position set to (0, 22)
 CONTROLLER ROOM START: Created 'UI' Layer.
 CONTROLLER ROOM START: Finished setup for room: rm_shore
-Inventory QoL Scroll: Active slot changed to 1, Item Index: 22
-Inventory QoL Scroll: Active slot changed to 2, Item Index: 21
-Inventory QoL Scroll: Active slot changed to 3, Item Index: 3
-Inventory QoL Scroll: Active slot changed to 4, Item Index: 4
-Inventory: Dropped 'Toboggan' as obj_toboggan at (152, 130)
-Inventory: Removed 'Toboggan' from slot 4 after dropping.
+Inventory QoL Scroll: Active slot changed to 1, Item Index: 4
+Inventory QoL Scroll: Active slot changed to 2, Item Index: 22
+Inventory QoL Scroll: Active slot changed to 3, Item Index: 21
+Inventory QoL Scroll: Active slot changed to 4, Item Index: 24
+Inventory: Dropped 'Tour Hat' as obj_tourhat_item at (172, 130)
+Inventory: Removed 'Tour Hat' from slot 4 after dropping.
 Inventory QoL Scroll: Active slot changed to 0, Item Index: 5
-Inventory QoL Scroll: Active slot changed to 3, Item Index: 3
-Inventory QoL Scroll: Active slot changed to 2, Item Index: 21
-Inventory QoL Scroll: Active slot changed to 3, Item Index: 3
-DEBUG: obj_player detected on obj_warp_block. Warping...
-obj_warp initialized. Target Room: 0
-DEBUG: obj_warp transition initiated. Moving player before room transition.
-Player successfully moved to new position.
-obj_controller Room End: Transitioning from room: rm_shore
-Saving runtime state for leaving room: rm_shore
-Stored runtime state ARRAY for room: rm_shore (Size: 1)
-Spawn Point marker created at (146, 155)
-CONTROLLER ROOM START: Entering room: rm_welcome_room
-CONTROLLER ROOM START (Warp): Using warp target pos...
-CONTROLLER ROOM START WARNING: Found unexpected player instance (ref instance 100665, obj: obj_player). Destroying it.
-obj_player Create: Applying initial player color: 52479
-obj_player: Initialized. Driving state: 0
-Created/Positioned player instance: ref instance 100668 with skin: player
-CONTROLLER ROOM START: Calling load_room_state for: rm_welcome_room (Is Fresh Load: 0)
-Attempting to load state for room: rm_welcome_room (Fresh Load: 0)
-Skipping instance destruction (Normal Room Entry).
-Found state array for rm_welcome_room. Size: 13
-Normal Room Entry: Assuming instances persist or were recreated by GM.
-CONTROLLER ROOM START: Set view[0] to use global.camera (ID: 193)
-Set camera view size to 288x216
-Set camera view border to (0, 0)
-Camera set to follow player (ID: ref instance 100668) with INSTANT speed (-1, -1)
-Camera initial position set to (212, 52)
-CONTROLLER ROOM START: Created 'UI' Layer.
-CONTROLLER ROOM START: Finished setup for room: rm_welcome_room
-DEBUG: Resetting repair flag...
-DEBUG: obj_player detected on obj_warp_block. Warping...
-obj_warp initialized. Target Room: 0
-DEBUG: obj_warp transition initiated. Moving player before room transition.
-Player successfully moved to new position.
-obj_controller Room End: Transitioning from room: rm_welcome_room
-Saving runtime state for leaving room: rm_welcome_room
-ERROR!!! :: ############################################################################################
-ERROR in action number 1
-of Other Event: Room End for object obj_controller:
-ds_exists argument 1 incorrect type (array) expecting a Number (YYGI32)
- at gml_Object_obj_controller_Other_5 (line 43) -              if (ds_exists(_old_data, ds_type_list)) {
-############################################################################################
-gml_Object_obj_controller_Other_5 (line 43)
-
-Output log when saving the game:
-Setting scheduler resolution to 1
-DirectX11: Using hardware device
-Resizing swap chain...
-Collision Event time(microsecs)=11
-Variable_Global_Init()
-PrepareGame()
-Audio_Init()
-Audio group 0 -> Loaded
-Attempting to set gamepadcount to 12
-Game_Prepare()
-Script_Prepare() 
-TimeLine_Prepare() 
-Object_Prepare() 
-Room_Prepare() 
-Finished PrepareGame() 
-Run_Start
-Done g_EffectsManager.Init()
-Done RenderStateManager
-CreateColPairs took 0.000000s 4 usecs for 125 object types obj_col_numb=0 physobjcount=0 resizes 0 final size 0
-Done ObjectLists
-Done Extension_Initialize
-About to startroom
-Number of buttons found: 3
-Total memory used = 12272392 (0x00bb4308) bytes 11.70MB
-Free memory = 6003920 (0x005b9cd0) bytes 5.73MB
-Peak memory used = 13097533 (0x00c7da3d) bytes 12.49MB
-**********************************.
-Entering main loop.
-**********************************.
-obj_menu_button: Start button selected. Setting is_loading_game=false.
-obj_menu_button: New Game selected. Setting is_loading_game=false.
-obj_menu_button: Play button selected. Setting is_loading_game=false.
---- Running scr_initialize_item_data ---
-Defined global.item_definitions struct.
-Created global.item_index_map
-Created global.item_type_map
-Created global.item_sprite_map
-Created global.item_object_map
-Ensured item lookup maps exist.
-Populated item lookup maps (Index, Type, Sprite, Object).
---- Finished scr_initialize_item_data ---
-obj_controller Create: Executed scr_initialize_item_data.
---- Running init_globals (Refactored) ---
-Ensured global.inventory_expanded exists.
-Ensured global.game_paused exists.
-Ensured global.is_pause_menu_active exists.
-Ensured global.player_controls_enabled exists.
-Ensured global.colour_picker_active exists.
-Ensured global.party_hat_visible exists.
-Ensured global.beta_hat_visible exists.
-Ensured global.skin_switching exists.
-Ensured global.following_puffles list exists.
-Ensured global.room_states map exists.
-Ensured global.active_quests list exists.
-Ensured global.completed_quests list exists.
-Ensured global.inventory array exists (Size 42).
-Ensured global.equipped_items map exists with slots.
-init_globals: global.camera variable does not exist. Creating camera.
-init_globals: Created new global.camera. ID: 193
-init_globals: Setting default values for NEW GAME.
-Finished setting default values via init_globals.
-Initialized global.is_game_paused in obj_controller Create.
-obj_player Create: Applying initial player color: 52479
-obj_player: Initialized. Driving state: 0
-Restored player color: 52479
-Player instance created: ref instance 100651
-obj_controller created with ID: ref instance 100014
-obj_controller Create event executed
-DEBUG: obj_initializer Create Event START
-DEBUG: global.following_puffles already exists.
-DEBUG: global.equipped_items already exists.
-obj_inventory Create: Initialized with size 42
-DEBUG: obj_inventory created.
-DEBUG: obj_map_icon created.
-DEBUG: obj_initializer Create Event FINISHED
-UI Manager initialized.
-rm_init: Creation Code Started.
-rm_init: global.target_room does NOT exist before check.
-rm_init: Not loading game. Proceeding to next room (New Game).
-rm_init: Creation Code Finished.
-obj_controller Room End: Transitioning from room: rm_init
-Saving runtime state for leaving room: rm_init
-Stored runtime state ARRAY for room: rm_init (Size: 2)
-Spawn Point marker created at (146, 155)
-CONTROLLER ROOM START: Entering room: rm_welcome_room
-CONTROLLER ROOM START (Default): Looking for obj_spawn_point...
-CONTROLLER ROOM START (Default): Found spawn point instance ref instance 100088 at (146,155)
-CONTROLLER ROOM START (Default): Using determined default pos (146,155) Face: 3
-obj_player Create: Applying initial player color: 52479
-obj_player: Initialized. Driving state: 0
-Created/Positioned player instance: ref instance 100661 with skin: player
-CONTROLLER ROOM START: Calling load_room_state for: rm_welcome_room (Is Fresh Load: 0)
-Attempting to load state for room: rm_welcome_room (Fresh Load: 0)
-Skipping instance destruction (Normal Room Entry).
-No state found for room: rm_welcome_room in global.room_states.
-CONTROLLER ROOM START: Set view[0] to use global.camera (ID: 193)
-Set camera view size to 288x216
-Set camera view border to (0, 0)
-Camera set to follow player (ID: ref instance 100661) with INSTANT speed (-1, -1)
-Camera initial position set to (2, 47)
-CONTROLLER ROOM START: Created 'UI' Layer.
-CONTROLLER ROOM START: Finished setup for room: rm_welcome_room
-DEBUG: Resetting repair flag...
-Inventory: Added 'Battery' (Index: 5) to slot 0
-'Battery' added to inventory via obj_inventory.
-Inventory: Added 'Wrench' (Index: 2) to slot 1
-'Wrench' added to inventory via obj_inventory.
-Inventory: Added 'Black Hoodie' (Index: 22) to slot 2
-'Black Hoodie' added to inventory via obj_inventory.
-Inventory: Added 'Snow Blaster' (Index: 19) to slot 3
-'Snow Blaster' added to inventory via obj_inventory.
-Inventory: Added 'Black Sun Glasses' (Index: 21) to slot 4
-'Black Sun Glasses' added to inventory via obj_inventory.
-Inventory: Added 'Beta Hat' (Index: 0) to slot 5
-'Beta Hat' added to inventory via obj_inventory.
-Inventory: Added 'Jackhammer' (Index: 10) to slot 6
-'Jackhammer' added to inventory via obj_inventory.
+Inventory QoL Scroll: Active slot changed to 1, Item Index: 4
 Slot 1: (3, 6) to (23, 26)
 Slot 2: (23, 6) to (43, 26)
 Slot 3: (43, 6) to (63, 26)
@@ -412,56 +238,14 @@ Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
 Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
 Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
 Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Clicked grid slot (4, 0)
-Slot 4 contains item index value: 21
+Clicked grid slot (3, 0)
+Slot 3 contains item index value: 21
 Item name found: 'Black Sun Glasses'
 Item type: 'face'
 Attempting to equip 'Black Sun Glasses' to slot 'face'
 Attempting to equip item: 'Black Sun Glasses' to slot: 'face'
 Equipped 'Black Sun Glasses' to slot 'face'.
-Removed 'Black Sun Glasses' directly from inventory array slot 4
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
+Removed 'Black Sun Glasses' directly from inventory array slot 3
 Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
 Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
 Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
@@ -615,8 +399,118 @@ Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
 Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
 Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
 DEBUG: Closing inventory UI completely.
-Inventory: Added 'Snow Shovel' (Index: 11) to slot 2
-'Snow Shovel' added to inventory via obj_inventory.
+DEBUG: obj_player detected on obj_warp_block. Warping...
+obj_warp initialized. Target Room: 0
+DEBUG: obj_warp transition initiated. Moving player before room transition.
+Player successfully moved to new position.
+obj_controller Room End: Transitioning from room: rm_shore
+Saving runtime state for leaving room: rm_shore
+Spawn Point marker created at (146, 155)
+CONTROLLER ROOM START: Entering room: rm_welcome_room
+CONTROLLER ROOM START (Warp): Using warp target pos...
+CONTROLLER ROOM START WARNING: Found unexpected player instance (ref instance 100663, obj: obj_player). Destroying it.
+obj_player Create: Applying initial player color: 52479
+obj_player: Initialized. Driving state: 0
+Created/Positioned player instance: ref instance 100667 with skin: player
+CONTROLLER ROOM START: Calling load_room_state for: rm_welcome_room (Is Fresh Load: 0)
+Attempting to load state for room: rm_welcome_room (Fresh Load: 0)
+Skipping instance destruction (Normal Room Entry).
+Found state array for rm_welcome_room. Size: 0
+Normal Room Entry: Assuming instances persist or were recreated by GM.
+CONTROLLER ROOM START: Set view[0] to use global.camera (ID: 193)
+Set camera view size to 288x216
+Set camera view border to (0, 0)
+Camera set to follow player (ID: ref instance 100667) with INSTANT speed (-1, -1)
+Camera initial position set to (212, 52)
+CONTROLLER ROOM START: Created 'UI' Layer.
+CONTROLLER ROOM START: Finished setup for room: rm_welcome_room
+DEBUG: Resetting repair flag...
+Attempting to switch to skin: toboggan
+Destroying old player instance (ref instance 100667, skin: player)
+obj_player_toboggan: Initialized. Player instance ID: ref instance 100668
+Skin switched to: toboggan. New instance ID: ref instance 100668
+Inventory: Removed 'Toboggan' (Index: 4) from slot 1
+Inventory: Removed Toboggan after switching to toboggan skin.
+Attempting to switch to skin: player
+Destroying old player instance (ref instance 100668, skin: toboggan)
+obj_player Create: Applying initial player color: 52479
+obj_player: Initialized. Driving state: 0
+Skin switched to: player. New instance ID: ref instance 100669
+Inventory: Added 'Toboggan' (Index: 4) to slot 1
+Inventory: Added Toboggan back after switching to player skin.
+DEBUG: obj_player detected on obj_warp_block. Warping...
+obj_warp initialized. Target Room: 0
+DEBUG: obj_warp transition initiated. Moving player before room transition.
+Player successfully moved to new position.
+obj_controller Room End: Transitioning from room: rm_welcome_room
+Replacing existing room state array for: rm_welcome_room
+Saving runtime state for leaving room: rm_welcome_room
+CONTROLLER ROOM START: Entering room: rm_shore
+CONTROLLER ROOM START (Warp): Using warp target pos...
+CONTROLLER ROOM START WARNING: Found unexpected player instance (ref instance 100669, obj: obj_player). Destroying it.
+obj_player Create: Applying initial player color: 52479
+obj_player: Initialized. Driving state: 0
+Created/Positioned player instance: ref instance 100671 with skin: player
+CONTROLLER ROOM START: Calling load_room_state for: rm_shore (Is Fresh Load: 0)
+Attempting to load state for room: rm_shore (Fresh Load: 0)
+Skipping instance destruction (Normal Room Entry).
+Found state array for rm_shore. Size: 0
+Normal Room Entry: Assuming instances persist or were recreated by GM.
+CONTROLLER ROOM START: Set view[0] to use global.camera (ID: 193)
+Set camera view size to 288x216
+Set camera view border to (0, 0)
+Camera set to follow player (ID: ref instance 100671) with INSTANT speed (-1, -1)
+Camera initial position set to (0, 22)
+CONTROLLER ROOM START: Created 'UI' Layer.
+CONTROLLER ROOM START: Finished setup for room: rm_shore
+Attempting to switch to skin: toboggan
+Destroying old player instance (ref instance 100671, skin: player)
+obj_player_toboggan: Initialized. Player instance ID: ref instance 100672
+Skin switched to: toboggan. New instance ID: ref instance 100672
+Inventory: Removed 'Toboggan' (Index: 4) from slot 1
+Inventory: Removed Toboggan after switching to toboggan skin.
+DEBUG: obj_player detected on obj_warp_block. Warping...
+obj_warp initialized. Target Room: 0
+DEBUG: obj_warp transition initiated. Moving player before room transition.
+Player successfully moved to new position.
+obj_controller Room End: Transitioning from room: rm_shore
+Replacing existing room state array for: rm_shore
+Saving runtime state for leaving room: rm_shore
+Spawn Point marker created at (146, 155)
+CONTROLLER ROOM START: Entering room: rm_welcome_room
+CONTROLLER ROOM START (Warp): Using warp target pos...
+CONTROLLER ROOM START WARNING: Found unexpected player instance (ref instance 100672, obj: obj_player_toboggan). Destroying it.
+obj_player_toboggan: Initialized. Player instance ID: ref instance 100674
+Created/Positioned player instance: ref instance 100674 with skin: Toboggan
+CONTROLLER ROOM START: Calling load_room_state for: rm_welcome_room (Is Fresh Load: 0)
+Attempting to load state for room: rm_welcome_room (Fresh Load: 0)
+Skipping instance destruction (Normal Room Entry).
+Found state array for rm_welcome_room. Size: 0
+Normal Room Entry: Assuming instances persist or were recreated by GM.
+CONTROLLER ROOM START: Set view[0] to use global.camera (ID: 193)
+Set camera view size to 288x216
+Set camera view border to (0, 0)
+Camera set to follow player (ID: ref instance 100674) with INSTANT speed (-1, -1)
+Camera initial position set to (212, 52)
+CONTROLLER ROOM START: Created 'UI' Layer.
+CONTROLLER ROOM START: Finished setup for room: rm_welcome_room
+DEBUG: Resetting repair flag...
+Inventory: Added 'Battery' (Index: 5) to slot 1
+'Battery' added to inventory via obj_inventory.
+Expanded HUD opened - global.is_expanded set to true
+UI Manager: Request to open UI object: obj_config_menu
+UI Manager: Successfully created new active UI (ref instance 100676) for object: obj_config_menu
+Configuration menu opened.
+Attempting to switch to skin: player
+Destroying old player instance (ref instance 100674, skin: Toboggan)
+obj_player Create: Applying initial player color: 52479
+obj_player: Initialized. Driving state: 0
+Skin switched to: player. New instance ID: ref instance 100677
+Switched to skin: player
+UI Manager: Request to close active UI.
+UI Manager: Destroying active UI (ref instance 100676)
+UI Manager: Restored inventory visibility after UI close.
+Inventory visibility set to true after skin switch.
 Repairing ice truck...
 DEBUG: Setting global.repair_complete = true in obj_icetruck_broken
 Ice truck repaired! It is now driveable.
@@ -630,12 +524,12 @@ obj_warp initialized. Target Room: 0
 DEBUG: obj_warp transition initiated. Moving player before room transition.
 Player successfully moved to new position.
 obj_controller Room End: Transitioning from room: rm_welcome_room
+Replacing existing room state array for: rm_welcome_room
 Saving runtime state for leaving room: rm_welcome_room
-Stored runtime state ARRAY for room: rm_welcome_room (Size: 9)
 CONTROLLER ROOM START: Entering room: rm_plaza
 CONTROLLER ROOM START (Warp): Using warp target pos...
 obj_player_icetruck: Initialized.
-Created/Positioned player instance: ref instance 100666 with skin: icetruck
+Created/Positioned player instance: ref instance 100681 with skin: icetruck
 CONTROLLER ROOM START: Calling load_room_state for: rm_plaza (Is Fresh Load: 0)
 Attempting to load state for room: rm_plaza (Fresh Load: 0)
 Skipping instance destruction (Normal Room Entry).
@@ -643,188 +537,41 @@ No state found for room: rm_plaza in global.room_states.
 CONTROLLER ROOM START: Set view[0] to use global.camera (ID: 193)
 Set camera view size to 288x216
 Set camera view border to (0, 0)
-Camera set to follow player (ID: ref instance 100666) with INSTANT speed (-1, -1)
+Camera set to follow player (ID: ref instance 100681) with INSTANT speed (-1, -1)
 Camera initial position set to (111, 184)
 CONTROLLER ROOM START: Created 'UI' Layer.
 CONTROLLER ROOM START: Finished setup for room: rm_plaza
 obj_player Create: Applying initial player color: 52479
 obj_player: Initialized. Driving state: 0
 Attempting to switch to skin: player
-Destroying old player instance (ref instance 100667, skin: icetruck)
+Destroying old player instance (ref instance 100682, skin: icetruck)
 obj_player Create: Applying initial player color: 52479
 obj_player: Initialized. Driving state: 0
-Skin switched to: player. New instance ID: ref instance 100669
+Skin switched to: player. New instance ID: ref instance 100684
 Exited ice truck. Current skin: player
-Inventory QoL Scroll: Active slot changed to 1, Item Index: 2
-Inventory QoL Scroll: Active slot changed to 6, Item Index: 10
-Inventory QoL Scroll: Active slot changed to 1, Item Index: 2
-Inventory QoL Scroll: Active slot changed to 2, Item Index: 11
-Inventory QoL Scroll: Active slot changed to 3, Item Index: 19
-Inventory: Dropped 'Snow Blaster' as obj_snowblaster_item at (211.50, 263.50)
-Inventory: Removed 'Snow Blaster' from slot 3 after dropping.
-Inventory QoL Scroll: Active slot changed to 2, Item Index: 11
-Game Paused
-Pause Menu DEBUG: Inventory state JUST BEFORE save call: [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,...]
---- Running save_game (Manual Array->Struct Room State + Inv Clone) ---
-Saved state ARRAY for room: rm_plaza with 4 objects.
-save_game: Manually converting global.room_states map (containing arrays) to struct...
-save_game: Finished manually converting room states.
-Save Game DEBUG: Inventory state before stringify: [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,...]
-Game saved successfully to savegame.sav (using inv clone).
---- Finished save_game ---
-Calling game_end from obj_pause_menu Quit Game button
-###game_end###0
-obj_controller Room End: Transitioning from room: rm_plaza
-Saving runtime state for leaving room: rm_plaza
-ERROR!!! :: ############################################################################################
-ERROR in action number 1
-of Other Event: Room End for object obj_controller:
-ds_exists argument 1 incorrect type (array) expecting a Number (YYGI32)
- at gml_Object_obj_controller_Other_5 (line 43) -              if (ds_exists(_old_data, ds_type_list)) {
-############################################################################################
-gml_Object_obj_controller_Other_5 (line 43)
-
-output log when loading the game from the savegame file:
-Setting scheduler resolution to 1
-DirectX11: Using hardware device
-Resizing swap chain...
-Collision Event time(microsecs)=11
-Variable_Global_Init()
-PrepareGame()
-Audio_Init()
-Audio group 0 -> Loaded
-Attempting to set gamepadcount to 12
-Game_Prepare()
-Script_Prepare() 
-TimeLine_Prepare() 
-Object_Prepare() 
-Room_Prepare() 
-Finished PrepareGame() 
-Run_Start
-Done g_EffectsManager.Init()
-Done RenderStateManager
-CreateColPairs took 0.000000s 4 usecs for 125 object types obj_col_numb=0 physobjcount=0 resizes 0 final size 0
-Done ObjectLists
-Done Extension_Initialize
-About to startroom
-Number of buttons found: 3
-Total memory used = 12268842 (0x00bb352a) bytes 11.70MB
-Free memory = 6003920 (0x005b9cd0) bytes 5.73MB
-Peak memory used = 13097538 (0x00c7da42) bytes 12.49MB
-**********************************.
-Entering main loop.
-**********************************.
-obj_menu_button: Start button selected. Setting is_loading_game=false.
-obj_menu_button: Continue selected. Setting is_loading_game=true.
---- Running load_game ---
-Load Game: Found save version: 1.3.2
-Load Game Init: Initializing global.inventory.
-Load Game Init: Initializing global.equipped_items.
-Load Game Init: Initializing global.room_states.
-Load Game Init: Initializing global.active_quests.
-Load Game Init: Initializing global.completed_quests.
-Load Game Init: Initializing global.following_puffles.
-Load Game: Restored player data (Pos: 271.50,245.50 Skin: player)
-Load Game: Target room set to rm_plaza
-Load Game DEBUG: Raw loaded inventory array: [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,...]
-Load Game: Copying 42 inventory items from save...
-Load Game: Inventory array copy complete.
-Load Game DEBUG: Final Global Inventory Contents:
-[0:-1], [1:-1], [2:-1], [3:-1], [4:-1], [5:-1], [6:-1], [7:-1], [8:-1], [9:-1]
-[10:-1], [11:-1], [12:-1], [13:-1], [14:-1], [15:-1], [16:-1], [17:-1], [18:-1], [19:-1]
-[20:-1], [21:-1], [22:-1], [23:-1], [24:-1], [25:-1], [26:-1], [27:-1], [28:-1], [29:-1]
-[30:-1], [31:-1], [32:-1], [33:-1], [34:-1], [35:-1], [36:-1], [37:-1], [38:-1], [39:-1]
-[40:-1], [41:-1]
-Load Game: Restored equipped items map.
-Load Game: Reconstructing global.room_states DS Map with *arrays* of state structs...
-  - Stored state *array* for room 'rm_init' (Size: 2)
-  - Stored state *array* for room 'rm_plaza' (Size: 4)
-  - Stored state *array* for room 'rm_welcome_room' (Size: 9)
-Load Game: Finished reconstructing global.room_states map (now contains arrays).
-Load Game: Restored active quests list.
-Load Game: Restored completed quests list.
---- Finished load_game (Success) ---
-obj_menu_button: load_game successful. Transitioning to rm_init...
---- Running scr_initialize_item_data ---
-Defined global.item_definitions struct.
-Created global.item_index_map
-Created global.item_type_map
-Created global.item_sprite_map
-Created global.item_object_map
-Ensured item lookup maps exist.
-Populated item lookup maps (Index, Type, Sprite, Object).
---- Finished scr_initialize_item_data ---
-obj_controller Create: Executed scr_initialize_item_data.
---- Running init_globals (Refactored) ---
-Ensured global.inventory_expanded exists.
-Ensured global.game_paused exists.
-Ensured global.is_pause_menu_active exists.
-Ensured global.player_controls_enabled exists.
-Ensured global.colour_picker_active exists.
-Ensured global.party_hat_visible exists.
-Ensured global.beta_hat_visible exists.
-Ensured global.skin_switching exists.
-init_globals: global.camera variable does not exist. Creating camera.
-init_globals: Created new global.camera. ID: 193
-init_globals: Skipping NEW GAME default value assignments during game load.
-Initialized global.is_game_paused in obj_controller Create.
-obj_player Create: Applying loaded player color: 52479
-obj_player: Initialized. Driving state: 0
-Restored player color: 52479
-Player instance created: ref instance 100636
-obj_controller created with ID: ref instance 100014
-obj_controller Create event executed
-DEBUG: obj_initializer Create Event START
-Skipping obj_initializer Create Event during game load.
-obj_inventory Create: Initialized with size 42
-UI Manager initialized.
-rm_init: Creation Code Started.
-rm_init: Value of global.target_room before check: rm_plaza (ID: ref room rm_plaza)
-rm_init: Loading game detected.
-rm_init: Valid target room found: rm_plaza. Transitioning...
-rm_init: Creation Code Finished.
-obj_controller Room End: Transitioning from room: rm_init
-CONTROLLER ROOM START: Entering room: rm_plaza
-CONTROLLER ROOM START (Load): Using saved player pos...
-obj_player Create: Applying loaded player color: 52479
-obj_player: Initialized. Driving state: 0
-Created/Positioned player instance: ref instance 100645 with skin: player
-CONTROLLER ROOM START: Calling load_room_state for: rm_plaza (Is Fresh Load: 1)
-Attempting to load state for room: rm_plaza (Fresh Load: 1)
-Destroying existing savable instances (Fresh Load)...
-Finished destroying old instances (Fresh Load).
-Found state array for rm_plaza. Size: 4
-Recreating instances from saved state array (Fresh Load)...
-Loaded obj_snowblaster_item at (211.50, 263.50)
-Loaded obj_icetruck at (307.50, 223.50)
-Loaded obj_boxpuffleo_item at (95, 282)
-Loaded obj_tube at (430, 296)
-Finished creating instances for rm_plaza (Fresh Load).
-CONTROLLER ROOM START: Resetting global.is_loading_game flag.
-CONTROLLER ROOM START: Set view[0] to use global.camera (ID: 193)
-Set camera view size to 288x216
-Set camera view border to (0, 0)
-Camera set to follow player (ID: ref instance 100645) with INSTANT speed (-1, -1)
-Camera initial position set to (127.50, 137.50)
-CONTROLLER ROOM START: Finished setup for room: rm_plaza
-Inventory: Added 'Snow Blaster' (Index: 19) to slot 0
-'Snow Blaster' added to inventory via obj_inventory.
-Inventory: Dropped 'Snow Blaster' as obj_snowblaster_item at (225.50, 268.50)
-Inventory: Removed 'Snow Blaster' from slot 0 after dropping.
+Expanded HUD opened - global.is_expanded set to true
+Special actions menu toggled: open
+Special actions menu toggled: closed
+Special actions menu toggled: open
+Special actions menu toggled: closed
+Expanded HUD closed successfully.
+Inventory: Dropped 'Battery' as obj_battery at (208, 265.75)
+Inventory: Removed 'Battery' from slot 1 after dropping.
 Inventory: Added 'Box Puffle O' (Index: 14) to slot 0
 'Box Puffle O' added to inventory via obj_inventory.
-obj_player_icetruck: Initialized.
-Entered ice truck. Current skin: icetruck
-DEBUG: obj_player detected on obj_warp_block. Warping...
-obj_warp initialized. Target Room: 0
-DEBUG: obj_warp transition initiated. Moving player before room transition.
-Player successfully moved to new position.
-obj_controller Room End: Transitioning from room: rm_plaza
-Saving runtime state for leaving room: rm_plaza
+Inventory: Added 'Tube' (Index: 3) to slot 1
+'Tube' added to inventory via obj_inventory.
+Game Paused
+Pause Menu DEBUG: Inventory state JUST BEFORE save call: [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,...]
+--- Running save_game ---
+Saved room state for: rm_plaza
+save_game: Manually converting global.room_states map (containing arrays) to struct...
+save_game: Finished manually converting room states.
 ERROR!!! :: ############################################################################################
 ERROR in action number 1
-of Other Event: Room End for object obj_controller:
-ds_exists argument 1 incorrect type (array) expecting a Number (YYGI32)
- at gml_Object_obj_controller_Other_5 (line 43) -              if (ds_exists(_old_data, ds_type_list)) {
+of  Step Event2 for object obj_pause_menu:
+Variable <unknown_object>.array_duplicate(100148, -2147483648) not set before reading it.
+ at gml_Script_save_game (line 73) -             inventory: array_duplicate(global.inventory),
 ############################################################################################
-gml_Object_obj_controller_Other_5 (line 43)
+gml_Script_save_game (line 73)
+gml_Object_obj_pause_menu_Step_2 (line 53) -                     save_game(); // Call the save function
