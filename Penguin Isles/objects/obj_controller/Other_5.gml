@@ -3,6 +3,22 @@
 var _leaving_room_name = room_get_name(room);
 show_debug_message("obj_controller Room End: Transitioning from room: " + _leaving_room_name);
 
+if (ds_exists(global.room_states, ds_type_map)) {
+    if (ds_map_exists(global.room_states, _leaving_room_name)) {
+        var _old_data = ds_map_find_value(global.room_states, _leaving_room_name);
+
+        if (is_array(_old_data)) {
+            // Arrays do not need explicit destruction
+            show_debug_message("Replacing existing room state array for: " + _leaving_room_name);
+        } else {
+            // Remove old data if not an array
+            ds_map_replace(global.room_states, _leaving_room_name, []);
+        }
+    } else {
+        ds_map_add(global.room_states, _leaving_room_name, []);
+    }
+}
+
 // --- NEW: Save state of the room being left ---
 if (!global.is_loading_game) { // Don't save state when we are in the middle of loading
     show_debug_message("Saving runtime state for leaving room: " + _leaving_room_name);
@@ -34,23 +50,4 @@ if (!global.is_loading_game) { // Don't save state when we are in the middle of 
             array_push(_state_array, _state_data);
        }
     }
-
-    // Update global.room_states (overwrite existing state for this room)
-    if (ds_exists(global.room_states, ds_type_map)) { // Ensure map exists
-         // Destroy old DS List if it was there from a previous save version (safety)
-         if (ds_map_exists(global.room_states, _leaving_room_name)) {
-             var _old_data = ds_map_find_value(global.room_states, _leaving_room_name);
-             if (ds_exists(_old_data, ds_type_list)) {
-                 ds_list_destroy(_old_data);
-                 show_debug_message("Destroyed legacy DS List for room: " + _leaving_room_name + " during runtime save.");
-             }
-             ds_map_delete(global.room_states, _leaving_room_name); // Remove old entry regardless of type
-         }
-         // Add the new GML array
-         ds_map_add(global.room_states, _leaving_room_name, _state_array);
-         show_debug_message("Stored runtime state ARRAY for room: " + _leaving_room_name + " (Size: " + string(array_length(_state_array)) + ")");
-    } else {
-        show_debug_message("ERROR: global.room_states map doesn't exist during Room End state save!");
-    }
 }
-// --- END Runtime State Saving ---

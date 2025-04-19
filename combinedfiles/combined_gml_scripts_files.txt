@@ -610,11 +610,11 @@ function load_game() {
         show_debug_message("Load Game ERROR: Failed to open save file.");
         return false;
     }
-    var _json_string = "";
-    while (!file_text_eof(_file)) { // Read the whole file
-        _json_string += file_text_readln(_file);
-    }
-    file_text_close(_file);
+	var _json_string = "";
+	while (!file_text_eof(_file)) {
+	    _json_string += file_text_readln(_file);
+	}
+	file_text_close(_file);
 
     if (_json_string == "") {
         show_debug_message("Load Game ERROR: Save file is empty.");
@@ -622,13 +622,11 @@ function load_game() {
     }
 
     // --- 2. Parse JSON Data ---
-    var _load_data = json_parse(_json_string);
-
-    if (!is_struct(_load_data)) {
-        show_debug_message("Load Game FATAL ERROR: Failed to parse save file JSON or root is not a struct.");
-        return false; // Stop loading
-    }
-
+	var _load_data = json_parse(_json_string);
+	if (is_struct(_load_data) && is_array(_load_data.inventory)) {
+	    global.inventory = array_copy(_load_data.inventory);
+	    show_debug_message("Inventory loaded: " + string(global.inventory));
+	}
     // --- 3. Validate Save Data Structure and Version ---
     try {
         if (!variable_struct_exists(_load_data, "save_format_version")) throw "Save data missing 'save_format_version'.";
@@ -1026,51 +1024,44 @@ File: scr_save_game.gml
 /// @function save_game()
 /// @description Saves the current game state to savegame.sav
 function save_game() {
-    show_debug_message("--- Running save_game (Manual Array->Struct Room State + Inv Clone) ---");
+    show_debug_message("--- Running save_game ---");
 
-    // --- Pre-checks --- (Keep existing)
-    if (!instance_exists(global.player_instance)) { /*...*/ return; }
-    if (!variable_global_exists("inventory") || !is_array(global.inventory)) global.inventory = array_create(INVENTORY_SIZE, -1);
-    if (!ds_exists(global.equipped_items, ds_type_map)) { /* init if needed */ }
+    // Ensure all necessary global structures exist
     if (!ds_exists(global.room_states, ds_type_map)) global.room_states = ds_map_create();
-    if (!ds_exists(global.following_puffles, ds_type_list)) global.following_puffles = ds_list_create();
-    if (!ds_exists(global.active_quests, ds_type_list)) global.active_quests = ds_list_create();
-    if (!ds_exists(global.completed_quests, ds_type_list)) global.completed_quests = ds_list_create();
 
-    // --- Update and Prepare Current Room State --- (Keep existing)
     var _current_room_name = room_get_name(room);
     var _state_array = [];
-    with (all) { /* ... existing logic to fill _state_array ... */
-         var _inst_id = id;
-         if (_inst_id == global.player_instance || object_index == obj_controller || object_index == obj_ui_manager ||
-             (object_index == obj_puffle && ds_list_find_index(global.following_puffles, _inst_id) != -1)) {
-             continue;
-         }
-         var _is_savable = (variable_instance_exists(_inst_id, "is_savable") && is_savable);
-         if (_is_savable) {
+
+    // Collect state from all savable instances
+    with (all) {
+        if (object_index == obj_controller || object_index == obj_ui_manager) continue;
+
+        if (variable_instance_exists(id, "is_savable") && is_savable) {
             var _state_data = {
-                 object_index_name: object_get_name(object_index),
-                 x: x, y: y,
-                 image_xscale: image_xscale ?? 1, image_yscale: image_yscale ?? 1,
-                 image_blend: image_blend ?? c_white, image_alpha: image_alpha ?? 1,
-                 face: variable_instance_exists(_inst_id, "face") ? face : undefined,
-                 icetruck_tint: variable_instance_exists(_inst_id, "icetruck_tint") ? icetruck_tint : undefined,
-                 is_driveable: variable_instance_exists(_inst_id, "is_driveable") ? is_driveable : undefined,
-                 item_name: variable_instance_exists(_inst_id, "item_name") ? item_name : undefined,
-                 following_player: false, // Non-followers are saved
-                 puffle_color: variable_instance_exists(_inst_id, "color") ? color : undefined,
-                 puffle_state: variable_instance_exists(_inst_id, "state") ? state : undefined,
-             };
-             array_push(_state_array, _state_data);
+                object_index_name: object_get_name(object_index),
+                x: x, y: y,
+                image_xscale: image_xscale ?? 1,
+                image_yscale: image_yscale ?? 1,
+                image_blend: image_blend ?? c_white,
+                image_alpha: image_alpha ?? 1,
+            };
+            array_push(_state_array, _state_data);
         }
     }
+	
+    // Update global.room_states
     if (ds_map_exists(global.room_states, _current_room_name)) {
         var _old_data = ds_map_find_value(global.room_states, _current_room_name);
-        if (ds_exists(_old_data, ds_type_list)) { ds_list_destroy(_old_data); }
-        ds_map_delete(global.room_states, _current_room_name);
+        if (is_array(_old_data)) {
+            // No need to destroy arrays, just replace them
+            ds_map_replace(global.room_states, _current_room_name, _state_array);
+        }
+    } else {
+        ds_map_add(global.room_states, _current_room_name, _state_array);
     }
-    ds_map_add(global.room_states, _current_room_name, _state_array);
-    show_debug_message("Saved state ARRAY for room: " + _current_room_name + " with " + string(array_length(_state_array)) + " objects.");
+
+    show_debug_message("Saved room state for: " + _current_room_name);
+
 
     // --- Prepare Data Structures for Saving ---
     var _equipped_items_struct = ds_map_to_struct_recursive(global.equipped_items);
@@ -1098,10 +1089,12 @@ function save_game() {
     // var _inventory_to_save = global.inventory; // REMOVED
 
     // --- Prepare Main Save Data Struct ---
-    var _save_data_json_compatible = {
+		var _save_data = {
         save_format_version: "1.3.2", // Increment version for inventory fix
         save_timestamp: date_current_datetime(),
         game_state: {
+            inventory: array_copy(global.inventory),
+			room_states: ds_map_to_struct_recursive(global.room_states),
             player_data: {
                 x: global.player_instance.x,
                 y: global.player_instance.y,
@@ -1111,9 +1104,7 @@ function save_game() {
              },
             current_room_name: _current_room_name,
             // *** CHANGE: Clone the inventory array directly here ***
-            inventory: array_clone_recursive(global.inventory),
             equipped_items: _equipped_items_struct,
-            room_states: _room_states_struct,
             following_puffles: _following_puffles_array,
             active_quests: _active_quests_array,
             completed_quests: _completed_quests_array,
@@ -1139,18 +1130,18 @@ function save_game() {
 
 
     // --- Convert to JSON and Save ---
-    var _json_string = json_stringify(_save_data_json_compatible);
+    var _json_string = json_stringify(_save_data);
 
     // File writing and cleanup
     if (_json_string == "") { /* error msg */ return; }
     var _file = file_text_open_write("savegame.sav");
     if (_file != -1) {
-        file_text_write_string(_file, _json_string);
-        file_text_close(_file);
+	file_text_write_string(_file, _json_string);
+	file_text_close(_file);
         show_debug_message("Game saved successfully to savegame.sav (using inv clone)."); // Update log
     } else { /* error msg */ }
 
-    show_debug_message("--- Finished save_game ---");
+    show_debug_message("Game saved successfully.");
 }
 Folder: D:\PenguinIsleProject\Penguin Isles\scripts\scr_set_depth
 File: scr_set_depth.gml
