@@ -22,13 +22,12 @@ Done ObjectLists
 Done Extension_Initialize
 About to startroom
 Number of buttons found: 3
-Total memory used = 12278094 (0x00bb594e) bytes 11.71MB
+Total memory used = 12213001 (0x00ba5b09) bytes 11.65MB
 Free memory = 6001408 (0x005b9300) bytes 5.72MB
-Peak memory used = 13096270 (0x00c7d54e) bytes 12.49MB
+Peak memory used = 13096290 (0x00c7d562) bytes 12.49MB
 **********************************.
 Entering main loop.
 **********************************.
-Number of buttons found: 3
 obj_menu_button: Start button selected. Setting is_loading_game=false.
 obj_menu_button: New Game selected. Setting is_loading_game=false.
 obj_menu_button: Play button selected. Setting is_loading_game=false.
@@ -46,6 +45,7 @@ obj_controller Create: Executed scr_initialize_item_data.
 Ensured global.inventory_expanded exists.
 Ensured global.game_paused exists.
 Ensured global.is_pause_menu_active exists.
+Ensured global.player_controls_enabled exists.
 Ensured global.colour_picker_active exists.
 Ensured global.party_hat_visible exists.
 Ensured global.beta_hat_visible exists.
@@ -103,12 +103,50 @@ CONTROLLER ROOM START: Finished setup for room: rm_welcome_room
 DEBUG: Resetting repair flag...
 Inventory: Added 'Battery' (Index: 5) to slot 0
 'Battery' added to inventory via obj_inventory.
+Repairing ice truck...
+DEBUG: Setting global.repair_complete = true in obj_icetruck_broken
+Ice truck repaired! It is now driveable.
+Inventory Check: Repair triggered ('R' pressed and repair_complete=true)
+Inventory: Attempting to remove Battery for repair...
+Inventory: Removed 'Battery' (Index: 5) from slot 0
+obj_player_icetruck: Initialized.
+Entered ice truck. Current skin: icetruck
+obj_player Create: Applying initial player color: 52479
+obj_player: Initialized. Driving state: 0
+Attempting to switch to skin: player
+Destroying old player instance (ref instance 100664, skin: icetruck)
+obj_player Create: Applying initial player color: 52479
+obj_player: Initialized. Driving state: 0
+Skin switched to: player. New instance ID: ref instance 100666
+Exited ice truck. Current skin: player
+obj_player_icetruck: Initialized.
+Entered ice truck. Current skin: icetruck
+Inventory: Added 'Wrench' (Index: 2) to slot 0
+'Wrench' added to inventory via obj_inventory.
+obj_player Create: Applying initial player color: 52479
+obj_player: Initialized. Driving state: 0
+Attempting to switch to skin: player
+Destroying old player instance (ref instance 100668, skin: icetruck)
+obj_player Create: Applying initial player color: 52479
+obj_player: Initialized. Driving state: 0
+Skin switched to: player. New instance ID: ref instance 100670
+Exited ice truck. Current skin: player
 Inventory: Added 'Toboggan' (Index: 4) to slot 1
 'Toboggan' added to inventory via obj_inventory.
-Inventory: Added 'Black Hoodie' (Index: 22) to slot 2
+Inventory: Added 'Miners Hard Hat' (Index: 23) to slot 2
+'Miners Hard Hat' added to inventory via obj_inventory.
+Inventory: Added 'Ghost Costume' (Index: 20) to slot 3
+'Ghost Costume' added to inventory via obj_inventory.
+Inventory: Added 'Black Hoodie' (Index: 22) to slot 4
 'Black Hoodie' added to inventory via obj_inventory.
-Inventory: Added 'Black Sun Glasses' (Index: 21) to slot 3
+Inventory: Added 'Snow Blaster' (Index: 19) to slot 5
+'Snow Blaster' added to inventory via obj_inventory.
+Inventory: Added 'Black Sun Glasses' (Index: 21) to slot 6
 'Black Sun Glasses' added to inventory via obj_inventory.
+Inventory: Added 'Tour Hat' (Index: 24) to slot 7
+'Tour Hat' added to inventory via obj_inventory.
+obj_player_icetruck: Initialized.
+Entered ice truck. Current skin: icetruck
 DEBUG: obj_player detected on obj_warp_block. Warping...
 obj_warp initialized. Target Room: 0
 DEBUG: obj_warp transition initiated. Moving player before room transition.
@@ -117,10 +155,8 @@ obj_controller Room End: Transitioning from room: rm_welcome_room
 Saving runtime state for leaving room: rm_welcome_room
 CONTROLLER ROOM START: Entering room: rm_shore
 CONTROLLER ROOM START (Warp): Using warp target pos...
-CONTROLLER ROOM START WARNING: Found unexpected player instance (ref instance 100661, obj: obj_player). Destroying it.
-obj_player Create: Applying initial player color: 52479
-obj_player: Initialized. Driving state: 0
-Created/Positioned player instance: ref instance 100663 with skin: player
+obj_player_icetruck: Initialized.
+Created/Positioned player instance: ref instance 100673 with skin: icetruck
 CONTROLLER ROOM START: Calling load_room_state for: rm_shore (Is Fresh Load: 0)
 Attempting to load state for room: rm_shore (Fresh Load: 0)
 Skipping instance destruction (Normal Room Entry).
@@ -128,91 +164,39 @@ No state found for room: rm_shore in global.room_states.
 CONTROLLER ROOM START: Set view[0] to use global.camera (ID: 193)
 Set camera view size to 288x216
 Set camera view border to (0, 0)
-Camera set to follow player (ID: ref instance 100663) with INSTANT speed (-1, -1)
+Camera set to follow player (ID: ref instance 100673) with INSTANT speed (-1, -1)
 Camera initial position set to (0, 22)
 CONTROLLER ROOM START: Created 'UI' Layer.
 CONTROLLER ROOM START: Finished setup for room: rm_shore
+obj_player Create: Applying initial player color: 52479
+obj_player: Initialized. Driving state: 0
+Attempting to switch to skin: player
+Destroying old player instance (ref instance 100674, skin: icetruck)
+obj_player Create: Applying initial player color: 52479
+obj_player: Initialized. Driving state: 0
+Skin switched to: player. New instance ID: ref instance 100676
+Exited ice truck. Current skin: player
 Inventory QoL Scroll: Active slot changed to 1, Item Index: 4
-Inventory: Dropped 'Toboggan' as obj_toboggan at (141, 130)
+Inventory: Dropped 'Toboggan' as obj_toboggan at (282.75, 162)
 Inventory: Removed 'Toboggan' from slot 1 after dropping.
-DEBUG: obj_player detected on obj_warp_block. Warping...
-obj_warp initialized. Target Room: 0
-DEBUG: obj_warp transition initiated. Moving player before room transition.
-Player successfully moved to new position.
-obj_controller Room End: Transitioning from room: rm_shore
-Saving runtime state for leaving room: rm_shore
-Spawn Point marker created at (146, 155)
-CONTROLLER ROOM START: Entering room: rm_welcome_room
-CONTROLLER ROOM START (Warp): Using warp target pos...
-CONTROLLER ROOM START WARNING: Found unexpected player instance (ref instance 100663, obj: obj_player). Destroying it.
-obj_player Create: Applying initial player color: 52479
-obj_player: Initialized. Driving state: 0
-Created/Positioned player instance: ref instance 100666 with skin: player
-CONTROLLER ROOM START: Calling load_room_state for: rm_welcome_room (Is Fresh Load: 0)
-Attempting to load state for room: rm_welcome_room (Fresh Load: 0)
-Skipping instance destruction (Normal Room Entry).
-Found state array for rm_welcome_room. Size: 0
-Normal Room Entry: Assuming instances persist or were recreated by GM.
-CONTROLLER ROOM START: Set view[0] to use global.camera (ID: 193)
-Set camera view size to 288x216
-Set camera view border to (0, 0)
-Camera set to follow player (ID: ref instance 100666) with INSTANT speed (-1, -1)
-Camera initial position set to (212, 52)
-CONTROLLER ROOM START: Created 'UI' Layer.
-CONTROLLER ROOM START: Finished setup for room: rm_welcome_room
-DEBUG: Resetting repair flag...
-DEBUG: obj_player detected on obj_warp_block. Warping...
-obj_warp initialized. Target Room: 0
-DEBUG: obj_warp transition initiated. Moving player before room transition.
-Player successfully moved to new position.
-obj_controller Room End: Transitioning from room: rm_welcome_room
-Replacing existing room state array for: rm_welcome_room
-Saving runtime state for leaving room: rm_welcome_room
-CONTROLLER ROOM START: Entering room: rm_shore
-CONTROLLER ROOM START (Warp): Using warp target pos...
-CONTROLLER ROOM START WARNING: Found unexpected player instance (ref instance 100666, obj: obj_player). Destroying it.
-obj_player Create: Applying initial player color: 52479
-obj_player: Initialized. Driving state: 0
-Created/Positioned player instance: ref instance 100668 with skin: player
-CONTROLLER ROOM START: Calling load_room_state for: rm_shore (Is Fresh Load: 0)
-Attempting to load state for room: rm_shore (Fresh Load: 0)
-Skipping instance destruction (Normal Room Entry).
-Found state array for rm_shore. Size: 0
-Normal Room Entry: Assuming instances persist or were recreated by GM.
-CONTROLLER ROOM START: Set view[0] to use global.camera (ID: 193)
-Set camera view size to 288x216
-Set camera view border to (0, 0)
-Camera set to follow player (ID: ref instance 100668) with INSTANT speed (-1, -1)
-Camera initial position set to (0, 22)
-CONTROLLER ROOM START: Created 'UI' Layer.
-CONTROLLER ROOM START: Finished setup for room: rm_shore
-DEBUG: obj_player detected on obj_warp_block. Warping...
-obj_warp initialized. Target Room: 0
-DEBUG: obj_warp transition initiated. Moving player before room transition.
-Player successfully moved to new position.
-obj_controller Room End: Transitioning from room: rm_shore
-Replacing existing room state array for: rm_shore
-Saving runtime state for leaving room: rm_shore
-Spawn Point marker created at (146, 155)
-CONTROLLER ROOM START: Entering room: rm_welcome_room
-CONTROLLER ROOM START (Warp): Using warp target pos...
-CONTROLLER ROOM START WARNING: Found unexpected player instance (ref instance 100668, obj: obj_player). Destroying it.
-obj_player Create: Applying initial player color: 52479
-obj_player: Initialized. Driving state: 0
-Created/Positioned player instance: ref instance 100670 with skin: player
-CONTROLLER ROOM START: Calling load_room_state for: rm_welcome_room (Is Fresh Load: 0)
-Attempting to load state for room: rm_welcome_room (Fresh Load: 0)
-Skipping instance destruction (Normal Room Entry).
-Found state array for rm_welcome_room. Size: 0
-Normal Room Entry: Assuming instances persist or were recreated by GM.
-CONTROLLER ROOM START: Set view[0] to use global.camera (ID: 193)
-Set camera view size to 288x216
-Set camera view border to (0, 0)
-Camera set to follow player (ID: ref instance 100670) with INSTANT speed (-1, -1)
-Camera initial position set to (212, 52)
-CONTROLLER ROOM START: Created 'UI' Layer.
-CONTROLLER ROOM START: Finished setup for room: rm_welcome_room
-DEBUG: Resetting repair flag...
+Inventory QoL Scroll: Active slot changed to 0, Item Index: 2
+Inventory: Dropped 'Wrench' as obj_wrench_item at (266.75, 200)
+Inventory: Removed 'Wrench' from slot 0 after dropping.
+Inventory QoL Scroll: Active slot changed to 2, Item Index: 23
+Inventory QoL Scroll: Active slot changed to 3, Item Index: 20
+Inventory QoL Scroll: Active slot changed to 4, Item Index: 22
+Inventory: Dropped 'Black Hoodie' as obj_blackhoodie_item at (321.75, 184)
+Inventory: Removed 'Black Hoodie' from slot 4 after dropping.
+Inventory QoL Scroll: Active slot changed to 5, Item Index: 19
+Inventory: Dropped 'Snow Blaster' as obj_snowblaster_item at (358.75, 154)
+Inventory: Removed 'Snow Blaster' from slot 5 after dropping.
+Inventory QoL Scroll: Active slot changed to 3, Item Index: 20
+Inventory QoL Scroll: Active slot changed to 2, Item Index: 23
+Inventory QoL Scroll: Active slot changed to 7, Item Index: 24
+Inventory QoL Scroll: Active slot changed to 6, Item Index: 21
+Inventory QoL Scroll: Active slot changed to 7, Item Index: 24
+Inventory: Dropped 'Tour Hat' as obj_tourhat_item at (382.75, 138)
+Inventory: Removed 'Tour Hat' from slot 7 after dropping.
 Slot 1: (3, 6) to (23, 26)
 Slot 2: (23, 6) to (43, 26)
 Slot 3: (43, 6) to (63, 26)
@@ -256,305 +240,491 @@ Slot 40: (83, 106) to (103, 126)
 Slot 41: (103, 106) to (123, 126)
 Slot 42: (123, 106) to (143, 126)
 DEBUG: Opening expanded inventory pane.
-Clicked grid slot (2, 0)
-Slot 2 contains item index value: 22
-Item name found: 'Black Hoodie'
-Item type: 'body'
-Attempting to equip 'Black Hoodie' to slot 'body'
-Attempting to equip item: 'Black Hoodie' to slot: 'body'
-Equipped 'Black Hoodie' to slot 'body'.
-Removed 'Black Hoodie' directly from inventory array slot 2
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
 Clicked grid slot (3, 0)
-Slot 3 contains item index value: 21
+Slot 3 contains item index value: 20
+Item name found: 'Ghost Costume'
+Item type: 'body'
+Attempting to equip 'Ghost Costume' to slot 'body'
+Attempting to equip item: 'Ghost Costume' to slot: 'body'
+Equipped 'Ghost Costume' to slot 'body'.
+Removed 'Ghost Costume' directly from inventory array slot 3
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Clicked grid slot (2, 0)
+Slot 2 contains item index value: 23
+Item name found: 'Miners Hard Hat'
+Item type: 'head'
+Attempting to equip 'Miners Hard Hat' to slot 'head'
+Attempting to equip item: 'Miners Hard Hat' to slot: 'head'
+Equipped 'Miners Hard Hat' to slot 'head'.
+Removed 'Miners Hard Hat' directly from inventory array slot 2
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Clicked grid slot (6, 0)
+Slot 6 contains item index value: 21
 Item name found: 'Black Sun Glasses'
 Item type: 'face'
 Attempting to equip 'Black Sun Glasses' to slot 'face'
 Attempting to equip item: 'Black Sun Glasses' to slot: 'face'
 Equipped 'Black Sun Glasses' to slot 'face'.
-Removed 'Black Sun Glasses' directly from inventory array slot 3
+Removed 'Black Sun Glasses' directly from inventory array slot 6
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
 Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
 Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
 Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
 Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
 Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
 Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
 Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
 Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
 Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
 Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
 Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
 Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
 Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
 Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
 Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
 Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
 Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
 Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
 Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
 Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
 Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
 Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
 Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
 Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
 Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
 Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
 Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
 Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
 Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
 Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
 Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
 Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
 Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
 Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
 Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
 Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
 Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
 Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
 Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
 Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
 Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
 Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
 Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
 Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
 Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
 Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
 Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
 Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
 Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
 Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
 Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
 Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
 Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
 Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
 Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
 Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
 Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
 Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
 Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
 Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
 Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
 Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
 Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
 Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
 Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
 Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
 Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
 Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
 Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
 Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
+Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
+Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
 Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
 Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Black Hoodie' corresponds to index value: 22
-Draw GUI: Drawing icon for 'Black Hoodie' (Index: 22) at slot 'body'
+Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
+Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
 DEBUG: Closing inventory UI completely.
-Repairing ice truck...
-DEBUG: Setting global.repair_complete = true in obj_icetruck_broken
-Ice truck repaired! It is now driveable.
-Inventory Check: Repair triggered ('R' pressed and repair_complete=true)
-Inventory: Attempting to remove Battery for repair...
-Inventory: Removed 'Battery' (Index: 5) from slot 0
-obj_player_icetruck: Initialized.
-Entered ice truck. Current skin: icetruck
-DEBUG: obj_player detected on obj_warp_block. Warping...
-obj_warp initialized. Target Room: 0
-DEBUG: obj_warp transition initiated. Moving player before room transition.
-Player successfully moved to new position.
-obj_controller Room End: Transitioning from room: rm_welcome_room
-Replacing existing room state array for: rm_welcome_room
-Saving runtime state for leaving room: rm_welcome_room
-CONTROLLER ROOM START: Entering room: rm_plaza
-CONTROLLER ROOM START (Warp): Using warp target pos...
-obj_player_icetruck: Initialized.
-Created/Positioned player instance: ref instance 100675 with skin: icetruck
-CONTROLLER ROOM START: Calling load_room_state for: rm_plaza (Is Fresh Load: 0)
-Attempting to load state for room: rm_plaza (Fresh Load: 0)
-Skipping instance destruction (Normal Room Entry).
-No state found for room: rm_plaza in global.room_states.
-CONTROLLER ROOM START: Set view[0] to use global.camera (ID: 193)
-Set camera view size to 288x216
-Set camera view border to (0, 0)
-Camera set to follow player (ID: ref instance 100675) with INSTANT speed (-1, -1)
-Camera initial position set to (111, 184)
-CONTROLLER ROOM START: Created 'UI' Layer.
-CONTROLLER ROOM START: Finished setup for room: rm_plaza
-obj_player Create: Applying initial player color: 52479
-obj_player: Initialized. Driving state: 0
-Attempting to switch to skin: player
-Destroying old player instance (ref instance 100676, skin: icetruck)
-obj_player Create: Applying initial player color: 52479
-obj_player: Initialized. Driving state: 0
-Skin switched to: player. New instance ID: ref instance 100678
-Exited ice truck. Current skin: player
-Inventory: Added 'Box Puffle O' (Index: 14) to slot 0
-'Box Puffle O' added to inventory via obj_inventory.
-Inventory: Added 'Tube' (Index: 3) to slot 1
-'Tube' added to inventory via obj_inventory.
+Inventory: Added 'Toboggan' (Index: 4) to slot 0
+'Toboggan' added to inventory via obj_inventory.
+Inventory: Added 'Wrench' (Index: 2) to slot 1
+'Wrench' added to inventory via obj_inventory.
 Game Paused
 Pause Menu DEBUG: Inventory state JUST BEFORE save call: [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,...]
 --- Running save_game ---
-Saved room state for: rm_plaza
+Saved room state for: rm_shore
 save_game: Manually converting global.room_states map (containing arrays) to struct...
 save_game: Finished manually converting room states.
 Save Game DEBUG: Inventory state before stringify: [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,...]
@@ -562,12 +732,18 @@ Game saved successfully to savegame.sav (using inv clone).
 Game saved successfully.
 Calling game_end from obj_pause_menu Quit Game button
 ###game_end###0
+obj_controller Room End: Transitioning from room: rm_shore
+Replacing existing room state array for: rm_shore
+Saving runtime state for leaving room: rm_shore
+Attempting to set gamepadcount to 0
+Script_Free called with 188 and global 25
+Unsetting previous scheduler resolution of 1
 
 output log when loading the game from the save file:
 Setting scheduler resolution to 1
 DirectX11: Using hardware device
 Resizing swap chain...
-Collision Event time(microsecs)=10
+Collision Event time(microsecs)=11
 Variable_Global_Init()
 PrepareGame()
 Audio_Init()
@@ -587,9 +763,9 @@ Done ObjectLists
 Done Extension_Initialize
 About to startroom
 Number of buttons found: 3
-Total memory used = 12221837 (0x00ba7d8d) bytes 11.66MB
+Total memory used = 12278434 (0x00bb5aa2) bytes 11.71MB
 Free memory = 6001408 (0x005b9300) bytes 5.72MB
-Peak memory used = 13096270 (0x00c7d54e) bytes 12.49MB
+Peak memory used = 13096290 (0x00c7d562) bytes 12.49MB
 **********************************.
 Entering main loop.
 **********************************.
