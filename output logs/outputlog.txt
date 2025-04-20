@@ -1,7 +1,7 @@
 Setting scheduler resolution to 1
 DirectX11: Using hardware device
 Resizing swap chain...
-Collision Event time(microsecs)=11
+Collision Event time(microsecs)=10
 Variable_Global_Init()
 PrepareGame()
 Audio_Init()
@@ -21,9 +21,9 @@ Done ObjectLists
 Done Extension_Initialize
 About to startroom
 Number of buttons found: 3
-Total memory used = 12492539 (0x00be9efb) bytes 11.91MB
+Total memory used = 12494073 (0x00bea4f9) bytes 11.92MB
 Free memory = 5994440 (0x005b77c8) bytes 5.72MB
-Peak memory used = 13304002 (0x00cb00c2) bytes 12.69MB
+Peak memory used = 13305286 (0x00cb05c6) bytes 12.69MB
 **********************************.
 Entering main loop.
 **********************************.
@@ -97,19 +97,22 @@ Set camera view size to 288x216, border (0,0)
 Camera follow player ref instance 100663 INSTANT.
 CONTROLLER ROOM START: Finished setup for room: rm_welcome_room
 DEBUG: Resetting repair flag...
+Player Action: Starting throw
+Player Action: Action 'none' finished by animation loop.
 DEBUG: Polar Bear detected on obj_warp_block. Warping.
+DEBUG: Checking for duplicate player instance during polar bear warp.
 ERROR!!! :: ############################################################################################
 ERROR in action number 1
 of  Step Event0 for object obj_warp_block:
 Variable <unknown_object>.destroy(100893, -2147483648) not set before reading it.
- at gml_Object_obj_warp_block_Step_0 (line 39) -             global.player_instance.destroy(); // Destroy existing player instance
+ at gml_Object_obj_warp_block_Step_0 (line 42) -                 global.player_instance.destroy();
 ############################################################################################
-gml_Object_obj_warp_block_Step_0 (line 39)
+gml_Object_obj_warp_block_Step_0 (line 42)
 
 Setting scheduler resolution to 1
 DirectX11: Using hardware device
 Resizing swap chain...
-Collision Event time(microsecs)=12
+Collision Event time(microsecs)=10
 Variable_Global_Init()
 PrepareGame()
 Audio_Init()
@@ -129,9 +132,9 @@ Done ObjectLists
 Done Extension_Initialize
 About to startroom
 Number of buttons found: 3
-Total memory used = 12496307 (0x00beadb3) bytes 11.92MB
+Total memory used = 12489923 (0x00be94c3) bytes 11.91MB
 Free memory = 5994440 (0x005b77c8) bytes 5.72MB
-Peak memory used = 13303997 (0x00cb00bd) bytes 12.69MB
+Peak memory used = 13305286 (0x00cb05c6) bytes 12.69MB
 **********************************.
 Entering main loop.
 **********************************.
@@ -206,27 +209,24 @@ Camera follow player ref instance 100663 INSTANT.
 CONTROLLER ROOM START: Finished setup for room: rm_welcome_room
 DEBUG: Resetting repair flag...
 Player Action: Starting throw
-DEBUG: Snowball (ref instance 100664) colliding with Polar Bear (ref instance 100089)
+Player Action: Action 'none' finished by animation loop.
+Player Action: Starting throw
+DEBUG: Snowball (ref instance 100665) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+Player Action: Action 'none' finished by animation loop.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
+Polar Bear threw snowball!
+DEBUG: Snowball (ref instance 100666) colliding with Polar Bear (ref instance 100089)
 Polar Bear instance exists. Setting mood to angry.
 PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
-Player Action: Action 'none' finished by animation loop.
-Player Action: Starting throw
-Player Action: Action 'none' finished by animation loop.
-Player Action: Starting throw
 Polar Bear threw snowball!
 DEBUG: Snowball (ref instance 100667) colliding with Polar Bear (ref instance 100089)
-Polar Bear instance exists. Setting mood to angry.
-Player Action: Action 'none' finished by animation loop.
-PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
-Player Action: Starting throw
-Player Action: Action 'none' finished by animation loop.
-Polar Bear threw snowball!
-DEBUG: Snowball (ref instance 100669) colliding with Polar Bear (ref instance 100089)
 Polar Bear instance exists. Setting mood to angry.
 Polar Bear calmed down (out of range).
 DEBUG: Player detected. Prioritizing warp.
 Creating obj_warp for instance: ref instance 100663 (obj_player)
 obj_warp initialized (Persistent: 1). Target Room: -4
+DEBUG: Invalid target room. Defaulting to current room.
 DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
 DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
 DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
@@ -250,16 +250,1231 @@ DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
 DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
 DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
 DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100663
-DEBUG (Warp Anim End): Moving instance: ref instance 100663 (obj_player) before room transition.
-DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100663
-DEBUG (Warp Anim End): Moving instance: ref instance 100663 (obj_player) before room transition.
-DEBUG (Warp Anim End): Instance ref instance 100663 moved.
-DEBUG (Warp Anim End): Stored PLAYER warp target pos.
-ERROR!!! :: ############################################################################################
-ERROR in action number 1
-of Other Event: Animation End for object obj_warp:
-room_goto argument 1 invalid reference to (room) - requested -4 max is 23
- at gml_Object_obj_warp_Other_7 (line 38) - room_goto(target_rm);
-############################################################################################
-gml_Object_obj_warp_Other_7 (line 38)
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG: Stored player position: (455, 167)
+Switching to map room...
+obj_controller Room End: Transitioning from room: rm_welcome_room
+Saving runtime state for leaving room: rm_welcome_room
+Room End WITH DEBUG: --- Start Instance Check ---
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100078 (obj_wrench_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100078
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100077 (obj_minershardhat_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100077
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100076 (obj_ghostcostume_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100076
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100075 (obj_tourhat_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100075
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100074 (obj_snowblaster_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100074
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100073 (obj_blacksunglasses_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100073
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100072 (obj_blackhoodie_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100072
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100084 (obj_puffle)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100084
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100071 (obj_boxpuffleo_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100071
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100083 (obj_toboggan)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100083
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100069 (obj_Jackhammer_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100069
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100068 (obj_snowshovel_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100068
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100067 (obj_beta_hat)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100067
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100066 (obj_battery)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100066
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100064 (obj_wood_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100064
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100065 (obj_snow_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100065
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100079 (obj_icetruck_broken)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100079
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100080 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100080
+Room End WITH DEBUG: --- End Instance Check ---
+Room End DEBUG: Finished checking instances. Collected 18 savable states.
+Adding new room state array for: rm_welcome_room with size: 18
+Finished saving runtime state for room: rm_welcome_room
+CONTROLLER ROOM START: Entering room: rm_map
+CONTROLLER ROOM START: Non-gameplay room detected...
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+Warping to Room: ref room rm_beach at (255, 130)
+obj_warp initialized (Persistent: 1). Target Room: -4
+obj_controller Room End: Transitioning from room: rm_map
+Skipping room state save: Non-gameplay room (rm_map).
+CONTROLLER ROOM START: Entering room: rm_beach
+CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
+CONTROLLER ROOM START (Default): Final default/spawn pos (250,200) Face: 3
+CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
+CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
+obj_player Create: Applying initial player color: 52479
+obj_player: Initialized. Driving state: 0
+Created player instance: ref instance 100670 skin: player at (250,200)
+CONTROLLER ROOM START: Calling load_room_state for: rm_beach (Is Fresh Load: 0)
+Attempting to load state for room: rm_beach (Fresh Load: 0)
+Skipping instance destruction (Normal Room Entry).
+No state found for room: rm_beach in global.room_states.
+Set camera view size to 288x216, border (0,0)
+Camera follow player ref instance 100670 INSTANT.
+CONTROLLER ROOM START: Finished setup for room: rm_beach
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+obj_player_icetruck: Initialized.
+Entered ice truck. Current skin: icetruck
+obj_player Create: Applying initial player color: 52479
+obj_player: Initialized. Driving state: 0
+Attempting to switch to skin: player
+Destroying old player instance (ref instance 100672, skin: icetruck)
+obj_player Create: Applying initial player color: 52479
+obj_player: Initialized. Driving state: 0
+Skin switched to: player. New instance ID: ref instance 100674
+Exited ice truck. Current skin: player
+DEBUG: Stored player position: (281, 25)
+Switching to map room...
+obj_controller Room End: Transitioning from room: rm_beach
+Saving runtime state for leaving room: rm_beach
+Room End WITH DEBUG: --- Start Instance Check ---
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100673 (obj_icetruck)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100673
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100374 (obj_tube_tower_decoration)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100374
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100379 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100379
+Room End WITH DEBUG: --- End Instance Check ---
+Room End DEBUG: Finished checking instances. Collected 3 savable states.
+Adding new room state array for: rm_beach with size: 3
+Finished saving runtime state for room: rm_beach
+CONTROLLER ROOM START: Entering room: rm_map
+CONTROLLER ROOM START: Non-gameplay room detected...
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+Warping to Room: ref room rm_welcome_room at (255, 130)
+obj_warp initialized (Persistent: 1). Target Room: -4
+obj_controller Room End: Transitioning from room: rm_map
+Skipping room state save: Non-gameplay room (rm_map).
+Spawn Point marker created at (146, 155)
+CONTROLLER ROOM START: Entering room: rm_welcome_room
+CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
+CONTROLLER ROOM START (Default): Final default/spawn pos (146,155) Face: 3
+CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
+CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
+obj_player Create: Applying initial player color: 52479
+obj_player: Initialized. Driving state: 0
+Created player instance: ref instance 100676 skin: player at (146,155)
+CONTROLLER ROOM START: Calling load_room_state for: rm_welcome_room (Is Fresh Load: 0)
+Attempting to load state for room: rm_welcome_room (Fresh Load: 0)
+Skipping instance destruction (Normal Room Entry).
+Found state array for rm_welcome_room. Size: 18
+Normal Room Entry: Assuming instances persist or were recreated by GM.
+Set camera view size to 288x216, border (0,0)
+Camera follow player ref instance 100676 INSTANT.
+CONTROLLER ROOM START: Finished setup for room: rm_welcome_room
+DEBUG: Resetting repair flag...
+DEBUG: Stored player position: (129, 160)
+Switching to map room...
+obj_controller Room End: Transitioning from room: rm_welcome_room
+Saving runtime state for leaving room: rm_welcome_room
+Room End WITH DEBUG: --- Start Instance Check ---
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100078 (obj_wrench_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100078
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100077 (obj_minershardhat_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100077
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100076 (obj_ghostcostume_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100076
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100075 (obj_tourhat_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100075
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100074 (obj_snowblaster_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100074
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100073 (obj_blacksunglasses_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100073
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100072 (obj_blackhoodie_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100072
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100084 (obj_puffle)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100084
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100071 (obj_boxpuffleo_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100071
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100083 (obj_toboggan)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100083
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100069 (obj_Jackhammer_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100069
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100068 (obj_snowshovel_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100068
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100067 (obj_beta_hat)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100067
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100066 (obj_battery)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100066
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100064 (obj_wood_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100064
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100065 (obj_snow_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100065
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100079 (obj_icetruck_broken)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100079
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100080 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100080
+Room End WITH DEBUG: --- End Instance Check ---
+Room End DEBUG: Finished checking instances. Collected 18 savable states.
+Replacing existing room state array for: rm_welcome_room with new array size: 18
+Finished saving runtime state for room: rm_welcome_room
+CONTROLLER ROOM START: Entering room: rm_map
+CONTROLLER ROOM START: Non-gameplay room detected...
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+Warping to Room: ref room rm_welcome_room at (255, 130)
+obj_warp initialized (Persistent: 1). Target Room: -4
+obj_controller Room End: Transitioning from room: rm_map
+Skipping room state save: Non-gameplay room (rm_map).
+Spawn Point marker created at (146, 155)
+CONTROLLER ROOM START: Entering room: rm_welcome_room
+CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
+CONTROLLER ROOM START (Default): Final default/spawn pos (146,155) Face: 3
+CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
+CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
+obj_player Create: Applying initial player color: 52479
+obj_player: Initialized. Driving state: 0
+Created player instance: ref instance 100678 skin: player at (146,155)
+CONTROLLER ROOM START: Calling load_room_state for: rm_welcome_room (Is Fresh Load: 0)
+Attempting to load state for room: rm_welcome_room (Fresh Load: 0)
+Skipping instance destruction (Normal Room Entry).
+Found state array for rm_welcome_room. Size: 18
+Normal Room Entry: Assuming instances persist or were recreated by GM.
+Set camera view size to 288x216, border (0,0)
+Camera follow player ref instance 100678 INSTANT.
+CONTROLLER ROOM START: Finished setup for room: rm_welcome_room
+DEBUG: Resetting repair flag...
+DEBUG: Stored player position: (255, 130)
+Switching to map room...
+obj_controller Room End: Transitioning from room: rm_welcome_room
+Saving runtime state for leaving room: rm_welcome_room
+Room End WITH DEBUG: --- Start Instance Check ---
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100078 (obj_wrench_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100078
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100077 (obj_minershardhat_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100077
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100076 (obj_ghostcostume_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100076
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100075 (obj_tourhat_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100075
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100074 (obj_snowblaster_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100074
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100073 (obj_blacksunglasses_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100073
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100072 (obj_blackhoodie_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100072
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100084 (obj_puffle)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100084
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100071 (obj_boxpuffleo_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100071
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100083 (obj_toboggan)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100083
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100069 (obj_Jackhammer_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100069
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100068 (obj_snowshovel_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100068
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100067 (obj_beta_hat)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100067
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100066 (obj_battery)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100066
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100064 (obj_wood_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100064
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100065 (obj_snow_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100065
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100079 (obj_icetruck_broken)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100079
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100080 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100080
+Room End WITH DEBUG: --- End Instance Check ---
+Room End DEBUG: Finished checking instances. Collected 18 savable states.
+Replacing existing room state array for: rm_welcome_room with new array size: 18
+Finished saving runtime state for room: rm_welcome_room
+CONTROLLER ROOM START: Entering room: rm_map
+CONTROLLER ROOM START: Non-gameplay room detected...
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+Warping to Room: ref room rm_town at (263, 217)
+obj_warp initialized (Persistent: 1). Target Room: -4
+obj_controller Room End: Transitioning from room: rm_map
+Skipping room state save: Non-gameplay room (rm_map).
+CONTROLLER ROOM START: Entering room: rm_town
+CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
+CONTROLLER ROOM START (Default): Final default/spawn pos (250,200) Face: 3
+CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
+CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
+obj_player Create: Applying initial player color: 52479
+obj_player: Initialized. Driving state: 0
+Created player instance: ref instance 100680 skin: player at (250,200)
+CONTROLLER ROOM START: Calling load_room_state for: rm_town (Is Fresh Load: 0)
+Attempting to load state for room: rm_town (Fresh Load: 0)
+Skipping instance destruction (Normal Room Entry).
+No state found for room: rm_town in global.room_states.
+Set camera view size to 288x216, border (0,0)
+Camera follow player ref instance 100680 INSTANT.
+CONTROLLER ROOM START: Finished setup for room: rm_town
+DEBUG: Stored player position: (143, 177)
+Switching to map room...
+obj_controller Room End: Transitioning from room: rm_town
+Saving runtime state for leaving room: rm_town
+Room End WITH DEBUG: --- Start Instance Check ---
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100344 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100344
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100343 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100343
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100342 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100342
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100341 (obj_icetruck)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100341
+Room End WITH DEBUG: --- End Instance Check ---
+Room End DEBUG: Finished checking instances. Collected 4 savable states.
+Adding new room state array for: rm_town with size: 4
+Finished saving runtime state for room: rm_town
+CONTROLLER ROOM START: Entering room: rm_map
+CONTROLLER ROOM START: Non-gameplay room detected...
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+Warping to Room: ref room rm_ski_mountaintop at (255, 130)
+obj_warp initialized (Persistent: 1). Target Room: -4
+obj_controller Room End: Transitioning from room: rm_map
+Skipping room state save: Non-gameplay room (rm_map).
+CONTROLLER ROOM START: Entering room: rm_ski_mountaintop
+CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
+CONTROLLER ROOM START (Default): Final default/spawn pos (250,200) Face: 3
+CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
+CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
+obj_player Create: Applying initial player color: 52479
+obj_player: Initialized. Driving state: 0
+Created player instance: ref instance 100682 skin: player at (250,200)
+CONTROLLER ROOM START: Calling load_room_state for: rm_ski_mountaintop (Is Fresh Load: 0)
+Attempting to load state for room: rm_ski_mountaintop (Fresh Load: 0)
+Skipping instance destruction (Normal Room Entry).
+No state found for room: rm_ski_mountaintop in global.room_states.
+Set camera view size to 288x216, border (0,0)
+Camera follow player ref instance 100682 INSTANT.
+CONTROLLER ROOM START: Finished setup for room: rm_ski_mountaintop
+DEBUG: Stored player position: (87, 168)
+Switching to map room...
+obj_controller Room End: Transitioning from room: rm_ski_mountaintop
+Saving runtime state for leaving room: rm_ski_mountaintop
+Room End WITH DEBUG: --- Start Instance Check ---
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100454 (obj_tube_tower_decoration)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100454
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100453 (obj_tube_tower_decoration)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100453
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100485 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100485
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100489 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100489
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100490 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100490
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100492 (obj_icetruck)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100492
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100491 (obj_icetruck)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100491
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100488 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100488
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100487 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100487
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100486 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100486
+Room End WITH DEBUG: --- End Instance Check ---
+Room End DEBUG: Finished checking instances. Collected 10 savable states.
+Adding new room state array for: rm_ski_mountaintop with size: 10
+Finished saving runtime state for room: rm_ski_mountaintop
+CONTROLLER ROOM START: Entering room: rm_map
+CONTROLLER ROOM START: Non-gameplay room detected...
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+Warping to Room: ref room rm_welcome_room at (255, 130)
+obj_warp initialized (Persistent: 1). Target Room: -4
+obj_controller Room End: Transitioning from room: rm_map
+Skipping room state save: Non-gameplay room (rm_map).
+Spawn Point marker created at (146, 155)
+CONTROLLER ROOM START: Entering room: rm_welcome_room
+CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
+CONTROLLER ROOM START (Default): Final default/spawn pos (146,155) Face: 3
+CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
+CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
+obj_player Create: Applying initial player color: 52479
+obj_player: Initialized. Driving state: 0
+Created player instance: ref instance 100684 skin: player at (146,155)
+CONTROLLER ROOM START: Calling load_room_state for: rm_welcome_room (Is Fresh Load: 0)
+Attempting to load state for room: rm_welcome_room (Fresh Load: 0)
+Skipping instance destruction (Normal Room Entry).
+Found state array for rm_welcome_room. Size: 18
+Normal Room Entry: Assuming instances persist or were recreated by GM.
+Set camera view size to 288x216, border (0,0)
+Camera follow player ref instance 100684 INSTANT.
+CONTROLLER ROOM START: Finished setup for room: rm_welcome_room
+DEBUG: Resetting repair flag...
+DEBUG: Stored player position: (179, 73)
+Switching to map room...
+obj_controller Room End: Transitioning from room: rm_welcome_room
+Saving runtime state for leaving room: rm_welcome_room
+Room End WITH DEBUG: --- Start Instance Check ---
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100078 (obj_wrench_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100078
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100077 (obj_minershardhat_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100077
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100076 (obj_ghostcostume_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100076
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100075 (obj_tourhat_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100075
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100074 (obj_snowblaster_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100074
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100073 (obj_blacksunglasses_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100073
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100072 (obj_blackhoodie_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100072
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100084 (obj_puffle)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100084
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100071 (obj_boxpuffleo_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100071
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100083 (obj_toboggan)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100083
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100069 (obj_Jackhammer_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100069
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100068 (obj_snowshovel_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100068
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100067 (obj_beta_hat)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100067
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100066 (obj_battery)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100066
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100064 (obj_wood_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100064
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100065 (obj_snow_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100065
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100079 (obj_icetruck_broken)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100079
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100080 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100080
+Room End WITH DEBUG: --- End Instance Check ---
+Room End DEBUG: Finished checking instances. Collected 18 savable states.
+Replacing existing room state array for: rm_welcome_room with new array size: 18
+Finished saving runtime state for room: rm_welcome_room
+CONTROLLER ROOM START: Entering room: rm_map
+CONTROLLER ROOM START: Non-gameplay room detected...
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+Warping to Room: ref room rm_forest at (255, 130)
+obj_warp initialized (Persistent: 1). Target Room: -4
+obj_controller Room End: Transitioning from room: rm_map
+Skipping room state save: Non-gameplay room (rm_map).
+CONTROLLER ROOM START: Entering room: rm_forest
+CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
+CONTROLLER ROOM START (Default): Final default/spawn pos (250,200) Face: 3
+CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
+CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
+obj_player Create: Applying initial player color: 52479
+obj_player: Initialized. Driving state: 0
+Created player instance: ref instance 100686 skin: player at (250,200)
+CONTROLLER ROOM START: Calling load_room_state for: rm_forest (Is Fresh Load: 0)
+Attempting to load state for room: rm_forest (Fresh Load: 0)
+Skipping instance destruction (Normal Room Entry).
+No state found for room: rm_forest in global.room_states.
+Set camera view size to 288x216, border (0,0)
+Camera follow player ref instance 100686 INSTANT.
+CONTROLLER ROOM START: Finished setup for room: rm_forest
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+Game Paused
+Calling game_end from obj_pause_menu Quit Game button
+###game_end###0
+obj_controller Room End: Transitioning from room: rm_forest
+Saving runtime state for leaving room: rm_forest
+Room End WITH DEBUG: --- Start Instance Check ---
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100211 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100211
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100210 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100210
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100209 (obj_icetruck)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100209
+Room End WITH DEBUG: --- End Instance Check ---
+Room End DEBUG: Finished checking instances. Collected 3 savable states.
+Adding new room state array for: rm_forest with size: 3
+Finished saving runtime state for room: rm_forest
+Attempting to set gamepadcount to 0
+Script_Free called with 188 and global 25
+Unsetting previous scheduler resolution of 1
