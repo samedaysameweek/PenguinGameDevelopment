@@ -1,4 +1,3 @@
-/// @function save_game()
 /// @description Saves the current game state to savegame.sav
 function save_game() {
     show_debug_message("--- Running save_game ---");
@@ -25,14 +24,10 @@ function save_game() {
             array_push(_state_array, _state_data);
         }
     }
-	
+
     // Update global.room_states
     if (ds_map_exists(global.room_states, _current_room_name)) {
-        var _old_data = ds_map_find_value(global.room_states, _current_room_name);
-        if (is_array(_old_data)) {
-            // No need to destroy arrays, just replace them
-            ds_map_replace(global.room_states, _current_room_name, _state_array);
-        }
+        ds_map_replace(global.room_states, _current_room_name, _state_array);
     } else {
         ds_map_add(global.room_states, _current_room_name, _state_array);
     }
@@ -67,11 +62,11 @@ function save_game() {
 
     // --- Prepare Main Save Data Struct ---
 		var _save_data = {
-        save_format_version: "1.3.2", // Increment version for inventory fix
+        save_format_version: "0.2.3", // Increment version for inventory fix
         save_timestamp: date_current_datetime(),
         game_state: {
-            inventory: array_duplicate(global.inventory),
-			room_states: ds_map_to_struct_recursive(global.room_states),
+        inventory: scr_array_duplicate_recursive(global.inventory), // Use the new function
+        room_states: ds_map_to_struct_recursive(global.room_states),
             player_data: {
                 x: global.player_instance.x,
                 y: global.player_instance.y,

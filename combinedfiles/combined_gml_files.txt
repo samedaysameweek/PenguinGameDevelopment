@@ -977,25 +977,23 @@ if (ds_exists(global.quest_definitions, ds_type_map)) {
 }
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_controller
 File: Other_4.gml
-// --- obj_controller: Other Event: Room Start (Other_4) ---
+// --- obj_controller: Other Event: Room Start (Other_4) --- SAFER CLEANUP
 
-var _current_room_name = room_get_name(room);
-show_debug_message("CONTROLLER ROOM START: Entering room: " + _current_room_name);
+   var _current_room_name = room_get_name(room);
+   show_debug_message("CONTROLLER ROOM START: Entering room: " + _current_room_name);
 
-// --- Determine if this is a UI/Special Room ---
-var is_non_gameplay_room = (room == rm_init || room == rm_main_menu || room == rm_map ||
-                            room == rm_pause_menu || room == rm_settings_menu || room == rm_saveload ||
-                            room == rm_colorpicker_menu); // Add any other non-gameplay rooms here
-
-// *** Store the loading state temporarily ***
-var _is_fresh_load = (variable_global_exists("is_loading_game") && global.is_loading_game == true);
-
-if (is_non_gameplay_room) {
+   // --- Determine if this is a UI/Special Room ---
+   var is_non_gameplay_room = (room == rm_init || room == rm_main_menu || room == rm_map ||
+                               room == rm_pause_menu || room == rm_settings_menu || room == rm_saveload ||
+                               room == rm_colorpicker_menu);
+   var _is_fresh_load = (variable_global_exists("is_loading_game") && global.is_loading_game == true);
+   if (is_non_gameplay_room) {
+    // [...] (Non-gameplay room logic remains the same)
     show_debug_message("CONTROLLER ROOM START: Non-gameplay room detected...");
-    if (!instance_exists(obj_ui_manager)) {
-         /* create UI manager */
+     if (!instance_exists(obj_ui_manager)) {
+         instance_create_layer(0, 0, "UI", obj_ui_manager);
+         show_debug_message("CONTROLLER ROOM START: Created obj_ui_manager in Non-Gameplay room.");
     }
-    // Reset loading flag here if needed for UI rooms
     if (_is_fresh_load) {
         global.is_loading_game = false;
         show_debug_message("CONTROLLER ROOM START: Reset global.is_loading_game (in UI room).");
@@ -1006,221 +1004,193 @@ if (is_non_gameplay_room) {
 // --- Gameplay Room Logic ---
 
 // --- 1. Determine Player Start Position & Facing ---
-var start_x, start_y, start_face;
-if (_is_fresh_load) {
-    // Use saved position if fresh load
-    start_x = global.player_x;
-    start_y = global.player_y;
-    start_face = global.last_player_face ?? DOWN;
-     show_debug_message("CONTROLLER ROOM START (Load): Using saved player pos...");
-} else if (variable_global_exists("warp_target_x") && !is_undefined(global.warp_target_x)) {
-    // Use warp position if warping
+   var start_x, start_y, start_face;
+   var _used_warp_coords = false;
+   if (_is_fresh_load) { /* ... Load logic ... */
+     start_x = global.player_x; start_y = global.player_y; start_face = global.last_player_face ?? DOWN;
+     show_debug_message("CONTROLLER ROOM START (Load): Using saved player pos (" + string(start_x) + "," + string(start_y) + ").");
+}    else if (variable_global_exists("warp_target_x") && !is_undefined(global.warp_target_x)) { /* ... Player Warp logic ... */
      start_x = global.warp_target_x; start_y = global.warp_target_y; start_face = global.warp_target_face ?? DOWN;
-     global.warp_target_x = undefined; global.warp_target_y = undefined; global.warp_target_face = undefined;
-     show_debug_message("CONTROLLER ROOM START (Warp): Using warp target pos...");
-} else {
-    show_debug_message("CONTROLLER ROOM START (Default): Looking for obj_spawn_point...");
-    var default_spawn = instance_find(obj_spawn_point, 0);
-    if (instance_exists(default_spawn)) {
-         start_x = default_spawn.x;
-         start_y = default_spawn.y;
-         show_debug_message("CONTROLLER ROOM START (Default): Found spawn point instance " + string(default_spawn) + " at (" + string(start_x) + "," + string(start_y) + ")");
-    } else {
-         show_debug_message("CONTROLLER ROOM START (Default): No instance of obj_spawn_point found. Defaulting to room center.");
-         start_x = room_width / 2;
-         start_y = room_height / 2;
-    }
-    start_face = DOWN;
-    show_debug_message("CONTROLLER ROOM START (Default): Using determined default pos (" + string(start_x) + "," + string(start_y) + ") Face: " + string(start_face));
+     _used_warp_coords = true;
+     show_debug_message("CONTROLLER ROOM START (Warp): Using PLAYER warp target pos (" + string(start_x) + "," + string(start_y) + ").");
+}	 else { /* ... Default/Spawn Point logic ... */
+      show_debug_message("CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...");
+      start_x = room_width / 2; start_y = room_height / 2; start_face = DOWN;
+      var default_spawn = instance_find(obj_spawn_point, 0);
+      if (instance_exists(default_spawn)) { start_x = default_spawn.x; start_y = default_spawn.y; }
+      show_debug_message("CONTROLLER ROOM START (Default): Final default/spawn pos (" + string(start_x) + "," + string(start_y) + ") Face: " + string(start_face));
+ }
+
+// --- Clear warp coordinates AFTER deciding start pos ---
+if (variable_global_exists("warp_target_x")) { /* ... Clear warp vars ... */
+     if (is_undefined(global.warp_target_x)) { show_debug_message("CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp)."); }
+     else { show_debug_message("CONTROLLER ROOM START: Clearing player warp target variables."); }
+     global.warp_target_x = undefined; global.warp_target_y = undefined; global.warp_target_face = undefined; global.warp_target_inst_id = noone;
 }
 
-// --- 2. Clean Up Any Stray Player Instances ---
-with(obj_player_base) {
-    if (id != other.id) {
-         show_debug_message("CONTROLLER ROOM START WARNING: Found unexpected player instance (" + string(id) + ", obj: " + object_get_name(object_index) + "). Destroying it.");
-         instance_destroy();
-    }
-}
 global.player_instance = noone;
+show_debug_message("CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.");
 
-// --- 3. Create or Position Player Instance ---
-var player_obj = obj_player;
-if (variable_global_exists("current_skin")) {
-    switch (global.current_skin) {
-        case "icetruck": player_obj = obj_player_icetruck; break;
-        case "tube": player_obj = obj_player_tube; break;
-        case "toboggan": player_obj = obj_player_toboggan; break;
-        case "sled_player": player_obj = obj_sled_player; break;
-        case "ninja": player_obj = obj_player_ninja; break;
-        default: player_obj = obj_player; break;
-    }
-} else {
-    show_debug_message("CONTROLLER ROOM START WARNING: global.current_skin not set! Defaulting to obj_player.");
-    global.current_skin = "player";
-}
-if (!object_exists(player_obj)) {
-     show_debug_message("CONTROLLER ROOM START FATAL ERROR: Target player object '" + object_get_name(player_obj) + "' does not exist!");
-     player_obj = obj_player;
-     global.current_skin = "player";
-     if (!object_exists(player_obj)) {
-          show_debug_message("CONTROLLER ROOM START FATAL ERROR: Fallback obj_player also does not exist!");
-          exit;
-     }
-}
-
+// --- 3. Create Player Instance ---
+ var player_obj = obj_player; // Default
+if (variable_global_exists("current_skin")) { /* ... code to find player_obj based on skin ... */
+    var found_skin = false;
+     for (var i = 0; i < array_length(global.skins); i++) { if (global.skins[i].name == global.current_skin) { if (object_exists(global.skins[i].object)) { player_obj = global.skins[i].object; found_skin = true; } else { /*Log Error*/ } break; } }
+     if (!found_skin) { /* Log Warning & Default */ global.current_skin = "player"; player_obj = obj_player; }
+} else { /* Log Warning & Default */ global.current_skin = "player"; player_obj = obj_player; }
+if (!object_exists(player_obj)) { /* ... error handling ... */ if (object_exists(obj_player)) { player_obj = obj_player; global.current_skin = "player"; } else { exit; } }
 if (!layer_exists("Instances")) { layer_create(0, "Instances"); }
-global.player_instance = instance_create_layer(start_x, start_y, "Instances", player_obj);
-if (instance_exists(global.player_instance)) {
-    global.player_instance.persistent = true;
+
+var _new_player = instance_create_layer(start_x, start_y, "Instances", player_obj);
+
+// --- 4. Assign and Verify Global Player Instance ---
+// Ensure global.player_instance *definitely* points to the new instance or noone.
+if (instance_exists(_new_player)) {
+     global.player_instance = _new_player; // Assign the new ID
+     global.player_instance.persistent = true;
     if (variable_instance_exists(global.player_instance, "face")) { global.player_instance.face = start_face; }
     global.player_instance.image_blend = global.player_color;
     global.player_instance.visible = true;
-    show_debug_message("Created/Positioned player instance: " + string(global.player_instance) + " with skin: " + global.current_skin);
+     show_debug_message("Created player instance: " + string(global.player_instance) + " skin: " + global.current_skin + " at ("+string(start_x)+","+string(start_y)+")");
+     // [...] Apply skin-specific state
 } else {
-    show_debug_message("CONTROLLER ROOM START FATAL ERROR: Failed to create player instance for skin: " + global.current_skin);
-    exit;
+     show_debug_message("CONTROLLER ROOM START FATAL ERROR: Failed to create player instance for skin: " + global.current_skin);
+     global.player_instance = noone; // Ensure it's noone if creation failed
+     exit;
 }
 
-// --- 4. Load Room State - Pass the flag ---
-// Call load_room_state *BEFORE* resetting global.is_loading_game
+
+// --- 5. Load Room State ---
 show_debug_message("CONTROLLER ROOM START: Calling load_room_state for: " + _current_room_name + " (Is Fresh Load: " + string(_is_fresh_load) + ")");
-load_room_state(room, _is_fresh_load); // <<< PASS THE FLAG
+load_room_state(room, _is_fresh_load);
 
-// --- 5. Final Setup (Reset loading flag AFTER load_room_state) ---
-if (_is_fresh_load) {
-    show_debug_message("CONTROLLER ROOM START: Resetting global.is_loading_game flag.");
-    global.is_loading_game = false;
+// --- 6. Final Setup ---
+if (_is_fresh_load) { /* ... Reset loading flag ... */
+     show_debug_message("CONTROLLER ROOM START: Resetting global.is_loading_game flag.");
+     global.is_loading_game = false;
 }
 
-// --- CAMERA AND VIEW SETUP ---
-// Assign camera to view 0 *first*
-view_set_camera(0, global.camera);
-view_enabled = true;
-view_visible[0] = true; // Ensure Viewport 0 is visible
-show_debug_message("CONTROLLER ROOM START: Set view[0] to use global.camera (ID: " + string(global.camera) + ")");
+// --- 7. CAMERA AND VIEW SETUP ---
+ // [...] (Camera setup code remains the same)
+ view_set_camera(0, global.camera); view_enabled = true; view_visible[0] = true;
+ var intended_view_width = 288; var intended_view_height = 216; var view_width = min(intended_view_width, room_width); var view_height = min(intended_view_height, room_height); camera_set_view_size(global.camera, view_width, view_height); camera_set_view_border(global.camera, 0, 0); show_debug_message("Set camera view size to " + string(view_width) + "x" + string(view_height) + ", border (0,0)");
+  if (room_width <= view_width && room_height <= view_height) { /* Fix camera */ camera_set_view_target(global.camera, noone); camera_set_view_speed(global.camera, -1, -1); camera_set_view_pos(global.camera, 0, 0); show_debug_message("Camera fixed at (0, 0)."); }
+  else { /* Follow player */ if (instance_exists(global.player_instance)) { camera_set_view_target(global.camera, global.player_instance); camera_set_view_speed(global.camera, -1, -1); var cam_x = global.player_instance.x - (view_width / 2); var cam_y = global.player_instance.y - (view_height / 2); cam_x = clamp(cam_x, 0, max(0, room_width - view_width)); cam_y = clamp(cam_y, 0, max(0, room_height - view_height)); camera_set_view_pos(global.camera, cam_x, cam_y); show_debug_message("Camera follow player " + string(global.player_instance) + " INSTANT."); } else { /* Fallback fix camera */ camera_set_view_target(global.camera, noone); camera_set_view_speed(global.camera, -1, -1); camera_set_view_pos(global.camera, 0, 0); show_debug_message("WARNING: Player missing, Camera fixed."); } }
 
-// Define intended view size
-var intended_view_width = 288;
-var intended_view_height = 216;
-
-// Set camera view size
-var view_width = min(intended_view_width, room_width);
-var view_height = min(intended_view_height, room_height);
-camera_set_view_size(global.camera, view_width, view_height);
-show_debug_message("Set camera view size to " + string(view_width) + "x" + string(view_height));
-
-// Set camera border to zero
-camera_set_view_border(global.camera, 0, 0);
-show_debug_message("Set camera view border to (0, 0)");
-
-// --- REMOVED Explicit Viewport Settings ---
-// view_set_hborder(0, 0); // REMOVED
-// view_set_vborder(0, 0); // REMOVED
-// view_set_xport(0, 0);   // REMOVED (These port settings are likely fine at default anyway)
-// view_set_yport(0, 0);   // REMOVED
-// view_set_wport(0, display_get_gui_width()); // REMOVED
-// view_set_hport(0, display_get_gui_height()); // REMOVED
-// show_debug_message("Explicitly set Viewport 0 border=(0,0) and port settings."); // REMOVED
-// --- END REMOVED SECTION ---
-
-// Determine camera behavior based on room size vs. view size
-if (room_width <= view_width && room_height <= view_height) {
-    // Room fits entirely within view, fix camera at (0, 0)
-    camera_set_view_target(global.camera, noone);
-    camera_set_view_speed(global.camera, -1, -1);
-    camera_set_view_pos(global.camera, 0, 0);
-    show_debug_message("Camera fixed at (0, 0) for small room.");
-} else {
-    // Room is larger than view, follow the player
-    if (instance_exists(global.player_instance)) {
-        // Set Target FIRST
-        camera_set_view_target(global.camera, global.player_instance);
-
-        // Set Speed SECOND
-        camera_set_view_speed(global.camera, -1, -1); // Instant follow (centered)
-        show_debug_message("Camera set to follow player (ID: " + string(global.player_instance) + ") with INSTANT speed (-1, -1)");
-
-        // Set Initial Position THIRD (Calculated based on target and view size)
-        var cam_x = global.player_instance.x - (view_width / 2);
-        var cam_y = global.player_instance.y - (view_height / 2);
-        cam_x = clamp(cam_x, 0, max(0, room_width - view_width));
-        cam_y = clamp(cam_y, 0, max(0, room_height - view_height));
-        camera_set_view_pos(global.camera, cam_x, cam_y);
-        show_debug_message("Camera initial position set to (" + string(cam_x) + ", " + string(cam_y) + ")");
-
-    } else {
-        // Fallback if no player
-        show_debug_message("CONTROLLER ROOM START WARNING: No player instance exists to follow! Fixing camera at (0,0).");
-        camera_set_view_target(global.camera, noone);
-        camera_set_view_speed(global.camera, -1, -1);
-        camera_set_view_pos(global.camera, 0, 0);
-    }
-}
-
-// --- 7. Ensure UI Layer and Manager ---
-if (!layer_exists("UI")) {
-    layer_create(-10000, "UI");
-    show_debug_message("CONTROLLER ROOM START: Created 'UI' Layer.");
-}
-if (!instance_exists(obj_ui_manager)) {
-    instance_create_layer(0, 0, "UI", obj_ui_manager);
-    show_debug_message("CONTROLLER ROOM START: Created obj_ui_manager in Gameplay room.");
-}
+// --- 8. Ensure UI Layer and Manager ---
+// [...] (UI layer/manager check remains the same)
+if (!layer_exists("UI")) { layer_create(-10000, "UI"); }
+if (!instance_exists(obj_ui_manager)) { instance_create_layer(0, 0, "UI", obj_ui_manager); }
 
 show_debug_message("CONTROLLER ROOM START: Finished setup for room: " + _current_room_name);
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_controller
 File: Other_5.gml
-// obj_controller -> Other Event: Room End (Other_5.gml)
+// obj_controller -> Other Event: Room End (Other_5.gml) - REVISED v8 (Correct Array Push Scope)
 
 var _leaving_room_name = room_get_name(room);
 show_debug_message("obj_controller Room End: Transitioning from room: " + _leaving_room_name);
 
-if (ds_exists(global.room_states, ds_type_map)) {
-    if (ds_map_exists(global.room_states, _leaving_room_name)) {
-        var _old_data = ds_map_find_value(global.room_states, _leaving_room_name);
-
-        if (is_array(_old_data)) {
-            // Arrays do not need explicit destruction
-            show_debug_message("Replacing existing room state array for: " + _leaving_room_name);
-        } else {
-            // Remove old data if not an array
-            ds_map_replace(global.room_states, _leaving_room_name, []);
-        }
-    } else {
-        ds_map_add(global.room_states, _leaving_room_name, []);
-    }
+// --- Ensure global room_states map exists ---
+if (!ds_exists(global.room_states, ds_type_map)) {
+    show_debug_message("Room End WARN: global.room_states map missing! Creating it.");
+    global.room_states = ds_map_create();
 }
 
-// --- NEW: Save state of the room being left ---
-if (!global.is_loading_game) { // Don't save state when we are in the middle of loading
+// --- Room State Saving Logic ---
+var is_non_gameplay_room = (room == rm_init || room == rm_main_menu || room == rm_map ||
+                            room == rm_pause_menu || room == rm_settings_menu || room == rm_saveload ||
+                            room == rm_colorpicker_menu);
+var _is_currently_loading = variable_global_exists("is_loading_game") && global.is_loading_game;
+
+if (!_is_currently_loading && !is_non_gameplay_room) {
     show_debug_message("Saving runtime state for leaving room: " + _leaving_room_name);
+    var _state_array = []; // <<< Declare the array in the main event scope
 
-    var _state_array = []; // Temporary array for this room's state
+    show_debug_message("Room End WITH DEBUG: --- Start Instance Check ---");
 
-    with (all) { // Collect state from savable instances in the leaving room
-        var _inst_id = id;
-         // Same skip conditions as save_game
-        if (_inst_id == global.player_instance || object_index == obj_controller || object_index == obj_ui_manager ||
-            (object_index == obj_puffle && ds_list_find_index(global.following_puffles, _inst_id) != -1)) {
-            continue;
+    // --- Iterate using with(all) ---
+    with (all) {
+        // `self` now refers to the instance being iterated over
+        var _inst_id = self.id;
+        var _obj_index = object_index;
+        var _dbg_obj_name = object_get_name(_obj_index);
+
+        // --- Skip non-savable instances ---
+        if (_inst_id == other.id) continue; // Skip controller
+        if (variable_global_exists("player_instance") && instance_exists(global.player_instance) && _inst_id == global.player_instance) continue;
+        if (variable_global_exists("ui_manager") && instance_exists(global.ui_manager) && _inst_id == global.ui_manager) continue;
+
+        // --- SAVABLE CHECK ---
+        var _is_instance_savable = false;
+        var _parent_index = object_get_parent(_obj_index);
+        if (_parent_index == obj_pickup_item) { // Check parent first
+            _is_instance_savable = true;
+        } else if ( // Check specific types if parent doesn't match
+            _obj_index == obj_pickup_item || _obj_index == obj_toboggan || _obj_index == obj_tube ||
+            _obj_index == obj_icetruck || _obj_index == obj_icetruck_broken || _obj_index == obj_puffle)
+        {
+             _is_instance_savable = true;
         }
-        var _is_savable = (variable_instance_exists(_inst_id, "is_savable") && is_savable);
-        if (_is_savable) {
-           var _state_data = {
-                 object_index_name: object_get_name(object_index),
-                 x: x, y: y,
-                 image_xscale: image_xscale ?? 1, image_yscale: image_yscale ?? 1,
-                 image_blend: image_blend ?? c_white, image_alpha: image_alpha ?? 1,
-                 face: variable_instance_exists(_inst_id, "face") ? face : undefined,
-                 icetruck_tint: variable_instance_exists(_inst_id, "icetruck_tint") ? icetruck_tint : undefined,
-                 is_driveable: variable_instance_exists(_inst_id, "is_driveable") ? is_driveable : undefined,
-                 item_name: variable_instance_exists(_inst_id, "item_name") ? item_name : undefined,
-                 following_player: false,
-                 puffle_color: variable_instance_exists(_inst_id, "color") ? color : undefined,
-                 puffle_state: variable_instance_exists(_inst_id, "state") ? state : undefined,
-            };
-            array_push(_state_array, _state_data);
-       }
+
+        // Further exclusion (Puffles)
+        if (_is_instance_savable && _obj_index == obj_puffle) {
+            if (variable_global_exists("following_puffles") && ds_exists(global.following_puffles, ds_type_list) && ds_list_find_index(global.following_puffles, _inst_id) != -1) {
+                _is_instance_savable = false;
+            }
+        }
+
+        // --- If deemed savable, process it ---
+        if (_is_instance_savable) {
+            show_debug_message("Room End WITH DEBUG: >>> Preparing to save state for: " + string(_inst_id) + " (" + _dbg_obj_name + ")"); // Log BEFORE push
+            try {
+                 var _state_data = {
+                     object_index_name: _dbg_obj_name,
+                     x: x, y: y,
+                     image_xscale: image_xscale ?? 1,
+                     image_yscale: image_yscale ?? 1,
+                     image_blend: image_blend ?? c_white,
+                     image_alpha: image_alpha ?? 1,
+                     face: variable_instance_exists(id, "face") ? face : undefined,
+                     icetruck_tint: variable_instance_exists(id, "icetruck_tint") ? icetruck_tint : undefined,
+                     is_driveable: variable_instance_exists(id, "is_driveable") ? is_driveable : undefined,
+                     item_name: variable_instance_exists(id, "item_name") ? item_name : undefined,
+                     following_player: variable_instance_exists(id, "following_player") ? following_player : undefined,
+                     puffle_color: (_obj_index == obj_puffle && variable_instance_exists(id, "color")) ? color : undefined,
+                     puffle_state: (_obj_index == obj_puffle && variable_instance_exists(id, "state")) ? state : undefined,
+                 };
+                 // *** THE FIX: Push directly to _state_array (NO `other`) ***
+                 array_push(_state_array, _state_data);
+                 show_debug_message("Room End WITH DEBUG: +++ Successfully pushed state for " + string(_inst_id)); // Log AFTER successful push
+            } catch (_ex) {
+                show_debug_message("Room End Save State ERROR: Failed during struct creation/push for " + string(_inst_id) + " (" + _dbg_obj_name + ") - " + string(_ex));
+            }
+        } else {
+             // Log skipped instance (optional)
+             // if (_obj_index != obj_controller && ...) { show_debug_message(...) }
+        }
+    } // --- End with(all) ---
+
+    show_debug_message("Room End WITH DEBUG: --- End Instance Check ---");
+    show_debug_message("Room End DEBUG: Finished checking instances. Collected " + string(array_length(_state_array)) + " savable states."); // Use the length of the array
+
+    // --- Store the collected state array ---
+    if (ds_map_exists(global.room_states, _leaving_room_name)) {
+        show_debug_message("Replacing existing room state array for: " + _leaving_room_name + " with new array size: " + string(array_length(_state_array)));
+        ds_map_replace(global.room_states, _leaving_room_name, _state_array);
+    } else {
+        show_debug_message("Adding new room state array for: " + _leaving_room_name + " with size: " + string(array_length(_state_array)));
+        ds_map_add(global.room_states, _leaving_room_name, _state_array);
+    }
+     show_debug_message("Finished saving runtime state for room: " + _leaving_room_name);
+
+} else {
+    // Log reason for skipping save
+    if (_is_currently_loading) show_debug_message("Skipping room state save: Currently loading game.");
+    if (is_non_gameplay_room) show_debug_message("Skipping room state save: Non-gameplay room (" + _leaving_room_name + ").");
+    // Ensure empty array is stored if room was visited but had no savable objects
+    if (!_is_currently_loading && !is_non_gameplay_room && !ds_map_exists(global.room_states, _leaving_room_name)) {
+         show_debug_message("Adding empty room state array for: " + _leaving_room_name + " (No savable objects found).");
+         ds_map_add(global.room_states, _leaving_room_name, []);
     }
 }
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_controller
@@ -5722,6 +5692,336 @@ Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_plaza_complete
 File: Step_0.gml
 set_depth();
 
+Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_polarbear
+File: Create_0.gml
+// obj_polarbear Create Event
+xspd = 0;
+yspd = 0;
+move_spd = 1; // SLOWER walking speed
+face = PB_UP_LEFT; // Use macro for initial face if needed, but 'face' isn't used by polar bear directly anymore
+mood = "passive"; // Start in passive mood
+throw_timer = 0;
+throw_duration = 96; // Duration of throw animation
+throw_frame_duration = 4; // Frames per subimage in throw sheet? Seems fast. Let's keep for now.
+throw_interval = 120; // Cooldown between throws
+throw_interval_timer = 0;
+view_range = 100;
+attack_distance = 50;
+is_savable = true;
+frame_w = 48;
+frame_h = 48;
+
+// -- NEW Animation Variables --
+walk_anim_speed = 0.1; // SLOWER animation speed (adjust as needed)
+idle_anim_speed = 0;   // Idle animation speed (0 for static face)
+image_index = 0;       // Current animation frame index
+image_speed = 0;       // GMS built-in animation speed control
+
+throw_sprite = noone; // Determined in Step event now
+
+wander_timer = 0; // Timer for wandering direction
+stop_timer = 0; // Timer for stopping
+is_stopped = false; // Whether the bear is stopped
+dist_to_player = 1000; // Initial distance to player
+
+// REMOVED Enum definition here
+
+current_direction = PB_DOWN; // Use Macro for Default direction
+
+// -- NEW: Spritesheet Mapping --
+walk_frame_sheets = array_create(8);
+walk_frame_sheets[PB_DOWN] = spr_polarbear_walkdown_sheet;
+walk_frame_sheets[PB_DOWN_LEFT] = spr_polarbear_walkdownleft_sheet;
+walk_frame_sheets[PB_LEFT] = spr_polarbear_walkleft_sheet;
+walk_frame_sheets[PB_UP_LEFT] = spr_polarbear_walkupleft_sheet;
+walk_frame_sheets[PB_UP] = spr_polarbear_walkup_sheet;
+// Right-facing directions will use left-facing sheets and be flipped
+walk_frame_sheets[PB_DOWN_RIGHT] = spr_polarbear_walkdownleft_sheet; // Uses down-left sheet
+walk_frame_sheets[PB_RIGHT] = spr_polarbear_walkleft_sheet; // Uses left sheet
+walk_frame_sheets[PB_UP_RIGHT] = spr_polarbear_walkupleft_sheet; // Uses up-left sheet
+
+// -- Collision Mask Update --
+mask_index = spr_polarbear_down; // Use the new specified sprite
+
+set_depth(); // Call set_depth script
+Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_polarbear
+File: Draw_0.gml
+   // obj_polarbear Draw Event - REVISED WALK FRAME CALC + DEBUG
+   var _frame_w = 48;
+   var _frame_h = 48;
+   var _draw_x = x;
+   var _draw_y = y;
+   var _sprite_to_draw = spr_polarbear_face_sheet; // Default fallback
+   var _frame_index_to_draw = current_direction;   // Default to face direction index
+   var _xscale = 1;                                // Default horizontal scale
+   var _final_draw_x = _draw_x - (_frame_w / 2);   // Default centered X
+   var _final_draw_y = _draw_y - (_frame_h / 2);   // Default centered Y
+   var _cols_per_sheet = 8;                        // Default for face/throw sheets
+   var _left = 0;
+   var _top = 0;
+   var _total_frames_in_sprite = 1; // Default
+
+   // --- DEBUG START ---
+   var _debug_draw_state = "Mood: " + mood + ", ThrT: " + string(throw_timer) + ", Stop: " + string(is_stopped) + ", ImgIdx: " + string(image_index) + ", ImgSpd: " + string(image_speed) + ", CurDir: " + string(current_direction);
+   // --- DEBUG END ---
+
+
+   if (mood == "passive" || (mood == "angry" && throw_timer <= 0)) {
+       // --- Walking or Idle (or Angry but NOT currently throwing) ---
+       var _is_currently_idle = (xspd == 0 && yspd == 0);
+
+       if (_is_currently_idle || is_stopped) {
+           _sprite_to_draw = spr_polarbear_face_sheet;
+           _total_frames_in_sprite = 8; // Face sheet has 8 frames
+           _frame_index_to_draw = current_direction % _total_frames_in_sprite;
+           _xscale = 1;
+           _cols_per_sheet = 8;
+           _debug_draw_state += " | DrawState: IdleFace";
+       } else {
+           _sprite_to_draw = walk_frame_sheets[current_direction];
+           if (!sprite_exists(_sprite_to_draw)) { /* ... fallback ... */
+               _debug_draw_state += " | ERROR: Walk sheet invalid for dir " + string(current_direction);
+               _sprite_to_draw = spr_polarbear_face_sheet;
+               _total_frames_in_sprite = 8;
+               _frame_index_to_draw = current_direction % _total_frames_in_sprite;
+               _xscale = 1;
+               _cols_per_sheet = 8;
+           } else {
+              // *** MANUALLY USE 40 FRAMES FOR WALK SHEETS ***
+              _total_frames_in_sprite = 40; // All walk sheets have 40 frames (8x5 grid)
+              _frame_index_to_draw = floor(image_index) % _total_frames_in_sprite;
+              // *** END CHANGE ***
+
+              if (current_direction == PB_DOWN_RIGHT || current_direction == PB_RIGHT || current_direction == PB_UP_RIGHT) { _xscale = -1; } else { _xscale = 1; }
+              _cols_per_sheet = 8;
+              _debug_draw_state += " | DrawState: Walking";
+           }
+       }
+
+   } else if (mood == "angry" && throw_timer > 0) {
+        // --- Throwing State ---
+         _sprite_to_draw = throw_sprite;
+        if (!sprite_exists(_sprite_to_draw)) { /* ... fallback ... */
+             _debug_draw_state += " | ERROR: Invalid throw_sprite! Fallback to face.";
+             _sprite_to_draw = spr_polarbear_face_sheet;
+             _total_frames_in_sprite = 8; // Use face sheet frame count
+             _frame_index_to_draw = current_direction % _total_frames_in_sprite;
+            _xscale = 1;
+            _cols_per_sheet = 8;
+        } else {
+            _total_frames_in_sprite = sprite_get_number(_sprite_to_draw);
+             if (_total_frames_in_sprite <= 0) _total_frames_in_sprite = 1;
+            _frame_index_to_draw = 0;
+            if (throw_duration > 0 && _total_frames_in_sprite > 0) {
+                var _anim_progress = 1 - (throw_timer / throw_duration);
+                _frame_index_to_draw = floor(_anim_progress * _total_frames_in_sprite);
+                _frame_index_to_draw = clamp(_frame_index_to_draw, 0, _total_frames_in_sprite - 1);
+            }
+            if (current_direction == PB_DOWN_RIGHT || current_direction == PB_RIGHT || current_direction == PB_UP_RIGHT) { _xscale = -1; } else { _xscale = 1; }
+            _cols_per_sheet = 8;
+            _debug_draw_state += " | DrawState: Throwing";
+        }
+   } else {
+        // Fallback state if logic is missed
+        _debug_draw_state += " | DrawState: UNKNOWN/FALLBACK";
+        _sprite_to_draw = spr_polarbear_face_sheet;
+        _total_frames_in_sprite = 8; // Use face sheet frame count
+        _frame_index_to_draw = current_direction % _total_frames_in_sprite;
+        _xscale = 1;
+        _cols_per_sheet = 8;
+   }
+
+   // --- Calculate Final Drawing Parameters ---
+   _final_draw_x = _draw_x - (_frame_w / 2) * _xscale; // Apply scale offset
+   _final_draw_y = _draw_y - (_frame_h / 2);
+   if (_cols_per_sheet <= 0) _cols_per_sheet = 1;
+   var _col = _frame_index_to_draw % _cols_per_sheet;
+   var _row = floor(_frame_index_to_draw / _cols_per_sheet);
+   _left = _col * _frame_w;
+   _top = _row * _frame_h;
+
+   // --- Final Draw Call & Debug ---
+   if (sprite_exists(_sprite_to_draw)) {
+       draw_sprite_part_ext(_sprite_to_draw, 0, _left, _top, _frame_w, _frame_h, _final_draw_x, _final_draw_y, _xscale, 1, c_white, 1);
+       draw_set_halign(fa_center); draw_set_valign(fa_bottom); draw_set_font(fnt_earlygb); draw_set_color(c_yellow);
+       // Refined Debug Text
+       var _sprite_name = sprite_get_name(_sprite_to_draw);
+       var _frame_info = " (" + string(_col) + "," + string(_row) + " of " + string(_total_frames_in_sprite) + ")";
+       draw_text(x, y - _frame_h/2 - 2, _debug_draw_state + " | Spr: " + _sprite_name + " | Frm: " + string(_frame_index_to_draw) + _frame_info);
+       draw_set_color(c_white); draw_set_halign(fa_left); draw_set_valign(fa_top);
+   } else { /* ... fallback drawing ... */ }
+
+   set_depth();
+Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_polarbear
+File: Step_0.gml
+// obj_polarbear Step Event - COMPLETE
+if (global.is_pause_menu_active) exit;
+
+// Handle warp block interaction
+if (place_meeting(x, y, obj_warp_block) && !instance_exists(obj_warp)) {
+     var warp = instance_nearest(x, y, obj_warp_block);
+     var inst = instance_create_depth(0, 0, -9999, obj_warp);
+     inst.target_x = warp.target_x;
+     inst.target_y = warp.target_y;
+     inst.target_rm = warp.target_rm;
+     inst.target_face = current_direction; // Keep current direction
+     inst.target_instance = id;
+     // Note: Cooldown is handled by obj_warp_block now
+}
+
+// Get player instance safely
+var _player_inst = instance_exists(global.player_instance) ? global.player_instance : noone;
+
+// Determine player distance ONLY if player exists
+dist_to_player = (_player_inst != noone) ? distance_to_object(_player_inst) : 10000;
+if (_player_inst == noone && mood == "angry") { mood = "passive"; } // Calm down if player gone
+
+// --- DEBUG: Log Start of State Logic ---
+// show_debug_message("PB Step Start: Mood=" + mood + ", is_stopped=" + string(is_stopped) + ", xspd=" + string(xspd) + ", yspd=" + string(yspd));
+
+// --- State Machine ---
+switch (mood) {
+    case "passive":
+        image_speed = 0; // Default for passive
+        xspd = 0;
+        yspd = 0;
+
+        if (is_stopped) {
+            image_speed = idle_anim_speed; // Usually 0
+            if (stop_timer > 0) {
+                stop_timer--;
+                // Face player logic...
+                if (_player_inst != noone && dist_to_player < view_range / 2) {
+                     var dir_to_player = point_direction(x, y, _player_inst.x, _player_inst.y);
+                     var angle = round(dir_to_player / 45) % 8;
+                     var face_map = [PB_RIGHT, PB_UP_RIGHT, PB_UP, PB_UP_LEFT, PB_LEFT, PB_DOWN_LEFT, PB_DOWN, PB_DOWN_RIGHT];
+                     current_direction = face_map[angle];
+                }
+            } else {
+                is_stopped = false;
+                wander_timer = irandom_range(60, 180);
+                current_direction = irandom(7);
+                 // show_debug_message("PB Passive: Stop timer ended. Starting wander. New Dir: " + string(current_direction));
+            }
+        } else { // Wandering
+            image_speed = walk_anim_speed; // Should be > 0
+            if (wander_timer > 0) {
+                wander_timer--;
+                // Calculate speed based on current_direction macro
+                switch (current_direction) { /* ... speed calculation ... */
+                     case PB_DOWN:      yspd = move_spd; break;
+                     case PB_DOWN_LEFT: xspd = -move_spd; yspd = move_spd; break;
+                     case PB_LEFT:      xspd = -move_spd; break;
+                     case PB_UP_LEFT:   xspd = -move_spd; yspd = -move_spd; break;
+                     case PB_UP:        yspd = -move_spd; break;
+                     case PB_UP_RIGHT:  xspd = move_spd; yspd = -move_spd; break;
+                     case PB_RIGHT:     xspd = move_spd; break;
+                     case PB_DOWN_RIGHT:xspd = move_spd; yspd = move_spd; break;
+                }
+            } else {
+                 // show_debug_message("PB Passive: Wander timer ended. Deciding next action.");
+                if (random(1) < 0.3) { // Stop
+                    is_stopped = true;
+                    stop_timer = irandom_range(60, 180);
+                     // show_debug_message("PB Passive: Decided to stop.");
+                } else { // Change direction
+                    current_direction = irandom(7);
+                    wander_timer = irandom_range(60, 180);
+                     // show_debug_message("PB Passive: Decided to wander again. New Dir: " + string(current_direction));
+                }
+                 // Reset speed here to reflect decision immediately
+                xspd = 0;
+                yspd = 0;
+                if (!is_stopped) { image_speed = walk_anim_speed; } else { image_speed = idle_anim_speed; }
+            }
+        }
+        break; // End passive state
+
+    case "angry":
+        image_speed = 0; // Default for angry
+        xspd = 0;
+        yspd = 0;
+
+        if (_player_inst == noone) { mood = "passive"; break; }
+
+        // Face the player
+        var dir_to_player = point_direction(x, y, _player_inst.x, _player_inst.y);
+        var angle = round(dir_to_player / 45) % 8;
+        var face_map = [PB_RIGHT, PB_UP_RIGHT, PB_UP, PB_UP_LEFT, PB_LEFT, PB_DOWN_LEFT, PB_DOWN, PB_DOWN_RIGHT];
+        current_direction = face_map[angle];
+
+        if (throw_timer > 0) {
+            // --- Currently Throwing ---
+            throw_timer--;
+            if (throw_sprite != noone && sprite_exists(throw_sprite)) {
+                 var _num_frames = sprite_get_number(throw_sprite);
+                 image_speed = (_num_frames > 0 && throw_duration > 0) ? (_num_frames / throw_duration) : 0;
+                 // show_debug_message("PB Throwing: Anim Speed=" + string(image_speed));
+            } else { image_speed = 0; }
+
+            if (throw_timer <= 0) { // Throw finished
+                 if (_player_inst != noone) {
+                     var snowball = instance_create_layer(x, y + 5, "Instances", obj_snowball); // Adjust Y slightly
+                     snowball.direction = dir_to_player;
+                     snowball.speed = 5;
+                      show_debug_message("Polar Bear threw snowball!");
+                 }
+                 image_speed = idle_anim_speed; // Transition to idle speed
+                 image_index = 0;
+                 throw_interval_timer = throw_interval;
+                 throw_sprite = noone;
+                  // show_debug_message("PB Throwing: Finished. Starting Cooldown.");
+            }
+        } else { // Not Throwing
+            if (throw_interval_timer > 0) { // Cooldown
+                throw_interval_timer--;
+                image_speed = idle_anim_speed; // Idle during cooldown
+                 // show_debug_message("PB Angry: Cooldown. Timer=" + string(throw_interval_timer));
+            } else { // Cooldown Finished
+                 // show_debug_message("PB Angry: Cooldown finished. Checking range. Dist=" + string(dist_to_player));
+                if (dist_to_player <= attack_distance) { // Start Throw
+                    throw_timer = throw_duration;
+                    image_index = 0;
+                    if (_player_inst.y > y + 10) { throw_sprite = spr_polarbear_snowballdownright_sheet; }
+                    else { throw_sprite = spr_polarbear_snowballupright_sheet; }
+                    if (!sprite_exists(throw_sprite)) { /* error handling */ mood = "passive"; throw_sprite = noone; throw_timer = 0; }
+                    else { show_debug_message("PB Angry: Starting throw. Sprite: " + sprite_get_name(throw_sprite)); image_speed = 0; }
+                } else if (dist_to_player <= view_range) { // Chase
+                    var stop_distance = attack_distance - 8;
+                    if (dist_to_player > stop_distance) {
+                         var chase_dir = point_direction(x, y, _player_inst.x, _player_inst.y);
+                         xspd = lengthdir_x(move_spd, chase_dir);
+                         yspd = lengthdir_y(move_spd, chase_dir);
+                         image_speed = walk_anim_speed; // Walk anim while chasing
+                          // show_debug_message("PB Angry: Chasing. Speed set.");
+                    } else {
+                         image_speed = idle_anim_speed; // Idle when close enough
+                         // show_debug_message("PB Angry: Close enough, idling.");
+                    }
+                } else { // Calm Down
+                    mood = "passive";
+                    is_stopped = true;
+                    stop_timer = 60;
+                    image_speed = idle_anim_speed;
+                    show_debug_message("Polar Bear calmed down (out of range).");
+                }
+            }
+        }
+        break; // End angry state
+} // End switch(mood)
+
+// --- DEBUG: Log final speed and image_speed BEFORE collision ---
+// show_debug_message("PB Pre-Collision: Mood=" + mood + ", xspd=" + string(xspd) + ", yspd=" + string(yspd) + ", image_speed=" + string(image_speed));
+
+// --- Collision Handling (using script) ---
+xspd = handle_collision("x", xspd);
+yspd = handle_collision("y", yspd);
+// x and y are updated by handle_collision
+
+// --- DEBUG: Log position AFTER collision ---
+// show_debug_message("PB Post-Collision: X=" + string(x) + ", Y=" + string(y));
+
+set_depth();
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_puffle
 File: Create_0.gml
 // Movement variables
@@ -6352,6 +6652,34 @@ File: Create_0.gml
 //depth
 depth = -bbox_bottom;
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_snowball
+File: Collision_obj_polarbear.gml
+   // obj_polarbear Collision Event with obj_snowball
+   show_debug_message("DEBUG: Snowball (" + string(id) + ") colliding with Polar Bear (" + string(other.id) + ")");
+
+   // Check if the polar bear instance still exists before trying to modify it
+   if (instance_exists(other))
+   {
+       show_debug_message("Polar Bear instance exists. Setting mood to angry.");
+       with (other) { // Use 'with' to ensure context is the polar bear
+           mood = "angry";
+           throw_interval_timer = 0;
+           throw_timer = 0;
+           is_stopped = false;
+           throw_sprite = noone;
+
+           // Correctly access the bear's idle_anim_speed
+           if (variable_instance_exists(id, "idle_anim_speed")) { // 'id' inside 'with' refers to the bear
+               image_speed = idle_anim_speed;
+           } else {
+               image_speed = 0;
+               show_debug_message("WARNING: idle_anim_speed missing on Polar Bear!");
+           }
+           image_index = 0;
+       }
+   } else { show_debug_message("WARNING: Polar Bear instance was already destroyed."); }
+
+   instance_destroy(); // Destroy the snowball (self)
+Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_snowball
 File: Create_0.gml
 direction = 0;
 speed = 3;
@@ -6659,46 +6987,69 @@ Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_warp
 File: Alarm_0.gml
 /// Alarm[0] Event
 global.warp_cooldown = false;
-show_debug_message("DEBUG: Warp cooldown finished. Player can warp again.");
-
+show_debug_message("DEBUG: Warp cooldown finished. Warping allowed again.");
+instance_destroy(); // Destroy the warp object itself after cooldown
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_warp
 File: Create_0.gml
-// obj_warp: Create Event
-target_rm = 0;
-target_x = 0;
-target_y = 0;
-target_face = 0;
-target_instance = noone;
+   // obj_warp: Create Event
+   target_rm = noone;
+   target_x = 0;
+   target_y = 0;
+   target_face = 0;
+   target_instance = noone;
 
-global.warp_cooldown = true;
-alarm[0] = room_speed / 2;
+   persistent = true; // <<< MAKE PERSISTENT
 
-show_debug_message("obj_warp initialized. Target Room: " + string(target_rm));
+   // Alarm 0 will reset the global cooldown
+   alarm[0] = room_speed / 2; // Keep the alarm short
 
+   show_debug_message("obj_warp initialized (Persistent: " + string(persistent) + "). Target Room: " + string(target_rm));
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_warp
 File: Draw_0.gml
 draw_sprite_tiled(sprite_index, image_index, 0, 0)
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_warp
 File: Other_7.gml
-/// Animation End Event for obj_warp
-show_debug_message("DEBUG: obj_warp transition initiated. Moving player before room transition.");
-global.player_instance = target_instance;
-if (target_instance != noone) {
-    global.warp_target_x = target_x;
-    global.warp_target_y = target_y;
-    global.warp_target_face = target_face;
-    show_debug_message("Player successfully moved to new position.");
-} else {
-    show_debug_message("ERROR: Target instance not found during warp.");
+/// Animation End Event for obj_warp - REVISED (Focus on target_instance)
+
+show_debug_message("DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: " + string(target_instance));
+
+// Make sure the specific target instance still exists
+if (!instance_exists(target_instance)) {
+    show_debug_message("ERROR (Warp Anim End): Target instance (" + string(target_instance) + ") no longer exists!");
+    room_goto(target_rm); // Go to room anyway
+    instance_destroy(); // Destroy self
+    exit;
 }
 
+show_debug_message("DEBUG (Warp Anim End): Moving instance: " + string(target_instance) + " (" + object_get_name(target_instance.object_index) + ") before room transition.");
+
+/// Animation End Event for obj_warp - REVISED (Focus on target_instance)
+
+show_debug_message("DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: " + string(target_instance));
+
+// Make sure the specific target instance still exists
+if (!instance_exists(target_instance)) { /* ... Error handling ... */ }
+else
+{
+    show_debug_message("DEBUG (Warp Anim End): Moving instance: " + string(target_instance) + " (" + object_get_name(target_instance.object_index) + ") before room transition.");
+
+    // --- Position the SPECIFIC target instance ---
+    target_instance.x = target_x; target_instance.y = target_y;
+    if (variable_instance_exists(target_instance, "current_direction")) { target_instance.current_direction = target_face; }
+    else if (variable_instance_exists(target_instance, "face")) { target_instance.face = target_face; }
+    show_debug_message("DEBUG (Warp Anim End): Instance " + string(target_instance) + " moved.");
+
+   // --- Store Warp Coords ONLY IF it was the Player ---
+    global.warp_target_x = undefined; global.warp_target_y = undefined; global.warp_target_face = undefined; global.warp_target_inst_id = noone; // Clear first
+    if (target_instance == global.player_instance) { global.warp_target_x = target_x; global.warp_target_y = target_y; global.warp_target_face = target_face; global.warp_target_inst_id = target_instance; show_debug_message("DEBUG (Warp Anim End): Stored PLAYER warp target pos."); }
+    else { if (!target_instance.persistent) { target_instance.persistent = true; show_debug_message("DEBUG (Warp Anim End): Made NPC persistent."); } show_debug_message("DEBUG (Warp Anim End): NPC warped. Global targets remain undefined."); }
+}
+
+// Go to the target room
 room_goto(target_rm);
 
-// Camera setup is handled in Room Start, so remove manual size setting here
-if (instance_exists(global.camera)) {
-    view_camera[0] = global.camera; // Ensure view uses the global camera
-    show_debug_message("DEBUG: Camera assigned to view[0] after room transition.");
-}
+// Destroy self *after* initiating room transition, allowing Alarm 0 to potentially trigger
+instance_destroy(); // <<< ADD THIS
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_warp
 File: Step_0.gml
 // Step Event for obj_warp
@@ -6739,78 +7090,80 @@ if (instance_exists(obj_warp)) {
 }
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_warp_block
 File: Step_0.gml
-/// Step Event for obj_warp_block
+/// Step Event for obj_warp_block - REVISED WARP LOGIC + DEBUG
 
-// Handle Player Warping
-if (instance_exists(global.player_instance) && place_meeting(x, y, global.player_instance) && !instance_exists(obj_warp)) 
-{
-    show_debug_message("DEBUG: obj_player detected on obj_warp_block. Warping...");
-    
-    var inst = instance_create_depth(0, 0, -9999, obj_warp);
-    inst.target_x = self.target_x;   // Ensure correct target coordinates
-    inst.target_y = self.target_y;
-    inst.target_rm = self.target_rm;
-    inst.target_face = self.target_face;
-    inst.target_instance = global.player_instance; // Use global instance of player
-	
+   if (instance_exists(obj_warp) || global.warp_cooldown) {
+       // Add a log if player is colliding but cooldown is active
+       if (global.warp_cooldown && instance_exists(global.player_instance) && place_meeting(x, y, global.player_instance)) {
+           show_debug_message("DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.");
+       }
+       exit;
+   }
+
+    var _warp_instance = noone; var _warp_target_face = target_face;
+    if (instance_exists(global.player_instance)) {
+    // --- DEBUG: Log player position and warp block bounds ---
+    var _player_x = global.player_instance.x;
+    var _player_y = global.player_instance.y;
+    var _block_bbox_left = bbox_left;
+    var _block_bbox_right = bbox_right;
+    var _block_bbox_top = bbox_top;
+    var _block_bbox_bottom = bbox_bottom;
+    // show_debug_message("Warp Block Check: Player ("+string(global.player_instance)+") at ("+string(_player_x)+","+string(_player_y)+"). Block Bounds: L"+string(_block_bbox_left)+" R"+string(_block_bbox_right)+" T"+string(_block_bbox_top)+" B"+string(_block_bbox_bottom));
+
+    if (place_meeting(x,y,global.player_instance)) { // Check collision using block's coords
+         // --- DEBUG: Log successful collision ---
+         show_debug_message("Warp Block Check: place_meeting with Player TRUE. Cooldown: " + string(global.warp_cooldown));
+
+         _warp_instance=global.player_instance;
+         if (variable_instance_exists(global.player_instance, "face")) {
+              _warp_target_face = global.player_instance.face;
+         }
+          show_debug_message("DEBUG: Player (" + string(_warp_instance) + ", Skin: " + global.current_skin + ") detected. Prioritizing warp.");
+    } else {
+         // --- DEBUG: Log failed collision ---
+          // show_debug_message("Warp Block Check: place_meeting with Player FALSE.");
+    }
 }
 
-// Handle Ice Truck Warping
-if (instance_exists(obj_player_icetruck) && place_meeting(x, y, obj_player_icetruck) && !instance_exists(obj_warp)) 
-{
+// --- Check Polar Bear Collision (ONLY IF PLAYER IS NOT WARPING) ---
+if (_warp_instance == noone) { 
+	var _c_b = instance_place(x,y,obj_polarbear); if(_c_b != noone) {
+        _warp_instance = _c_b;
+        _warp_target_face = _c_b.current_direction; // Use bear's direction
+        show_debug_message("DEBUG: Polar Bear (" + string(_warp_instance) + ") detected on obj_warp_block. Warping.");
+    }
+}
+
+// --- Check OLD NPC Collision (ONLY IF PLAYER/BEAR ARE NOT WARPING) ---
+// Add similar blocks for obj_npc_old or other specific NPCs if needed
+if (_warp_instance == noone) {
+    var _colliding_npc_old = instance_place(x, y, obj_npc_old);
+    if (_colliding_npc_old != noone) {
+         _warp_instance = _colliding_npc_old;
+         _warp_target_face = _colliding_npc_old.face; // Use NPC's face
+         show_debug_message("DEBUG: obj_npc_old (" + string(_warp_instance) + ") detected on obj_warp_block. Warping.");
+    }
+}
+
+
+// --- Create Warp Instance IF a target was found ---
+if (_warp_instance != noone) {
+    show_debug_message("Creating obj_warp for instance: " + string(_warp_instance) + " (" + object_get_name(_warp_instance.object_index) + ")");
     var inst = instance_create_depth(0, 0, -9999, obj_warp);
+
+    // Pass the specific instance and details to the warp object
+    inst.target_rm = self.target_rm;
     inst.target_x = self.target_x;
     inst.target_y = self.target_y;
-    inst.target_rm = self.target_rm;
-    inst.target_face = obj_player_icetruck.face;
-    inst.target_instance = instance_find(obj_player_icetruck, 0);
+    inst.target_face = _warp_target_face; // Use the determined face
+    inst.target_instance = _warp_instance; // *** STORE THE SPECIFIC INSTANCE ***
 
+    global.warp_cooldown = true; // Set cooldown AFTER successfully creating warp
+
+    show_debug_message("Warping instance " + string(_warp_instance) + " to Room: " + room_get_name(inst.target_rm) +
+        " Pos: (" + string(inst.target_x) + ", " + string(inst.target_y) + ") Facing: " + string(inst.target_face));
 }
-
-/// Step Event for obj_warp_block
-
-// Handle Player Warping
-if (instance_exists(global.player_instance) && place_meeting(global.player_instance.x, global.player_instance.y, id) && !instance_exists(obj_warp)) 
-{
-    show_debug_message("DEBUG: obj_player_tube detected on obj_warp_block. Warping...");
-
-    var inst = instance_create_depth(0, 0, -9999, obj_warp);
-    inst.target_x = self.target_x;   // Correctly assign the warp block's values
-    inst.target_y = self.target_y;
-    inst.target_rm = self.target_rm;
-    inst.target_face = self.target_face;
-    inst.target_instance = global.player_instance;
-
-    // Debugging output to confirm correct values are passed
-    show_debug_message("Warping obj_player_tube to Room: " + string(inst.target_rm) +
-        " Position: (" + string(inst.target_x) + ", " + string(inst.target_y) + ") Facing: " + string(inst.target_face));
-}
-
-
-
-// Handle NPC Warping
-if (instance_exists(obj_npc_old) && place_meeting(x, y, obj_npc_old) && !instance_exists(obj_warp)) 
-{
-    var inst = instance_create_depth(0, 0, -9999, obj_warp);
-    inst.target_x = self.target_x;
-    inst.target_y = self.target_y;
-    inst.target_rm = self.target_rm;
-    inst.target_face = obj_npc_old.face;
-    inst.target_instance = instance_find(obj_npc_old, 0);
-
-}
-
-if (!global.warp_cooldown && instance_exists(global.player_instance) && place_meeting(global.player_instance.x, global.player_instance.y, id) && !instance_exists(obj_warp)) 
-{
-    var inst = instance_create_depth(0, 0, -9999, obj_warp);
-    inst.target_x = self.target_x;
-    inst.target_y = self.target_y;
-    inst.target_rm = self.target_rm;
-    inst.target_face = self.target_face;
-    inst.target_instance = global.player_instance;
-}
-
-
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_warp_map
 File: Create_0.gml
 // obj_warp_map: Create Event

@@ -1,4 +1,3 @@
-Output log when saving the game:
 Setting scheduler resolution to 1
 DirectX11: Using hardware device
 Resizing swap chain...
@@ -17,14 +16,14 @@ Finished PrepareGame()
 Run_Start
 Done g_EffectsManager.Init()
 Done RenderStateManager
-CreateColPairs took 0.000000s 4 usecs for 125 object types obj_col_numb=0 physobjcount=0 resizes 0 final size 0
+CreateColPairs took 0.000000s 4 usecs for 126 object types obj_col_numb=0 physobjcount=1 resizes 0 final size 1
 Done ObjectLists
 Done Extension_Initialize
 About to startroom
 Number of buttons found: 3
-Total memory used = 12213001 (0x00ba5b09) bytes 11.65MB
-Free memory = 6001408 (0x005b9300) bytes 5.72MB
-Peak memory used = 13096290 (0x00c7d562) bytes 12.49MB
+Total memory used = 12500227 (0x00bebd03) bytes 11.92MB
+Free memory = 5994120 (0x005b7688) bytes 5.72MB
+Peak memory used = 13307613 (0x00cb0edd) bytes 12.69MB
 **********************************.
 Entering main loop.
 **********************************.
@@ -64,7 +63,7 @@ Initialized global.is_game_paused in obj_controller Create.
 obj_player Create: Applying initial player color: 52479
 obj_player: Initialized. Driving state: 0
 Restored player color: 52479
-Player instance created: ref instance 100651
+Player instance created: ref instance 100653
 obj_controller created with ID: ref instance 100014
 obj_controller Create event executed
 DEBUG: obj_initializer Create Event START
@@ -80,703 +79,1393 @@ rm_init: global.target_room does NOT exist before check.
 rm_init: Not loading game. Proceeding to next room (New Game).
 rm_init: Creation Code Finished.
 obj_controller Room End: Transitioning from room: rm_init
-Saving runtime state for leaving room: rm_init
+Skipping room state save: Non-gameplay room (rm_init).
 Spawn Point marker created at (146, 155)
 CONTROLLER ROOM START: Entering room: rm_welcome_room
-CONTROLLER ROOM START (Default): Looking for obj_spawn_point...
-CONTROLLER ROOM START (Default): Found spawn point instance ref instance 100088 at (146,155)
-CONTROLLER ROOM START (Default): Using determined default pos (146,155) Face: 3
+CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
+CONTROLLER ROOM START (Default): Final default/spawn pos (146,155) Face: 3
+CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
+CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
 obj_player Create: Applying initial player color: 52479
 obj_player: Initialized. Driving state: 0
-Created/Positioned player instance: ref instance 100661 with skin: player
+Created player instance: ref instance 100663 skin: player at (146,155)
 CONTROLLER ROOM START: Calling load_room_state for: rm_welcome_room (Is Fresh Load: 0)
 Attempting to load state for room: rm_welcome_room (Fresh Load: 0)
 Skipping instance destruction (Normal Room Entry).
 No state found for room: rm_welcome_room in global.room_states.
-CONTROLLER ROOM START: Set view[0] to use global.camera (ID: 193)
-Set camera view size to 288x216
-Set camera view border to (0, 0)
-Camera set to follow player (ID: ref instance 100661) with INSTANT speed (-1, -1)
-Camera initial position set to (2, 47)
-CONTROLLER ROOM START: Created 'UI' Layer.
+Set camera view size to 288x216, border (0,0)
+Camera follow player ref instance 100663 INSTANT.
 CONTROLLER ROOM START: Finished setup for room: rm_welcome_room
 DEBUG: Resetting repair flag...
-Inventory: Added 'Battery' (Index: 5) to slot 0
-'Battery' added to inventory via obj_inventory.
-Repairing ice truck...
-DEBUG: Setting global.repair_complete = true in obj_icetruck_broken
-Ice truck repaired! It is now driveable.
-Inventory Check: Repair triggered ('R' pressed and repair_complete=true)
-Inventory: Attempting to remove Battery for repair...
-Inventory: Removed 'Battery' (Index: 5) from slot 0
-obj_player_icetruck: Initialized.
-Entered ice truck. Current skin: icetruck
-obj_player Create: Applying initial player color: 52479
-obj_player: Initialized. Driving state: 0
-Attempting to switch to skin: player
-Destroying old player instance (ref instance 100664, skin: icetruck)
-obj_player Create: Applying initial player color: 52479
-obj_player: Initialized. Driving state: 0
-Skin switched to: player. New instance ID: ref instance 100666
-Exited ice truck. Current skin: player
-obj_player_icetruck: Initialized.
-Entered ice truck. Current skin: icetruck
-Inventory: Added 'Wrench' (Index: 2) to slot 0
-'Wrench' added to inventory via obj_inventory.
-obj_player Create: Applying initial player color: 52479
-obj_player: Initialized. Driving state: 0
-Attempting to switch to skin: player
-Destroying old player instance (ref instance 100668, skin: icetruck)
-obj_player Create: Applying initial player color: 52479
-obj_player: Initialized. Driving state: 0
-Skin switched to: player. New instance ID: ref instance 100670
-Exited ice truck. Current skin: player
-Inventory: Added 'Toboggan' (Index: 4) to slot 1
-'Toboggan' added to inventory via obj_inventory.
-Inventory: Added 'Miners Hard Hat' (Index: 23) to slot 2
-'Miners Hard Hat' added to inventory via obj_inventory.
-Inventory: Added 'Ghost Costume' (Index: 20) to slot 3
-'Ghost Costume' added to inventory via obj_inventory.
-Inventory: Added 'Black Hoodie' (Index: 22) to slot 4
-'Black Hoodie' added to inventory via obj_inventory.
-Inventory: Added 'Snow Blaster' (Index: 19) to slot 5
-'Snow Blaster' added to inventory via obj_inventory.
-Inventory: Added 'Black Sun Glasses' (Index: 21) to slot 6
-'Black Sun Glasses' added to inventory via obj_inventory.
-Inventory: Added 'Tour Hat' (Index: 24) to slot 7
-'Tour Hat' added to inventory via obj_inventory.
-obj_player_icetruck: Initialized.
-Entered ice truck. Current skin: icetruck
-DEBUG: obj_player detected on obj_warp_block. Warping...
-obj_warp initialized. Target Room: 0
-DEBUG: obj_warp transition initiated. Moving player before room transition.
-Player successfully moved to new position.
+DEBUG: Polar Bear (ref instance 100089) detected on obj_warp_block. Warping.
+Creating obj_warp for instance: ref instance 100089 (obj_polarbear)
+obj_warp initialized (Persistent: 1). Target Room: -4
+Warping instance ref instance 100089 to Room: rm_plaza Pos: (255, 360) Facing: 3
+DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
+DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
+DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
+DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
+DEBUG (Warp Anim End): Instance ref instance 100089 moved.
+DEBUG (Warp Anim End): NPC warped. Global targets remain undefined.
 obj_controller Room End: Transitioning from room: rm_welcome_room
 Saving runtime state for leaving room: rm_welcome_room
+Room End WITH DEBUG: --- Start Instance Check ---
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100078 (obj_wrench_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100078
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100077 (obj_minershardhat_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100077
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100076 (obj_ghostcostume_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100076
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100075 (obj_tourhat_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100075
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100074 (obj_snowblaster_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100074
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100073 (obj_blacksunglasses_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100073
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100072 (obj_blackhoodie_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100072
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100084 (obj_puffle)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100084
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100071 (obj_boxpuffleo_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100071
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100083 (obj_toboggan)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100083
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100069 (obj_Jackhammer_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100069
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100068 (obj_snowshovel_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100068
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100067 (obj_beta_hat)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100067
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100066 (obj_battery)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100066
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100064 (obj_wood_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100064
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100065 (obj_snow_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100065
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100079 (obj_icetruck_broken)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100079
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100080 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100080
+Room End WITH DEBUG: --- End Instance Check ---
+Room End DEBUG: Finished checking instances. Collected 18 savable states.
+Adding new room state array for: rm_welcome_room with size: 18
+Finished saving runtime state for room: rm_welcome_room
+CONTROLLER ROOM START: Entering room: rm_plaza
+CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
+CONTROLLER ROOM START (Default): Final default/spawn pos (250,200) Face: 3
+CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
+CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
+obj_player Create: Applying initial player color: 52479
+obj_player: Initialized. Driving state: 0
+Created player instance: ref instance 100665 skin: player at (250,200)
+CONTROLLER ROOM START: Calling load_room_state for: rm_plaza (Is Fresh Load: 0)
+Attempting to load state for room: rm_plaza (Fresh Load: 0)
+Skipping instance destruction (Normal Room Entry).
+No state found for room: rm_plaza in global.room_states.
+Set camera view size to 288x216, border (0,0)
+Camera follow player ref instance 100665 INSTANT.
+CONTROLLER ROOM START: Finished setup for room: rm_plaza
+obj_warp initialized (Persistent: 1). Target Room: -4
+DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
+DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
+DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
+DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
+DEBUG (Warp Anim End): Instance ref instance 100089 moved.
+DEBUG (Warp Anim End): NPC warped. Global targets remain undefined.
+obj_controller Room End: Transitioning from room: rm_plaza
+Saving runtime state for leaving room: rm_plaza
+Room End WITH DEBUG: --- Start Instance Check ---
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100137 (obj_boxpuffleo_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100137
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100182 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100182
+Room End WITH DEBUG: --- End Instance Check ---
+Room End DEBUG: Finished checking instances. Collected 2 savable states.
+Adding new room state array for: rm_plaza with size: 2
+Finished saving runtime state for room: rm_plaza
+Spawn Point marker created at (146, 155)
+CONTROLLER ROOM START: Entering room: rm_welcome_room
+CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
+CONTROLLER ROOM START (Default): Final default/spawn pos (146,155) Face: 3
+CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
+CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
+obj_player Create: Applying initial player color: 52479
+obj_player: Initialized. Driving state: 0
+Created player instance: ref instance 100667 skin: player at (146,155)
+CONTROLLER ROOM START: Calling load_room_state for: rm_welcome_room (Is Fresh Load: 0)
+Attempting to load state for room: rm_welcome_room (Fresh Load: 0)
+Skipping instance destruction (Normal Room Entry).
+Found state array for rm_welcome_room. Size: 18
+Normal Room Entry: Assuming instances persist or were recreated by GM.
+Set camera view size to 288x216, border (0,0)
+Camera follow player ref instance 100667 INSTANT.
+CONTROLLER ROOM START: Finished setup for room: rm_welcome_room
+DEBUG: Resetting repair flag...
+obj_warp initialized (Persistent: 1). Target Room: -4
+DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
+DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
+DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
+DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
+DEBUG (Warp Anim End): Instance ref instance 100089 moved.
+DEBUG (Warp Anim End): NPC warped. Global targets remain undefined.
+obj_controller Room End: Transitioning from room: rm_welcome_room
+Saving runtime state for leaving room: rm_welcome_room
+Room End WITH DEBUG: --- Start Instance Check ---
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100078 (obj_wrench_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100078
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100077 (obj_minershardhat_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100077
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100076 (obj_ghostcostume_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100076
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100075 (obj_tourhat_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100075
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100074 (obj_snowblaster_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100074
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100073 (obj_blacksunglasses_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100073
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100072 (obj_blackhoodie_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100072
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100084 (obj_puffle)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100084
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100071 (obj_boxpuffleo_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100071
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100083 (obj_toboggan)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100083
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100069 (obj_Jackhammer_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100069
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100068 (obj_snowshovel_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100068
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100067 (obj_beta_hat)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100067
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100066 (obj_battery)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100066
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100064 (obj_wood_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100064
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100065 (obj_snow_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100065
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100079 (obj_icetruck_broken)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100079
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100080 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100080
+Room End WITH DEBUG: --- End Instance Check ---
+Room End DEBUG: Finished checking instances. Collected 18 savable states.
+Replacing existing room state array for: rm_welcome_room with new array size: 18
+Finished saving runtime state for room: rm_welcome_room
+CONTROLLER ROOM START: Entering room: rm_plaza
+CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
+CONTROLLER ROOM START (Default): Final default/spawn pos (250,200) Face: 3
+CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
+CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
+obj_player Create: Applying initial player color: 52479
+obj_player: Initialized. Driving state: 0
+Created player instance: ref instance 100669 skin: player at (250,200)
+CONTROLLER ROOM START: Calling load_room_state for: rm_plaza (Is Fresh Load: 0)
+Attempting to load state for room: rm_plaza (Fresh Load: 0)
+Skipping instance destruction (Normal Room Entry).
+Found state array for rm_plaza. Size: 2
+Normal Room Entry: Assuming instances persist or were recreated by GM.
+Set camera view size to 288x216, border (0,0)
+Camera follow player ref instance 100669 INSTANT.
+CONTROLLER ROOM START: Finished setup for room: rm_plaza
+obj_warp initialized (Persistent: 1). Target Room: -4
+DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
+DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
+DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
+DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
+DEBUG (Warp Anim End): Instance ref instance 100089 moved.
+DEBUG (Warp Anim End): NPC warped. Global targets remain undefined.
+obj_controller Room End: Transitioning from room: rm_plaza
+Saving runtime state for leaving room: rm_plaza
+Room End WITH DEBUG: --- Start Instance Check ---
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100137 (obj_boxpuffleo_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100137
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100182 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100182
+Room End WITH DEBUG: --- End Instance Check ---
+Room End DEBUG: Finished checking instances. Collected 2 savable states.
+Replacing existing room state array for: rm_plaza with new array size: 2
+Finished saving runtime state for room: rm_plaza
+Spawn Point marker created at (146, 155)
+CONTROLLER ROOM START: Entering room: rm_welcome_room
+CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
+CONTROLLER ROOM START (Default): Final default/spawn pos (146,155) Face: 3
+CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
+CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
+obj_player Create: Applying initial player color: 52479
+obj_player: Initialized. Driving state: 0
+Created player instance: ref instance 100671 skin: player at (146,155)
+CONTROLLER ROOM START: Calling load_room_state for: rm_welcome_room (Is Fresh Load: 0)
+Attempting to load state for room: rm_welcome_room (Fresh Load: 0)
+Skipping instance destruction (Normal Room Entry).
+Found state array for rm_welcome_room. Size: 18
+Normal Room Entry: Assuming instances persist or were recreated by GM.
+Set camera view size to 288x216, border (0,0)
+Camera follow player ref instance 100671 INSTANT.
+CONTROLLER ROOM START: Finished setup for room: rm_welcome_room
+DEBUG: Resetting repair flag...
+obj_warp initialized (Persistent: 1). Target Room: -4
+DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
+DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
+DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
+DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
+DEBUG (Warp Anim End): Instance ref instance 100089 moved.
+DEBUG (Warp Anim End): NPC warped. Global targets remain undefined.
+obj_controller Room End: Transitioning from room: rm_welcome_room
+Saving runtime state for leaving room: rm_welcome_room
+Room End WITH DEBUG: --- Start Instance Check ---
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100078 (obj_wrench_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100078
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100077 (obj_minershardhat_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100077
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100076 (obj_ghostcostume_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100076
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100075 (obj_tourhat_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100075
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100074 (obj_snowblaster_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100074
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100073 (obj_blacksunglasses_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100073
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100072 (obj_blackhoodie_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100072
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100084 (obj_puffle)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100084
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100071 (obj_boxpuffleo_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100071
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100083 (obj_toboggan)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100083
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100069 (obj_Jackhammer_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100069
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100068 (obj_snowshovel_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100068
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100067 (obj_beta_hat)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100067
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100066 (obj_battery)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100066
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100064 (obj_wood_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100064
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100065 (obj_snow_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100065
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100079 (obj_icetruck_broken)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100079
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100080 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100080
+Room End WITH DEBUG: --- End Instance Check ---
+Room End DEBUG: Finished checking instances. Collected 18 savable states.
+Replacing existing room state array for: rm_welcome_room with new array size: 18
+Finished saving runtime state for room: rm_welcome_room
+CONTROLLER ROOM START: Entering room: rm_plaza
+CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
+CONTROLLER ROOM START (Default): Final default/spawn pos (250,200) Face: 3
+CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
+CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
+obj_player Create: Applying initial player color: 52479
+obj_player: Initialized. Driving state: 0
+Created player instance: ref instance 100673 skin: player at (250,200)
+CONTROLLER ROOM START: Calling load_room_state for: rm_plaza (Is Fresh Load: 0)
+Attempting to load state for room: rm_plaza (Fresh Load: 0)
+Skipping instance destruction (Normal Room Entry).
+Found state array for rm_plaza. Size: 2
+Normal Room Entry: Assuming instances persist or were recreated by GM.
+Set camera view size to 288x216, border (0,0)
+Camera follow player ref instance 100673 INSTANT.
+CONTROLLER ROOM START: Finished setup for room: rm_plaza
+obj_warp initialized (Persistent: 1). Target Room: -4
+DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
+DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
+DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
+DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
+DEBUG (Warp Anim End): Instance ref instance 100089 moved.
+DEBUG (Warp Anim End): NPC warped. Global targets remain undefined.
+obj_controller Room End: Transitioning from room: rm_plaza
+Saving runtime state for leaving room: rm_plaza
+Room End WITH DEBUG: --- Start Instance Check ---
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100137 (obj_boxpuffleo_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100137
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100182 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100182
+Room End WITH DEBUG: --- End Instance Check ---
+Room End DEBUG: Finished checking instances. Collected 2 savable states.
+Replacing existing room state array for: rm_plaza with new array size: 2
+Finished saving runtime state for room: rm_plaza
+Spawn Point marker created at (146, 155)
+CONTROLLER ROOM START: Entering room: rm_welcome_room
+CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
+CONTROLLER ROOM START (Default): Final default/spawn pos (146,155) Face: 3
+CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
+CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
+obj_player Create: Applying initial player color: 52479
+obj_player: Initialized. Driving state: 0
+Created player instance: ref instance 100675 skin: player at (146,155)
+CONTROLLER ROOM START: Calling load_room_state for: rm_welcome_room (Is Fresh Load: 0)
+Attempting to load state for room: rm_welcome_room (Fresh Load: 0)
+Skipping instance destruction (Normal Room Entry).
+Found state array for rm_welcome_room. Size: 18
+Normal Room Entry: Assuming instances persist or were recreated by GM.
+Set camera view size to 288x216, border (0,0)
+Camera follow player ref instance 100675 INSTANT.
+CONTROLLER ROOM START: Finished setup for room: rm_welcome_room
+DEBUG: Resetting repair flag...
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+obj_warp initialized (Persistent: 1). Target Room: -4
+DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
+DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
+DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
+DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
+DEBUG (Warp Anim End): Instance ref instance 100089 moved.
+DEBUG (Warp Anim End): NPC warped. Global targets remain undefined.
+obj_controller Room End: Transitioning from room: rm_welcome_room
+Saving runtime state for leaving room: rm_welcome_room
+Room End WITH DEBUG: --- Start Instance Check ---
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100078 (obj_wrench_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100078
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100077 (obj_minershardhat_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100077
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100076 (obj_ghostcostume_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100076
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100075 (obj_tourhat_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100075
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100074 (obj_snowblaster_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100074
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100073 (obj_blacksunglasses_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100073
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100072 (obj_blackhoodie_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100072
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100084 (obj_puffle)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100084
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100071 (obj_boxpuffleo_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100071
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100083 (obj_toboggan)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100083
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100069 (obj_Jackhammer_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100069
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100068 (obj_snowshovel_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100068
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100067 (obj_beta_hat)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100067
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100066 (obj_battery)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100066
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100064 (obj_wood_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100064
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100065 (obj_snow_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100065
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100079 (obj_icetruck_broken)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100079
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100080 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100080
+Room End WITH DEBUG: --- End Instance Check ---
+Room End DEBUG: Finished checking instances. Collected 18 savable states.
+Replacing existing room state array for: rm_welcome_room with new array size: 18
+Finished saving runtime state for room: rm_welcome_room
 CONTROLLER ROOM START: Entering room: rm_shore
-CONTROLLER ROOM START (Warp): Using warp target pos...
-obj_player_icetruck: Initialized.
-Created/Positioned player instance: ref instance 100673 with skin: icetruck
+CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
+CONTROLLER ROOM START (Default): Final default/spawn pos (250,200) Face: 3
+CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
+CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
+obj_player Create: Applying initial player color: 52479
+obj_player: Initialized. Driving state: 0
+Created player instance: ref instance 100677 skin: player at (250,200)
 CONTROLLER ROOM START: Calling load_room_state for: rm_shore (Is Fresh Load: 0)
 Attempting to load state for room: rm_shore (Fresh Load: 0)
 Skipping instance destruction (Normal Room Entry).
 No state found for room: rm_shore in global.room_states.
-CONTROLLER ROOM START: Set view[0] to use global.camera (ID: 193)
-Set camera view size to 288x216
-Set camera view border to (0, 0)
-Camera set to follow player (ID: ref instance 100673) with INSTANT speed (-1, -1)
-Camera initial position set to (0, 22)
-CONTROLLER ROOM START: Created 'UI' Layer.
+Set camera view size to 288x216, border (0,0)
+Camera follow player ref instance 100677 INSTANT.
 CONTROLLER ROOM START: Finished setup for room: rm_shore
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+DEBUG: Snowball (ref instance 100685) colliding with Polar Bear (ref instance 100122)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
+DEBUG: Snowball (ref instance 100683) colliding with Polar Bear (ref instance 100122)
+Polar Bear instance exists. Setting mood to angry.
+DEBUG: Snowball (ref instance 100682) colliding with Polar Bear (ref instance 100122)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
+DEBUG: Snowball (ref instance 100684) colliding with Polar Bear (ref instance 100122)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
+DEBUG: Snowball (ref instance 100681) colliding with Polar Bear (ref instance 100122)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Polar Bear threw snowball!
+DEBUG: Snowball (ref instance 100686) colliding with Polar Bear (ref instance 100122)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
+Polar Bear threw snowball!
+DEBUG: Snowball (ref instance 100687) colliding with Polar Bear (ref instance 100122)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
+Polar Bear threw snowball!
+DEBUG: Snowball (ref instance 100688) colliding with Polar Bear (ref instance 100122)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
+Polar Bear threw snowball!
+DEBUG: Snowball (ref instance 100689) colliding with Polar Bear (ref instance 100122)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
+Polar Bear threw snowball!
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Polar Bear calmed down (out of range).
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+DEBUG: Snowball (ref instance 100714) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
+DEBUG: Snowball (ref instance 100712) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+DEBUG: Snowball (ref instance 100711) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
+DEBUG: Snowball (ref instance 100713) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
+DEBUG: Snowball (ref instance 100710) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+DEBUG: Snowball (ref instance 100722) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+DEBUG: Snowball (ref instance 100726) colliding with Polar Bear (ref instance 100122)
+Polar Bear instance exists. Setting mood to angry.
+Polar Bear calmed down (out of range).
+DEBUG: Snowball (ref instance 100729) colliding with Polar Bear (ref instance 100122)
+Polar Bear instance exists. Setting mood to angry.
+Polar Bear calmed down (out of range).
+DEBUG: Snowball (ref instance 100728) colliding with Polar Bear (ref instance 100122)
+Polar Bear instance exists. Setting mood to angry.
+DEBUG: Snowball (ref instance 100727) colliding with Polar Bear (ref instance 100122)
+Polar Bear instance exists. Setting mood to angry.
+Polar Bear calmed down (out of range).
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+DEBUG: Snowball (ref instance 100730) colliding with Polar Bear (ref instance 100122)
+Polar Bear instance exists. Setting mood to angry.
+Polar Bear calmed down (out of range).
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+DEBUG: Snowball (ref instance 100734) colliding with Polar Bear (ref instance 100122)
+Polar Bear instance exists. Setting mood to angry.
+Polar Bear calmed down (out of range).
+DEBUG: Snowball (ref instance 100737) colliding with Polar Bear (ref instance 100122)
+Polar Bear instance exists. Setting mood to angry.
+Polar Bear calmed down (out of range).
+DEBUG: Snowball (ref instance 100736) colliding with Polar Bear (ref instance 100122)
+Polar Bear instance exists. Setting mood to angry.
+DEBUG: Snowball (ref instance 100735) colliding with Polar Bear (ref instance 100122)
+Polar Bear instance exists. Setting mood to angry.
+Polar Bear calmed down (out of range).
+Polar Bear threw snowball!
+DEBUG: Snowball (ref instance 100739) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
+DEBUG: Snowball (ref instance 100738) colliding with Polar Bear (ref instance 100122)
+Polar Bear instance exists. Setting mood to angry.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Polar Bear calmed down (out of range).
+Polar Bear threw snowball!
+DEBUG: Snowball (ref instance 100740) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballupright_sheet
+Polar Bear threw snowball!
+DEBUG: Snowball (ref instance 100741) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+Polar Bear calmed down (out of range).
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+DEBUG: Snowball (ref instance 100745) colliding with Polar Bear (ref instance 100122)
+Polar Bear instance exists. Setting mood to angry.
+Polar Bear calmed down (out of range).
+DEBUG: Snowball (ref instance 100748) colliding with Polar Bear (ref instance 100122)
+Polar Bear instance exists. Setting mood to angry.
+Polar Bear calmed down (out of range).
+DEBUG: Snowball (ref instance 100749) colliding with Polar Bear (ref instance 100122)
+Polar Bear instance exists. Setting mood to angry.
+Polar Bear calmed down (out of range).
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+DEBUG: Snowball (ref instance 100755) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+DEBUG: Snowball (ref instance 100754) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
+DEBUG: Snowball (ref instance 100756) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
+DEBUG: Snowball (ref instance 100753) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+obj_warp initialized (Persistent: 1). Target Room: -4
+DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100122
+DEBUG (Warp Anim End): Moving instance: ref instance 100122 (obj_polarbear) before room transition.
+DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100122
+DEBUG (Warp Anim End): Moving instance: ref instance 100122 (obj_polarbear) before room transition.
+DEBUG (Warp Anim End): Instance ref instance 100122 moved.
+DEBUG (Warp Anim End): NPC warped. Global targets remain undefined.
+obj_controller Room End: Transitioning from room: rm_shore
+Saving runtime state for leaving room: rm_shore
+Room End WITH DEBUG: --- Start Instance Check ---
+Room End WITH DEBUG: --- End Instance Check ---
+Room End DEBUG: Finished checking instances. Collected 0 savable states.
+Adding new room state array for: rm_shore with size: 0
+Finished saving runtime state for room: rm_shore
+Spawn Point marker created at (146, 155)
+CONTROLLER ROOM START: Entering room: rm_welcome_room
+CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
+CONTROLLER ROOM START (Default): Final default/spawn pos (146,155) Face: 3
+CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
+CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
 obj_player Create: Applying initial player color: 52479
 obj_player: Initialized. Driving state: 0
-Attempting to switch to skin: player
-Destroying old player instance (ref instance 100674, skin: icetruck)
+Created player instance: ref instance 100759 skin: player at (146,155)
+CONTROLLER ROOM START: Calling load_room_state for: rm_welcome_room (Is Fresh Load: 0)
+Attempting to load state for room: rm_welcome_room (Fresh Load: 0)
+Skipping instance destruction (Normal Room Entry).
+Found state array for rm_welcome_room. Size: 18
+Normal Room Entry: Assuming instances persist or were recreated by GM.
+Set camera view size to 288x216, border (0,0)
+Camera follow player ref instance 100759 INSTANT.
+CONTROLLER ROOM START: Finished setup for room: rm_welcome_room
+obj_warp initialized (Persistent: 1). Target Room: -4
+DEBUG: Resetting repair flag...
+Polar Bear threw snowball!
+DEBUG: Snowball (ref instance 100761) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100122
+DEBUG (Warp Anim End): Moving instance: ref instance 100122 (obj_polarbear) before room transition.
+DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100122
+DEBUG (Warp Anim End): Moving instance: ref instance 100122 (obj_polarbear) before room transition.
+DEBUG (Warp Anim End): Instance ref instance 100122 moved.
+DEBUG (Warp Anim End): NPC warped. Global targets remain undefined.
+obj_controller Room End: Transitioning from room: rm_welcome_room
+Saving runtime state for leaving room: rm_welcome_room
+Room End WITH DEBUG: --- Start Instance Check ---
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100078 (obj_wrench_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100078
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100077 (obj_minershardhat_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100077
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100076 (obj_ghostcostume_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100076
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100075 (obj_tourhat_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100075
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100074 (obj_snowblaster_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100074
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100073 (obj_blacksunglasses_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100073
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100072 (obj_blackhoodie_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100072
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100084 (obj_puffle)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100084
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100071 (obj_boxpuffleo_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100071
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100083 (obj_toboggan)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100083
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100069 (obj_Jackhammer_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100069
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100068 (obj_snowshovel_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100068
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100067 (obj_beta_hat)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100067
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100066 (obj_battery)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100066
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100064 (obj_wood_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100064
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100065 (obj_snow_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100065
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100079 (obj_icetruck_broken)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100079
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100080 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100080
+Room End WITH DEBUG: --- End Instance Check ---
+Room End DEBUG: Finished checking instances. Collected 18 savable states.
+Replacing existing room state array for: rm_welcome_room with new array size: 18
+Finished saving runtime state for room: rm_welcome_room
+CONTROLLER ROOM START: Entering room: rm_shore
+CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
+CONTROLLER ROOM START (Default): Final default/spawn pos (250,200) Face: 3
+CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
+CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
 obj_player Create: Applying initial player color: 52479
 obj_player: Initialized. Driving state: 0
-Skin switched to: player. New instance ID: ref instance 100676
-Exited ice truck. Current skin: player
-Inventory QoL Scroll: Active slot changed to 1, Item Index: 4
-Inventory: Dropped 'Toboggan' as obj_toboggan at (282.75, 162)
-Inventory: Removed 'Toboggan' from slot 1 after dropping.
-Inventory QoL Scroll: Active slot changed to 0, Item Index: 2
-Inventory: Dropped 'Wrench' as obj_wrench_item at (266.75, 200)
-Inventory: Removed 'Wrench' from slot 0 after dropping.
-Inventory QoL Scroll: Active slot changed to 2, Item Index: 23
-Inventory QoL Scroll: Active slot changed to 3, Item Index: 20
-Inventory QoL Scroll: Active slot changed to 4, Item Index: 22
-Inventory: Dropped 'Black Hoodie' as obj_blackhoodie_item at (321.75, 184)
-Inventory: Removed 'Black Hoodie' from slot 4 after dropping.
-Inventory QoL Scroll: Active slot changed to 5, Item Index: 19
-Inventory: Dropped 'Snow Blaster' as obj_snowblaster_item at (358.75, 154)
-Inventory: Removed 'Snow Blaster' from slot 5 after dropping.
-Inventory QoL Scroll: Active slot changed to 3, Item Index: 20
-Inventory QoL Scroll: Active slot changed to 2, Item Index: 23
-Inventory QoL Scroll: Active slot changed to 7, Item Index: 24
-Inventory QoL Scroll: Active slot changed to 6, Item Index: 21
-Inventory QoL Scroll: Active slot changed to 7, Item Index: 24
-Inventory: Dropped 'Tour Hat' as obj_tourhat_item at (382.75, 138)
-Inventory: Removed 'Tour Hat' from slot 7 after dropping.
-Slot 1: (3, 6) to (23, 26)
-Slot 2: (23, 6) to (43, 26)
-Slot 3: (43, 6) to (63, 26)
-Slot 4: (63, 6) to (83, 26)
-Slot 5: (83, 6) to (103, 26)
-Slot 6: (103, 6) to (123, 26)
-Slot 7: (123, 6) to (143, 26)
-Slot 8: (3, 26) to (23, 46)
-Slot 9: (23, 26) to (43, 46)
-Slot 10: (43, 26) to (63, 46)
-Slot 11: (63, 26) to (83, 46)
-Slot 12: (83, 26) to (103, 46)
-Slot 13: (103, 26) to (123, 46)
-Slot 14: (123, 26) to (143, 46)
-Slot 15: (3, 46) to (23, 66)
-Slot 16: (23, 46) to (43, 66)
-Slot 17: (43, 46) to (63, 66)
-Slot 18: (63, 46) to (83, 66)
-Slot 19: (83, 46) to (103, 66)
-Slot 20: (103, 46) to (123, 66)
-Slot 21: (123, 46) to (143, 66)
-Slot 22: (3, 66) to (23, 86)
-Slot 23: (23, 66) to (43, 86)
-Slot 24: (43, 66) to (63, 86)
-Slot 25: (63, 66) to (83, 86)
-Slot 26: (83, 66) to (103, 86)
-Slot 27: (103, 66) to (123, 86)
-Slot 28: (123, 66) to (143, 86)
-Slot 29: (3, 86) to (23, 106)
-Slot 30: (23, 86) to (43, 106)
-Slot 31: (43, 86) to (63, 106)
-Slot 32: (63, 86) to (83, 106)
-Slot 33: (83, 86) to (103, 106)
-Slot 34: (103, 86) to (123, 106)
-Slot 35: (123, 86) to (143, 106)
-Slot 36: (3, 106) to (23, 126)
-Slot 37: (23, 106) to (43, 126)
-Slot 38: (43, 106) to (63, 126)
-Slot 39: (63, 106) to (83, 126)
-Slot 40: (83, 106) to (103, 126)
-Slot 41: (103, 106) to (123, 126)
-Slot 42: (123, 106) to (143, 126)
-DEBUG: Opening expanded inventory pane.
-Clicked grid slot (3, 0)
-Slot 3 contains item index value: 20
-Item name found: 'Ghost Costume'
-Item type: 'body'
-Attempting to equip 'Ghost Costume' to slot 'body'
-Attempting to equip item: 'Ghost Costume' to slot: 'body'
-Equipped 'Ghost Costume' to slot 'body'.
-Removed 'Ghost Costume' directly from inventory array slot 3
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Clicked grid slot (2, 0)
-Slot 2 contains item index value: 23
-Item name found: 'Miners Hard Hat'
-Item type: 'head'
-Attempting to equip 'Miners Hard Hat' to slot 'head'
-Attempting to equip item: 'Miners Hard Hat' to slot: 'head'
-Equipped 'Miners Hard Hat' to slot 'head'.
-Removed 'Miners Hard Hat' directly from inventory array slot 2
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Clicked grid slot (6, 0)
-Slot 6 contains item index value: 21
-Item name found: 'Black Sun Glasses'
-Item type: 'face'
-Attempting to equip 'Black Sun Glasses' to slot 'face'
-Attempting to equip item: 'Black Sun Glasses' to slot: 'face'
-Equipped 'Black Sun Glasses' to slot 'face'.
-Removed 'Black Sun Glasses' directly from inventory array slot 6
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-Draw GUI: Item 'Miners Hard Hat' corresponds to index value: 23
-Draw GUI: Drawing icon for 'Miners Hard Hat' (Index: 23) at slot 'head'
-Draw GUI: Item 'Black Sun Glasses' corresponds to index value: 21
-Draw GUI: Drawing icon for 'Black Sun Glasses' (Index: 21) at slot 'face'
-Draw GUI: Item 'Ghost Costume' corresponds to index value: 20
-Draw GUI: Drawing icon for 'Ghost Costume' (Index: 20) at slot 'body'
-DEBUG: Closing inventory UI completely.
-Inventory: Added 'Toboggan' (Index: 4) to slot 0
-'Toboggan' added to inventory via obj_inventory.
-Inventory: Added 'Wrench' (Index: 2) to slot 1
-'Wrench' added to inventory via obj_inventory.
+Created player instance: ref instance 100762 skin: player at (250,200)
+CONTROLLER ROOM START: Calling load_room_state for: rm_shore (Is Fresh Load: 0)
+Attempting to load state for room: rm_shore (Fresh Load: 0)
+Skipping instance destruction (Normal Room Entry).
+Found state array for rm_shore. Size: 0
+Normal Room Entry: Assuming instances persist or were recreated by GM.
+Set camera view size to 288x216, border (0,0)
+Camera follow player ref instance 100762 INSTANT.
+CONTROLLER ROOM START: Finished setup for room: rm_shore
+Polar Bear calmed down (out of range).
+DEBUG: Stored player position: (270, 150)
+Switching to map room...
+obj_controller Room End: Transitioning from room: rm_shore
+Saving runtime state for leaving room: rm_shore
+Room End WITH DEBUG: --- Start Instance Check ---
+Room End WITH DEBUG: --- End Instance Check ---
+Room End DEBUG: Finished checking instances. Collected 0 savable states.
+Replacing existing room state array for: rm_shore with new array size: 0
+Finished saving runtime state for room: rm_shore
+CONTROLLER ROOM START: Entering room: rm_map
+CONTROLLER ROOM START: Non-gameplay room detected...
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+Warping to Room: ref room rm_forest at (255, 130)
+obj_warp initialized (Persistent: 1). Target Room: -4
+obj_controller Room End: Transitioning from room: rm_map
+Skipping room state save: Non-gameplay room (rm_map).
+CONTROLLER ROOM START: Entering room: rm_forest
+CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
+CONTROLLER ROOM START (Default): Final default/spawn pos (250,200) Face: 3
+CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
+CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
+obj_player Create: Applying initial player color: 52479
+obj_player: Initialized. Driving state: 0
+Created player instance: ref instance 100764 skin: player at (250,200)
+CONTROLLER ROOM START: Calling load_room_state for: rm_forest (Is Fresh Load: 0)
+Attempting to load state for room: rm_forest (Fresh Load: 0)
+Skipping instance destruction (Normal Room Entry).
+No state found for room: rm_forest in global.room_states.
+Set camera view size to 288x216, border (0,0)
+Camera follow player ref instance 100764 INSTANT.
+CONTROLLER ROOM START: Finished setup for room: rm_forest
+obj_warp initialized (Persistent: 1). Target Room: -4
+DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100122
+DEBUG (Warp Anim End): Moving instance: ref instance 100122 (obj_polarbear) before room transition.
+DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100122
+DEBUG (Warp Anim End): Moving instance: ref instance 100122 (obj_polarbear) before room transition.
+DEBUG (Warp Anim End): Instance ref instance 100122 moved.
+DEBUG (Warp Anim End): NPC warped. Global targets remain undefined.
+obj_controller Room End: Transitioning from room: rm_forest
+Saving runtime state for leaving room: rm_forest
+Room End WITH DEBUG: --- Start Instance Check ---
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100211 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100211
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100210 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100210
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100209 (obj_icetruck)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100209
+Room End WITH DEBUG: --- End Instance Check ---
+Room End DEBUG: Finished checking instances. Collected 3 savable states.
+Adding new room state array for: rm_forest with size: 3
+Finished saving runtime state for room: rm_forest
+CONTROLLER ROOM START: Entering room: rm_plaza
+CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
+CONTROLLER ROOM START (Default): Final default/spawn pos (250,200) Face: 3
+CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
+CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
+obj_player Create: Applying initial player color: 52479
+obj_player: Initialized. Driving state: 0
+Created player instance: ref instance 100766 skin: player at (250,200)
+CONTROLLER ROOM START: Calling load_room_state for: rm_plaza (Is Fresh Load: 0)
+Attempting to load state for room: rm_plaza (Fresh Load: 0)
+Skipping instance destruction (Normal Room Entry).
+Found state array for rm_plaza. Size: 2
+Normal Room Entry: Assuming instances persist or were recreated by GM.
+Set camera view size to 288x216, border (0,0)
+Camera follow player ref instance 100766 INSTANT.
+CONTROLLER ROOM START: Finished setup for room: rm_plaza
+obj_warp initialized (Persistent: 1). Target Room: -4
+DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
+DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
+DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
+DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
+DEBUG (Warp Anim End): Instance ref instance 100089 moved.
+DEBUG (Warp Anim End): NPC warped. Global targets remain undefined.
+obj_controller Room End: Transitioning from room: rm_plaza
+Saving runtime state for leaving room: rm_plaza
+Room End WITH DEBUG: --- Start Instance Check ---
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100137 (obj_boxpuffleo_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100137
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100182 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100182
+Room End WITH DEBUG: --- End Instance Check ---
+Room End DEBUG: Finished checking instances. Collected 2 savable states.
+Replacing existing room state array for: rm_plaza with new array size: 2
+Finished saving runtime state for room: rm_plaza
+CONTROLLER ROOM START: Entering room: rm_snow_fort
+CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
+CONTROLLER ROOM START (Default): Final default/spawn pos (250,200) Face: 3
+CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
+CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
+obj_player Create: Applying initial player color: 52479
+obj_player: Initialized. Driving state: 0
+Created player instance: ref instance 100768 skin: player at (250,200)
+CONTROLLER ROOM START: Calling load_room_state for: rm_snow_fort (Is Fresh Load: 0)
+Attempting to load state for room: rm_snow_fort (Fresh Load: 0)
+Skipping instance destruction (Normal Room Entry).
+No state found for room: rm_snow_fort in global.room_states.
+Set camera view size to 288x216, border (0,0)
+Camera follow player ref instance 100768 INSTANT.
+CONTROLLER ROOM START: Finished setup for room: rm_snow_fort
+obj_warp initialized (Persistent: 1). Target Room: -4
+DEBUG: Resetting repair flag...
+DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
+DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
+DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
+DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
+DEBUG (Warp Anim End): Instance ref instance 100089 moved.
+DEBUG (Warp Anim End): NPC warped. Global targets remain undefined.
+obj_controller Room End: Transitioning from room: rm_snow_fort
+Saving runtime state for leaving room: rm_snow_fort
+Room End WITH DEBUG: --- Start Instance Check ---
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100294 (obj_icetruck_broken)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100294
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100292 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100292
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100291 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100291
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100290 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100290
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100289 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100289
+Room End WITH DEBUG: --- End Instance Check ---
+Room End DEBUG: Finished checking instances. Collected 5 savable states.
+Adding new room state array for: rm_snow_fort with size: 5
+Finished saving runtime state for room: rm_snow_fort
+CONTROLLER ROOM START: Entering room: rm_plaza
+CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
+CONTROLLER ROOM START (Default): Final default/spawn pos (250,200) Face: 3
+CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
+CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
+obj_player Create: Applying initial player color: 52479
+obj_player: Initialized. Driving state: 0
+Created player instance: ref instance 100770 skin: player at (250,200)
+CONTROLLER ROOM START: Calling load_room_state for: rm_plaza (Is Fresh Load: 0)
+Attempting to load state for room: rm_plaza (Fresh Load: 0)
+Skipping instance destruction (Normal Room Entry).
+Found state array for rm_plaza. Size: 2
+Normal Room Entry: Assuming instances persist or were recreated by GM.
+Set camera view size to 288x216, border (0,0)
+Camera follow player ref instance 100770 INSTANT.
+CONTROLLER ROOM START: Finished setup for room: rm_plaza
+obj_warp initialized (Persistent: 1). Target Room: -4
+DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100122
+DEBUG (Warp Anim End): Moving instance: ref instance 100122 (obj_polarbear) before room transition.
+DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100122
+DEBUG (Warp Anim End): Moving instance: ref instance 100122 (obj_polarbear) before room transition.
+DEBUG (Warp Anim End): Instance ref instance 100122 moved.
+DEBUG (Warp Anim End): NPC warped. Global targets remain undefined.
+obj_controller Room End: Transitioning from room: rm_plaza
+Saving runtime state for leaving room: rm_plaza
+Room End WITH DEBUG: --- Start Instance Check ---
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100137 (obj_boxpuffleo_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100137
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100182 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100182
+Room End WITH DEBUG: --- End Instance Check ---
+Room End DEBUG: Finished checking instances. Collected 2 savable states.
+Replacing existing room state array for: rm_plaza with new array size: 2
+Finished saving runtime state for room: rm_plaza
+CONTROLLER ROOM START: Entering room: rm_forest
+CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
+CONTROLLER ROOM START (Default): Final default/spawn pos (250,200) Face: 3
+CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
+CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
+obj_player Create: Applying initial player color: 52479
+obj_player: Initialized. Driving state: 0
+Created player instance: ref instance 100772 skin: player at (250,200)
+CONTROLLER ROOM START: Calling load_room_state for: rm_forest (Is Fresh Load: 0)
+Attempting to load state for room: rm_forest (Fresh Load: 0)
+Skipping instance destruction (Normal Room Entry).
+Found state array for rm_forest. Size: 3
+Normal Room Entry: Assuming instances persist or were recreated by GM.
+Set camera view size to 288x216, border (0,0)
+Camera follow player ref instance 100772 INSTANT.
+CONTROLLER ROOM START: Finished setup for room: rm_forest
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+DEBUG: Snowball (ref instance 100787) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
+DEBUG: Snowball (ref instance 100786) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Polar Bear threw snowball!
+DEBUG: Snowball (ref instance 100788) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+DEBUG: Snowball (ref instance 100803) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
+DEBUG: Snowball (ref instance 100802) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+DEBUG: Snowball (ref instance 100814) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+DEBUG: Snowball (ref instance 100811) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
+DEBUG: Snowball (ref instance 100818) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
+DEBUG: Snowball (ref instance 100817) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+DEBUG: Snowball (ref instance 100829) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+DEBUG: Snowball (ref instance 100826) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
+DEBUG: Snowball (ref instance 100833) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
+DEBUG: Snowball (ref instance 100832) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+DEBUG: Snowball (ref instance 100844) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+DEBUG: Snowball (ref instance 100841) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+DEBUG: Snowball (ref instance 100843) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+DEBUG: Snowball (ref instance 100842) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+DEBUG: Snowball (ref instance 100845) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+DEBUG: Snowball (ref instance 100859) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+DEBUG: Snowball (ref instance 100856) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
+DEBUG: Snowball (ref instance 100863) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
+DEBUG: Snowball (ref instance 100862) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+Player Action: Starting throw
+DEBUG: Snowball (ref instance 100874) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+DEBUG: Snowball (ref instance 100871) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
+DEBUG: Snowball (ref instance 100878) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
+DEBUG: Snowball (ref instance 100877) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Player Action: Action 'none' finished by animation loop.
+Polar Bear threw snowball!
+DEBUG: Snowball (ref instance 100879) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballupright_sheet
+Polar Bear threw snowball!
+DEBUG: Snowball (ref instance 100880) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballupright_sheet
+Polar Bear threw snowball!
+DEBUG: Snowball (ref instance 100881) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballupright_sheet
+Polar Bear threw snowball!
+DEBUG: Snowball (ref instance 100882) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballupright_sheet
+Polar Bear threw snowball!
+DEBUG: Snowball (ref instance 100883) colliding with Polar Bear (ref instance 100089)
+Polar Bear instance exists. Setting mood to angry.
+PB Angry: Starting throw. Sprite: spr_polarbear_snowballupright_sheet
 Game Paused
-Pause Menu DEBUG: Inventory state JUST BEFORE save call: [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,...]
---- Running save_game ---
-Saved room state for: rm_shore
-save_game: Manually converting global.room_states map (containing arrays) to struct...
-save_game: Finished manually converting room states.
-Save Game DEBUG: Inventory state before stringify: [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,...]
-Game saved successfully to savegame.sav (using inv clone).
-Game saved successfully.
 Calling game_end from obj_pause_menu Quit Game button
 ###game_end###0
-obj_controller Room End: Transitioning from room: rm_shore
-Replacing existing room state array for: rm_shore
-Saving runtime state for leaving room: rm_shore
+obj_controller Room End: Transitioning from room: rm_forest
+Saving runtime state for leaving room: rm_forest
+Room End WITH DEBUG: --- Start Instance Check ---
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100211 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100211
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100210 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100210
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100209 (obj_icetruck)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100209
+Room End WITH DEBUG: --- End Instance Check ---
+Room End DEBUG: Finished checking instances. Collected 3 savable states.
+Replacing existing room state array for: rm_forest with new array size: 3
+Finished saving runtime state for room: rm_forest
 Attempting to set gamepadcount to 0
 Script_Free called with 188 and global 25
 Unsetting previous scheduler resolution of 1
-
-output log when loading the game from the save file:
-Setting scheduler resolution to 1
-DirectX11: Using hardware device
-Resizing swap chain...
-Collision Event time(microsecs)=11
-Variable_Global_Init()
-PrepareGame()
-Audio_Init()
-Audio group 0 -> Loaded
-Attempting to set gamepadcount to 12
-Game_Prepare()
-Script_Prepare() 
-TimeLine_Prepare() 
-Object_Prepare() 
-Room_Prepare() 
-Finished PrepareGame() 
-Run_Start
-Done g_EffectsManager.Init()
-Done RenderStateManager
-CreateColPairs took 0.000000s 4 usecs for 125 object types obj_col_numb=0 physobjcount=0 resizes 0 final size 0
-Done ObjectLists
-Done Extension_Initialize
-About to startroom
-Number of buttons found: 3
-Total memory used = 12278434 (0x00bb5aa2) bytes 11.71MB
-Free memory = 6001408 (0x005b9300) bytes 5.72MB
-Peak memory used = 13096290 (0x00c7d562) bytes 12.49MB
-**********************************.
-Entering main loop.
-**********************************.
-obj_menu_button: Start button selected. Setting is_loading_game=false.
-obj_menu_button: Continue selected. Setting is_loading_game=true.
---- Running load_game ---
-ERROR!!! :: ############################################################################################
-ERROR in action number 1
-of Mouse Event for Left Pressed for object obj_menu_button:
-Variable <unknown_object>.inventory(100072, -2147483648) not set before reading it.
- at gml_Script_load_game (line 33) -     if (is_struct(_load_data) && is_array(_load_data.inventory)) {
-############################################################################################
-gml_Script_load_game (line 33)
-gml_Object_obj_menu_button_Mouse_4 (line 25) -     var _load_result = load_game(); // Call the load_game function

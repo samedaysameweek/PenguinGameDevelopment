@@ -12,14 +12,14 @@
   "edgeFiltering":false,
   "For3D":false,
   "frames":[
-    {"$GMSpriteFrame":"","%Name":"25bc0f26-c18c-4a8c-abb1-69bc83acdbe7","name":"25bc0f26-c18c-4a8c-abb1-69bc83acdbe7","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"","%Name":"e904a3c6-6c18-4761-a716-5a1d94e02892","name":"e904a3c6-6c18-4761-a716-5a1d94e02892","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
   ],
   "gridX":0,
   "gridY":0,
   "height":168,
   "HTile":false,
   "layers":[
-    {"$GMImageLayer":"","%Name":"eb2cbb40-a305-430f-89a3-8310ca2500ea","blendMode":0,"displayName":"default","isLocked":false,"name":"eb2cbb40-a305-430f-89a3-8310ca2500ea","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
+    {"$GMImageLayer":"","%Name":"9bf118d2-5c45-4f36-a9fc-a443b7588ca9","blendMode":0,"displayName":"default","isLocked":false,"name":"9bf118d2-5c45-4f36-a9fc-a443b7588ca9","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
   ],
   "name":"spr_throwsnowball_colour",
   "nineSlice":null,
@@ -63,14 +63,16 @@
     "playbackSpeedType":0,
     "resourceType":"GMSequence",
     "resourceVersion":"2.0",
+    "seqHeight":168.0,
+    "seqWidth":192.0,
     "showBackdrop":true,
     "showBackdropImage":false,
     "timeUnits":1,
     "tracks":[
       {"$GMSpriteFramesTrack":"","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"$KeyframeStore<SpriteFrameKeyframe>":"","Keyframes":[
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"25bc0f26-c18c-4a8c-abb1-69bc83acdbe7","path":"sprites/spr_throwsnowball_colour/spr_throwsnowball_colour.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"2a4abce9-438e-48df-8d8b-abb136609b04","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"e904a3c6-6c18-4761-a716-5a1d94e02892","path":"sprites/spr_throwsnowball_colour/spr_throwsnowball_colour.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"265d004a-a6a2-455d-a20e-6a4957040b12","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
           ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange":null,

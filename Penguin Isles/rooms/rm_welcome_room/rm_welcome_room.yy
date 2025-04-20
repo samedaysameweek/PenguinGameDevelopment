@@ -73,6 +73,7 @@
     {"name":"inst_1C9A20A0","path":"rooms/rm_welcome_room/rm_welcome_room.yy",},
     {"name":"inst_6E117CC4","path":"rooms/rm_welcome_room/rm_welcome_room.yy",},
     {"name":"inst_3F2D39C","path":"rooms/rm_welcome_room/rm_welcome_room.yy",},
+    {"name":"inst_4681FAE8","path":"rooms/rm_welcome_room/rm_welcome_room.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -150,6 +151,7 @@
         {"$GMRInstance":"v2","%Name":"inst_C2FC8A6","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":true,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_C2FC8A6","objectId":{"name":"obj_puffle","path":"objects/obj_puffle/obj_puffle.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":189.0,"y":237.0,},
         {"$GMRInstance":"v2","%Name":"TourDude","colour":4294967295,"frozen":false,"hasCreationCode":true,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"TourDude","objectId":{"name":"obj_npc","path":"objects/obj_npc/obj_npc.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":240.0,"y":36.0,},
         {"$GMRInstance":"v2","%Name":"inst_6E117CC4","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_6E117CC4","objectId":{"name":"obj_spawn_point","path":"objects/obj_spawn_point/obj_spawn_point.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":146.0,"y":155.0,},
+        {"$GMRInstance":"v2","%Name":"inst_4681FAE8","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_4681FAE8","objectId":{"name":"obj_polarbear","path":"objects/obj_polarbear/obj_polarbear.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":342.0,"y":135.0,},
       ],"layers":[],"name":"Instances","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRTileLayer":"","%Name":"Snow","depth":400,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Snow","properties":[],"resourceType":"GMRTileLayer","resourceVersion":"2.0","tiles":{"SerialiseHeight":25,"SerialiseWidth":32,"TileCompressedData":[
           -10,117,2,19,112,-8,36,3,110,18,19,-5,117,8,20,21,20,117,20,21,20,21,-6,117,2,64,124,-8,36,4,110,30,

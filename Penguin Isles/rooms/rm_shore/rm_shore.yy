@@ -38,6 +38,7 @@
     {"name":"inst_167F9269","path":"rooms/rm_shore/rm_shore.yy",},
     {"name":"inst_4FCFD19A","path":"rooms/rm_shore/rm_shore.yy",},
     {"name":"inst_2FFBDC53","path":"rooms/rm_shore/rm_shore.yy",},
+    {"name":"inst_19A11574","path":"rooms/rm_shore/rm_shore.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -77,7 +78,9 @@
         {"$GMRInstance":"v2","%Name":"inst_618DAC2D","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":1,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_618DAC2D","objectId":{"name":"obj_small_bushes","path":"objects/obj_small_bushes/obj_small_bushes.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":345.5,"y":12.0,},
         {"$GMRInstance":"v2","%Name":"inst_1AFFFF2D","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_1AFFFF2D","objectId":{"name":"obj_big_bush","path":"objects/obj_big_bush/obj_big_bush.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":-1.0,"scaleY":1.0,"x":209.0,"y":66.0,},
       ],"layers":[],"name":"obj_env","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
-    {"$GMRInstanceLayer":"","%Name":"Instances","depth":200,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[],"layers":[],"name":"Instances","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
+    {"$GMRInstanceLayer":"","%Name":"Instances","depth":200,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
+        {"$GMRInstance":"v2","%Name":"inst_19A11574","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_19A11574","objectId":{"name":"obj_polarbear","path":"objects/obj_polarbear/obj_polarbear.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":320.0,"y":192.0,},
+      ],"layers":[],"name":"Instances","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRTileLayer":"","%Name":"TS_Snow","depth":300,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"TS_Snow","properties":[],"resourceType":"GMRTileLayer","resourceVersion":"2.0","tiles":{"SerialiseHeight":25,"SerialiseWidth":32,"TileCompressedData":[
           192,31,32,33,34,35,30,31,32,33,34,35,30,31,32,33,34,35,30,31,32,33,34,35,30,31,32,33,34,35,30,31,32,
           19,20,21,22,23,18,19,20,21,22,23,18,19,20,21,22,23,18,19,20,21,22,23,18,19,20,21,22,23,18,19,20,31,32,
