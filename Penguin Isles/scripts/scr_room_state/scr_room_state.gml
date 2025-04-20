@@ -18,7 +18,7 @@ function load_room_state(room_id, is_fresh_load) {
         with (all) {
             if (variable_instance_exists(id, "is_savable") && is_savable &&
                  id != global.player_instance && object_index != obj_controller && object_index != obj_ui_manager &&
-                 (object_index != obj_puffle || ds_list_find_index(global.following_puffles, id) == -1))
+                 (object_index != obj_polarbear || !instance_exists(global.player_instance)))
              { instance_destroy(); /* Log if needed */ }
         }
         show_debug_message("Finished destroying old instances (Fresh Load).");
@@ -26,7 +26,7 @@ function load_room_state(room_id, is_fresh_load) {
          show_debug_message("Skipping instance destruction (Normal Room Entry).");
     }
     // --- End Conditional Destruction ---
-	
+    
     // Check if saved state exists for this room
     if (ds_map_exists(global.room_states, room_name)) {
         var state_array = ds_map_find_value(global.room_states, room_name);
@@ -36,10 +36,8 @@ function load_room_state(room_id, is_fresh_load) {
             show_debug_message("Found state array for " + room_name + ". Size: " + string(array_length(state_array)));
 
              // --- Create instances from saved state ARRAY ---
-             // --- IF FRESH LOAD: Destroy Existing (already done above) & Create From Saved ---
              if (is_fresh_load) {
                   show_debug_message("Recreating instances from saved state array (Fresh Load)...");
-                  // Existing loop to create instances from state_array
                   for (var i = 0; i < array_length(state_array); i++) {
                          var state = state_array[i];
                          if (!is_struct(state)) { continue; }
@@ -47,9 +45,9 @@ function load_room_state(room_id, is_fresh_load) {
                          var _obj_index_to_load = asset_get_index(state.object_index_name);
                          if (_obj_index_to_load == -1 || !object_exists(_obj_index_to_load)) { continue; }
                          if (object_is_ancestor(_obj_index_to_load, obj_player_base) || _obj_index_to_load == obj_controller || _obj_index_to_load == obj_ui_manager) {
-                    show_debug_message("Load State: Skipping creation of reserved object (" + object_get_name(_obj_index_to_load) + ") found in save data.");
-                    continue;
-                }
+                             show_debug_message("Load State: Skipping creation of reserved object (" + object_get_name(_obj_index_to_load) + ") found in save data.");
+                             continue;
+                         }
 
                  // Skip creating follower puffles from save state (they are persistent)
                 var is_follower = (_obj_index_to_load == obj_puffle && variable_struct_exists(state, "following_player") && state.following_player);
@@ -57,6 +55,7 @@ function load_room_state(room_id, is_fresh_load) {
 
                  // Create instance (Non-followers or other objects)
                         var inst = instance_create_layer(state.x, state.y, "Instances", _obj_index_to_load);
+                        show_debug_message("Created instance from saved state: " + object_get_name(_obj_index_to_load));
                         if (instance_exists(inst)) { try {
                         inst.is_savable = true; // Mark loaded instance as savable
 
