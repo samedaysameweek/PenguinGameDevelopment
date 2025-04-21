@@ -697,261 +697,37 @@ if (!global.is_pause_menu_active) { // Avoid saving during pause
 alarm[1] = room_speed * 5; // Reset alarm
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_controller
 File: Create_0.gml
-/// Create Event for obj_controller
-
-// --- ONE-TIME STATIC DATA INITIALIZATION ---
-// Check if static data has already been initialized
-if (!variable_global_exists("static_data_initialized") || global.static_data_initialized == false) {
-    scr_initialize_item_data(); // Call the new script
-    global.static_data_initialized = true; // Set flag to prevent re-running
-    show_debug_message("obj_controller Create: Executed scr_initialize_item_data.");
+// --- INITIALIZE NEW SYSTEMS ---
+// Only initialize if the functions exist and haven't been initialized yet
+if (!variable_global_exists("systems_initialized") || global.systems_initialized == false) {
+    var has_error_logger = script_exists(asset_get_index("ErrorLogger_Initialize"));
+    var has_room_state_manager = script_exists(asset_get_index("RoomStateManager_Initialize"));
+    
+    if (has_error_logger) {
+        show_debug_message("obj_controller: Initializing new system - ErrorLogger");
+        ErrorLogger_Initialize();
+    }
+    
+    if (has_room_state_manager) {
+        show_debug_message("obj_controller: Initializing new system - RoomStateManager");
+        RoomStateManager_Initialize();
+    }
+    
+    if (script_exists(asset_get_index("GlobalStateManager_Initialize"))) {
+        show_debug_message("obj_controller: Initializing new system - GlobalStateManager");
+        GlobalStateManager_Initialize();
+    }
+    
+    if (script_exists(asset_get_index("InventoryManager_Initialize"))) {
+        show_debug_message("obj_controller: Initializing new system - InventoryManager");
+        InventoryManager_Initialize();
+    }
+    
+    global.systems_initialized = true;
 } else {
-    show_debug_message("obj_controller Create: Static item data already initialized, skipping scr_initialize_item_data.");
+    show_debug_message("obj_controller: New systems already initialized, skipping initialization.");
 }
-// --- END ONE-TIME STATIC DATA INITIALIZATION ---
-
-/// @method switch_skin(new_skin_name)
-/// @description Destroys current player instance and creates a new one based on skin name.
-/// @param {string} new_skin_name The name of the skin to switch to (e.g., "player", "icetruck").
-/// @returns {bool} True if switch was successful, false otherwise.
-switch_skin = function(new_skin_name) {
-    if (global.skin_switching) {
-         show_debug_message("Skin Switch Denied: Switch already in progress.");
-         return false; // Prevent overlapping switches
-    }
-    global.skin_switching = true;
-    show_debug_message("Attempting to switch to skin: " + new_skin_name);
-
-    // Store current player state safely
-    var _x = (instance_exists(global.player_instance)) ? global.player_instance.x : global.player_x;
-    var _y = (instance_exists(global.player_instance)) ? global.player_instance.y : global.player_y;
-    var _face = DOWN; // Default facing
-    if (instance_exists(global.player_instance) && variable_instance_exists(global.player_instance, "face")) {
-        _face = global.player_instance.face;
-    }
-
-    // Store skin-specific state (Example: icetruck tint)
-    var _icetruck_tint = c_yellow; // Default
-    if (global.current_skin == "icetruck" && instance_exists(global.player_instance) && variable_instance_exists(global.player_instance, "icetruck_tint")) {
-         _icetruck_tint = global.player_instance.icetruck_tint;
-    }
-
-    // Destroy old instance if it exists
-    if (instance_exists(global.player_instance)) {
-        show_debug_message("Destroying old player instance (" + string(global.player_instance) + ", skin: " + global.current_skin + ")");
-        instance_destroy(global.player_instance);
-        global.player_instance = noone; // Explicitly clear reference
-    } else {
-        show_debug_message("Warning: No existing player instance found to destroy during skin switch.");
-    }
-
-
-    // Find the object corresponding to the new skin name
-    var new_player_obj = noone;
-    var skin_found = false;
-    if (variable_global_exists("skins") && is_array(global.skins)) {
-         for (var i = 0; i < array_length(global.skins); i++) {
-             if (global.skins[i].name == new_skin_name) {
-                 if (object_exists(global.skins[i].object)) {
-                    new_player_obj = global.skins[i].object;
-                    skin_found = true;
-                 } else {
-                     show_debug_message("ERROR: Skin object for '" + new_skin_name + "' does not exist!");
-                 }
-                 break;
-             }
-         }
-    } else {
-         show_debug_message("ERROR: global.skins array not found or not an array!");
-    }
-
-    if (!skin_found) {
-        show_debug_message("ERROR: Skin name '" + new_skin_name + "' not found in global.skins definition. Defaulting to 'player'.");
-        new_skin_name = "player"; // Attempt to fallback
-        new_player_obj = obj_player; // Assuming obj_player is default
-        if (!object_exists(new_player_obj)) {
-             show_debug_message("FATAL ERROR: Default skin obj_player doesn't exist!");
-             global.skin_switching = false;
-             return false; // Cannot continue
-        }
-    }
-
-    // Create the new player instance
-    global.player_instance = instance_create_layer(_x, _y, "Instances", new_player_obj);
-    if (!instance_exists(global.player_instance)) {
-          show_debug_message("FATAL ERROR: Failed to create new player instance for skin: " + new_skin_name);
-          global.skin_switching = false;
-          global.current_skin = "unknown"; // Reflect failed state
-          return false; // Cannot continue
-    }
-
-    // Update global state and apply common properties
-    global.current_skin = new_skin_name;
-    global.player_instance.persistent = true; // Make sure new instance persists
-
-    // Apply common state
-    if (variable_instance_exists(global.player_instance, "face")) {
-        global.player_instance.face = _face;
-    }
-    global.player_instance.image_blend = global.player_color;
-
-     // Apply skin-specific state (Example: icetruck tint)
-    if (new_skin_name == "icetruck" && variable_instance_exists(global.player_instance, "icetruck_tint")) {
-        global.player_instance.icetruck_tint = _icetruck_tint; // Apply saved/default tint
-        show_debug_message("Applied icetruck tint: " + string(_icetruck_tint));
-    }
-
-    // Update camera target
-    camera_set_view_target(global.camera, global.player_instance);
-
-    show_debug_message("Skin switched to: " + global.current_skin + ". New instance ID: " + string(global.player_instance));
-    global.skin_switching = false; // Allow next switch
-    return true; // Switch successful
-} // End of switch_skin method definition
-
-// --- Rest of obj_controller Create Event ---
-init_globals(); // This now only ensures vars/DS and sets new game defaults
-
-if (!variable_global_exists("colour_picker_active")) {
-    global.colour_picker_active = false;
-    show_debug_message("Initialized global.colour_picker_active in obj_controller Create.");
-}
-
-if (!variable_global_exists("is_game_paused")) {
-         global.is_game_paused = false;
-         show_debug_message("Initialized global.is_game_paused in obj_controller Create.");
-    }
-global.chat_active = false;
-global.chat_npc = noone;
-global.player_controls_enabled = true;
-
-persistent = true; // Ensure persistence across rooms
-
-// Initialize global variables early to avoid undefined references
-global.dialogue_active = false; // Dialogue system starts inactive
-
-// Track clicks processed by any UI elements
-global.click_handled = false;
-global.is_expanded = false;
-
-// Get the FPS value for the room
-var room_fps = game_get_speed(gamespeed_fps);
-
-// Initialize countdown_timer with the desired duration in seconds multiplied by room_fps
-global.countdown_timer = 1 * room_fps; // 1 second countdown 
-global.is_pause_menu_active = false;
-global.game_started = false; // Flag to check if the game has started
-global.lives = 3; // Initialize player lives
-game_timer = 0; // Initialize game timer
-global.skin_switching = false; // Initialize the skin switching flag
-
-// Initialize global variables
-global.skins = [
-    { name: "player", object: obj_player },
-    { name: "icetruck", object: obj_player_icetruck },
-    { name: "tube", object: obj_player_tube },
-    { name: "toboggan", object: obj_player_toboggan },
-    { name: "sled_player", object: obj_sled_player },
-    { name: "ninja", object: obj_player_ninja }
-];
-
-global.current_skin = "player"; // Starting skin
-global.player_instance = noone; // Initialize player instance
-global.icetruck_destroyed = false; // Initialize icetruck_destroyed
-
-// Define player colors globally
-global.player_colors = [
-    make_color_rgb(51, 51, 51),    // notblack
-    make_color_rgb(46, 71, 170),   // bluer
-    make_color_rgb(153, 102, 0),   // brown
-    make_color_rgb(7, 167, 163),   // cyan
-    make_color_rgb(7, 106, 68),    // emerald
-    make_color_rgb(6, 155, 77),    // greener
-    make_color_rgb(176, 126, 194), // lavender
-    make_color_rgb(8, 153, 211),   // lightblue
-    make_color_rgb(189, 252, 201), // mint
-    make_color_rgb(255, 102, 0),   // oranger
-    make_color_rgb(255, 51, 153),  // pink
-    make_color_rgb(102, 49, 158),  // purpler
-    make_color_rgb(204, 0, 0),     // reder
-    make_color_rgb(255, 67, 63),   // salmon
-    make_color_rgb(255, 204, 0)    // yellower
-];
-
-// Room state management
-if (!variable_global_exists("room_states")) {
-    global.room_states = ds_map_create();
-}
-global.current_room = room; // Track current room
-
-// Ensure player instance exists
-if (global.player_instance == noone) {
-    if (global.current_skin == "player") {
-        global.player_instance = instance_create_layer(x, y, "Instances", obj_player);
-    } else if (global.current_skin == "icetruck") {
-        global.player_instance = instance_create_layer(x, y, "Instances", obj_player_icetruck);
-    } else if (global.current_skin == "tube") {
-        global.player_instance = instance_create_layer(x, y, "Instances", obj_player_tube);
-    } else if (global.current_skin == "sled_player") {
-        global.player_instance = instance_create_layer(x, y, "Instances", obj_sled_player);
-    } else if (global.current_skin == "ninja") {
-        global.player_instance = instance_create_layer(x, y, "Instances", obj_player_ninja);
-    } else if (global.current_skin == "toboggan") {
-        global.player_instance = instance_create_layer(x, y, "Instances", obj_player_toboggan);
-    }
-}
-
-if (instance_exists(global.player_instance)) {
-    global.player_instance.image_blend = global.player_color;
-    show_debug_message("Restored player color: " + string(global.player_color));
-} 
-
-if (!variable_global_exists("following_puffles")) {
-    global.following_puffles = ds_list_create();
-}
-
-// Quest management
-global.active_quests = ds_list_create();
-global.completed_quests = ds_list_create();
-global.quest_progress = ds_map_create();
-global.quest_definitions = ds_map_create();
-
-// Define a sample quest
-function create_quest(_id, _name, _description, _objectives, _rewards) {
-    var quest = ds_map_create();
-    ds_map_add(quest, "id", _id);
-    ds_map_add(quest, "name", _name);
-    ds_map_add(quest, "description", _description);
-    ds_map_add(quest, "objectives", _objectives);
-    ds_map_add(quest, "rewards", _rewards);
-    return quest;
-}
-
-// Sample quest: Find the Missing Puffle
-var quest1 = create_quest(
-    1,
-    "Find the Missing Puffle",
-    "Help the NPC find their lost puffle.",
-    [
-        { "type": "collect", "item": "Puffle O", "amount": 1 },
-        { "type": "talk", "npc": "NPC1" }
-    ],
-    { "coins": 100, "item": "Beta Hat" }
-);
-ds_map_add(global.quest_definitions, 1, quest1);
-
-// Debugging
-if (instance_exists(global.player_instance)) {
-    show_debug_message("Player instance created: " + string(global.player_instance));
-} else {
-    show_debug_message("Error: Failed to create player instance.");
-}
-
-// Add debug message to confirm Create event runs
-show_debug_message("obj_controller created with ID: " + string(id));
-show_debug_message("obj_controller Create event executed");
-
-//alarm[1] = room_speed * 5;
+// --- END INITIALIZE NEW SYSTEMS --- 
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_controller
 File: Other_3.gml
 function cleanup_game() {
@@ -977,22 +753,22 @@ if (ds_exists(global.quest_definitions, ds_type_map)) {
 }
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_controller
 File: Other_4.gml
-// --- obj_controller: Other Event: Room Start (Other_4) --- SAFER CLEANUP
+// --- obj_controller: Other Event: Room Start (Other_4) --- UPDATED FOR NEW SYSTEM
 
-   var _current_room_name = room_get_name(room);
-   show_debug_message("CONTROLLER ROOM START: Entering room: " + _current_room_name);
+var _current_room_name = room_get_name(room);
+show_debug_message("CONTROLLER ROOM START: Entering room: " + _current_room_name);
 
-   // --- Determine if this is a UI/Special Room ---
-   var is_non_gameplay_room = (room == rm_init || room == rm_main_menu || room == rm_map ||
-                               room == rm_pause_menu || room == rm_settings_menu || room == rm_saveload ||
-                               room == rm_colorpicker_menu);
-   var _is_fresh_load = (variable_global_exists("is_loading_game") && global.is_loading_game == true);
-   if (is_non_gameplay_room) {
-    // [...] (Non-gameplay room logic remains the same)
+// --- Determine if this is a UI/Special Room ---
+var is_non_gameplay_room = (room == rm_init || room == rm_main_menu || room == rm_map ||
+                           room == rm_pause_menu || room == rm_settings_menu || room == rm_saveload ||
+                           room == rm_colorpicker_menu);
+var _is_fresh_load = (variable_global_exists("is_loading_game") && global.is_loading_game == true);
+
+if (is_non_gameplay_room) {
     show_debug_message("CONTROLLER ROOM START: Non-gameplay room detected...");
-     if (!instance_exists(obj_ui_manager)) {
-         instance_create_layer(0, 0, "UI", obj_ui_manager);
-         show_debug_message("CONTROLLER ROOM START: Created obj_ui_manager in Non-Gameplay room.");
+    if (!instance_exists(obj_ui_manager)) {
+        instance_create_layer(0, 0, "UI", obj_ui_manager);
+        show_debug_message("CONTROLLER ROOM START: Created obj_ui_manager in Non-Gameplay room.");
     }
     if (_is_fresh_load) {
         global.is_loading_game = false;
@@ -1002,206 +778,128 @@ File: Other_4.gml
 }
 
 // --- Gameplay Room Logic ---
+show_debug_message("CONTROLLER ROOM START: Loading state for room: " + _current_room_name);
 
-// --- 1. Determine Player Start Position & Facing ---
-   var start_x, start_y, start_face;
-   var _used_warp_coords = false;
-   if (_is_fresh_load) { /* ... Load logic ... */
-     start_x = global.player_x; start_y = global.player_y; start_face = global.last_player_face ?? DOWN;
-     show_debug_message("CONTROLLER ROOM START (Load): Using saved player pos (" + string(start_x) + "," + string(start_y) + ").");
-}    else if (variable_global_exists("warp_target_x") && !is_undefined(global.warp_target_x)) { /* ... Player Warp logic ... */
-     start_x = global.warp_target_x; start_y = global.warp_target_y; start_face = global.warp_target_face ?? DOWN;
-     _used_warp_coords = true;
-     show_debug_message("CONTROLLER ROOM START (Warp): Using PLAYER warp target pos (" + string(start_x) + "," + string(start_y) + ").");
-}	 else { /* ... Default/Spawn Point logic ... */
-      show_debug_message("CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...");
-      start_x = room_width / 2; start_y = room_height / 2; start_face = DOWN;
-      var default_spawn = instance_find(obj_spawn_point, 0);
-      if (instance_exists(default_spawn)) { start_x = default_spawn.x; start_y = default_spawn.y; }
-      show_debug_message("CONTROLLER ROOM START (Default): Final default/spawn pos (" + string(start_x) + "," + string(start_y) + ") Face: " + string(start_face));
- }
-
-// --- Clear warp coordinates AFTER deciding start pos ---
-if (variable_global_exists("warp_target_x")) { /* ... Clear warp vars ... */
-     if (is_undefined(global.warp_target_x)) { show_debug_message("CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp)."); }
-     else { show_debug_message("CONTROLLER ROOM START: Clearing player warp target variables."); }
-     global.warp_target_x = undefined; global.warp_target_y = undefined; global.warp_target_face = undefined; global.warp_target_inst_id = noone;
+// Load room state using appropriate method
+if (script_exists(asset_get_index("RoomStateManager_LoadState"))) {
+    // Use new system
+    show_debug_message("CONTROLLER ROOM START: Using RoomStateManager_LoadState");
+    RoomStateManager_LoadState(_current_room_name, _is_fresh_load);
+} 
+else if (script_exists(asset_get_index("load_room_state"))) {
+    // Use backward compatibility function
+    show_debug_message("CONTROLLER ROOM START: Using load_room_state");
+    load_room_state(room, _is_fresh_load);
+}
+else {
+    show_debug_message("CONTROLLER ROOM START: WARNING - No room state load function available!");
 }
 
-global.player_instance = noone;
-show_debug_message("CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.");
+// --- Handle Player Spawning ---
+var start_x, start_y, start_face;
 
-// --- 3. Create Player Instance ---
- var player_obj = obj_player; // Default
-if (variable_global_exists("current_skin")) { /* ... code to find player_obj based on skin ... */
-    var found_skin = false;
-     for (var i = 0; i < array_length(global.skins); i++) { if (global.skins[i].name == global.current_skin) { if (object_exists(global.skins[i].object)) { player_obj = global.skins[i].object; found_skin = true; } else { /*Log Error*/ } break; } }
-     if (!found_skin) { /* Log Warning & Default */ global.current_skin = "player"; player_obj = obj_player; }
-} else { /* Log Warning & Default */ global.current_skin = "player"; player_obj = obj_player; }
-if (!object_exists(player_obj)) { /* ... error handling ... */ if (object_exists(obj_player)) { player_obj = obj_player; global.current_skin = "player"; } else { exit; } }
-if (!layer_exists("Instances")) { layer_create(0, "Instances"); }
-
-var _new_player = instance_create_layer(start_x, start_y, "Instances", player_obj);
-
-// --- SAFETY CHECK: Destroy duplicate player instances ---
-if (instance_exists(_new_player)) {
-    with(obj_player_base) { // Check parent type
-        // Destroy any instance that IS a player type but NOT the newly created one, and NOT the controller itself
-        if (id != _new_player && id != other.id && object_index != obj_controller) {
-            show_debug_message("CONTROLLER ROOM START (Safety): Destroying potentially duplicate player instance: ID " + string(id) + " (" + object_get_name(object_index) + ")");
-            instance_destroy(id);
+if (_is_fresh_load) {
+    start_x = global.player_x;
+    start_y = global.player_y;
+    start_face = global.last_player_face ?? DOWN;
+    show_debug_message("CONTROLLER ROOM START (Load): Using saved player pos (" + string(start_x) + "," + string(start_y) + ")");
+} else {
+    // Check for warp target coordinates
+    if (variable_global_exists("warp_target_x") && !is_undefined(global.warp_target_x)) {
+        start_x = global.warp_target_x;
+        start_y = global.warp_target_y;
+        start_face = global.warp_target_face ?? DOWN;
+        show_debug_message("CONTROLLER ROOM START: Using warp target pos (" + string(start_x) + "," + string(start_y) + ")");
+        
+        // Clear warp targets after use
+        global.warp_target_x = undefined;
+        global.warp_target_y = undefined;
+        global.warp_target_face = undefined;
+    } else {
+        // Use spawn point or default position
+        var spawn = instance_find(obj_spawn_point, 0);
+        if (spawn != noone) {
+            start_x = spawn.x;
+            start_y = spawn.y;
+            start_face = spawn.face ?? DOWN;
+            show_debug_message("CONTROLLER ROOM START: Using spawn point pos (" + string(start_x) + "," + string(start_y) + ")");
+        } else {
+            start_x = room_width / 2;
+            start_y = room_height / 2;
+            start_face = DOWN;
+            show_debug_message("CONTROLLER ROOM START: Using default center pos (" + string(start_x) + "," + string(start_y) + ")");
         }
     }
 }
 
-// --- 4. Assign and Verify Global Player Instance ---
-// Ensure global.player_instance *definitely* points to the new instance or noone.
-if (instance_exists(_new_player)) {
-     global.player_instance = _new_player; // Assign the new ID
-     global.player_instance.persistent = true;
-    if (variable_instance_exists(global.player_instance, "face")) { global.player_instance.face = start_face; }
-    global.player_instance.image_blend = global.player_color;
-    global.player_instance.visible = true;
-     show_debug_message("Created player instance: " + string(global.player_instance) + " skin: " + global.current_skin + " at ("+string(start_x)+","+string(start_y)+")");
-     // [...] Apply skin-specific state
-} else {
-     show_debug_message("CONTROLLER ROOM START FATAL ERROR: Failed to create player instance for skin: " + global.current_skin);
-     global.player_instance = noone; // Ensure it's noone if creation failed
-     exit;
+// Create player if needed
+if (!instance_exists(global.player_instance)) {
+    global.player_instance = noone; // Explicitly clear before creating new
+    var player_obj = asset_get_index("obj_" + global.current_skin);
+    if (!object_exists(player_obj)) player_obj = obj_player;
+    
+    global.player_instance = instance_create_layer(start_x, start_y, "Instances", player_obj);
+    if (variable_instance_exists(global.player_instance, "face")) {
+        global.player_instance.face = start_face;
+    }
+    
+    show_debug_message("Created player instance: " + string(global.player_instance) + 
+                      " skin: " + global.current_skin + 
+                      " at (" + string(start_x) + "," + string(start_y) + ")");
 }
 
-
-// --- 5. Load Room State ---
-show_debug_message("CONTROLLER ROOM START: Calling load_room_state for: " + _current_room_name + " (Is Fresh Load: " + string(_is_fresh_load) + ")");
-load_room_state(room, _is_fresh_load);
-
-// --- 6. Final Setup ---
-if (_is_fresh_load) { /* ... Reset loading flag ... */
-     show_debug_message("CONTROLLER ROOM START: Resetting global.is_loading_game flag.");
-     global.is_loading_game = false;
-}
-
-// --- 7. CAMERA AND VIEW SETUP ---
- // [...] (Camera setup code remains the same)
- view_set_camera(0, global.camera); view_enabled = true; view_visible[0] = true;
- var intended_view_width = 288; var intended_view_height = 216; var view_width = min(intended_view_width, room_width); var view_height = min(intended_view_height, room_height); camera_set_view_size(global.camera, view_width, view_height); camera_set_view_border(global.camera, 0, 0); show_debug_message("Set camera view size to " + string(view_width) + "x" + string(view_height) + ", border (0,0)");
-  if (room_width <= view_width && room_height <= view_height) { /* Fix camera */ camera_set_view_target(global.camera, noone); camera_set_view_speed(global.camera, -1, -1); camera_set_view_pos(global.camera, 0, 0); show_debug_message("Camera fixed at (0, 0)."); }
-  else { /* Follow player */ if (instance_exists(global.player_instance)) { camera_set_view_target(global.camera, global.player_instance); camera_set_view_speed(global.camera, -1, -1); var cam_x = global.player_instance.x - (view_width / 2); var cam_y = global.player_instance.y - (view_height / 2); cam_x = clamp(cam_x, 0, max(0, room_width - view_width)); cam_y = clamp(cam_y, 0, max(0, room_height - view_height)); camera_set_view_pos(global.camera, cam_x, cam_y); show_debug_message("Camera follow player " + string(global.player_instance) + " INSTANT."); } else { /* Fallback fix camera */ camera_set_view_target(global.camera, noone); camera_set_view_speed(global.camera, -1, -1); camera_set_view_pos(global.camera, 0, 0); show_debug_message("WARNING: Player missing, Camera fixed."); } }
-
-// --- 8. Ensure UI Layer and Manager ---
-// [...] (UI layer/manager check remains the same)
-if (!layer_exists("UI")) { layer_create(-10000, "UI"); }
-if (!instance_exists(obj_ui_manager)) { instance_create_layer(0, 0, "UI", obj_ui_manager); }
-
-show_debug_message("CONTROLLER ROOM START: Finished setup for room: " + _current_room_name);
+// Ensure camera follows player
+if (instance_exists(global.player_instance)) {
+    camera_set_view_target(global.camera, global.player_instance);
+} 
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_controller
 File: Other_5.gml
-// obj_controller -> Other Event: Room End (Other_5.gml) - REVISED v8 (Correct Array Push Scope)
+// obj_controller -> Other Event: Room End (Other_5.gml) - UPDATED FOR NEW SYSTEM
 
 var _leaving_room_name = room_get_name(room);
 show_debug_message("obj_controller Room End: Transitioning from room: " + _leaving_room_name);
 
-// --- Ensure global room_states map exists ---
-if (!ds_exists(global.room_states, ds_type_map)) {
-    show_debug_message("Room End WARN: global.room_states map missing! Creating it.");
-    global.room_states = ds_map_create();
-}
-
-// --- Room State Saving Logic ---
+// Check for non-gameplay room
 var is_non_gameplay_room = (room == rm_init || room == rm_main_menu || room == rm_map ||
-                            room == rm_pause_menu || room == rm_settings_menu || room == rm_saveload ||
-                            room == rm_colorpicker_menu);
+                           room == rm_pause_menu || room == rm_settings_menu || room == rm_saveload ||
+                           room == rm_colorpicker_menu);
 var _is_currently_loading = variable_global_exists("is_loading_game") && global.is_loading_game;
 
-if (!_is_currently_loading && !is_non_gameplay_room) {
-    show_debug_message("Saving runtime state for leaving room: " + _leaving_room_name);
-    var _state_array = []; // <<< Declare the array in the main event scope
+// Skip save for special conditions
+if (_is_currently_loading) {
+    show_debug_message("Skipping room state save: Currently loading game.");
+    exit;
+}
 
-    show_debug_message("Room End WITH DEBUG: --- Start Instance Check ---");
+if (is_non_gameplay_room) {
+    show_debug_message("Skipping room state save: Non-gameplay room (" + _leaving_room_name + ").");
+    exit;
+}
 
-    // --- Iterate using with(all) ---
-    with (all) {
-        // `self` now refers to the instance being iterated over
-        var _inst_id = self.id;
-        var _obj_index = object_index;
-        var _dbg_obj_name = object_get_name(_obj_index);
-
-        // --- Skip non-savable instances ---
-        if (_inst_id == other.id) continue; // Skip controller
-        if (variable_global_exists("player_instance") && instance_exists(global.player_instance) && _inst_id == global.player_instance) continue;
-        if (variable_global_exists("ui_manager") && instance_exists(global.ui_manager) && _inst_id == global.ui_manager) continue;
-
-        // --- SAVABLE CHECK ---
-        var _is_instance_savable = false;
-        var _parent_index = object_get_parent(_obj_index);
-        if (_parent_index == obj_pickup_item) { // Check parent first
-            _is_instance_savable = true;
-        } else if ( // Check specific types if parent doesn't match
-            _obj_index == obj_pickup_item || _obj_index == obj_toboggan || _obj_index == obj_tube ||
-            _obj_index == obj_icetruck || _obj_index == obj_icetruck_broken || _obj_index == obj_puffle)
-        {
-             _is_instance_savable = true;
-        }
-
-        // Further exclusion (Puffles)
-        if (_is_instance_savable && _obj_index == obj_puffle) {
-            if (variable_global_exists("following_puffles") && ds_exists(global.following_puffles, ds_type_list) && ds_list_find_index(global.following_puffles, _inst_id) != -1) {
-                _is_instance_savable = false;
-            }
-        }
-
-        // --- If deemed savable, process it ---
-        if (_is_instance_savable) {
-            show_debug_message("Room End WITH DEBUG: >>> Preparing to save state for: " + string(_inst_id) + " (" + _dbg_obj_name + ")"); // Log BEFORE push
-            try {
-                 var _state_data = {
-                     object_index_name: _dbg_obj_name,
-                     x: x, y: y,
-                     image_xscale: image_xscale ?? 1,
-                     image_yscale: image_yscale ?? 1,
-                     image_blend: image_blend ?? c_white,
-                     image_alpha: image_alpha ?? 1,
-                     face: variable_instance_exists(id, "face") ? face : undefined,
-                     icetruck_tint: variable_instance_exists(id, "icetruck_tint") ? icetruck_tint : undefined,
-                     is_driveable: variable_instance_exists(id, "is_driveable") ? is_driveable : undefined,
-                     item_name: variable_instance_exists(id, "item_name") ? item_name : undefined,
-                     following_player: variable_instance_exists(id, "following_player") ? following_player : undefined,
-                     puffle_color: (_obj_index == obj_puffle && variable_instance_exists(id, "color")) ? color : undefined,
-                     puffle_state: (_obj_index == obj_puffle && variable_instance_exists(id, "state")) ? state : undefined,
-                 };
-                 // *** THE FIX: Push directly to _state_array (NO `other`) ***
-                 array_push(_state_array, _state_data);
-                 show_debug_message("Room End WITH DEBUG: +++ Successfully pushed state for " + string(_inst_id)); // Log AFTER successful push
-            } catch (_ex) {
-                show_debug_message("Room End Save State ERROR: Failed during struct creation/push for " + string(_inst_id) + " (" + _dbg_obj_name + ") - " + string(_ex));
-            }
-        } else {
-             // Log skipped instance (optional)
-             // if (_obj_index != obj_controller && ...) { show_debug_message(...) }
-        }
-    } // --- End with(all) ---
-
-    show_debug_message("Room End WITH DEBUG: --- End Instance Check ---");
-    show_debug_message("Room End DEBUG: Finished checking instances. Collected " + string(array_length(_state_array)) + " savable states."); // Use the length of the array
-
-    // --- Store the collected state array ---
-    if (ds_map_exists(global.room_states, _leaving_room_name)) {
-        show_debug_message("Replacing existing room state array for: " + _leaving_room_name + " with new array size: " + string(array_length(_state_array)));
-        ds_map_replace(global.room_states, _leaving_room_name, _state_array);
-    } else {
-        show_debug_message("Adding new room state array for: " + _leaving_room_name + " with size: " + string(array_length(_state_array)));
-        ds_map_add(global.room_states, _leaving_room_name, _state_array);
+// Save room state using the appropriate method
+if (script_exists(asset_get_index("RoomStateManager_SaveState"))) {
+    // Use new system
+    show_debug_message("Using RoomStateManager_SaveState for room: " + _leaving_room_name);
+    RoomStateManager_SaveState(room);
+} 
+else if (script_exists(asset_get_index("save_room_state"))) {
+    // Use backward compatibility function
+    show_debug_message("Using save_room_state for room: " + _leaving_room_name);
+    save_room_state(room);
+}
+else {
+    show_debug_message("WARNING: No room state save function available!");
+    
+    // Fallback - ensure room_states exists
+    if (!variable_global_exists("room_states")) {
+        global.room_states = ds_map_create();
+        show_debug_message("Created missing global.room_states map");
     }
-     show_debug_message("Finished saving runtime state for room: " + _leaving_room_name);
-
-} else {
-    // Log reason for skipping save
-    if (_is_currently_loading) show_debug_message("Skipping room state save: Currently loading game.");
-    if (is_non_gameplay_room) show_debug_message("Skipping room state save: Non-gameplay room (" + _leaving_room_name + ").");
-    // Ensure empty array is stored if room was visited but had no savable objects
-    if (!_is_currently_loading && !is_non_gameplay_room && !ds_map_exists(global.room_states, _leaving_room_name)) {
-         show_debug_message("Adding empty room state array for: " + _leaving_room_name + " (No savable objects found).");
-         ds_map_add(global.room_states, _leaving_room_name, []);
+    
+    // Direct fallback implementation - just add empty array as placeholder
+    if (ds_exists(global.room_states, ds_type_map) && !ds_map_exists(global.room_states, _leaving_room_name)) {
+        ds_map_add(global.room_states, _leaving_room_name, []);
+        show_debug_message("Added empty placeholder state for room: " + _leaving_room_name);
     }
 }
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_controller
@@ -1417,6 +1115,13 @@ Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_fishing_rod
 File: Create_0.gml
 event_inherited();
 item_name = "Fishing Rod";
+Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_game_controller
+File: Create_0.gml
+// Initialize core systems
+ErrorLogger_Initialize();
+GlobalStateManager_Initialize();
+RoomStateManager_Initialize();
+QuestManager_Initialize(); 
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_ghostcostume_item
 File: Create_0.gml
 event_inherited();

@@ -102,6 +102,133 @@ function equip_item(slot, item_name) {
         show_debug_message("ERROR: Invalid equipment slot specified: '" + slot + "'");
     }
 }
+Folder: D:\PenguinIsleProject\Penguin Isles\scripts\load_room_state
+File: load_room_state.gml
+/// @function load_room_state(room_id, is_fresh_load)
+/// @description Loads room state (Backward compatibility function)
+/// @param {Real} room_id Room ID to load state for
+/// @param {Bool} is_fresh_load Whether this is a fresh game load
+function load_room_state(room_id, is_fresh_load) {
+    var room_name = room_get_name(room_id);
+    show_debug_message("[LEGACY] load_room_state: Calling for room " + room_name);
+    
+    // Call our new function if it exists
+    if (script_exists(asset_get_index("RoomStateManager_LoadState"))) {
+        show_debug_message("[LEGACY] load_room_state: Using RoomStateManager_LoadState");
+        RoomStateManager_LoadState(room_name, is_fresh_load);
+    } 
+    // Otherwise, use the existing room_states logic
+    else {
+        show_debug_message("[LEGACY] load_room_state: Using fallback implementation");
+        
+        // Ensure room_states exists
+        if (!variable_global_exists("room_states")) {
+            global.room_states = ds_map_create();
+            show_debug_message("[LEGACY] load_room_state: Created missing global.room_states map");
+        }
+        
+        // Check if saved state exists for this room
+        if (ds_exists(global.room_states, ds_type_map) && ds_map_exists(global.room_states, room_name)) {
+            var state_array = global.room_states[? room_name];
+            
+            // Only recreate instances during fresh load
+            if (is_fresh_load && is_array(state_array)) {
+                show_debug_message("[LEGACY] load_room_state: Loading " + string(array_length(state_array)) + 
+                                 " instances for room " + room_name);
+                
+                for (var i = 0; i < array_length(state_array); i++) {
+                    var state = state_array[i];
+                    if (!is_struct(state)) continue;
+                    
+                    // Skip if object name or required properties missing
+                    if (!variable_struct_exists(state, "object_index_name")) continue;
+                    
+                    var obj_index = asset_get_index(state.object_index_name);
+                    if (obj_index == -1 || !object_exists(obj_index)) continue;
+                    
+                    // Skip player, controller, or UI manager
+                    if (object_is_ancestor(obj_index, obj_player_base) || 
+                        obj_index == obj_controller || 
+                        obj_index == obj_ui_manager) {
+                        continue;
+                    }
+                    
+                    // Skip follower puffles
+                    var is_follower = (obj_index == obj_puffle && 
+                                      variable_struct_exists(state, "following_player") && 
+                                      state.following_player);
+                    if (is_follower) continue;
+                    
+                    // Create instance and apply properties
+                    var inst = instance_create_layer(state.x, state.y, "Instances", obj_index);
+                    
+                    if (instance_exists(inst)) {
+                        inst.is_savable = true;
+                        
+                        // Apply standard properties if they exist
+                        if (variable_struct_exists(state, "image_xscale")) 
+                            inst.image_xscale = state.image_xscale;
+                        else 
+                            inst.image_xscale = 1;
+                            
+                        if (variable_struct_exists(state, "image_yscale")) 
+                            inst.image_yscale = state.image_yscale;
+                        else 
+                            inst.image_yscale = 1;
+                            
+                        if (variable_struct_exists(state, "image_blend")) 
+                            inst.image_blend = state.image_blend;
+                        else
+                            inst.image_blend = c_white;
+                            
+                        if (variable_struct_exists(state, "image_alpha")) 
+                            inst.image_alpha = state.image_alpha;
+                        else
+                            inst.image_alpha = 1;
+                            
+                        // Apply object-specific properties
+                        if (variable_struct_exists(state, "face") && variable_instance_exists(inst, "face"))
+                            inst.face = state.face;
+                        
+                        if (obj_index == obj_icetruck || obj_index == obj_icetruck_broken) {
+                            if (variable_struct_exists(state, "icetruck_tint") && 
+                                variable_instance_exists(inst, "icetruck_tint"))
+                                inst.icetruck_tint = state.icetruck_tint;
+                                
+                            if (variable_struct_exists(state, "is_driveable") && 
+                                variable_instance_exists(inst, "is_driveable"))
+                                inst.is_driveable = state.is_driveable;
+                        }
+                        else if (object_get_parent(inst.object_index) == obj_pickup_item || 
+                                inst.object_index == obj_dropped_item) {
+                            if (variable_struct_exists(state, "item_name") && 
+                                variable_instance_exists(inst, "item_name"))
+                                inst.item_name = state.item_name;
+                        }
+                        else if (obj_index == obj_puffle) {
+                            if (variable_struct_exists(state, "puffle_color") && 
+                                variable_instance_exists(inst, "color"))
+                                inst.color = state.puffle_color;
+                                
+                            if (variable_struct_exists(state, "puffle_state") && 
+                                variable_instance_exists(inst, "state"))
+                                inst.state = state.puffle_state;
+                        }
+                        
+                        show_debug_message("[LEGACY] load_room_state: Created " + state.object_index_name + 
+                                        " at (" + string(state.x) + "," + string(state.y) + ")");
+                    }
+                }
+                
+                show_debug_message("[LEGACY] load_room_state: Finished loading instances for " + room_name);
+            } else {
+                show_debug_message("[LEGACY] load_room_state: Not recreating instances (normal room entry)");
+            }
+        } else {
+            show_debug_message("[LEGACY] load_room_state: No saved state found for " + room_name);
+        }
+    }
+} 
 Folder: D:\PenguinIsleProject\Penguin Isles\scripts\RoomStateManager
 File: RoomStateManager.gml
 /// @function RoomStateManager_Save()
@@ -222,6 +349,124 @@ function RoomStateManager_Save(room_id) {
          // If fresh load, room is default empty. If normal entry, existing instances remain.
     }
 }
+Folder: D:\PenguinIsleProject\Penguin Isles\scripts\save_room_state
+File: save_room_state.gml
+/// @function save_room_state(room_id)
+/// @description Saves room state (Backward compatibility function)
+/// @param {Real} room_id Room ID to save state for
+function save_room_state(room_id) {
+    var room_name = room_get_name(room_id);
+    show_debug_message("[LEGACY] save_room_state: Calling RoomStateManager_SaveState for " + room_name);
+    
+    // Call our new function if it exists
+    if (script_exists(asset_get_index("RoomStateManager_SaveState"))) {
+        RoomStateManager_SaveState(room_id);
+    } 
+    // Otherwise, use the existing room_states logic
+    else {
+        show_debug_message("[LEGACY] save_room_state: Using fallback implementation");
+        
+        // Ensure global room_states map exists
+        if (!variable_global_exists("room_states") || !ds_exists(global.room_states, ds_type_map)) {
+            global.room_states = ds_map_create();
+        }
+        
+        var state_array = [];
+        
+        with (all) {
+            // Skip controller and UI objects
+            if (object_index == obj_controller || object_index == obj_ui_manager) continue;
+            
+            // Determine if instance is savable
+            var is_savable = false;
+            var parent_index = object_get_parent(object_index);
+            
+            if (parent_index == obj_pickup_item) {
+                is_savable = true;
+            } else if (
+                object_index == obj_pickup_item || 
+                object_index == obj_toboggan || 
+                object_index == obj_tube ||
+                object_index == obj_icetruck || 
+                object_index == obj_icetruck_broken || 
+                object_index == obj_puffle
+            ) {
+                is_savable = true;
+            }
+            
+            // Exclude following puffles
+            if (is_savable && object_index == obj_puffle) {
+                if (variable_global_exists("following_puffles") && 
+                    ds_exists(global.following_puffles, ds_type_list) && 
+                    ds_list_find_index(global.following_puffles, id) != -1) {
+                    is_savable = false;
+                }
+            }
+            
+            // Save state data
+            if (is_savable) {
+                try {
+                    var state_data = {
+                        object_index_name: object_get_name(object_index),
+                        x: x, y: y,
+                        image_xscale: image_xscale ?? 1,
+                        image_yscale: image_yscale ?? 1,
+                        image_blend: image_blend ?? c_white,
+                        image_alpha: image_alpha ?? 1
+                    };
+                    
+                    // Add common object properties
+                    if (variable_instance_exists(id, "face")) {
+                        state_data.face = face;
+                    }
+                    
+                    // Add object-specific properties
+                    if (object_index == obj_icetruck || object_index == obj_icetruck_broken) {
+                        if (variable_instance_exists(id, "icetruck_tint")) {
+                            state_data.icetruck_tint = icetruck_tint;
+                        }
+                        if (variable_instance_exists(id, "is_driveable")) {
+                            state_data.is_driveable = is_driveable;
+                        }
+                    }
+                    else if (object_get_parent(object_index) == obj_pickup_item || 
+                            object_index == obj_dropped_item) {
+                        if (variable_instance_exists(id, "item_name")) {
+                            state_data.item_name = item_name;
+                        }
+                    }
+                    else if (object_index == obj_puffle) {
+                        if (variable_instance_exists(id, "following_player")) {
+                            state_data.following_player = following_player;
+                        }
+                        if (variable_instance_exists(id, "color")) {
+                            state_data.puffle_color = color;
+                        }
+                        if (variable_instance_exists(id, "state")) {
+                            state_data.puffle_state = state;
+                        }
+                    }
+                    
+                    array_push(state_array, state_data);
+                }
+                catch (err) {
+                    show_debug_message("[ERROR] Error saving state for object: " + 
+                                   object_get_name(object_index) + " - " + string(err));
+                }
+            }
+        }
+        
+        // Update room states
+        if (ds_map_exists(global.room_states, room_name)) {
+            ds_map_replace(global.room_states, room_name, state_array);
+        } else {
+            ds_map_add(global.room_states, room_name, state_array);
+        }
+        
+        show_debug_message("[LEGACY] save_room_state: Saved " + string(array_length(state_array)) + 
+                         " objects for room " + room_name);
+    }
+} 
 Folder: D:\PenguinIsleProject\Penguin Isles\scripts\scr_array_clone_recursive
 File: scr_array_clone_recursive.gml
 /// @function array_clone_recursive(source_array)
@@ -1234,6 +1479,1415 @@ function struct_to_ds_map_recursive(struct_data) {
     }
     return _map;
 }
+Folder: D:\PenguinIsleProject\Penguin Isles\scripts\system
+File: ErrorLogger.gml
+/// @function ErrorLogger_Initialize()
+/// @description Sets up the error logging system
+function ErrorLogger_Initialize() {
+    // Define log levels as a global enum
+    global.LogLevel = {
+        DEBUG: 0,
+        INFO: 1,
+        WARNING: 2,
+        ERROR: 3,
+        CRITICAL: 4
+    };
+    
+    // Initialize log settings
+    global.logLevel = global.LogLevel.DEBUG; // Current logging threshold
+    global.logToFile = true;
+    global.logFilePath = "game_log.txt";
+    
+    show_debug_message("[INFO] ErrorLogger initialized");
+}
+
+/// @function LogMessage(level, message, [context])
+/// @param {Real} level The severity level of the message
+/// @param {String} message The message to log
+/// @param {Any} [context] Optional context data
+function LogMessage(_level, _message, _context = undefined) {
+    if (_level < global.logLevel) return;
+    
+    var _levelString = "";
+    switch(_level) {
+        case global.LogLevel.DEBUG: _levelString = "DEBUG"; break;
+        case global.LogLevel.INFO: _levelString = "INFO"; break;
+        case global.LogLevel.WARNING: _levelString = "WARNING"; break;
+        case global.LogLevel.ERROR: _levelString = "ERROR"; break;
+        case global.LogLevel.CRITICAL: _levelString = "CRITICAL"; break;
+    }
+    
+    var _timestamp = string(current_year) + "-" + 
+                     string(current_month) + "-" + 
+                     string(current_day) + " " +
+                     string(current_hour) + ":" + 
+                     string(current_minute) + ":" + 
+                     string(current_second);
+                     
+    var _logString = "[" + _timestamp + "] [" + _levelString + "] " + _message;
+    if (_context != undefined) {
+        _logString += "\nContext: " + string(_context);
+    }
+    
+    show_debug_message(_logString);
+    
+    if (global.logToFile) {
+        var _file = file_text_open_append(global.logFilePath);
+        file_text_write_string(_file, _logString + "\n");
+        file_text_close(_file);
+    }
+    
+    // Return structured log entry
+    return {
+        timestamp: _timestamp,
+        level: _level,
+        levelString: _levelString,
+        message: _message,
+        context: _context
+    };
+} 
+Folder: D:\PenguinIsleProject\Penguin Isles\scripts\system
+File: GlobalStateManager.gml
+/// @function GlobalStateManager_Initialize()
+/// @description Initializes the global state manager with default values
+function GlobalStateManager_Initialize() {
+    global.gameState = {
+        // Player state
+        player: {
+            instance: noone,
+            position: { x: 0, y: 0 },
+            skin: "player",
+            color: c_white,
+            face: DOWN,
+            controls_enabled: true
+        },
+        
+        // Game state
+        game: {
+            is_paused: false,
+            is_loading: false,
+            inventory_expanded: false,
+            repair_complete: false
+        },
+        
+        // UI state
+        ui: {
+            pause_menu_active: false,
+            colour_picker_active: false,
+            inventory_visible: false
+        },
+        
+        // Room state
+        room: {
+            current: noone,
+            target: noone,
+            states: ds_map_create()
+        }
+    };
+    
+    LogMessage(global.LogLevel.INFO, "GlobalStateManager initialized");
+}
+
+/// @function GlobalState_Get(path)
+/// @param {String} path Dot-notation path to the desired value
+/// @returns {Any} The value at the specified path, or undefined if not found
+function GlobalState_Get(_path) {
+    try {
+        var _parts = string_split(_path, ".");
+        var _current = global.gameState;
+        
+        for (var i = 0; i < array_length(_parts); i++) {
+            if (!variable_struct_exists(_current, _parts[i])) {
+                LogMessage(global.LogLevel.WARNING, "Path not found in global state", _path);
+                return undefined;
+            }
+            _current = variable_struct_get(_current, _parts[i]);
+        }
+        
+        return _current;
+    } catch(_error) {
+        LogMessage(global.LogLevel.ERROR, "Error accessing global state", {
+            path: _path,
+            error: _error
+        });
+        return undefined;
+    }
+}
+
+/// @function GlobalState_Set(path, value)
+/// @param {String} path Dot-notation path to set
+/// @param {Any} value Value to set at the path
+function GlobalState_Set(_path, _value) {
+    try {
+        var _parts = string_split(_path, ".");
+        var _current = global.gameState;
+        
+        // Navigate to the parent of our target
+        for (var i = 0; i < array_length(_parts) - 1; i++) {
+            if (!variable_struct_exists(_current, _parts[i])) {
+                _current[$ _parts[i]] = {};
+            }
+            _current = variable_struct_get(_current, _parts[i]);
+        }
+        
+        // Set the value
+        _current[$ _parts[array_length(_parts) - 1]] = _value;
+        
+        LogMessage(global.LogLevel.DEBUG, "Global state updated", {
+            path: _path,
+            value: _value
+        });
+        
+        return true;
+    } catch(_error) {
+        LogMessage(global.LogLevel.ERROR, "Error setting global state", {
+            path: _path,
+            value: _value,
+            error: _error
+        });
+        return false;
+    }
+} 
+Folder: D:\PenguinIsleProject\Penguin Isles\scripts\system
+File: InventoryManager.gml
+/// @function InventoryManager_Initialize()
+/// @description Initializes the inventory management system
+function InventoryManager_Initialize() {
+    global.gameState.inventory = {
+        slots: array_create(INVENTORY_SIZE, -1),
+        equipped: ds_map_create(),
+        activeSlot: 0,
+        isExpanded: false,
+        
+        // Equipment slots configuration
+        equipmentSlots: {
+            head: -1,
+            face: -1,
+            neck: -1,
+            body: -1,
+            hand: -1,
+            feet: -1
+        }
+    };
+    
+    // Initialize equipment slots
+    var _slots = variable_struct_get_names(global.gameState.inventory.equipmentSlots);
+    for (var i = 0; i < array_length(_slots); i++) {
+        ds_map_add(global.gameState.inventory.equipped, _slots[i], -1);
+    }
+    
+    LogMessage(global.LogLevel.INFO, "InventoryManager initialized");
+}
+
+/// @function InventoryManager_AddItem(itemName)
+/// @param {String} itemName Name of the item to add
+/// @returns {Bool} True if item was added successfully
+function InventoryManager_AddItem(_itemName) {
+    try {
+        var _inventory = global.gameState.inventory.slots;
+        
+        // Find first empty slot
+        for (var i = 0; i < array_length(_inventory); i++) {
+            if (_inventory[i] == -1) {
+                _inventory[i] = _itemName;
+                
+                LogMessage(global.LogLevel.INFO, "Item added to inventory", {
+                    item: _itemName,
+                    slot: i
+                });
+                
+                return true;
+            }
+        }
+        
+        LogMessage(global.LogLevel.WARNING, "Inventory full - couldn't add item", _itemName);
+        return false;
+    } catch(_error) {
+        LogMessage(global.LogLevel.ERROR, "Error adding item to inventory", {
+            item: _itemName,
+            error: _error
+        });
+        return false;
+    }
+}
+
+/// @function InventoryManager_EquipItem(slot, itemName)
+/// @param {String} slot Equipment slot to use
+/// @param {String} itemName Item to equip
+/// @returns {Bool} True if item was equipped successfully
+function InventoryManager_EquipItem(_slot, _itemName) {
+    try {
+        var _equipped = global.gameState.inventory.equipped;
+        
+        // Validate slot exists
+        if (!ds_map_exists(_equipped, _slot)) {
+            LogMessage(global.LogLevel.ERROR, "Invalid equipment slot", _slot);
+            return false;
+        }
+        
+        // Check if something is already equipped
+        var _currentItem = _equipped[? _slot];
+        if (_currentItem != -1) {
+            // Try to move current item to inventory
+            if (!InventoryManager_AddItem(_currentItem)) {
+                LogMessage(global.LogLevel.WARNING, "Cannot unequip item - inventory full", _currentItem);
+                return false;
+            }
+        }
+        
+        // Equip new item
+        _equipped[? _slot] = _itemName;
+        
+        LogMessage(global.LogLevel.INFO, "Item equipped", {
+            slot: _slot,
+            item: _itemName
+        });
+        
+        return true;
+    } catch(_error) {
+        LogMessage(global.LogLevel.ERROR, "Error equipping item", {
+            slot: _slot,
+            item: _itemName,
+            error: _error
+        });
+        return false;
+    }
+} 
+Folder: D:\PenguinIsleProject\Penguin Isles\scripts\system
+File: PlayerManager.gml
+/// @function PlayerManager_Initialize()
+/// @description Initializes the player management system
+function PlayerManager_Initialize() {
+    global.gameState.player = {
+        // Core properties
+        instance: noone,
+        position: { x: 0, y: 0 },
+        movement: { xspd: 0, yspd: 0, move_spd: 1 },
+        face: DOWN,
+        
+        // Visual state
+        skin: "player",
+        color: c_white,
+        last_color: c_white,
+        
+        // Action state
+        action: {
+            current: "none",
+            timer: 0,
+            duration: 0,
+            has_spawned_projectile: false
+        },
+        
+        // Animation data
+        animation: {
+            frame_index: 0,
+            speed: 0,
+            frame_data: undefined,
+            sprite_body: undefined,
+            sprite_color: undefined
+        },
+        
+        // State flags
+        flags: {
+            controls_enabled: true,
+            is_sliding: false,
+            is_driving: false,
+            can_interact: true
+        }
+    };
+    
+    // Initialize animation frame data
+    PlayerManager_InitializeAnimations();
+    
+    LogMessage(global.LogLevel.INFO, "PlayerManager initialized");
+}
+
+/// @function PlayerManager_InitializeAnimations()
+/// @description Sets up animation data for the player
+function PlayerManager_InitializeAnimations() {
+    var _player = global.gameState.player;
+    
+    // Frame data for walking (8 directions, 3 frames each)
+    _player.animation.frame_data = {
+        walking: array_create(8),
+        actions: ds_map_create()
+    };
+    
+    // Walking animation frames
+    _player.animation.frame_data.walking[DOWN] = [0, 0, 24, 24, 0, 24, 24, 24, 0, 48, 24, 24];
+    _player.animation.frame_data.walking[UP] = [24, 0, 24, 24, 24, 24, 24, 24, 24, 48, 24, 24];
+    _player.animation.frame_data.walking[DOWN_LEFT] = [48, 0, 24, 24, 48, 24, 24, 24, 48, 48, 24, 24];
+    _player.animation.frame_data.walking[DOWN_RIGHT] = [72, 0, 24, 24, 72, 24, 24, 24, 72, 48, 24, 24];
+    _player.animation.frame_data.walking[LEFT] = [96, 0, 24, 24, 96, 24, 24, 24, 96, 48, 24, 24];
+    _player.animation.frame_data.walking[RIGHT] = [120, 0, 24, 24, 120, 24, 24, 24, 120, 48, 24, 24];
+    _player.animation.frame_data.walking[UP_RIGHT] = [144, 0, 24, 24, 144, 24, 24, 24, 144, 48, 24, 24];
+    _player.animation.frame_data.walking[UP_LEFT] = [168, 0, 24, 24, 168, 24, 24, 24, 168, 48, 24, 24];
+    
+    // Action animations
+    var _actions = _player.animation.frame_data.actions;
+    
+    // Sit animation
+    ds_map_add(_actions, "sit", {
+        frames: [
+            [0, 72, 24, 24], [24, 72, 24, 24], [48, 72, 24, 24], [72, 72, 24, 24],
+            [96, 72, 24, 24], [120, 72, 24, 24], [144, 72, 24, 24], [168, 72, 24, 24]
+        ],
+        speed: 0,
+        loop: false,
+        sprite_body: "spr_player_body",
+        sprite_color: "spr_player_colour"
+    });
+    
+    // Wave animation
+    ds_map_add(_actions, "wave", {
+        frames: [
+            [0, 96, 24, 24], [24, 96, 24, 24], [48, 96, 24, 24], [72, 96, 24, 24],
+            [96, 96, 24, 24], [120, 96, 24, 24], [144, 96, 24, 24], [168, 96, 24, 24]
+        ],
+        speed: 0.1,
+        loop: true,
+        sprite_body: "spr_player_body",
+        sprite_color: "spr_player_colour"
+    });
+    
+    // Add other action animations similarly...
+}
+
+/// @function PlayerManager_Update()
+/// @description Updates player state and animations
+function PlayerManager_Update() {
+    var _player = global.gameState.player;
+    if (!instance_exists(_player.instance)) return;
+    
+    var _inst = _player.instance;
+    
+    // Update position
+    _player.position.x = _inst.x;
+    _player.position.y = _inst.y;
+    
+    // Handle movement if not in action
+    if (_player.action.current == "none" && _player.flags.controls_enabled) {
+        PlayerManager_HandleMovement();
+    }
+    
+    // Update action state
+    if (_player.action.current != "none") {
+        PlayerManager_UpdateAction();
+    }
+    
+    // Update animation
+    PlayerManager_UpdateAnimation();
+}
+
+/// @function PlayerManager_HandleMovement()
+/// @description Handles player movement input and physics
+function PlayerManager_HandleMovement() {
+    var _player = global.gameState.player;
+    var _inst = _player.instance;
+    
+    // Get input
+    var _right = keyboard_check(ord("D")) || keyboard_check(vk_right);
+    var _left = keyboard_check(ord("A")) || keyboard_check(vk_left);
+    var _up = keyboard_check(ord("W")) || keyboard_check(vk_up);
+    var _down = keyboard_check(ord("S")) || keyboard_check(vk_down);
+    
+    // Calculate movement
+    var _move_x = (_right - _left) * _player.movement.move_spd;
+    var _move_y = (_down - _up) * _player.movement.move_spd;
+    
+    // Apply sliding if active
+    if (_player.flags.is_sliding) {
+        // Sliding physics calculation here
+    }
+    
+    // Update facing direction
+    if (_move_x != 0 || _move_y != 0) {
+        _player.face = PlayerManager_CalculateFacing(_move_x, _move_y);
+    }
+    
+    // Apply movement with collision
+    _inst.xspd = _move_x;
+    _inst.yspd = _move_y;
+    
+    // Store movement state
+    _player.movement.xspd = _move_x;
+    _player.movement.yspd = _move_y;
+}
+
+/// @function PlayerManager_StartAction(action_name)
+/// @param {String} action_name Name of the action to start
+/// @returns {Bool} True if action started successfully
+function PlayerManager_StartAction(_action_name) {
+    var _player = global.gameState.player;
+    
+    // Check if action exists
+    if (!ds_map_exists(_player.animation.frame_data.actions, _action_name)) {
+        LogMessage(global.LogLevel.ERROR, "Invalid action name", _action_name);
+        return false;
+    }
+    
+    // Check if action is allowed
+    if (!_player.flags.controls_enabled) return false;
+    
+    // Get action data
+    var _action_data = _player.animation.frame_data.actions[? _action_name];
+    
+    // Start action
+    _player.action.current = _action_name;
+    _player.action.timer = 0;
+    _player.action.has_spawned_projectile = false;
+    _player.animation.frame_index = 0;
+    _player.animation.speed = _action_data.speed;
+    
+    LogMessage(global.LogLevel.INFO, "Started player action", _action_name);
+    return true;
+}
+
+/// @function PlayerManager_UpdateAction()
+/// @description Updates current player action state
+function PlayerManager_UpdateAction() {
+    var _player = global.gameState.player;
+    var _action_data = _player.animation.frame_data.actions[? _player.action.current];
+    
+    // Update action timer
+    _player.action.timer++;
+    
+    // Check for action completion
+    if (_action_data.loop == false) {
+        if (_player.animation.frame_index >= array_length(_action_data.frames)) {
+            PlayerManager_EndAction();
+        }
+    }
+}
+
+/// @function PlayerManager_EndAction()
+/// @description Ends the current player action
+function PlayerManager_EndAction() {
+    var _player = global.gameState.player;
+    
+    _player.action.current = "none";
+    _player.action.timer = 0;
+    _player.action.has_spawned_projectile = false;
+    _player.animation.frame_index = 0;
+    _player.animation.speed = 0;
+}
+
+/// @function PlayerManager_CalculateFacing(move_x, move_y)
+/// @param {Real} move_x Horizontal movement
+/// @param {Real} move_y Vertical movement
+/// @returns {Real} The calculated facing direction
+function PlayerManager_CalculateFacing(_move_x, _move_y) {
+    if (_move_y < 0) {
+        if (_move_x < 0) return UP_LEFT;
+        if (_move_x > 0) return UP_RIGHT;
+        return UP;
+    }
+    if (_move_y > 0) {
+        if (_move_x < 0) return DOWN_LEFT;
+        if (_move_x > 0) return DOWN_RIGHT;
+        return DOWN;
+    }
+    if (_move_x > 0) return RIGHT;
+    if (_move_x < 0) return LEFT;
+    
+    return global.gameState.player.face;
+} 
+Folder: D:\PenguinIsleProject\Penguin Isles\scripts\system
+File: QuestManager.gml
+/// @function QuestManager_Initialize()
+/// @description Initializes the quest management system
+function QuestManager_Initialize() {
+    global.gameState.quests = {
+        active: ds_list_create(),
+        completed: ds_list_create(),
+        available: ds_list_create(),
+        
+        // Quest definitions
+        definitions: {},
+        
+        // Quest progress tracking
+        progress: {},
+        
+        // Quest flags
+        flags: {},
+        
+        // Current tracked quest
+        tracked: undefined
+    };
+    
+    // Initialize quest definitions
+    QuestManager_InitializeQuests();
+    
+    LogMessage(global.LogLevel.INFO, "QuestManager initialized");
+}
+
+/// @function QuestManager_InitializeQuests()
+/// @description Defines all available quests
+function QuestManager_InitializeQuests() {
+    var _quests = global.gameState.quests.definitions;
+    
+    // Tour Guide Mystery Quest Line
+    _quests.FIND_TOUR_GUIDE = {
+        id: "FIND_TOUR_GUIDE",
+        title: "The Missing Tour Guide",
+        description: "The island's Tour Guide has mysteriously disappeared. Find clues about their whereabouts.",
+        type: "main",
+        stages: [
+            {
+                id: "TALK_TO_WITNESSES",
+                description: "Talk to penguins around the Town Center",
+                required: 3,
+                progress: 0
+            },
+            {
+                id: "FIND_GUIDE_HAT",
+                description: "Look for the Tour Guide's hat",
+                required: 1,
+                progress: 0
+            },
+            {
+                id: "REPORT_TO_MANAGER",
+                description: "Report your findings to the Manager",
+                required: 1,
+                progress: 0
+            }
+        ],
+        rewards: {
+            coins: 100,
+            items: ["Tour Hat"],
+            unlocks: ["INVESTIGATE_BOTS"]
+        },
+        prerequisites: []
+    };
+    
+    _quests.INVESTIGATE_BOTS = {
+        id: "INVESTIGATE_BOTS",
+        title: "Suspicious Bots",
+        description: "Strange bots have been spreading misinformation. Investigate their behavior.",
+        type: "main",
+        stages: [
+            {
+                id: "OBSERVE_BOTS",
+                description: "Observe bot behavior in different locations",
+                required: 4,
+                progress: 0
+            },
+            {
+                id: "COLLECT_EVIDENCE",
+                description: "Collect evidence of bot tampering",
+                required: 3,
+                progress: 0
+            }
+        ],
+        rewards: {
+            coins: 150,
+            items: ["EPF Phone"],
+            unlocks: ["TRACK_BOT_SIGNAL"]
+        },
+        prerequisites: ["FIND_TOUR_GUIDE"]
+    };
+    
+    // Add to available quests if prerequisites met
+    QuestManager_UpdateAvailableQuests();
+}
+
+/// @function QuestManager_UpdateAvailableQuests()
+/// @description Updates the list of available quests based on prerequisites
+function QuestManager_UpdateAvailableQuests() {
+    var _quests = global.gameState.quests;
+    var _definitions = _quests.definitions;
+    ds_list_clear(_quests.available);
+    
+    var _quest_ids = variable_struct_get_names(_definitions);
+    for (var i = 0; i < array_length(_quest_ids); i++) {
+        var _quest = _definitions[$ _quest_ids[i]];
+        
+        // Skip if already active or completed
+        if (ds_list_find_index(_quests.active, _quest.id) != -1) continue;
+        if (ds_list_find_index(_quests.completed, _quest.id) != -1) continue;
+        
+        // Check prerequisites
+        var _prerequisites_met = true;
+        for (var j = 0; j < array_length(_quest.prerequisites); j++) {
+            if (ds_list_find_index(_quests.completed, _quest.prerequisites[j]) == -1) {
+                _prerequisites_met = false;
+                break;
+            }
+        }
+        
+        if (_prerequisites_met) {
+            ds_list_add(_quests.available, _quest.id);
+        }
+    }
+}
+
+/// @function QuestManager_StartQuest(quest_id)
+/// @param {String} quest_id ID of the quest to start
+/// @returns {Bool} True if quest started successfully
+function QuestManager_StartQuest(_quest_id) {
+    var _quests = global.gameState.quests;
+    
+    // Validate quest exists
+    if (!variable_struct_exists(_quests.definitions, _quest_id)) {
+        LogMessage(global.LogLevel.ERROR, "Invalid quest ID", _quest_id);
+        return false;
+    }
+    
+    // Check if quest is available
+    if (ds_list_find_index(_quests.available, _quest_id) == -1) {
+        LogMessage(global.LogLevel.WARNING, "Quest not available", _quest_id);
+        return false;
+    }
+    
+    // Initialize quest progress
+    _quests.progress[$ _quest_id] = {
+        started_time: date_current_datetime(),
+        current_stage: 0,
+        stages: array_create(array_length(_quests.definitions[$ _quest_id].stages))
+    };
+    
+    // Add to active quests
+    ds_list_add(_quests.active, _quest_id);
+    
+    // Remove from available quests
+    ds_list_delete(_quests.available, ds_list_find_index(_quests.available, _quest_id));
+    
+    // Set as tracked quest if none is tracked
+    if (_quests.tracked == undefined) {
+        _quests.tracked = _quest_id;
+    }
+    
+    LogMessage(global.LogLevel.INFO, "Quest started", {
+        quest: _quest_id,
+        time: _quests.progress[$ _quest_id].started_time
+    });
+    
+    return true;
+}
+
+/// @function QuestManager_UpdateProgress(quest_id, stage_id, amount)
+/// @param {String} quest_id ID of the quest to update
+/// @param {String} stage_id ID of the stage to update
+/// @param {Real} amount Amount to progress by
+/// @returns {Bool} True if stage completed
+function QuestManager_UpdateProgress(_quest_id, _stage_id, _amount = 1) {
+    var _quests = global.gameState.quests;
+    var _quest = _quests.definitions[$ _quest_id];
+    var _progress = _quests.progress[$ _quest_id];
+    
+    if (_progress == undefined) return false;
+    
+    var _current_stage = _quest.stages[_progress.current_stage];
+    if (_current_stage.id != _stage_id) return false;
+    
+    _progress.stages[_progress.current_stage] += _amount;
+    
+    // Check if stage is complete
+    if (_progress.stages[_progress.current_stage] >= _current_stage.required) {
+        return QuestManager_AdvanceStage(_quest_id);
+    }
+    
+    return false;
+}
+
+/// @function QuestManager_AdvanceStage(quest_id)
+/// @param {String} quest_id ID of the quest to advance
+/// @returns {Bool} True if quest completed
+function QuestManager_AdvanceStage(_quest_id) {
+    var _quests = global.gameState.quests;
+    var _quest = _quests.definitions[$ _quest_id];
+    var _progress = _quests.progress[$ _quest_id];
+    
+    _progress.current_stage++;
+    
+    // Check if quest is complete
+    if (_progress.current_stage >= array_length(_quest.stages)) {
+        return QuestManager_CompleteQuest(_quest_id);
+    }
+    
+    LogMessage(global.LogLevel.INFO, "Quest stage advanced", {
+        quest: _quest_id,
+        stage: _progress.current_stage
+    });
+    
+    return false;
+}
+
+/// @function QuestManager_CompleteQuest(quest_id)
+/// @param {String} quest_id ID of the quest to complete
+/// @returns {Bool} True if quest completed successfully
+function QuestManager_CompleteQuest(_quest_id) {
+    var _quests = global.gameState.quests;
+    var _quest = _quests.definitions[$ _quest_id];
+    
+    // Remove from active quests
+    var _active_index = ds_list_find_index(_quests.active, _quest_id);
+    if (_active_index != -1) {
+        ds_list_delete(_quests.active, _active_index);
+    }
+    
+    // Add to completed quests
+    ds_list_add(_quests.completed, _quest_id);
+    
+    // Grant rewards
+    if (variable_struct_exists(_quest, "rewards")) {
+        // Add coins
+        if (variable_struct_exists(_quest.rewards, "coins")) {
+            // Assuming we have a function to add coins
+            // AddCoins(_quest.rewards.coins);
+        }
+        
+        // Add items
+        if (variable_struct_exists(_quest.rewards, "items")) {
+            for (var i = 0; i < array_length(_quest.rewards.items); i++) {
+                InventoryManager_AddItem(_quest.rewards.items[i]);
+            }
+        }
+        
+        // Unlock new quests
+        if (variable_struct_exists(_quest.rewards, "unlocks")) {
+            for (var i = 0; i < array_length(_quest.rewards.unlocks); i++) {
+                _quests.flags[$ _quest.rewards.unlocks[i]] = true;
+            }
+        }
+    }
+    
+    // Update available quests
+    QuestManager_UpdateAvailableQuests();
+    
+    // Update tracked quest if needed
+    if (_quests.tracked == _quest_id) {
+        _quests.tracked = undefined;
+    }
+    
+    LogMessage(global.LogLevel.INFO, "Quest completed", {
+        quest: _quest_id,
+        rewards: _quest.rewards
+    });
+    
+    return true;
+} 
+Folder: D:\PenguinIsleProject\Penguin Isles\scripts\system
+File: RoomStateManager.gml
+/// @function RoomStateManager_Initialize()
+/// @description Initializes the room state management system
+function RoomStateManager_Initialize() {
+    // Make sure we use the existing room_states data structure
+    if (!variable_global_exists("room_states") || !ds_exists(global.room_states, ds_type_map)) {
+        global.room_states = ds_map_create();
+    }
+    
+    show_debug_message("[INFO] RoomStateManager initialized");
+}
+
+/// @function RoomStateManager_SaveState(roomId)
+/// @param {Real} roomId The room ID to save state for
+function RoomStateManager_SaveState(_roomId) {
+    var _roomName = room_get_name(_roomId);
+    
+    show_debug_message("[INFO] RoomStateManager: Saving state for room: " + _roomName);
+    
+    if (!ds_exists(global.room_states, ds_type_map)) {
+        show_debug_message("[ERROR] RoomStateManager: global.room_states map does not exist");
+        global.room_states = ds_map_create();
+    }
+    
+    var _stateArray = [];
+    
+    with (all) {
+        // Skip controller and UI objects
+        if (object_index == obj_controller || object_index == obj_ui_manager) continue;
+        
+        if (variable_instance_exists(id, "is_savable") && is_savable) {
+            var _stateData = {
+                object_index_name: object_get_name(object_index),
+                x: x,
+                y: y,
+                image_xscale: image_xscale ?? 1,
+                image_yscale: image_yscale ?? 1,
+                image_blend: image_blend ?? c_white,
+                image_alpha: image_alpha ?? 1
+            };
+            
+            // Store common variables if they exist
+            if (variable_instance_exists(id, "face")) {
+                _stateData.face = face;
+            }
+            
+            // Store object-specific properties
+            if (object_index == obj_icetruck || object_index == obj_icetruck_broken) {
+                if (variable_instance_exists(id, "icetruck_tint")) {
+                    _stateData.icetruck_tint = icetruck_tint;
+                }
+                
+                if (variable_instance_exists(id, "is_driveable")) {
+                    _stateData.is_driveable = is_driveable;
+                }
+            }
+            else if (object_get_parent(object_index) == obj_pickup_item || 
+                     object_index == obj_dropped_item) {
+                if (variable_instance_exists(id, "item_name")) {
+                    _stateData.item_name = item_name;
+                }
+            }
+            else if (object_index == obj_puffle) {
+                if (variable_instance_exists(id, "following_player")) {
+                    _stateData.following_player = following_player;
+                }
+                
+                if (variable_instance_exists(id, "color")) {
+                    _stateData.puffle_color = color;
+                }
+                
+                if (variable_instance_exists(id, "state")) {
+                    _stateData.puffle_state = state;
+                }
+            }
+            
+            array_push(_stateArray, _stateData);
+        }
+    }
+    
+    // Add or replace the state
+    if (ds_map_exists(global.room_states, _roomName)) {
+        ds_map_replace(global.room_states, _roomName, _stateArray);
+    } else {
+        ds_map_add(global.room_states, _roomName, _stateArray);
+    }
+    
+    show_debug_message("[INFO] RoomStateManager: Saved state for room: " + _roomName + 
+                     " with " + string(array_length(_stateArray)) + " objects");
+                     
+    return true;
+}
+
+/// @function RoomStateManager_LoadState(roomName, isFreshLoad)
+/// @param {String} roomName The name of the room to load state for
+/// @param {Bool} isFreshLoad Whether this is a fresh game load
+function RoomStateManager_LoadState(_roomName, _isFreshLoad) {
+    show_debug_message("[INFO] RoomStateManager_LoadState called for: " + _roomName);
+    
+    if (!ds_exists(global.room_states, ds_type_map)) {
+        show_debug_message("[ERROR] RoomStateManager: global.room_states map does not exist");
+        return false;
+    }
+    
+    if (!ds_map_exists(global.room_states, _roomName)) {
+        show_debug_message("[INFO] RoomStateManager: No saved state found for room: " + _roomName);
+        return false;
+    }
+    
+    var _stateArray = global.room_states[? _roomName];
+    if (!is_array(_stateArray)) {
+        show_debug_message("[ERROR] RoomStateManager: Invalid room state format for: " + _roomName);
+        return false;
+    }
+    
+    show_debug_message("[INFO] RoomStateManager: Found state for room: " + _roomName + 
+                      " with " + string(array_length(_stateArray)) + " objects");
+    
+    if (_isFreshLoad) {
+        show_debug_message("[INFO] RoomStateManager: Fresh load - recreating instances");
+        
+        for (var i = 0; i < array_length(_stateArray); i++) {
+            var _state = _stateArray[i];
+            
+            if (!is_struct(_state)) {
+                show_debug_message("[WARNING] RoomStateManager: State entry " + string(i) + " is not a struct");
+                continue;
+            }
+            
+            if (!variable_struct_exists(_state, "object_index_name")) {
+                show_debug_message("[WARNING] RoomStateManager: State entry " + string(i) + " missing object_index_name");
+                continue;
+            }
+            
+            var _objIndex = asset_get_index(_state.object_index_name);
+            if (_objIndex == -1 || !object_exists(_objIndex)) {
+                show_debug_message("[WARNING] RoomStateManager: Object does not exist: " + _state.object_index_name);
+                continue;
+            }
+            
+            // Skip certain objects
+            if (object_is_ancestor(_objIndex, obj_player_base) || 
+                _objIndex == obj_controller || 
+                _objIndex == obj_ui_manager) {
+                show_debug_message("[INFO] RoomStateManager: Skipping reserved object: " + _state.object_index_name);
+                continue;
+            }
+            
+            // Skip follower puffles
+            var _isFollower = (_objIndex == obj_puffle && 
+                              variable_struct_exists(_state, "following_player") && 
+                              _state.following_player);
+            if (_isFollower) {
+                show_debug_message("[INFO] RoomStateManager: Skipping follower puffle");
+                continue;
+            }
+            
+            // Create instance
+            var _inst = instance_create_layer(_state.x, _state.y, "Instances", _objIndex);
+            
+            if (instance_exists(_inst)) {
+                _inst.is_savable = true;
+                
+                // Apply common properties
+                if (variable_struct_exists(_state, "face") && variable_instance_exists(_inst, "face")) {
+                    _inst.face = _state.face;
+                } else if (variable_instance_exists(_inst, "face")) {
+                    _inst.face = DOWN;
+                }
+                
+                if (variable_struct_exists(_state, "image_xscale")) _inst.image_xscale = _state.image_xscale;
+                else _inst.image_xscale = 1;
+                
+                if (variable_struct_exists(_state, "image_yscale")) _inst.image_yscale = _state.image_yscale;
+                else _inst.image_yscale = 1;
+                
+                if (variable_struct_exists(_state, "image_blend")) _inst.image_blend = _state.image_blend;
+                else _inst.image_blend = c_white;
+                
+                if (variable_struct_exists(_state, "image_alpha")) _inst.image_alpha = _state.image_alpha;
+                else _inst.image_alpha = 1;
+                
+                // Apply object-specific properties
+                if (_objIndex == obj_icetruck || _objIndex == obj_icetruck_broken) {
+                    if (variable_struct_exists(_state, "icetruck_tint") && 
+                        variable_instance_exists(_inst,"icetruck_tint")) {
+                        _inst.icetruck_tint = _state.icetruck_tint;
+                    }
+                    
+                    if (variable_struct_exists(_state, "is_driveable") && 
+                        variable_instance_exists(_inst,"is_driveable")) {
+                        _inst.is_driveable = _state.is_driveable;
+                    }
+                    
+                    if (_objIndex == obj_icetruck_broken && 
+                        variable_instance_exists(_inst, "repair_required")) {
+                        _inst.repair_required = true;
+                    }
+                    
+                    if (_objIndex == obj_icetruck && 
+                        variable_instance_exists(_inst, "repair_required")) {
+                        _inst.repair_required = false;
+                    }
+                }
+                else if (object_get_parent(_inst.object_index) == obj_pickup_item || 
+                         _inst.object_index == obj_dropped_item) {
+                    if (variable_struct_exists(_state, "item_name") && 
+                        variable_instance_exists(_inst,"item_name")) {
+                        _inst.item_name = _state.item_name;
+                    }
+                }
+                else if (_objIndex == obj_puffle) {
+                    if (variable_instance_exists(_inst,"following_player")) {
+                        _inst.following_player = false;
+                    }
+                    
+                    if (variable_struct_exists(_state, "puffle_color") && 
+                        variable_instance_exists(_inst,"color")) {
+                        _inst.color = _state.puffle_color;
+                    }
+                    
+                    if (variable_struct_exists(_state, "puffle_state") && 
+                        variable_instance_exists(_inst,"state")) {
+                        _inst.state = _state.puffle_state;
+                    }
+                }
+                
+                show_debug_message("[INFO] RoomStateManager: Created " + _state.object_index_name + 
+                                 " at (" + string(_state.x) + "," + string(_state.y) + ")");
+            }
+        }
+        
+        show_debug_message("[INFO] RoomStateManager: Finished creating instances for " + _roomName);
+    } else {
+        show_debug_message("[INFO] RoomStateManager: Normal room entry - not creating instances");
+    }
+    
+    return true;
+} 
+Folder: D:\PenguinIsleProject\Penguin Isles\scripts\system
+File: SaveLoadManager.gml
+/// @function SaveLoadManager_Initialize()
+/// @description Initializes the save/load system
+function SaveLoadManager_Initialize() {
+    global.gameState.saveSystem = {
+        version: "1.0.0",
+        lastSaveTime: undefined,
+        autoSaveEnabled: true,
+        autoSaveInterval: 300, // 5 minutes in seconds
+        saveFilePath: "savegame.sav"
+    };
+    
+    LogMessage(global.LogLevel.INFO, "SaveLoadManager initialized");
+}
+
+/// @function SaveLoadManager_SaveGame()
+/// @description Saves the current game state to file
+/// @returns {Bool} True if save was successful
+function SaveLoadManager_SaveGame() {
+    try {
+        var _saveData = {
+            // Save metadata
+            version: global.gameState.saveSystem.version,
+            timestamp: date_current_datetime(),
+            
+            // Game state
+            player: {
+                x: GlobalState_Get("player.position.x"),
+                y: GlobalState_Get("player.position.y"),
+                skin: GlobalState_Get("player.skin"),
+                color: GlobalState_Get("player.color"),
+                face: GlobalState_Get("player.face")
+            },
+            
+            // Room state
+            currentRoom: room_get_name(room),
+            roomStates: {},
+            
+            // Inventory state
+            inventory: {
+                slots: GlobalState_Get("inventory.slots"),
+                equipped: SaveLoadManager_ConvertDsMapToStruct(
+                    GlobalState_Get("inventory.equipped")
+                ),
+                activeSlot: GlobalState_Get("inventory.activeSlot")
+            },
+            
+            // Quest and progress state
+            gameProgress: {
+                activeQuests: ds_list_to_array_recursive(global.active_quests),
+                completedQuests: ds_list_to_array_recursive(global.completed_quests),
+                flags: global.gameFlags ?? {}
+            }
+        };
+        
+        // Convert room states from ds_map to struct
+        var _roomStates = GlobalState_Get("room.states");
+        var _roomKeys = ds_map_keys_to_array(_roomStates);
+        for (var i = 0; i < array_length(_roomKeys); i++) {
+            var _key = _roomKeys[i];
+            _saveData.roomStates[$ _key] = ds_map_find_value(_roomStates, _key);
+        }
+        
+        // Convert save data to JSON
+        var _jsonString = json_stringify(_saveData);
+        if (_jsonString == "") {
+            LogMessage(global.LogLevel.ERROR, "Failed to stringify save data");
+            return false;
+        }
+        
+        // Write to file
+        var _file = file_text_open_write(global.gameState.saveSystem.saveFilePath);
+        if (_file == -1) {
+            LogMessage(global.LogLevel.ERROR, "Failed to open save file for writing");
+            return false;
+        }
+        
+        file_text_write_string(_file, _jsonString);
+        file_text_close(_file);
+        
+        // Update last save time
+        global.gameState.saveSystem.lastSaveTime = date_current_datetime();
+        
+        LogMessage(global.LogLevel.INFO, "Game saved successfully", {
+            timestamp: _saveData.timestamp,
+            room: _saveData.currentRoom
+        });
+        
+        return true;
+    } catch(_error) {
+        LogMessage(global.LogLevel.ERROR, "Error saving game", _error);
+        return false;
+    }
+}
+
+/// @function SaveLoadManager_LoadGame()
+/// @description Loads game state from file
+/// @returns {Bool} True if load was successful
+function SaveLoadManager_LoadGame() {
+    try {
+        if (!file_exists(global.gameState.saveSystem.saveFilePath)) {
+            LogMessage(global.LogLevel.ERROR, "Save file does not exist");
+            return false;
+        }
+        
+        // Read save file
+        var _file = file_text_open_read(global.gameState.saveSystem.saveFilePath);
+        if (_file == -1) {
+            LogMessage(global.LogLevel.ERROR, "Failed to open save file for reading");
+            return false;
+        }
+        
+        var _jsonString = "";
+        while (!file_text_eof(_file)) {
+            _jsonString += file_text_readln(_file);
+        }
+        file_text_close(_file);
+        
+        // Parse save data
+        var _saveData = json_parse(_jsonString);
+        if (!is_struct(_saveData)) {
+            LogMessage(global.LogLevel.ERROR, "Invalid save data format");
+            return false;
+        }
+        
+        // Version check
+        if (_saveData.version != global.gameState.saveSystem.version) {
+            LogMessage(global.LogLevel.WARNING, "Save version mismatch", {
+                save: _saveData.version,
+                current: global.gameState.saveSystem.version
+            });
+        }
+        
+        // Set loading flag
+        GlobalState_Set("game.is_loading", true);
+        
+        // Restore player state
+        GlobalState_Set("player.position.x", _saveData.player.x);
+        GlobalState_Set("player.position.y", _saveData.player.y);
+        GlobalState_Set("player.skin", _saveData.player.skin);
+        GlobalState_Set("player.color", _saveData.player.color);
+        GlobalState_Set("player.face", _saveData.player.face);
+        
+        // Restore inventory
+        GlobalState_Set("inventory.slots", _saveData.inventory.slots);
+        SaveLoadManager_ConvertStructToDsMap(
+            _saveData.inventory.equipped,
+            GlobalState_Get("inventory.equipped")
+        );
+        GlobalState_Set("inventory.activeSlot", _saveData.inventory.activeSlot);
+        
+        // Restore room states
+        var _roomStates = GlobalState_Get("room.states");
+        ds_map_clear(_roomStates);
+        var _roomNames = variable_struct_get_names(_saveData.roomStates);
+        for (var i = 0; i < array_length(_roomNames); i++) {
+            var _key = _roomNames[i];
+            ds_map_add(_roomStates, _key, _saveData.roomStates[$ _key]);
+        }
+        
+        // Set target room
+        GlobalState_Set("room.target", asset_get_index(_saveData.currentRoom));
+        
+        // Restore quest state
+        ds_list_clear(global.active_quests);
+        ds_list_clear(global.completed_quests);
+        array_copy_to_list(_saveData.gameProgress.activeQuests, global.active_quests);
+        array_copy_to_list(_saveData.gameProgress.completedQuests, global.completed_quests);
+        
+        // Restore game flags
+        global.gameFlags = _saveData.gameProgress.flags;
+        
+        LogMessage(global.LogLevel.INFO, "Game loaded successfully", {
+            timestamp: _saveData.timestamp,
+            room: _saveData.currentRoom
+        });
+        
+        return true;
+    } catch(_error) {
+        LogMessage(global.LogLevel.ERROR, "Error loading game", _error);
+        GlobalState_Set("game.is_loading", false);
+        return false;
+    }
+}
+
+/// @function SaveLoadManager_ConvertDsMapToStruct(map)
+/// @param {Id.DsMap} map The ds_map to convert
+/// @returns {Struct} A struct representation of the map
+function SaveLoadManager_ConvertDsMapToStruct(_map) {
+    var _struct = {};
+    var _keys = ds_map_keys_to_array(_map);
+    
+    for (var i = 0; i < array_length(_keys); i++) {
+        var _key = _keys[i];
+        _struct[$ _key] = ds_map_find_value(_map, _key);
+    }
+    
+    return _struct;
+}
+
+/// @function SaveLoadManager_ConvertStructToDsMap(struct, map)
+/// @param {Struct} struct The struct to convert
+/// @param {Id.DsMap} map The ds_map to populate
+function SaveLoadManager_ConvertStructToDsMap(_struct, _map) {
+    ds_map_clear(_map);
+    var _keys = variable_struct_get_names(_struct);
+    
+    for (var i = 0; i < array_length(_keys); i++) {
+        var _key = _keys[i];
+        ds_map_add(_map, _key, _struct[$ _key]);
+    }
+}
+
+/// @function SaveLoadManager_AutoSave()
+/// @description Handles auto-saving if enabled
+function SaveLoadManager_AutoSave() {
+    if (!global.gameState.saveSystem.autoSaveEnabled) return;
+    
+    var _currentTime = date_current_datetime();
+    var _lastSaveTime = global.gameState.saveSystem.lastSaveTime;
+    
+    if (_lastSaveTime == undefined || 
+        date_second_span(_lastSaveTime, _currentTime) >= global.gameState.saveSystem.autoSaveInterval) {
+        SaveLoadManager_SaveGame();
+    }
+} 
+Folder: D:\PenguinIsleProject\Penguin Isles\scripts\system
+File: SystemInitializer.gml
+/// @function SystemInitializer_Initialize()
+/// @description Initializes all game systems in the correct order
+function SystemInitializer_Initialize() {
+    // Initialize core systems first
+    ErrorLogger_Initialize();
+    GlobalStateManager_Initialize();
+    
+    // Initialize gameplay systems
+    RoomStateManager_Initialize();
+    InventoryManager_Initialize();
+    
+    // Initialize UI systems last
+    UIStateManager_Initialize();
+    
+    LogMessage(global.LogLevel.INFO, "All systems initialized");
+}
+
+/// @function SystemInitializer_Cleanup()
+/// @description Cleans up all systems properly
+function SystemInitializer_Cleanup() {
+    // Clean up UI systems first
+    var _activeElements = global.gameState.ui.activeElements;
+    if (ds_exists(_activeElements, ds_type_list)) {
+        ds_list_destroy(_activeElements);
+    }
+    
+    // Clean up gameplay systems
+    var _roomStates = global.gameState.room.states;
+    if (ds_exists(_roomStates, ds_type_map)) {
+        ds_map_destroy(_roomStates);
+    }
+    
+    var _equipped = global.gameState.inventory.equipped;
+    if (ds_exists(_equipped, ds_type_map)) {
+        ds_map_destroy(_equipped);
+    }
+    
+    LogMessage(global.LogLevel.INFO, "All systems cleaned up");
+} 
+Folder: D:\PenguinIsleProject\Penguin Isles\scripts\system
+File: UIStateManager.gml
+/// @function UIStateManager_Initialize()
+/// @description Initializes the UI state management system
+function UIStateManager_Initialize() {
+    global.gameState.ui = {
+        // Menu states
+        menus: {
+            pause: false,
+            inventory: false,
+            colorPicker: false,
+            shop: false,
+            dialog: false
+        },
+        
+        // Active UI elements
+        activeElements: ds_list_create(),
+        
+        // UI settings
+        settings: {
+            scale: 2.2,
+            showHUD: true,
+            showDebug: false
+        },
+        
+        // Dialog system state
+        dialog: {
+            active: false,
+            text: "",
+            speaker: "",
+            options: [],
+            callback: undefined
+        }
+    };
+    
+    LogMessage(global.LogLevel.INFO, "UIStateManager initialized");
+}
+
+/// @function UIStateManager_ShowMenu(menuName)
+/// @param {String} menuName Name of the menu to show
+/// @returns {Bool} True if menu was shown successfully
+function UIStateManager_ShowMenu(_menuName) {
+    try {
+        if (!variable_struct_exists(global.gameState.ui.menus, _menuName)) {
+            LogMessage(global.LogLevel.ERROR, "Invalid menu name", _menuName);
+            return false;
+        }
+        
+        // Close other menus first
+        UIStateManager_CloseAllMenus();
+        
+        // Show requested menu
+        global.gameState.ui.menus[$ _menuName] = true;
+        
+        // Update game state
+        GlobalState_Set("game.is_paused", true);
+        
+        LogMessage(global.LogLevel.INFO, "Menu shown", _menuName);
+        return true;
+    } catch(_error) {
+        LogMessage(global.LogLevel.ERROR, "Error showing menu", {
+            menu: _menuName,
+            error: _error
+        });
+        return false;
+    }
+}
+
+/// @function UIStateManager_CloseAllMenus()
+function UIStateManager_CloseAllMenus() {
+    var _menus = variable_struct_get_names(global.gameState.ui.menus);
+    for (var i = 0; i < array_length(_menus); i++) {
+        global.gameState.ui.menus[$ _menus[i]] = false;
+    }
+    
+    // Resume game
+    GlobalState_Set("game.is_paused", false);
+    
+    LogMessage(global.LogLevel.INFO, "All menus closed");
+}
+
+/// @function UIStateManager_ShowDialog(text, [speaker], [options], [callback])
+/// @param {String} text Dialog text to display
+/// @param {String} [speaker] Optional speaker name
+/// @param {Array} [options] Optional dialog options
+/// @param {Function} [callback] Optional callback when dialog completes
+function UIStateManager_ShowDialog(_text, _speaker = "", _options = [], _callback = undefined) {
+    try {
+        global.gameState.ui.dialog = {
+            active: true,
+            text: _text,
+            speaker: _speaker,
+            options: _options,
+            callback: _callback
+        };
+        
+        // Add dialog to active UI elements
+        ds_list_add(global.gameState.ui.activeElements, "dialog");
+        
+        LogMessage(global.LogLevel.INFO, "Dialog shown", {
+            speaker: _speaker,
+            text: _text
+        });
+        
+        return true;
+    } catch(_error) {
+        LogMessage(global.LogLevel.ERROR, "Error showing dialog", {
+            text: _text,
+            error: _error
+        });
+        return false;
+    }
+} 
 Folder: D:\PenguinIsleProject\Penguin Isles\scripts\unequip_item
 File: unequip_item.gml
 /// @function unequip_item(slot)

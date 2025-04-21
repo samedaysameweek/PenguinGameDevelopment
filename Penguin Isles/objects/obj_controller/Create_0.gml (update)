@@ -1,0 +1,45 @@
+/// Create Event for obj_controller
+
+// --- ONE-TIME STATIC DATA INITIALIZATION ---
+// Check if static data has already been initialized
+if (!variable_global_exists("static_data_initialized") || global.static_data_initialized == false) {
+    scr_initialize_item_data(); // Call the new script
+    global.static_data_initialized = true; // Set flag to prevent re-running
+    show_debug_message("obj_controller Create: Executed scr_initialize_item_data.");
+} else {
+    show_debug_message("obj_controller Create: Static item data already initialized, skipping scr_initialize_item_data.");
+}
+
+// --- INITIALIZE NEW SYSTEMS ---
+// Only initialize if the functions exist and haven't been initialized yet
+if (!variable_global_exists("systems_initialized") || global.systems_initialized == false) {
+    var has_error_logger = script_exists(asset_get_index("ErrorLogger_Initialize"));
+    var has_room_state_manager = script_exists(asset_get_index("RoomStateManager_Initialize"));
+    
+    if (has_error_logger) {
+        show_debug_message("obj_controller: Initializing new system - ErrorLogger");
+        ErrorLogger_Initialize();
+    }
+    
+    if (has_room_state_manager) {
+        show_debug_message("obj_controller: Initializing new system - RoomStateManager");
+        RoomStateManager_Initialize();
+    }
+    
+    if (script_exists(asset_get_index("GlobalStateManager_Initialize"))) {
+        show_debug_message("obj_controller: Initializing new system - GlobalStateManager");
+        GlobalStateManager_Initialize();
+    }
+    
+    if (script_exists(asset_get_index("InventoryManager_Initialize"))) {
+        show_debug_message("obj_controller: Initializing new system - InventoryManager");
+        InventoryManager_Initialize();
+    }
+    
+    global.systems_initialized = true;
+} else {
+    show_debug_message("obj_controller: New systems already initialized, skipping initialization.");
+}
+// --- END INITIALIZE NEW SYSTEMS ---
+
+// Rest of obj_controller Create event remains unchanged... 

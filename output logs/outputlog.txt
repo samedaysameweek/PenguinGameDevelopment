@@ -21,30 +21,20 @@ Done ObjectLists
 Done Extension_Initialize
 About to startroom
 Number of buttons found: 3
-Total memory used = 12492747 (0x00be9fcb) bytes 11.91MB
-Free memory = 5994056 (0x005b7648) bytes 5.72MB
-Peak memory used = 13304810 (0x00cb03ea) bytes 12.69MB
+Total memory used = 12456683 (0x00be12eb) bytes 11.88MB
+Free memory = 5999688 (0x005b8c48) bytes 5.72MB
+Peak memory used = 13271418 (0x00ca817a) bytes 12.66MB
 **********************************.
 Entering main loop.
 **********************************.
+Number of buttons found: 3
 obj_menu_button: Start button selected. Setting is_loading_game=false.
 obj_menu_button: New Game selected. Setting is_loading_game=false.
 obj_menu_button: Play button selected. Setting is_loading_game=false.
---- Running scr_initialize_item_data ---
-Defined global.item_definitions struct.
-Created global.item_index_map
-Created global.item_type_map
-Created global.item_sprite_map
-Created global.item_object_map
-Ensured item lookup maps exist.
-Populated item lookup maps (Index, Type, Sprite, Object).
---- Finished scr_initialize_item_data ---
-obj_controller Create: Executed scr_initialize_item_data.
 --- Running init_globals (Refactored) ---
 Ensured global.inventory_expanded exists.
 Ensured global.game_paused exists.
 Ensured global.is_pause_menu_active exists.
-Ensured global.player_controls_enabled exists.
 Ensured global.colour_picker_active exists.
 Ensured global.party_hat_visible exists.
 Ensured global.beta_hat_visible exists.
@@ -60,12 +50,7 @@ init_globals: Created new global.camera. ID: 193
 init_globals: Setting default values for NEW GAME.
 Finished setting default values via init_globals.
 Initialized global.is_game_paused in obj_controller Create.
-obj_player Create: Applying initial player color: 52479
-obj_player: Initialized. Driving state: 0
-Restored player color: 52479
-Player instance created: ref instance 100653
-obj_controller created with ID: ref instance 100014
-obj_controller Create event executed
+Initialized global.chat_active in obj_controller Create.
 DEBUG: obj_initializer Create Event START
 DEBUG: global.following_puffles already exists.
 DEBUG: global.equipped_items already exists.
@@ -82,202 +67,740 @@ obj_controller Room End: Transitioning from room: rm_init
 Skipping room state save: Non-gameplay room (rm_init).
 Spawn Point marker created at (146, 155)
 CONTROLLER ROOM START: Entering room: rm_welcome_room
-CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
-CONTROLLER ROOM START (Default): Final default/spawn pos (146,155) Face: 3
-CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
-CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
+CONTROLLER ROOM START: Loading state for room: rm_welcome_room
+CONTROLLER ROOM START: WARNING - No room state load function available!
+CONTROLLER ROOM START: Spawn point found, but missing 'face' variable. Defaulting to DOWN.
+CONTROLLER ROOM START: Using spawn point pos (146,155) Face: 3
+CONTROLLER ROOM START: global.current_skin was not set. Defaulting to 'player'.
 obj_player Create: Applying initial player color: 52479
 obj_player: Initialized. Driving state: 0
-Created player instance: ref instance 100663 skin: player at (146,155)
-CONTROLLER ROOM START: Calling load_room_state for: rm_welcome_room (Is Fresh Load: 0)
-Attempting to load state for room: rm_welcome_room (Fresh Load: 0)
-Skipping instance destruction (Normal Room Entry).
-No state found for room: rm_welcome_room in global.room_states.
-Set camera view size to 288x216, border (0,0)
-Camera follow player ref instance 100663 INSTANT.
-CONTROLLER ROOM START: Finished setup for room: rm_welcome_room
+Created player instance: ref instance 100659 skin: player at (146,155)
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
 DEBUG: Resetting repair flag...
-DEBUG: Player detected on warp block ref instance 100037. Initiating warp.
-DEBUG: Valid target room: rm_plaza
-obj_warp initialized (Persistent: 0). Target Room: 0
-DEBUG: Player warp initiated. Cooldown started (2s). Alarm[0] set on warp block ref instance 100037
-DEBUG (Warp Anim End): Animation ended. Target Instance: ref instance 100663
-DEBUG (Warp Anim End): Setting global warp targets for player.
-DEBUG (Warp Anim End): Calling room_goto(rm_plaza)
-DEBUG (Warp Anim End): obj_warp instance destroyed.
-obj_controller Room End: Transitioning from room: rm_welcome_room
-Saving runtime state for leaving room: rm_welcome_room
-Room End WITH DEBUG: --- Start Instance Check ---
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100078 (obj_wrench_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100078
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100077 (obj_minershardhat_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100077
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100076 (obj_ghostcostume_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100076
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100075 (obj_tourhat_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100075
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100074 (obj_snowblaster_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100074
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100073 (obj_blacksunglasses_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100073
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100072 (obj_blackhoodie_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100072
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100084 (obj_puffle)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100084
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100071 (obj_boxpuffleo_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100071
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100083 (obj_toboggan)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100083
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100069 (obj_Jackhammer_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100069
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100068 (obj_snowshovel_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100068
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100067 (obj_beta_hat)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100067
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100066 (obj_battery)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100066
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100064 (obj_wood_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100064
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100065 (obj_snow_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100065
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100079 (obj_icetruck_broken)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100079
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100080 (obj_tube)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100080
-Room End WITH DEBUG: --- End Instance Check ---
-Room End DEBUG: Finished checking instances. Collected 18 savable states.
-Adding new room state array for: rm_welcome_room with size: 18
-Finished saving runtime state for room: rm_welcome_room
-CONTROLLER ROOM START: Entering room: rm_plaza
-CONTROLLER ROOM START (Warp): Using PLAYER warp target pos (255,360).
-CONTROLLER ROOM START: Clearing player warp target variables.
-CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
-obj_player Create: Applying initial player color: 52479
-obj_player: Initialized. Driving state: 0
-CONTROLLER ROOM START (Safety): Destroying potentially duplicate player instance: ID ref instance 100663 (obj_player)
-Created player instance: ref instance 100665 skin: player at (255,360)
-CONTROLLER ROOM START: Calling load_room_state for: rm_plaza (Is Fresh Load: 0)
-Attempting to load state for room: rm_plaza (Fresh Load: 0)
-Skipping instance destruction (Normal Room Entry).
-No state found for room: rm_plaza in global.room_states.
-Set camera view size to 288x216, border (0,0)
-Camera follow player ref instance 100665 INSTANT.
-CONTROLLER ROOM START: Finished setup for room: rm_plaza
-DEBUG: Stored player position: (206, 277)
-Switching to map room...
-obj_controller Room End: Transitioning from room: rm_plaza
-Saving runtime state for leaving room: rm_plaza
-Room End WITH DEBUG: --- Start Instance Check ---
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100137 (obj_boxpuffleo_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100137
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100182 (obj_tube)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100182
-Room End WITH DEBUG: --- End Instance Check ---
-Room End DEBUG: Finished checking instances. Collected 2 savable states.
-Adding new room state array for: rm_plaza with size: 2
-Finished saving runtime state for room: rm_plaza
-CONTROLLER ROOM START: Entering room: rm_map
-CONTROLLER ROOM START: Non-gameplay room detected...
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-Warping to Room: ref room rm_beach at (255, 130)
-obj_warp initialized (Persistent: 0). Target Room: 0
-obj_controller Room End: Transitioning from room: rm_map
-Skipping room state save: Non-gameplay room (rm_map).
-CONTROLLER ROOM START: Entering room: rm_beach
-CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
-CONTROLLER ROOM START (Default): Final default/spawn pos (250,200) Face: 3
-CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
-CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
-obj_player Create: Applying initial player color: 52479
-obj_player: Initialized. Driving state: 0
-CONTROLLER ROOM START (Safety): Destroying potentially duplicate player instance: ID ref instance 100665 (obj_player)
-Created player instance: ref instance 100667 skin: player at (250,200)
-CONTROLLER ROOM START: Calling load_room_state for: rm_beach (Is Fresh Load: 0)
-Attempting to load state for room: rm_beach (Fresh Load: 0)
-Skipping instance destruction (Normal Room Entry).
-No state found for room: rm_beach in global.room_states.
-Set camera view size to 288x216, border (0,0)
-Camera follow player ref instance 100667 INSTANT.
-CONTROLLER ROOM START: Finished setup for room: rm_beach
-Game Paused
-Calling game_end from obj_pause_menu Quit Game button
-###game_end###0
-obj_controller Room End: Transitioning from room: rm_beach
-Saving runtime state for leaving room: rm_beach
-Room End WITH DEBUG: --- Start Instance Check ---
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100374 (obj_tube_tower_decoration)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100374
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100379 (obj_tube)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100379
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100378 (obj_icetruck)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100378
-Room End WITH DEBUG: --- End Instance Check ---
-Room End DEBUG: Finished checking instances. Collected 3 savable states.
-Adding new room state array for: rm_beach with size: 3
-Finished saving runtime state for room: rm_beach
-Attempting to set gamepadcount to 0
-Script_Free called with 188 and global 25
-Unsetting previous scheduler resolution of 1
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+CRITICAL WARNING: global.item_sprite_map missing! Reinitializing.
+ERROR!!! :: ############################################################################################
+ERROR in action number 1
+of  Step Event0 for object obj_pickup_item:
+global variable name 'item_index_map' index (100162) not set before reading it.
+ at gml_Script_anon@1950@gml_Object_obj_inventory_Create_0 (line 43) -     if (!ds_exists(global.item_index_map, ds_type_map)) {
+############################################################################################
+gml_Script_anon@1950@gml_Object_obj_inventory_Create_0 (line 43)
+gml_Object_obj_pickup_item_Step_0 (line 6) -         var added = obj_inventory.inventory_add(item_name);

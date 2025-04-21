@@ -6,11 +6,11 @@ if (global.game_paused || global.is_pause_menu_active || global.chat_active) {
 }
 
 // --- Inventory Check Example ---
-if (instance_exists(obj_inventory)) {
-    if (obj_inventory.inventory_has("Wrench")) {
-        // Do something if the player has a wrench
-    }
-}
+//if (instance_exists(obj_inventory)) {
+//    if (obj_inventory.inventory_has("Wrench")) {
+//        // Do something if the player has a wrench
+//    }
+//}
 
 // --- Action Handling ---
 // Handle starting special actions (only when not driving and not already in an action)
