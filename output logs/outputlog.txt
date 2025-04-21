@@ -1,117 +1,7 @@
 Setting scheduler resolution to 1
 DirectX11: Using hardware device
 Resizing swap chain...
-Collision Event time(microsecs)=10
-Variable_Global_Init()
-PrepareGame()
-Audio_Init()
-Audio group 0 -> Loaded
-Attempting to set gamepadcount to 12
-Game_Prepare()
-Script_Prepare() 
-TimeLine_Prepare() 
-Object_Prepare() 
-Room_Prepare() 
-Finished PrepareGame() 
-Run_Start
-Done g_EffectsManager.Init()
-Done RenderStateManager
-CreateColPairs took 0.000000s 4 usecs for 126 object types obj_col_numb=0 physobjcount=1 resizes 0 final size 1
-Done ObjectLists
-Done Extension_Initialize
-About to startroom
-Number of buttons found: 3
-Total memory used = 12494191 (0x00bea56f) bytes 11.92MB
-Free memory = 5994440 (0x005b77c8) bytes 5.72MB
-Peak memory used = 13305686 (0x00cb0756) bytes 12.69MB
-**********************************.
-Entering main loop.
-**********************************.
-obj_menu_button: Start button selected. Setting is_loading_game=false.
-obj_menu_button: New Game selected. Setting is_loading_game=false.
-obj_menu_button: Play button selected. Setting is_loading_game=false.
---- Running scr_initialize_item_data ---
-Defined global.item_definitions struct.
-Created global.item_index_map
-Created global.item_type_map
-Created global.item_sprite_map
-Created global.item_object_map
-Ensured item lookup maps exist.
-Populated item lookup maps (Index, Type, Sprite, Object).
---- Finished scr_initialize_item_data ---
-obj_controller Create: Executed scr_initialize_item_data.
---- Running init_globals (Refactored) ---
-Ensured global.inventory_expanded exists.
-Ensured global.game_paused exists.
-Ensured global.is_pause_menu_active exists.
-Ensured global.player_controls_enabled exists.
-Ensured global.colour_picker_active exists.
-Ensured global.party_hat_visible exists.
-Ensured global.beta_hat_visible exists.
-Ensured global.skin_switching exists.
-Ensured global.following_puffles list exists.
-Ensured global.room_states map exists.
-Ensured global.active_quests list exists.
-Ensured global.completed_quests list exists.
-Ensured global.inventory array exists (Size 42).
-Ensured global.equipped_items map exists with slots.
-init_globals: global.camera variable does not exist. Creating camera.
-init_globals: Created new global.camera. ID: 193
-init_globals: Setting default values for NEW GAME.
-Finished setting default values via init_globals.
-Initialized global.is_game_paused in obj_controller Create.
-obj_player Create: Applying initial player color: 52479
-obj_player: Initialized. Driving state: 0
-Restored player color: 52479
-Player instance created: ref instance 100653
-obj_controller created with ID: ref instance 100014
-obj_controller Create event executed
-DEBUG: obj_initializer Create Event START
-DEBUG: global.following_puffles already exists.
-DEBUG: global.equipped_items already exists.
-obj_inventory Create: Initialized with size 42
-DEBUG: obj_inventory created.
-DEBUG: obj_map_icon created.
-DEBUG: obj_initializer Create Event FINISHED
-UI Manager initialized.
-rm_init: Creation Code Started.
-rm_init: global.target_room does NOT exist before check.
-rm_init: Not loading game. Proceeding to next room (New Game).
-rm_init: Creation Code Finished.
-obj_controller Room End: Transitioning from room: rm_init
-Skipping room state save: Non-gameplay room (rm_init).
-Spawn Point marker created at (146, 155)
-CONTROLLER ROOM START: Entering room: rm_welcome_room
-CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
-CONTROLLER ROOM START (Default): Final default/spawn pos (146,155) Face: 3
-CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
-CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
-obj_player Create: Applying initial player color: 52479
-obj_player: Initialized. Driving state: 0
-Created player instance: ref instance 100663 skin: player at (146,155)
-CONTROLLER ROOM START: Calling load_room_state for: rm_welcome_room (Is Fresh Load: 0)
-Attempting to load state for room: rm_welcome_room (Fresh Load: 0)
-Skipping instance destruction (Normal Room Entry).
-No state found for room: rm_welcome_room in global.room_states.
-Set camera view size to 288x216, border (0,0)
-Camera follow player ref instance 100663 INSTANT.
-CONTROLLER ROOM START: Finished setup for room: rm_welcome_room
-DEBUG: Resetting repair flag...
-DEBUG: Polar Bear detected on obj_warp_block. Warping.
-DEBUG: Valid target room identified: ref room rm_plaza
-DEBUG: Checking for duplicate player instance during polar bear warp.
-ERROR!!! :: ############################################################################################
-ERROR in action number 1
-of  Step Event0 for object obj_warp_block:
-Variable <unknown_object>.destroy(100893, -2147483648) not set before reading it.
- at gml_Object_obj_warp_block_Step_0 (line 53) -                 global.player_instance.destroy();
-############################################################################################
-gml_Object_obj_warp_block_Step_0 (line 53)
-
-Setting scheduler resolution to 1
-DirectX11: Using hardware device
-Resizing swap chain...
-Collision Event time(microsecs)=13
+Collision Event time(microsecs)=11
 Variable_Global_Init()
 PrepareGame()
 Audio_Init()
@@ -131,7 +21,7 @@ Done ObjectLists
 Done Extension_Initialize
 About to startroom
 Number of buttons found: 3
-Total memory used = 12490323 (0x00be9653) bytes 11.91MB
+Total memory used = 12498357 (0x00beb5b5) bytes 11.92MB
 Free memory = 5994440 (0x005b77c8) bytes 5.72MB
 Peak memory used = 13305686 (0x00cb0756) bytes 12.69MB
 **********************************.
@@ -207,7 +97,7 @@ Set camera view size to 288x216, border (0,0)
 Camera follow player ref instance 100663 INSTANT.
 CONTROLLER ROOM START: Finished setup for room: rm_welcome_room
 DEBUG: Resetting repair flag...
-DEBUG: Stored player position: (146, 155)
+DEBUG: Stored player position: (131, 155)
 Switching to map room...
 obj_controller Room End: Transitioning from room: rm_welcome_room
 Saving runtime state for leaving room: rm_welcome_room
@@ -346,11 +236,23 @@ DEBUG: UI Room detected. Player instance hidden.
 DEBUG: UI Room detected. Player instance hidden.
 DEBUG: UI Room detected. Player instance hidden.
 DEBUG: UI Room detected. Player instance hidden.
-Warping to Room: ref room rm_beach at (255, 130)
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+Warping to Room: ref room rm_dock at (272, 148)
 obj_warp initialized (Persistent: 1). Target Room: 0
 obj_controller Room End: Transitioning from room: rm_map
 Skipping room state save: Non-gameplay room (rm_map).
-CONTROLLER ROOM START: Entering room: rm_beach
+CONTROLLER ROOM START: Entering room: rm_dock
 CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
 CONTROLLER ROOM START (Default): Final default/spawn pos (250,200) Face: 3
 CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
@@ -358,18 +260,17 @@ CONTROLLER ROOM START: Explicitly set global.player_instance = noone before crea
 obj_player Create: Applying initial player color: 52479
 obj_player: Initialized. Driving state: 0
 Created player instance: ref instance 100665 skin: player at (250,200)
-CONTROLLER ROOM START: Calling load_room_state for: rm_beach (Is Fresh Load: 0)
-Attempting to load state for room: rm_beach (Fresh Load: 0)
+CONTROLLER ROOM START: Calling load_room_state for: rm_dock (Is Fresh Load: 0)
+Attempting to load state for room: rm_dock (Fresh Load: 0)
 Skipping instance destruction (Normal Room Entry).
-No state found for room: rm_beach in global.room_states.
+No state found for room: rm_dock in global.room_states.
 Set camera view size to 288x216, border (0,0)
 Camera follow player ref instance 100665 INSTANT.
-CONTROLLER ROOM START: Finished setup for room: rm_beach
+CONTROLLER ROOM START: Finished setup for room: rm_dock
 DEBUG: Player detected. Prioritizing warp.
-DEBUG: Valid target room identified: ref room rm_ski_village
+DEBUG: Valid target room identified: ref room rm_beach
 Creating obj_warp for instance: ref instance 100665 (obj_player)
 obj_warp initialized (Persistent: 1). Target Room: 0
-DEBUG Warp Block: Warp already in progress, skipping.
 DEBUG Warp Block: Warp already in progress, skipping.
 DEBUG Warp Block: Warp already in progress, skipping.
 DEBUG Warp Block: Warp already in progress, skipping.
@@ -422,6 +323,156 @@ DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref
 DEBUG (Warp Anim End): Moving instance: ref instance 100665 (obj_player) before room transition.
 DEBUG (Warp Anim End): Instance ref instance 100665 moved.
 DEBUG (Warp Anim End): Stored PLAYER warp target pos.
+obj_controller Room End: Transitioning from room: rm_dock
+Saving runtime state for leaving room: rm_dock
+Room End WITH DEBUG: --- Start Instance Check ---
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100610 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100610
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100609 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100609
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100608 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100608
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100607 (obj_icetruck)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100607
+Room End WITH DEBUG: --- End Instance Check ---
+Room End DEBUG: Finished checking instances. Collected 4 savable states.
+Adding new room state array for: rm_dock with size: 4
+Finished saving runtime state for room: rm_dock
+CONTROLLER ROOM START: Entering room: rm_beach
+CONTROLLER ROOM START (Warp): Using PLAYER warp target pos (480,191).
+CONTROLLER ROOM START: Clearing player warp target variables.
+CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
+obj_player Create: Applying initial player color: 52479
+obj_player: Initialized. Driving state: 0
+Created player instance: ref instance 100667 skin: player at (480,191)
+CONTROLLER ROOM START: Calling load_room_state for: rm_beach (Is Fresh Load: 0)
+Attempting to load state for room: rm_beach (Fresh Load: 0)
+Skipping instance destruction (Normal Room Entry).
+No state found for room: rm_beach in global.room_states.
+Set camera view size to 288x216, border (0,0)
+Camera follow player ref instance 100667 INSTANT.
+CONTROLLER ROOM START: Finished setup for room: rm_beach
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG: Stored player position: (510, 191)
+Switching to map room...
 obj_controller Room End: Transitioning from room: rm_beach
 Saving runtime state for leaving room: rm_beach
 Room End WITH DEBUG: --- Start Instance Check ---
@@ -435,612 +486,8 @@ Room End WITH DEBUG: --- End Instance Check ---
 Room End DEBUG: Finished checking instances. Collected 3 savable states.
 Adding new room state array for: rm_beach with size: 3
 Finished saving runtime state for room: rm_beach
-CONTROLLER ROOM START: Entering room: rm_ski_village
-CONTROLLER ROOM START (Warp): Using PLAYER warp target pos (420,360).
-CONTROLLER ROOM START: Clearing player warp target variables.
-CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
-obj_player Create: Applying initial player color: 52479
-obj_player: Initialized. Driving state: 0
-Created player instance: ref instance 100667 skin: player at (420,360)
-CONTROLLER ROOM START: Calling load_room_state for: rm_ski_village (Is Fresh Load: 0)
-Attempting to load state for room: rm_ski_village (Fresh Load: 0)
-Skipping instance destruction (Normal Room Entry).
-No state found for room: rm_ski_village in global.room_states.
-Set camera view size to 288x216, border (0,0)
-Camera follow player ref instance 100667 INSTANT.
-CONTROLLER ROOM START: Finished setup for room: rm_ski_village
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-obj_warp initialized (Persistent: 1). Target Room: 0
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
-DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
-DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
-DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
-DEBUG (Warp Anim End): Instance ref instance 100089 moved.
-DEBUG (Warp Anim End): NPC warped. Global targets remain undefined.
-obj_controller Room End: Transitioning from room: rm_ski_village
-Saving runtime state for leaving room: rm_ski_village
-Room End WITH DEBUG: --- Start Instance Check ---
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100433 (obj_tube_tower_decoration)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100433
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100435 (obj_tube_tower_decoration)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100435
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100434 (obj_tube_tower_decoration)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100434
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100436 (obj_tube_tower_decoration)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100436
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100432 (obj_tube)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100432
-Room End WITH DEBUG: --- End Instance Check ---
-Room End DEBUG: Finished checking instances. Collected 5 savable states.
-Adding new room state array for: rm_ski_village with size: 5
-Finished saving runtime state for room: rm_ski_village
-CONTROLLER ROOM START: Entering room: rm_ski_mountaintop
-CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
-CONTROLLER ROOM START (Default): Final default/spawn pos (250,200) Face: 3
-CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
-CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
-obj_player Create: Applying initial player color: 52479
-obj_player: Initialized. Driving state: 0
-Created player instance: ref instance 100669 skin: player at (250,200)
-CONTROLLER ROOM START: Calling load_room_state for: rm_ski_mountaintop (Is Fresh Load: 0)
-Attempting to load state for room: rm_ski_mountaintop (Fresh Load: 0)
-Skipping instance destruction (Normal Room Entry).
-No state found for room: rm_ski_mountaintop in global.room_states.
-Set camera view size to 288x216, border (0,0)
-Camera follow player ref instance 100669 INSTANT.
-CONTROLLER ROOM START: Finished setup for room: rm_ski_mountaintop
-obj_warp initialized (Persistent: 1). Target Room: 0
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
-DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
-DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
-DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
-DEBUG (Warp Anim End): Instance ref instance 100089 moved.
-DEBUG (Warp Anim End): NPC warped. Global targets remain undefined.
-obj_controller Room End: Transitioning from room: rm_ski_mountaintop
-Saving runtime state for leaving room: rm_ski_mountaintop
-Room End WITH DEBUG: --- Start Instance Check ---
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100454 (obj_tube_tower_decoration)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100454
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100453 (obj_tube_tower_decoration)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100453
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100485 (obj_tube)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100485
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100489 (obj_tube)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100489
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100490 (obj_tube)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100490
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100492 (obj_icetruck)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100492
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100491 (obj_icetruck)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100491
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100488 (obj_tube)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100488
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100487 (obj_tube)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100487
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100486 (obj_tube)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100486
-Room End WITH DEBUG: --- End Instance Check ---
-Room End DEBUG: Finished checking instances. Collected 10 savable states.
-Adding new room state array for: rm_ski_mountaintop with size: 10
-Finished saving runtime state for room: rm_ski_mountaintop
-CONTROLLER ROOM START: Entering room: rm_ski_village
-CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
-CONTROLLER ROOM START (Default): Final default/spawn pos (250,200) Face: 3
-CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
-CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
-obj_player Create: Applying initial player color: 52479
-obj_player: Initialized. Driving state: 0
-Created player instance: ref instance 100671 skin: player at (250,200)
-CONTROLLER ROOM START: Calling load_room_state for: rm_ski_village (Is Fresh Load: 0)
-Attempting to load state for room: rm_ski_village (Fresh Load: 0)
-Skipping instance destruction (Normal Room Entry).
-Found state array for rm_ski_village. Size: 5
-Normal Room Entry: Assuming instances persist or were recreated by GM.
-Set camera view size to 288x216, border (0,0)
-Camera follow player ref instance 100671 INSTANT.
-CONTROLLER ROOM START: Finished setup for room: rm_ski_village
-DEBUG: Stored player position: (231, 228)
-Switching to map room...
-obj_controller Room End: Transitioning from room: rm_ski_village
-Saving runtime state for leaving room: rm_ski_village
-Room End WITH DEBUG: --- Start Instance Check ---
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100433 (obj_tube_tower_decoration)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100433
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100435 (obj_tube_tower_decoration)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100435
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100434 (obj_tube_tower_decoration)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100434
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100436 (obj_tube_tower_decoration)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100436
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100432 (obj_tube)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100432
-Room End WITH DEBUG: --- End Instance Check ---
-Room End DEBUG: Finished checking instances. Collected 5 savable states.
-Replacing existing room state array for: rm_ski_village with new array size: 5
-Finished saving runtime state for room: rm_ski_village
 CONTROLLER ROOM START: Entering room: rm_map
 CONTROLLER ROOM START: Non-gameplay room detected...
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-Warping to Room: ref room rm_welcome_room at (255, 130)
-obj_warp initialized (Persistent: 1). Target Room: 0
-obj_controller Room End: Transitioning from room: rm_map
-Skipping room state save: Non-gameplay room (rm_map).
-Spawn Point marker created at (146, 155)
-CONTROLLER ROOM START: Entering room: rm_welcome_room
-CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
-CONTROLLER ROOM START (Default): Final default/spawn pos (146,155) Face: 3
-CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
-CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
-obj_player Create: Applying initial player color: 52479
-obj_player: Initialized. Driving state: 0
-Created player instance: ref instance 100673 skin: player at (146,155)
-CONTROLLER ROOM START: Calling load_room_state for: rm_welcome_room (Is Fresh Load: 0)
-Attempting to load state for room: rm_welcome_room (Fresh Load: 0)
-Skipping instance destruction (Normal Room Entry).
-Found state array for rm_welcome_room. Size: 18
-Normal Room Entry: Assuming instances persist or were recreated by GM.
-Set camera view size to 288x216, border (0,0)
-Camera follow player ref instance 100673 INSTANT.
-CONTROLLER ROOM START: Finished setup for room: rm_welcome_room
-DEBUG: Resetting repair flag...
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG: Stored player position: (214, 90)
-Switching to map room...
-obj_controller Room End: Transitioning from room: rm_welcome_room
-Saving runtime state for leaving room: rm_welcome_room
-Room End WITH DEBUG: --- Start Instance Check ---
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100078 (obj_wrench_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100078
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100077 (obj_minershardhat_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100077
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100076 (obj_ghostcostume_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100076
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100075 (obj_tourhat_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100075
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100074 (obj_snowblaster_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100074
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100073 (obj_blacksunglasses_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100073
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100072 (obj_blackhoodie_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100072
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100084 (obj_puffle)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100084
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100071 (obj_boxpuffleo_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100071
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100083 (obj_toboggan)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100083
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100069 (obj_Jackhammer_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100069
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100068 (obj_snowshovel_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100068
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100067 (obj_beta_hat)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100067
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100066 (obj_battery)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100066
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100064 (obj_wood_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100064
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100065 (obj_snow_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100065
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100079 (obj_icetruck_broken)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100079
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100080 (obj_tube)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100080
-Room End WITH DEBUG: --- End Instance Check ---
-Room End DEBUG: Finished checking instances. Collected 18 savable states.
-Replacing existing room state array for: rm_welcome_room with new array size: 18
-Finished saving runtime state for room: rm_welcome_room
-CONTROLLER ROOM START: Entering room: rm_map
-CONTROLLER ROOM START: Non-gameplay room detected...
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
 DEBUG: UI Room detected. Player instance hidden.
 DEBUG: UI Room detected. Player instance hidden.
 DEBUG: UI Room detected. Player instance hidden.
@@ -1152,15 +599,15 @@ CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC wa
 CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
 obj_player Create: Applying initial player color: 52479
 obj_player: Initialized. Driving state: 0
-Created player instance: ref instance 100675 skin: player at (250,200)
+Created player instance: ref instance 100669 skin: player at (250,200)
 CONTROLLER ROOM START: Calling load_room_state for: rm_town (Is Fresh Load: 0)
 Attempting to load state for room: rm_town (Fresh Load: 0)
 Skipping instance destruction (Normal Room Entry).
 No state found for room: rm_town in global.room_states.
 Set camera view size to 288x216, border (0,0)
-Camera follow player ref instance 100675 INSTANT.
+Camera follow player ref instance 100669 INSTANT.
 CONTROLLER ROOM START: Finished setup for room: rm_town
-DEBUG: Stored player position: (74, 171)
+DEBUG: Stored player position: (263, 217)
 Switching to map room...
 obj_controller Room End: Transitioning from room: rm_town
 Saving runtime state for leaving room: rm_town
@@ -1247,41 +694,133 @@ DEBUG: UI Room detected. Player instance hidden.
 DEBUG: UI Room detected. Player instance hidden.
 DEBUG: UI Room detected. Player instance hidden.
 DEBUG: UI Room detected. Player instance hidden.
-Warping to Room: ref room rm_beach at (255, 130)
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+Warping to Room: ref room rm_dock at (272, 148)
 obj_warp initialized (Persistent: 1). Target Room: 0
 obj_controller Room End: Transitioning from room: rm_map
 Skipping room state save: Non-gameplay room (rm_map).
-CONTROLLER ROOM START: Entering room: rm_beach
+CONTROLLER ROOM START: Entering room: rm_dock
 CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
 CONTROLLER ROOM START (Default): Final default/spawn pos (250,200) Face: 3
 CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
 CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
 obj_player Create: Applying initial player color: 52479
 obj_player: Initialized. Driving state: 0
-Created player instance: ref instance 100677 skin: player at (250,200)
-CONTROLLER ROOM START: Calling load_room_state for: rm_beach (Is Fresh Load: 0)
-Attempting to load state for room: rm_beach (Fresh Load: 0)
+Created player instance: ref instance 100671 skin: player at (250,200)
+CONTROLLER ROOM START: Calling load_room_state for: rm_dock (Is Fresh Load: 0)
+Attempting to load state for room: rm_dock (Fresh Load: 0)
 Skipping instance destruction (Normal Room Entry).
-Found state array for rm_beach. Size: 3
+Found state array for rm_dock. Size: 4
 Normal Room Entry: Assuming instances persist or were recreated by GM.
 Set camera view size to 288x216, border (0,0)
-Camera follow player ref instance 100677 INSTANT.
-CONTROLLER ROOM START: Finished setup for room: rm_beach
-DEBUG: Stored player position: (199, 130)
+Camera follow player ref instance 100671 INSTANT.
+CONTROLLER ROOM START: Finished setup for room: rm_dock
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG: Stored player position: (489, 184)
 Switching to map room...
-obj_controller Room End: Transitioning from room: rm_beach
-Saving runtime state for leaving room: rm_beach
+obj_controller Room End: Transitioning from room: rm_dock
+Saving runtime state for leaving room: rm_dock
 Room End WITH DEBUG: --- Start Instance Check ---
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100374 (obj_tube_tower_decoration)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100374
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100379 (obj_tube)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100379
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100378 (obj_icetruck)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100378
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100610 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100610
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100609 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100609
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100608 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100608
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100607 (obj_icetruck)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100607
 Room End WITH DEBUG: --- End Instance Check ---
-Room End DEBUG: Finished checking instances. Collected 3 savable states.
-Replacing existing room state array for: rm_beach with new array size: 3
-Finished saving runtime state for room: rm_beach
+Room End DEBUG: Finished checking instances. Collected 4 savable states.
+Replacing existing room state array for: rm_dock with new array size: 4
+Finished saving runtime state for room: rm_dock
 CONTROLLER ROOM START: Entering room: rm_map
 CONTROLLER ROOM START: Non-gameplay room detected...
 DEBUG: UI Room detected. Player instance hidden.
@@ -1366,567 +905,10 @@ DEBUG: UI Room detected. Player instance hidden.
 DEBUG: UI Room detected. Player instance hidden.
 DEBUG: UI Room detected. Player instance hidden.
 DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-Warping to Room: ref room rm_welcome_room at (255, 130)
+Warping to Room: ref room rm_plaza at (255, 130)
 obj_warp initialized (Persistent: 1). Target Room: 0
 obj_controller Room End: Transitioning from room: rm_map
 Skipping room state save: Non-gameplay room (rm_map).
-Spawn Point marker created at (146, 155)
-CONTROLLER ROOM START: Entering room: rm_welcome_room
-CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
-CONTROLLER ROOM START (Default): Final default/spawn pos (146,155) Face: 3
-CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
-CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
-obj_player Create: Applying initial player color: 52479
-obj_player: Initialized. Driving state: 0
-Created player instance: ref instance 100679 skin: player at (146,155)
-CONTROLLER ROOM START: Calling load_room_state for: rm_welcome_room (Is Fresh Load: 0)
-Attempting to load state for room: rm_welcome_room (Fresh Load: 0)
-Skipping instance destruction (Normal Room Entry).
-Found state array for rm_welcome_room. Size: 18
-Normal Room Entry: Assuming instances persist or were recreated by GM.
-Set camera view size to 288x216, border (0,0)
-Camera follow player ref instance 100679 INSTANT.
-CONTROLLER ROOM START: Finished setup for room: rm_welcome_room
-DEBUG: Resetting repair flag...
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-DEBUG: Snowball (ref instance 100736) colliding with Polar Bear (ref instance 100089)
-Polar Bear instance exists. Setting mood to angry.
-Polar Bear calmed down (out of range).
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-DEBUG: Snowball (ref instance 100745) colliding with Polar Bear (ref instance 100089)
-Polar Bear instance exists. Setting mood to angry.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
-DEBUG: Snowball (ref instance 100752) colliding with Polar Bear (ref instance 100089)
-Polar Bear instance exists. Setting mood to angry.
-PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-DEBUG: Snowball (ref instance 100769) colliding with Polar Bear (ref instance 100089)
-Polar Bear instance exists. Setting mood to angry.
-PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-DEBUG: Snowball (ref instance 100778) colliding with Polar Bear (ref instance 100089)
-Polar Bear instance exists. Setting mood to angry.
-PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-DEBUG: Snowball (ref instance 100779) colliding with Polar Bear (ref instance 100089)
-Polar Bear instance exists. Setting mood to angry.
-PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-DEBUG: Snowball (ref instance 100788) colliding with Polar Bear (ref instance 100089)
-Polar Bear instance exists. Setting mood to angry.
-PB Angry: Starting throw. Sprite: spr_polarbear_snowballupright_sheet
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-DEBUG: Snowball (ref instance 100797) colliding with Polar Bear (ref instance 100089)
-Polar Bear instance exists. Setting mood to angry.
-PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-DEBUG: Snowball (ref instance 100806) colliding with Polar Bear (ref instance 100089)
-Polar Bear instance exists. Setting mood to angry.
-PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Polar Bear threw snowball!
-DEBUG: Snowball (ref instance 100815) colliding with Polar Bear (ref instance 100089)
-Polar Bear instance exists. Setting mood to angry.
-PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
-Polar Bear threw snowball!
-DEBUG: Snowball (ref instance 100816) colliding with Polar Bear (ref instance 100089)
-Polar Bear instance exists. Setting mood to angry.
-Polar Bear calmed down (out of range).
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-obj_warp initialized (Persistent: 1). Target Room: 0
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
-DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
-DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
-DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
-DEBUG (Warp Anim End): Instance ref instance 100089 moved.
-DEBUG (Warp Anim End): NPC warped. Global targets remain undefined.
-obj_controller Room End: Transitioning from room: rm_welcome_room
-Saving runtime state for leaving room: rm_welcome_room
-Room End WITH DEBUG: --- Start Instance Check ---
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100078 (obj_wrench_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100078
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100077 (obj_minershardhat_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100077
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100076 (obj_ghostcostume_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100076
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100075 (obj_tourhat_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100075
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100074 (obj_snowblaster_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100074
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100073 (obj_blacksunglasses_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100073
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100072 (obj_blackhoodie_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100072
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100084 (obj_puffle)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100084
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100071 (obj_boxpuffleo_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100071
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100083 (obj_toboggan)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100083
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100069 (obj_Jackhammer_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100069
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100068 (obj_snowshovel_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100068
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100067 (obj_beta_hat)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100067
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100066 (obj_battery)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100066
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100064 (obj_wood_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100064
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100065 (obj_snow_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100065
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100079 (obj_icetruck_broken)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100079
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100080 (obj_tube)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100080
-Room End WITH DEBUG: --- End Instance Check ---
-Room End DEBUG: Finished checking instances. Collected 18 savable states.
-Replacing existing room state array for: rm_welcome_room with new array size: 18
-Finished saving runtime state for room: rm_welcome_room
 CONTROLLER ROOM START: Entering room: rm_plaza
 CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
 CONTROLLER ROOM START (Default): Final default/spawn pos (250,200) Face: 3
@@ -1934,93 +916,16 @@ CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC wa
 CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
 obj_player Create: Applying initial player color: 52479
 obj_player: Initialized. Driving state: 0
-Created player instance: ref instance 100818 skin: player at (250,200)
+Created player instance: ref instance 100673 skin: player at (250,200)
 CONTROLLER ROOM START: Calling load_room_state for: rm_plaza (Is Fresh Load: 0)
 Attempting to load state for room: rm_plaza (Fresh Load: 0)
 Skipping instance destruction (Normal Room Entry).
 No state found for room: rm_plaza in global.room_states.
 Set camera view size to 288x216, border (0,0)
-Camera follow player ref instance 100818 INSTANT.
+Camera follow player ref instance 100673 INSTANT.
 CONTROLLER ROOM START: Finished setup for room: rm_plaza
-obj_warp initialized (Persistent: 1). Target Room: 0
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
-DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
-DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
-DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
-DEBUG (Warp Anim End): Instance ref instance 100089 moved.
-DEBUG (Warp Anim End): NPC warped. Global targets remain undefined.
+DEBUG: Stored player position: (255, 130)
+Switching to map room...
 obj_controller Room End: Transitioning from room: rm_plaza
 Saving runtime state for leaving room: rm_plaza
 Room End WITH DEBUG: --- Start Instance Check ---
@@ -2032,959 +937,267 @@ Room End WITH DEBUG: --- End Instance Check ---
 Room End DEBUG: Finished checking instances. Collected 2 savable states.
 Adding new room state array for: rm_plaza with size: 2
 Finished saving runtime state for room: rm_plaza
-Spawn Point marker created at (146, 155)
-CONTROLLER ROOM START: Entering room: rm_welcome_room
-CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
-CONTROLLER ROOM START (Default): Final default/spawn pos (146,155) Face: 3
-CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
-CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
-obj_player Create: Applying initial player color: 52479
-obj_player: Initialized. Driving state: 0
-Created player instance: ref instance 100820 skin: player at (146,155)
-CONTROLLER ROOM START: Calling load_room_state for: rm_welcome_room (Is Fresh Load: 0)
-Attempting to load state for room: rm_welcome_room (Fresh Load: 0)
-Skipping instance destruction (Normal Room Entry).
-Found state array for rm_welcome_room. Size: 18
-Normal Room Entry: Assuming instances persist or were recreated by GM.
-Set camera view size to 288x216, border (0,0)
-Camera follow player ref instance 100820 INSTANT.
-CONTROLLER ROOM START: Finished setup for room: rm_welcome_room
-DEBUG: Resetting repair flag...
+CONTROLLER ROOM START: Entering room: rm_map
+CONTROLLER ROOM START: Non-gameplay room detected...
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+Warping to Room: ref room rm_ski_village at (303, 264)
 obj_warp initialized (Persistent: 1). Target Room: 0
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
-DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
-DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
-DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
-DEBUG (Warp Anim End): Instance ref instance 100089 moved.
-DEBUG (Warp Anim End): NPC warped. Global targets remain undefined.
-obj_controller Room End: Transitioning from room: rm_welcome_room
-Saving runtime state for leaving room: rm_welcome_room
-Room End WITH DEBUG: --- Start Instance Check ---
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100078 (obj_wrench_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100078
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100077 (obj_minershardhat_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100077
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100076 (obj_ghostcostume_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100076
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100075 (obj_tourhat_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100075
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100074 (obj_snowblaster_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100074
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100073 (obj_blacksunglasses_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100073
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100072 (obj_blackhoodie_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100072
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100084 (obj_puffle)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100084
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100071 (obj_boxpuffleo_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100071
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100083 (obj_toboggan)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100083
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100069 (obj_Jackhammer_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100069
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100068 (obj_snowshovel_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100068
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100067 (obj_beta_hat)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100067
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100066 (obj_battery)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100066
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100064 (obj_wood_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100064
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100065 (obj_snow_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100065
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100079 (obj_icetruck_broken)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100079
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100080 (obj_tube)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100080
-Room End WITH DEBUG: --- End Instance Check ---
-Room End DEBUG: Finished checking instances. Collected 18 savable states.
-Replacing existing room state array for: rm_welcome_room with new array size: 18
-Finished saving runtime state for room: rm_welcome_room
-CONTROLLER ROOM START: Entering room: rm_plaza
+obj_controller Room End: Transitioning from room: rm_map
+Skipping room state save: Non-gameplay room (rm_map).
+CONTROLLER ROOM START: Entering room: rm_ski_village
 CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
 CONTROLLER ROOM START (Default): Final default/spawn pos (250,200) Face: 3
 CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
 CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
 obj_player Create: Applying initial player color: 52479
 obj_player: Initialized. Driving state: 0
-Created player instance: ref instance 100822 skin: player at (250,200)
-CONTROLLER ROOM START: Calling load_room_state for: rm_plaza (Is Fresh Load: 0)
-Attempting to load state for room: rm_plaza (Fresh Load: 0)
+Created player instance: ref instance 100675 skin: player at (250,200)
+CONTROLLER ROOM START: Calling load_room_state for: rm_ski_village (Is Fresh Load: 0)
+Attempting to load state for room: rm_ski_village (Fresh Load: 0)
 Skipping instance destruction (Normal Room Entry).
-Found state array for rm_plaza. Size: 2
-Normal Room Entry: Assuming instances persist or were recreated by GM.
+No state found for room: rm_ski_village in global.room_states.
 Set camera view size to 288x216, border (0,0)
-Camera follow player ref instance 100822 INSTANT.
-CONTROLLER ROOM START: Finished setup for room: rm_plaza
-obj_warp initialized (Persistent: 1). Target Room: 0
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
-DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
-DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
-DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
-DEBUG (Warp Anim End): Instance ref instance 100089 moved.
-DEBUG (Warp Anim End): NPC warped. Global targets remain undefined.
-obj_controller Room End: Transitioning from room: rm_plaza
-Saving runtime state for leaving room: rm_plaza
+Camera follow player ref instance 100675 INSTANT.
+CONTROLLER ROOM START: Finished setup for room: rm_ski_village
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
+DEBUG: Stored player position: (415, 381)
+Switching to map room...
+obj_controller Room End: Transitioning from room: rm_ski_village
+Saving runtime state for leaving room: rm_ski_village
 Room End WITH DEBUG: --- Start Instance Check ---
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100137 (obj_boxpuffleo_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100137
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100182 (obj_tube)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100182
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100433 (obj_tube_tower_decoration)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100433
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100435 (obj_tube_tower_decoration)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100435
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100434 (obj_tube_tower_decoration)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100434
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100436 (obj_tube_tower_decoration)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100436
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100432 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100432
 Room End WITH DEBUG: --- End Instance Check ---
-Room End DEBUG: Finished checking instances. Collected 2 savable states.
-Replacing existing room state array for: rm_plaza with new array size: 2
-Finished saving runtime state for room: rm_plaza
-Spawn Point marker created at (146, 155)
-CONTROLLER ROOM START: Entering room: rm_welcome_room
-CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
-CONTROLLER ROOM START (Default): Final default/spawn pos (146,155) Face: 3
-CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
-CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
-obj_player Create: Applying initial player color: 52479
-obj_player: Initialized. Driving state: 0
-Created player instance: ref instance 100824 skin: player at (146,155)
-CONTROLLER ROOM START: Calling load_room_state for: rm_welcome_room (Is Fresh Load: 0)
-Attempting to load state for room: rm_welcome_room (Fresh Load: 0)
-Skipping instance destruction (Normal Room Entry).
-Found state array for rm_welcome_room. Size: 18
-Normal Room Entry: Assuming instances persist or were recreated by GM.
-Set camera view size to 288x216, border (0,0)
-Camera follow player ref instance 100824 INSTANT.
-CONTROLLER ROOM START: Finished setup for room: rm_welcome_room
-DEBUG: Resetting repair flag...
+Room End DEBUG: Finished checking instances. Collected 5 savable states.
+Adding new room state array for: rm_ski_village with size: 5
+Finished saving runtime state for room: rm_ski_village
+CONTROLLER ROOM START: Entering room: rm_map
+CONTROLLER ROOM START: Non-gameplay room detected...
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+DEBUG: UI Room detected. Player instance hidden.
+Warping to Room: ref room rm_dock at (272, 148)
 obj_warp initialized (Persistent: 1). Target Room: 0
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
-DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
-DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
-DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
-DEBUG (Warp Anim End): Instance ref instance 100089 moved.
-DEBUG (Warp Anim End): NPC warped. Global targets remain undefined.
-obj_controller Room End: Transitioning from room: rm_welcome_room
-Saving runtime state for leaving room: rm_welcome_room
-Room End WITH DEBUG: --- Start Instance Check ---
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100078 (obj_wrench_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100078
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100077 (obj_minershardhat_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100077
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100076 (obj_ghostcostume_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100076
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100075 (obj_tourhat_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100075
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100074 (obj_snowblaster_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100074
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100073 (obj_blacksunglasses_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100073
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100072 (obj_blackhoodie_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100072
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100084 (obj_puffle)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100084
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100071 (obj_boxpuffleo_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100071
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100083 (obj_toboggan)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100083
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100069 (obj_Jackhammer_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100069
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100068 (obj_snowshovel_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100068
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100067 (obj_beta_hat)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100067
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100066 (obj_battery)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100066
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100064 (obj_wood_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100064
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100065 (obj_snow_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100065
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100079 (obj_icetruck_broken)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100079
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100080 (obj_tube)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100080
-Room End WITH DEBUG: --- End Instance Check ---
-Room End DEBUG: Finished checking instances. Collected 18 savable states.
-Replacing existing room state array for: rm_welcome_room with new array size: 18
-Finished saving runtime state for room: rm_welcome_room
-CONTROLLER ROOM START: Entering room: rm_plaza
+obj_controller Room End: Transitioning from room: rm_map
+Skipping room state save: Non-gameplay room (rm_map).
+CONTROLLER ROOM START: Entering room: rm_dock
 CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
 CONTROLLER ROOM START (Default): Final default/spawn pos (250,200) Face: 3
 CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
 CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
 obj_player Create: Applying initial player color: 52479
 obj_player: Initialized. Driving state: 0
-Created player instance: ref instance 100826 skin: player at (250,200)
-CONTROLLER ROOM START: Calling load_room_state for: rm_plaza (Is Fresh Load: 0)
-Attempting to load state for room: rm_plaza (Fresh Load: 0)
+Created player instance: ref instance 100677 skin: player at (250,200)
+CONTROLLER ROOM START: Calling load_room_state for: rm_dock (Is Fresh Load: 0)
+Attempting to load state for room: rm_dock (Fresh Load: 0)
 Skipping instance destruction (Normal Room Entry).
-Found state array for rm_plaza. Size: 2
+Found state array for rm_dock. Size: 4
 Normal Room Entry: Assuming instances persist or were recreated by GM.
 Set camera view size to 288x216, border (0,0)
-Camera follow player ref instance 100826 INSTANT.
-CONTROLLER ROOM START: Finished setup for room: rm_plaza
-obj_warp initialized (Persistent: 1). Target Room: 0
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
-DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
-DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
-DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
-DEBUG (Warp Anim End): Instance ref instance 100089 moved.
-DEBUG (Warp Anim End): NPC warped. Global targets remain undefined.
-obj_controller Room End: Transitioning from room: rm_plaza
-Saving runtime state for leaving room: rm_plaza
+Camera follow player ref instance 100677 INSTANT.
+CONTROLLER ROOM START: Finished setup for room: rm_dock
+###game_end###254
+obj_controller Room End: Transitioning from room: rm_dock
+Saving runtime state for leaving room: rm_dock
 Room End WITH DEBUG: --- Start Instance Check ---
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100137 (obj_boxpuffleo_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100137
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100182 (obj_tube)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100182
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100610 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100610
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100609 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100609
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100608 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100608
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100607 (obj_icetruck)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100607
 Room End WITH DEBUG: --- End Instance Check ---
-Room End DEBUG: Finished checking instances. Collected 2 savable states.
-Replacing existing room state array for: rm_plaza with new array size: 2
-Finished saving runtime state for room: rm_plaza
-Spawn Point marker created at (146, 155)
-CONTROLLER ROOM START: Entering room: rm_welcome_room
-CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
-CONTROLLER ROOM START (Default): Final default/spawn pos (146,155) Face: 3
-CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
-CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
-obj_player Create: Applying initial player color: 52479
-obj_player: Initialized. Driving state: 0
-Created player instance: ref instance 100828 skin: player at (146,155)
-CONTROLLER ROOM START: Calling load_room_state for: rm_welcome_room (Is Fresh Load: 0)
-Attempting to load state for room: rm_welcome_room (Fresh Load: 0)
-Skipping instance destruction (Normal Room Entry).
-Found state array for rm_welcome_room. Size: 18
-Normal Room Entry: Assuming instances persist or were recreated by GM.
-Set camera view size to 288x216, border (0,0)
-Camera follow player ref instance 100828 INSTANT.
-CONTROLLER ROOM START: Finished setup for room: rm_welcome_room
-DEBUG: Resetting repair flag...
-obj_warp initialized (Persistent: 1). Target Room: 0
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
-DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
-DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
-DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
-DEBUG (Warp Anim End): Instance ref instance 100089 moved.
-DEBUG (Warp Anim End): NPC warped. Global targets remain undefined.
-obj_controller Room End: Transitioning from room: rm_welcome_room
-Saving runtime state for leaving room: rm_welcome_room
-Room End WITH DEBUG: --- Start Instance Check ---
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100078 (obj_wrench_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100078
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100077 (obj_minershardhat_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100077
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100076 (obj_ghostcostume_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100076
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100075 (obj_tourhat_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100075
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100074 (obj_snowblaster_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100074
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100073 (obj_blacksunglasses_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100073
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100072 (obj_blackhoodie_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100072
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100084 (obj_puffle)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100084
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100071 (obj_boxpuffleo_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100071
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100083 (obj_toboggan)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100083
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100069 (obj_Jackhammer_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100069
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100068 (obj_snowshovel_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100068
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100067 (obj_beta_hat)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100067
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100066 (obj_battery)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100066
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100064 (obj_wood_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100064
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100065 (obj_snow_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100065
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100079 (obj_icetruck_broken)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100079
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100080 (obj_tube)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100080
-Room End WITH DEBUG: --- End Instance Check ---
-Room End DEBUG: Finished checking instances. Collected 18 savable states.
-Replacing existing room state array for: rm_welcome_room with new array size: 18
-Finished saving runtime state for room: rm_welcome_room
-CONTROLLER ROOM START: Entering room: rm_plaza
-CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
-CONTROLLER ROOM START (Default): Final default/spawn pos (250,200) Face: 3
-CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
-CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
-obj_player Create: Applying initial player color: 52479
-obj_player: Initialized. Driving state: 0
-Created player instance: ref instance 100830 skin: player at (250,200)
-CONTROLLER ROOM START: Calling load_room_state for: rm_plaza (Is Fresh Load: 0)
-Attempting to load state for room: rm_plaza (Fresh Load: 0)
-Skipping instance destruction (Normal Room Entry).
-Found state array for rm_plaza. Size: 2
-Normal Room Entry: Assuming instances persist or were recreated by GM.
-Set camera view size to 288x216, border (0,0)
-Camera follow player ref instance 100830 INSTANT.
-CONTROLLER ROOM START: Finished setup for room: rm_plaza
-obj_warp initialized (Persistent: 1). Target Room: 0
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
-DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
-DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
-DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
-DEBUG (Warp Anim End): Instance ref instance 100089 moved.
-DEBUG (Warp Anim End): NPC warped. Global targets remain undefined.
-obj_controller Room End: Transitioning from room: rm_plaza
-Saving runtime state for leaving room: rm_plaza
-Room End WITH DEBUG: --- Start Instance Check ---
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100137 (obj_boxpuffleo_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100137
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100182 (obj_tube)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100182
-Room End WITH DEBUG: --- End Instance Check ---
-Room End DEBUG: Finished checking instances. Collected 2 savable states.
-Replacing existing room state array for: rm_plaza with new array size: 2
-Finished saving runtime state for room: rm_plaza
-Spawn Point marker created at (146, 155)
-CONTROLLER ROOM START: Entering room: rm_welcome_room
-CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
-CONTROLLER ROOM START (Default): Final default/spawn pos (146,155) Face: 3
-CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
-CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
-obj_player Create: Applying initial player color: 52479
-obj_player: Initialized. Driving state: 0
-Created player instance: ref instance 100832 skin: player at (146,155)
-CONTROLLER ROOM START: Calling load_room_state for: rm_welcome_room (Is Fresh Load: 0)
-Attempting to load state for room: rm_welcome_room (Fresh Load: 0)
-Skipping instance destruction (Normal Room Entry).
-Found state array for rm_welcome_room. Size: 18
-Normal Room Entry: Assuming instances persist or were recreated by GM.
-Set camera view size to 288x216, border (0,0)
-Camera follow player ref instance 100832 INSTANT.
-CONTROLLER ROOM START: Finished setup for room: rm_welcome_room
-DEBUG: Resetting repair flag...
-obj_warp initialized (Persistent: 1). Target Room: 0
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
-DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
-DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
-DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
-DEBUG (Warp Anim End): Instance ref instance 100089 moved.
-DEBUG (Warp Anim End): NPC warped. Global targets remain undefined.
-obj_controller Room End: Transitioning from room: rm_welcome_room
-Saving runtime state for leaving room: rm_welcome_room
-Room End WITH DEBUG: --- Start Instance Check ---
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100078 (obj_wrench_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100078
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100077 (obj_minershardhat_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100077
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100076 (obj_ghostcostume_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100076
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100075 (obj_tourhat_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100075
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100074 (obj_snowblaster_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100074
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100073 (obj_blacksunglasses_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100073
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100072 (obj_blackhoodie_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100072
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100084 (obj_puffle)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100084
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100071 (obj_boxpuffleo_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100071
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100083 (obj_toboggan)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100083
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100069 (obj_Jackhammer_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100069
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100068 (obj_snowshovel_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100068
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100067 (obj_beta_hat)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100067
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100066 (obj_battery)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100066
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100064 (obj_wood_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100064
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100065 (obj_snow_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100065
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100079 (obj_icetruck_broken)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100079
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100080 (obj_tube)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100080
-Room End WITH DEBUG: --- End Instance Check ---
-Room End DEBUG: Finished checking instances. Collected 18 savable states.
-Replacing existing room state array for: rm_welcome_room with new array size: 18
-Finished saving runtime state for room: rm_welcome_room
-CONTROLLER ROOM START: Entering room: rm_plaza
-CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
-CONTROLLER ROOM START (Default): Final default/spawn pos (250,200) Face: 3
-CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
-CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
-obj_player Create: Applying initial player color: 52479
-obj_player: Initialized. Driving state: 0
-Created player instance: ref instance 100834 skin: player at (250,200)
-CONTROLLER ROOM START: Calling load_room_state for: rm_plaza (Is Fresh Load: 0)
-Attempting to load state for room: rm_plaza (Fresh Load: 0)
-Skipping instance destruction (Normal Room Entry).
-Found state array for rm_plaza. Size: 2
-Normal Room Entry: Assuming instances persist or were recreated by GM.
-Set camera view size to 288x216, border (0,0)
-Camera follow player ref instance 100834 INSTANT.
-CONTROLLER ROOM START: Finished setup for room: rm_plaza
-obj_warp initialized (Persistent: 1). Target Room: 0
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
-DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
-DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100089
-DEBUG (Warp Anim End): Moving instance: ref instance 100089 (obj_polarbear) before room transition.
-DEBUG (Warp Anim End): Instance ref instance 100089 moved.
-DEBUG (Warp Anim End): NPC warped. Global targets remain undefined.
-obj_controller Room End: Transitioning from room: rm_plaza
-Saving runtime state for leaving room: rm_plaza
-Room End WITH DEBUG: --- Start Instance Check ---
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100137 (obj_boxpuffleo_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100137
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100182 (obj_tube)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100182
-Room End WITH DEBUG: --- End Instance Check ---
-Room End DEBUG: Finished checking instances. Collected 2 savable states.
-Replacing existing room state array for: rm_plaza with new array size: 2
-Finished saving runtime state for room: rm_plaza
-Spawn Point marker created at (146, 155)
-CONTROLLER ROOM START: Entering room: rm_welcome_room
-CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
-CONTROLLER ROOM START (Default): Final default/spawn pos (146,155) Face: 3
-CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
-CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
-obj_player Create: Applying initial player color: 52479
-obj_player: Initialized. Driving state: 0
-Created player instance: ref instance 100836 skin: player at (146,155)
-CONTROLLER ROOM START: Calling load_room_state for: rm_welcome_room (Is Fresh Load: 0)
-Attempting to load state for room: rm_welcome_room (Fresh Load: 0)
-Skipping instance destruction (Normal Room Entry).
-Found state array for rm_welcome_room. Size: 18
-Normal Room Entry: Assuming instances persist or were recreated by GM.
-Set camera view size to 288x216, border (0,0)
-Camera follow player ref instance 100836 INSTANT.
-CONTROLLER ROOM START: Finished setup for room: rm_welcome_room
-DEBUG: Resetting repair flag...
-Game Paused
-Calling game_end from obj_pause_menu Quit Game button
-###game_end###0
-obj_controller Room End: Transitioning from room: rm_welcome_room
-Saving runtime state for leaving room: rm_welcome_room
-Room End WITH DEBUG: --- Start Instance Check ---
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100078 (obj_wrench_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100078
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100077 (obj_minershardhat_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100077
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100076 (obj_ghostcostume_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100076
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100075 (obj_tourhat_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100075
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100074 (obj_snowblaster_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100074
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100073 (obj_blacksunglasses_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100073
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100072 (obj_blackhoodie_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100072
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100084 (obj_puffle)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100084
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100071 (obj_boxpuffleo_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100071
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100083 (obj_toboggan)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100083
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100069 (obj_Jackhammer_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100069
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100068 (obj_snowshovel_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100068
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100067 (obj_beta_hat)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100067
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100066 (obj_battery)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100066
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100064 (obj_wood_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100064
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100065 (obj_snow_item)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100065
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100079 (obj_icetruck_broken)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100079
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100080 (obj_tube)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100080
-Room End WITH DEBUG: --- End Instance Check ---
-Room End DEBUG: Finished checking instances. Collected 18 savable states.
-Replacing existing room state array for: rm_welcome_room with new array size: 18
-Finished saving runtime state for room: rm_welcome_room
+Room End DEBUG: Finished checking instances. Collected 4 savable states.
+Replacing existing room state array for: rm_dock with new array size: 4
+Finished saving runtime state for room: rm_dock
 Attempting to set gamepadcount to 0
 Script_Free called with 188 and global 25
 Unsetting previous scheduler resolution of 1
-
