@@ -2,19 +2,19 @@
 /// @description Loads the game state from savegame.sav
 /// @returns {Bool} True if loading was successful, false otherwise.
 function load_game() {
-    show_debug_message("--- Running load_game ---");
+    show_debug_message("[INFO] --- Running load_game ---");
     var _load_successful = false;
     var _load_data = undefined; // Initialize to ensure scope
 
     // --- 1. Check for and Read Save File ---
     if (!file_exists("savegame.sav")) {
-        show_debug_message("Load Game: No save file found.");
+        show_debug_message("[ERROR] Load Game: No save file found.");
         return false;
     }
 
     var _file = file_text_open_read("savegame.sav");
     if (_file == -1) {
-        show_debug_message("Load Game ERROR: Failed to open save file.");
+        show_debug_message("[ERROR] Load Game: Failed to open save file.");
         return false;
     }
 
@@ -24,7 +24,7 @@ function load_game() {
             _json_string += file_text_readln(_file);
         }
     } catch (_err) {
-        show_debug_message("Load Game ERROR: Exception during file read: " + string(_err));
+        show_debug_message("[ERROR] Load Game: Exception during file read: " + string(_err));
         file_text_close(_file); // Ensure file is closed on error
         return false;
     } finally {
@@ -33,7 +33,7 @@ function load_game() {
 
 
     if (_json_string == "") {
-        show_debug_message("Load Game ERROR: Save file is empty or read failed.");
+        show_debug_message("[ERROR] Load Game: Save file is empty or read failed.");
         return false;
     }
 
@@ -41,14 +41,14 @@ function load_game() {
     try {
          _load_data = json_parse(_json_string);
     } catch (_parse_error) {
-         show_debug_message("Load Game ERROR: Failed to parse JSON string: " + string(_parse_error));
+         show_debug_message("[ERROR] Load Game: Failed to parse JSON string: " + string(_parse_error));
          try { show_message_async("Failed to load save data:\nInvalid format."); } catch (ex) {}
          return false; // Exit if JSON is invalid
     }
 
     // --- NEW: Validate _load_data structure ---
     if (!is_struct(_load_data)) {
-        show_debug_message("Load Game ERROR: Parsed data is not a struct. Data: " + string(_load_data));
+        show_debug_message("[ERROR] Load Game: Parsed data is not a struct.");
          try { show_message_async("Failed to load save data:\nIncorrect structure."); } catch (ex) {}
         return false; // Exit if not a struct
     }
@@ -239,9 +239,9 @@ function load_game() {
 
     // --- 6. Finalization ---
     if (_load_successful) {
-        show_debug_message("--- Finished load_game (Success) ---");
+        show_debug_message("[DEBUG] Load Game: JSON parsed successfully.");
     } else {
-        show_debug_message("--- Finished load_game (Failed) ---");
+        show_debug_message("[DEBUG] Load Game: JSON parsed failed.");
          global.is_loading_game = false; // Reset flag on failure
     }
     // Clean up parsed data struct if it exists

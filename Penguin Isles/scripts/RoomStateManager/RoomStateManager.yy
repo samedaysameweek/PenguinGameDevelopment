@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_room_state",
+  "%Name":"RoomStateManager",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_room_state",
+  "name":"RoomStateManager",
   "parent":{
     "name":"Scripts",
     "path":"folders/Scripts.yy",

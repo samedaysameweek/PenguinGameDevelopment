@@ -1,30 +1,32 @@
-/// @function load_room_state(room_id, is_fresh_load)
-/// @description Loads and restores the state of objects in a given room.
-/// @param {Asset.GMRoom} room_id The ID of the room to load state for.
-/// @param {Bool} is_fresh_load True if loading from save file, false if just entering room.
-function load_room_state(room_id, is_fresh_load) {
+/// @function RoomStateManager_Save()
+/// @description Saves the current state of the room.
+/// @param {real} room_id - ID of the room to save.
+function RoomStateManager_Save(room_id) {
     var room_name = room_get_name(room_id);
-    show_debug_message("Attempting to load state for room: " + room_name + " (Fresh Load: " + string(is_fresh_load) + ")");
+    show_debug_message("[INFO] RoomStateManager: Saving state for room: " + room_name);
 
-    // Ensure global map exists
-    if (!ds_exists(global.room_states, ds_type_map)) {
-         show_debug_message("Load State ERROR: global.room_states DS Map does not exist!");
-         return; // Cannot load state
+    if (!ds_exists(global.roomStates, ds_type_map)) {
+        global.roomStates = ds_map_create();
     }
 
-    // --- Destroy existing savable instances ONLY IF LOADING FROM SAVE ---
-    if (is_fresh_load) {
-        show_debug_message("Destroying existing savable instances (Fresh Load)...");
-        with (all) {
-            if (variable_instance_exists(id, "is_savable") && is_savable &&
-                 id != global.player_instance && object_index != obj_controller && object_index != obj_ui_manager)
-             { instance_destroy(); /* Log if needed */ }
+    var state_array = [];
+    with (all) {
+        if (variable_instance_exists(id, "is_savable") && is_savable) {
+            var state_data = {
+                object_index_name: object_get_name(object_index),
+                x: x, y: y
+            };
+            array_push(state_array, state_data);
         }
-        show_debug_message("Finished destroying old instances (Fresh Load).");
-    } else {
-         show_debug_message("Skipping instance destruction (Normal Room Entry).");
     }
-    // --- End Conditional Destruction ---
+
+    if (ds_map_exists(global.roomStates, room_name)) {
+        ds_map_replace(global.roomStates, room_name, state_array);
+    } else {
+        ds_map_add(global.roomStates, room_name, state_array);
+    }
+
+    show_debug_message("[INFO] RoomStateManager: Room state saved for: " + room_name);
     
     // Check if saved state exists for this room
     if (ds_map_exists(global.room_states, room_name)) {
