@@ -1,41 +1,40 @@
-/// Animation End Event for obj_warp - REVISED (Focus on target_instance)
+/// Animation End Event for obj_warp - Simplified Player Warp Trigger
+show_debug_message("DEBUG (Warp Anim End): Animation ended. Target Instance: " + string(target_instance));
 
-show_debug_message("DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: " + string(target_instance));
+// Restore Player Visibility (if you hid it in warp_block step)
+// if (instance_exists(target_instance) && target_instance == global.player_instance) {
+//     target_instance.visible = true;
+// }
 
-// Make sure the specific target instance still exists
-if (!instance_exists(target_instance)) {
-    show_debug_message("ERROR (Warp Anim End): Target instance (" + string(target_instance) + ") no longer exists!");
-    room_goto(target_rm); // Go to room anyway
-    instance_destroy(); // Destroy self
-    exit;
+// Ensure the target instance is still the player before setting globals
+if (instance_exists(target_instance) && target_instance == global.player_instance) {
+    show_debug_message("DEBUG (Warp Anim End): Setting global warp targets for player.");
+    // Store the target coordinates for the controller's Room Start event
+    global.warp_target_x = target_x;
+    global.warp_target_y = target_y;
+    global.warp_target_face = target_face;
+    // Optional: Storing ID for verification (can be removed if not needed)
+    // global.warp_target_inst_id = target_instance;
+
+} else {
+     show_debug_message("WARNING (Warp Anim End): Target instance ("+string(target_instance)+") is not the player or doesn't exist! Cannot set warp targets.");
+     // Clear potential stale targets just in case
+     global.warp_target_x = undefined;
+     global.warp_target_y = undefined;
+     global.warp_target_face = undefined;
 }
 
-show_debug_message("DEBUG (Warp Anim End): Moving instance: " + string(target_instance) + " (" + object_get_name(target_instance.object_index) + ") before room transition.");
-
-/// Animation End Event for obj_warp - REVISED (Focus on target_instance)
-
-show_debug_message("DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: " + string(target_instance));
-
-// Make sure the specific target instance still exists
-if (!instance_exists(target_instance)) { /* ... Error handling ... */ }
-else
-{
-    show_debug_message("DEBUG (Warp Anim End): Moving instance: " + string(target_instance) + " (" + object_get_name(target_instance.object_index) + ") before room transition.");
-
-    // --- Position the SPECIFIC target instance ---
-    target_instance.x = target_x; target_instance.y = target_y;
-    if (variable_instance_exists(target_instance, "current_direction")) { target_instance.current_direction = target_face; }
-    else if (variable_instance_exists(target_instance, "face")) { target_instance.face = target_face; }
-    show_debug_message("DEBUG (Warp Anim End): Instance " + string(target_instance) + " moved.");
-
-   // --- Store Warp Coords ONLY IF it was the Player ---
-    global.warp_target_x = undefined; global.warp_target_y = undefined; global.warp_target_face = undefined; global.warp_target_inst_id = noone; // Clear first
-    if (target_instance == global.player_instance) { global.warp_target_x = target_x; global.warp_target_y = target_y; global.warp_target_face = target_face; global.warp_target_inst_id = target_instance; show_debug_message("DEBUG (Warp Anim End): Stored PLAYER warp target pos."); }
-    else { if (!target_instance.persistent) { target_instance.persistent = true; show_debug_message("DEBUG (Warp Anim End): Made NPC persistent."); } show_debug_message("DEBUG (Warp Anim End): NPC warped. Global targets remain undefined."); }
+// --- Initiate Room Transition ---
+show_debug_message("DEBUG (Warp Anim End): Calling room_goto(" + room_get_name(target_rm) + ")");
+if (room_exists(target_rm)) {
+    room_goto(target_rm);
+} else {
+    show_debug_message("ERROR (Warp Anim End): Target room doesn't exist! Cannot transition.");
+    // Decide fallback behavior - maybe go to a default room?
+    // room_goto(rm_welcome_room);
 }
 
-// Go to the target room
-room_goto(target_rm);
-
-// Destroy self *after* initiating room transition, allowing Alarm 0 to potentially trigger
-instance_destroy(); // <<< ADD THIS
+// --- Destroy this temporary warp effect object ---
+// This runs AFTER room_goto starts the transition process
+instance_destroy();
+show_debug_message("DEBUG (Warp Anim End): obj_warp instance destroyed.");

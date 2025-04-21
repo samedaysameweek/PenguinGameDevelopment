@@ -1,8 +1,8 @@
 // obj_polarbear Create Event
 xspd = 0;
 yspd = 0;
-move_spd = 1; // SLOWER walking speed
-face = PB_UP_LEFT; // Use macro for initial face if needed, but 'face' isn't used by polar bear directly anymore
+move_spd = 0.5; // SLOWER walking speed
+face = PB_DOWN; // Use macro for initial face if needed, but 'face' isn't used by polar bear directly anymore
 mood = "passive"; // Start in passive mood
 throw_timer = 0;
 throw_duration = 96; // Duration of throw animation
@@ -16,7 +16,7 @@ frame_w = 48;
 frame_h = 48;
 
 // -- NEW Animation Variables --
-walk_anim_speed = 0.1; // SLOWER animation speed (adjust as needed)
+walk_anim_speed = 0.5; // SLOWER animation speed (adjust as needed)
 idle_anim_speed = 0;   // Idle animation speed (0 for static face)
 image_index = 0;       // Current animation frame index
 image_speed = 0;       // GMS built-in animation speed control

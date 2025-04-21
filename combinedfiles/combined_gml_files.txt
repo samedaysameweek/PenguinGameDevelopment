@@ -1043,6 +1043,17 @@ if (!layer_exists("Instances")) { layer_create(0, "Instances"); }
 
 var _new_player = instance_create_layer(start_x, start_y, "Instances", player_obj);
 
+// --- SAFETY CHECK: Destroy duplicate player instances ---
+if (instance_exists(_new_player)) {
+    with(obj_player_base) { // Check parent type
+        // Destroy any instance that IS a player type but NOT the newly created one, and NOT the controller itself
+        if (id != _new_player && id != other.id && object_index != obj_controller) {
+            show_debug_message("CONTROLLER ROOM START (Safety): Destroying potentially duplicate player instance: ID " + string(id) + " (" + object_get_name(object_index) + ")");
+            instance_destroy(id);
+        }
+    }
+}
+
 // --- 4. Assign and Verify Global Player Instance ---
 // Ensure global.player_instance *definitely* points to the new instance or noone.
 if (instance_exists(_new_player)) {
@@ -4411,7 +4422,7 @@ action_duration = 0;
 sit_delay = 0;
 image_index = 0;              // Current animation frame
 image_speed = 0;              // Animation speed
-
+action_has_spawned_projectile = false;
 
 // Frame data and sprite maps for special actions
 action_frame_data = ds_map_create();
@@ -5697,8 +5708,8 @@ File: Create_0.gml
 // obj_polarbear Create Event
 xspd = 0;
 yspd = 0;
-move_spd = 1; // SLOWER walking speed
-face = PB_UP_LEFT; // Use macro for initial face if needed, but 'face' isn't used by polar bear directly anymore
+move_spd = 0.5; // SLOWER walking speed
+face = PB_DOWN; // Use macro for initial face if needed, but 'face' isn't used by polar bear directly anymore
 mood = "passive"; // Start in passive mood
 throw_timer = 0;
 throw_duration = 96; // Duration of throw animation
@@ -5712,7 +5723,7 @@ frame_w = 48;
 frame_h = 48;
 
 // -- NEW Animation Variables --
-walk_anim_speed = 0.1; // SLOWER animation speed (adjust as needed)
+walk_anim_speed = 0.5; // SLOWER animation speed (adjust as needed)
 idle_anim_speed = 0;   // Idle animation speed (0 for static face)
 image_index = 0;       // Current animation frame index
 image_speed = 0;       // GMS built-in animation speed control
@@ -5870,79 +5881,87 @@ if (place_meeting(x, y, obj_warp_block) && !instance_exists(obj_warp)) {
 }
 
 // Get player instance safely
-var _player_inst = instance_exists(global.player_instance) ? global.player_instance : noone;
+var _player_inst = noone;
+if (instance_exists(global.player_instance)) {
+    _player_inst = global.player_instance;
+}
 
 // Determine player distance ONLY if player exists
-dist_to_player = (_player_inst != noone) ? distance_to_object(_player_inst) : 10000;
-if (_player_inst == noone && mood == "angry") { mood = "passive"; } // Calm down if player gone
+if (_player_inst != noone) {
+     dist_to_player = distance_to_object(_player_inst);
+     // Check if player is close enough to potentially anger the bear
+     if (dist_to_player <= view_range && mood == "passive") {
+         // Optional: Add a chance to become angry just by player being near?
+         // if (random(100) < 1) { mood = "angry"; }
+     }
+} else {
+     dist_to_player = 10000; // Effectively infinite distance if player doesn't exist
+     if (mood == "angry") { mood = "passive"; } // Calm down if player disappears
+}
 
-// --- DEBUG: Log Start of State Logic ---
-// show_debug_message("PB Step Start: Mood=" + mood + ", is_stopped=" + string(is_stopped) + ", xspd=" + string(xspd) + ", yspd=" + string(yspd));
 
 // --- State Machine ---
 switch (mood) {
     case "passive":
-        image_speed = 0; // Default for passive
-        xspd = 0;
+        image_speed = 0; // Default for passive, overridden below
+        xspd = 0;        // Reset speed at start of passive logic
         yspd = 0;
 
         if (is_stopped) {
-            image_speed = idle_anim_speed; // Usually 0
+            image_speed = idle_anim_speed; // Use idle animation speed (currently 0)
             if (stop_timer > 0) {
                 stop_timer--;
-                // Face player logic...
+                // Optionally face player if nearby and stopped
                 if (_player_inst != noone && dist_to_player < view_range / 2) {
                      var dir_to_player = point_direction(x, y, _player_inst.x, _player_inst.y);
                      var angle = round(dir_to_player / 45) % 8;
+                     // Map angle to PB_XXX macros (0=Right, 1=UR, 2=Up, ..., 7=DR)
                      var face_map = [PB_RIGHT, PB_UP_RIGHT, PB_UP, PB_UP_LEFT, PB_LEFT, PB_DOWN_LEFT, PB_DOWN, PB_DOWN_RIGHT];
                      current_direction = face_map[angle];
                 }
             } else {
                 is_stopped = false;
-                wander_timer = irandom_range(60, 180);
-                current_direction = irandom(7);
-                 // show_debug_message("PB Passive: Stop timer ended. Starting wander. New Dir: " + string(current_direction));
+                wander_timer = irandom_range(60, 180); // Wander for 1-3 seconds
+                current_direction = irandom(7); // Pick new random direction using 0-7 range matching macros
             }
         } else { // Wandering
-            image_speed = walk_anim_speed; // Should be > 0
+            image_speed = walk_anim_speed; // Use walk animation speed
             if (wander_timer > 0) {
                 wander_timer--;
                 // Calculate speed based on current_direction macro
-                switch (current_direction) { /* ... speed calculation ... */
-                     case PB_DOWN:      yspd = move_spd; break;
-                     case PB_DOWN_LEFT: xspd = -move_spd; yspd = move_spd; break;
-                     case PB_LEFT:      xspd = -move_spd; break;
-                     case PB_UP_LEFT:   xspd = -move_spd; yspd = -move_spd; break;
-                     case PB_UP:        yspd = -move_spd; break;
-                     case PB_UP_RIGHT:  xspd = move_spd; yspd = -move_spd; break;
-                     case PB_RIGHT:     xspd = move_spd; break;
-                     case PB_DOWN_RIGHT:xspd = move_spd; yspd = move_spd; break;
+                switch (current_direction) {
+                    case PB_DOWN:      yspd = move_spd; break;
+                    case PB_DOWN_LEFT: xspd = -move_spd; yspd = move_spd; break;
+                    case PB_LEFT:      xspd = -move_spd; break;
+                    case PB_UP_LEFT:   xspd = -move_spd; yspd = -move_spd; break;
+                    case PB_UP:        yspd = -move_spd; break;
+                    case PB_UP_RIGHT:  xspd = move_spd; yspd = -move_spd; break;
+                    case PB_RIGHT:     xspd = move_spd; break;
+                    case PB_DOWN_RIGHT:xspd = move_spd; yspd = move_spd; break;
                 }
             } else {
-                 // show_debug_message("PB Passive: Wander timer ended. Deciding next action.");
-                if (random(1) < 0.3) { // Stop
+                // Decide to stop or change direction
+                if (random(1) < 0.3) { // 30% chance to stop
                     is_stopped = true;
-                    stop_timer = irandom_range(60, 180);
-                     // show_debug_message("PB Passive: Decided to stop.");
-                } else { // Change direction
-                    current_direction = irandom(7);
-                    wander_timer = irandom_range(60, 180);
-                     // show_debug_message("PB Passive: Decided to wander again. New Dir: " + string(current_direction));
+                    stop_timer = irandom_range(60, 180); // Stop for 1-3 seconds
+                } else { // 70% chance to change direction
+                    current_direction = irandom(7); // Pick random 0-7
+                    wander_timer = irandom_range(60, 180); // Wander for 1-3 seconds
                 }
-                 // Reset speed here to reflect decision immediately
-                xspd = 0;
-                yspd = 0;
-                if (!is_stopped) { image_speed = walk_anim_speed; } else { image_speed = idle_anim_speed; }
             }
         }
+        // Animate walking/idle - GMS handles index increment based on image_speed
         break; // End passive state
 
     case "angry":
-        image_speed = 0; // Default for angry
-        xspd = 0;
+        image_speed = 0; // Default for angry, overridden below
+        xspd = 0;        // Reset speed at start of angry logic
         yspd = 0;
 
-        if (_player_inst == noone) { mood = "passive"; break; }
+        if (_player_inst == noone) { // If player doesn't exist, calm down
+            mood = "passive";
+            break;
+        }
 
         // Face the player
         var dir_to_player = point_direction(x, y, _player_inst.x, _player_inst.y);
@@ -5953,75 +5972,97 @@ switch (mood) {
         if (throw_timer > 0) {
             // --- Currently Throwing ---
             throw_timer--;
+
+            // Animate throw based on duration (Ensuring throw_sprite is valid)
             if (throw_sprite != noone && sprite_exists(throw_sprite)) {
                  var _num_frames = sprite_get_number(throw_sprite);
                  image_speed = (_num_frames > 0 && throw_duration > 0) ? (_num_frames / throw_duration) : 0;
-                 // show_debug_message("PB Throwing: Anim Speed=" + string(image_speed));
-            } else { image_speed = 0; }
-
-            if (throw_timer <= 0) { // Throw finished
-                 if (_player_inst != noone) {
-                     var snowball = instance_create_layer(x, y + 5, "Instances", obj_snowball); // Adjust Y slightly
-                     snowball.direction = dir_to_player;
-                     snowball.speed = 5;
-                      show_debug_message("Polar Bear threw snowball!");
-                 }
-                 image_speed = idle_anim_speed; // Transition to idle speed
-                 image_index = 0;
-                 throw_interval_timer = throw_interval;
-                 throw_sprite = noone;
-                  // show_debug_message("PB Throwing: Finished. Starting Cooldown.");
+            } else {
+                 image_speed = 0; // Don't animate if sprite is invalid
             }
-        } else { // Not Throwing
-            if (throw_interval_timer > 0) { // Cooldown
+
+            // Check if throw animation finished
+            if (throw_timer <= 0) {
+                 // Throw finished - Start cooldown AND CREATE SNOWBALL NOW
+                 if (_player_inst != noone) { // Check if player still exists
+                     var snowball = instance_create_layer(x, y, "Instances", obj_snowball);
+                     snowball.direction = dir_to_player; // Use direction calculated at start of state
+                     snowball.speed = 5;
+                     show_debug_message("Polar Bear threw snowball!");
+                 }
+                 image_speed = idle_anim_speed; // Transition to idle speed after throw
+                 image_index = 0; // Reset frame index
+                 throw_interval_timer = throw_interval;
+                 throw_sprite = noone; // Clear the selected throw sprite
+            }
+        } else {
+            // --- Not Throwing - Decide Action ---
+            if (throw_interval_timer > 0) {
+                // --- Cooldown Active ---
                 throw_interval_timer--;
-                image_speed = idle_anim_speed; // Idle during cooldown
-                 // show_debug_message("PB Angry: Cooldown. Timer=" + string(throw_interval_timer));
-            } else { // Cooldown Finished
-                 // show_debug_message("PB Angry: Cooldown finished. Checking range. Dist=" + string(dist_to_player));
-                if (dist_to_player <= attack_distance) { // Start Throw
-                    throw_timer = throw_duration;
-                    image_index = 0;
-                    if (_player_inst.y > y + 10) { throw_sprite = spr_polarbear_snowballdownright_sheet; }
-                    else { throw_sprite = spr_polarbear_snowballupright_sheet; }
-                    if (!sprite_exists(throw_sprite)) { /* error handling */ mood = "passive"; throw_sprite = noone; throw_timer = 0; }
-                    else { show_debug_message("PB Angry: Starting throw. Sprite: " + sprite_get_name(throw_sprite)); image_speed = 0; }
-                } else if (dist_to_player <= view_range) { // Chase
-                    var stop_distance = attack_distance - 8;
+                xspd = 0; // Stay still during cooldown
+                yspd = 0;
+                image_speed = idle_anim_speed; // Idle animation during cooldown
+
+            } else {
+                // --- Cooldown Finished - Check Range & Act ---
+                if (dist_to_player <= attack_distance) {
+                    // --- In Attack Range: Start Throw ---
+                    throw_timer = throw_duration; // Start animation timer
+                    image_index = 0; // Reset animation index
+
+                    // Determine which throw sprite to use based on player Y relative position
+                    if (_player_inst.y > y) { // Player is lower or level
+                        throw_sprite = spr_polarbear_snowballdownright_sheet;
+                    } else { // Player is higher
+                        throw_sprite = spr_polarbear_snowballupright_sheet;
+                    }
+                    // Safety check if sprite exists
+                    if (!sprite_exists(throw_sprite)) {
+                         show_debug_message("ERROR: Selected throw sprite does not exist! Reverting to passive.");
+                         mood = "passive";
+                         throw_sprite = noone;
+                         throw_timer = 0; // Cancel throw
+                    } else {
+                         show_debug_message("Polar Bear starting throw. Sprite: " + sprite_get_name(throw_sprite));
+                         image_speed = 0; // Ensure speed is 0 until throw anim logic calculates it next step
+                    }
+
+                } else if (dist_to_player <= view_range) {
+                    // --- In View Range (but not attack): Move Closer ---
+                    var stop_distance = attack_distance - 8; // Stop slightly before exact attack range
                     if (dist_to_player > stop_distance) {
                          var chase_dir = point_direction(x, y, _player_inst.x, _player_inst.y);
                          xspd = lengthdir_x(move_spd, chase_dir);
                          yspd = lengthdir_y(move_spd, chase_dir);
-                         image_speed = walk_anim_speed; // Walk anim while chasing
-                          // show_debug_message("PB Angry: Chasing. Speed set.");
+                         image_speed = walk_anim_speed; // Play walk animation while chasing
                     } else {
-                         image_speed = idle_anim_speed; // Idle when close enough
-                         // show_debug_message("PB Angry: Close enough, idling.");
+                         xspd = 0;
+                         yspd = 0;
+                         image_speed = idle_anim_speed; // Idle while waiting to attack
                     }
-                } else { // Calm Down
+                } else {
+                    // --- Out of View Range: Calm Down ---
                     mood = "passive";
-                    is_stopped = true;
-                    stop_timer = 60;
-                    image_speed = idle_anim_speed;
-                    show_debug_message("Polar Bear calmed down (out of range).");
+                    is_stopped = true; // Start passive state by stopping
+                    stop_timer = 60; // Stop briefly before wandering
+                    image_speed = idle_anim_speed; // Set idle speed for passive transition
+                    show_debug_message("Polar Bear calmed down.");
                 }
             }
         }
         break; // End angry state
 } // End switch(mood)
 
-// --- DEBUG: Log final speed and image_speed BEFORE collision ---
-// show_debug_message("PB Pre-Collision: Mood=" + mood + ", xspd=" + string(xspd) + ", yspd=" + string(yspd) + ", image_speed=" + string(image_speed));
-
 // --- Collision Handling (using script) ---
 xspd = handle_collision("x", xspd);
 yspd = handle_collision("y", yspd);
 // x and y are updated by handle_collision
 
-// --- DEBUG: Log position AFTER collision ---
-// show_debug_message("PB Post-Collision: X=" + string(x) + ", Y=" + string(y));
+// GMS handles image_index increment when image_speed is set > 0
+// So, no need for manual image_index += image_speed here
 
-set_depth();
+set_depth(); // Set depth based on final y
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_puffle
 File: Create_0.gml
 // Movement variables
@@ -6653,32 +6694,29 @@ File: Create_0.gml
 depth = -bbox_bottom;
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_snowball
 File: Collision_obj_polarbear.gml
-   // obj_polarbear Collision Event with obj_snowball
-   show_debug_message("DEBUG: Snowball (" + string(id) + ") colliding with Polar Bear (" + string(other.id) + ")");
+// Collision Event with obj_snowball
+show_debug_message("DEBUG: Snowball (" + string(id) + ") colliding with Polar Bear (" + string(other.id) + ")");
 
-   // Check if the polar bear instance still exists before trying to modify it
-   if (instance_exists(other))
-   {
-       show_debug_message("Polar Bear instance exists. Setting mood to angry.");
-       with (other) { // Use 'with' to ensure context is the polar bear
-           mood = "angry";
-           throw_interval_timer = 0;
-           throw_timer = 0;
-           is_stopped = false;
-           throw_sprite = noone;
+// Apply effect to the specific Polar Bear instance that was hit
+with (other) {
+    if (mood != "angry") {
+        show_debug_message("Polar Bear (" + string(id) + ") hit while passive/other state. Becoming angry!");
+    } else {
+        show_debug_message("Polar Bear (" + string(id) + ") hit while already angry.");
+    }
+    mood = "angry";         // Force angry state
+    throw_timer = 0;        // Stop current throw animation if any
+    throw_interval_timer = 0; // Reset throw cooldown to allow immediate retaliation
+    image_speed = idle_anim_speed; // Stop walking/throwing animation briefly
+    image_index = 0;         // Reset animation index
+    is_stopped = false;      // Ensure bear isn't stuck in a stopped state
+    wander_timer = 0;       // Stop current wander path
+    xspd = 0;                // Stop current movement
+    yspd = 0;
+}
 
-           // Correctly access the bear's idle_anim_speed
-           if (variable_instance_exists(id, "idle_anim_speed")) { // 'id' inside 'with' refers to the bear
-               image_speed = idle_anim_speed;
-           } else {
-               image_speed = 0;
-               show_debug_message("WARNING: idle_anim_speed missing on Polar Bear!");
-           }
-           image_index = 0;
-       }
-   } else { show_debug_message("WARNING: Polar Bear instance was already destroyed."); }
-
-   instance_destroy(); // Destroy the snowball (self)
+// Destroy the snowball
+instance_destroy();
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_snowball
 File: Create_0.gml
 direction = 0;
@@ -6985,71 +7023,75 @@ set_depth();
 
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_warp
 File: Alarm_0.gml
-/// Alarm[0] Event
+/// Alarm[0] Event - Reset PLAYER Warp Cooldown
 global.warp_cooldown = false;
-show_debug_message("DEBUG: Warp cooldown finished. Warping allowed again.");
-instance_destroy(); // Destroy the warp object itself after cooldown
+show_debug_message("DEBUG (Warp Block): Player warp cooldown finished.");
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_warp
 File: Create_0.gml
-   // obj_warp: Create Event
-   target_rm = 0;
-   target_x = 0;
-   target_y = 0;
-   target_face = 0;
-   target_instance = noone;
+// obj_warp: Create Event
+target_rm = 0;
+target_x = 0;
+target_y = 0;
+target_face = 0;
+target_instance = noone;
 
-   persistent = true; // <<< MAKE PERSISTENT
+persistent = false; // <<< CHANGE THIS TO FALSE
 
-   // Alarm 0 will reset the global cooldown
-   alarm[0] = room_speed / 2; // Keep the alarm short
+// REMOVED: Alarm setting - Cooldown now handled by obj_warp_block
+// alarm[0] = room_speed / 2;
 
-   show_debug_message("obj_warp initialized (Persistent: " + string(persistent) + "). Target Room: " + string(target_rm));
+show_debug_message("obj_warp initialized (Persistent: " + string(persistent) + "). Target Room: " + string(target_rm));
+
+// Optional: Set sprite based on target instance for visual feedback
+// if (instance_exists(target_instance)) {
+//     sprite_index = (target_instance == global.player_instance) ? spr_player_warp_effect : spr_warp_effect_default;
+//     image_speed = 1; // Or adjust as needed
+// }
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_warp
 File: Draw_0.gml
 draw_sprite_tiled(sprite_index, image_index, 0, 0)
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_warp
 File: Other_7.gml
-/// Animation End Event for obj_warp - REVISED (Focus on target_instance)
+/// Animation End Event for obj_warp - Simplified Player Warp Trigger
+show_debug_message("DEBUG (Warp Anim End): Animation ended. Target Instance: " + string(target_instance));
 
-show_debug_message("DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: " + string(target_instance));
+// Restore Player Visibility (if you hid it in warp_block step)
+// if (instance_exists(target_instance) && target_instance == global.player_instance) {
+//     target_instance.visible = true;
+// }
 
-// Make sure the specific target instance still exists
-if (!instance_exists(target_instance)) {
-    show_debug_message("ERROR (Warp Anim End): Target instance (" + string(target_instance) + ") no longer exists!");
-    room_goto(target_rm); // Go to room anyway
-    instance_destroy(); // Destroy self
-    exit;
+// Ensure the target instance is still the player before setting globals
+if (instance_exists(target_instance) && target_instance == global.player_instance) {
+    show_debug_message("DEBUG (Warp Anim End): Setting global warp targets for player.");
+    // Store the target coordinates for the controller's Room Start event
+    global.warp_target_x = target_x;
+    global.warp_target_y = target_y;
+    global.warp_target_face = target_face;
+    // Optional: Storing ID for verification (can be removed if not needed)
+    // global.warp_target_inst_id = target_instance;
+
+} else {
+     show_debug_message("WARNING (Warp Anim End): Target instance ("+string(target_instance)+") is not the player or doesn't exist! Cannot set warp targets.");
+     // Clear potential stale targets just in case
+     global.warp_target_x = undefined;
+     global.warp_target_y = undefined;
+     global.warp_target_face = undefined;
 }
 
-show_debug_message("DEBUG (Warp Anim End): Moving instance: " + string(target_instance) + " (" + object_get_name(target_instance.object_index) + ") before room transition.");
-
-/// Animation End Event for obj_warp - REVISED (Focus on target_instance)
-
-show_debug_message("DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: " + string(target_instance));
-
-// Make sure the specific target instance still exists
-if (!instance_exists(target_instance)) { /* ... Error handling ... */ }
-else
-{
-    show_debug_message("DEBUG (Warp Anim End): Moving instance: " + string(target_instance) + " (" + object_get_name(target_instance.object_index) + ") before room transition.");
-
-    // --- Position the SPECIFIC target instance ---
-    target_instance.x = target_x; target_instance.y = target_y;
-    if (variable_instance_exists(target_instance, "current_direction")) { target_instance.current_direction = target_face; }
-    else if (variable_instance_exists(target_instance, "face")) { target_instance.face = target_face; }
-    show_debug_message("DEBUG (Warp Anim End): Instance " + string(target_instance) + " moved.");
-
-   // --- Store Warp Coords ONLY IF it was the Player ---
-    global.warp_target_x = undefined; global.warp_target_y = undefined; global.warp_target_face = undefined; global.warp_target_inst_id = noone; // Clear first
-    if (target_instance == global.player_instance) { global.warp_target_x = target_x; global.warp_target_y = target_y; global.warp_target_face = target_face; global.warp_target_inst_id = target_instance; show_debug_message("DEBUG (Warp Anim End): Stored PLAYER warp target pos."); }
-    else { if (!target_instance.persistent) { target_instance.persistent = true; show_debug_message("DEBUG (Warp Anim End): Made NPC persistent."); } show_debug_message("DEBUG (Warp Anim End): NPC warped. Global targets remain undefined."); }
+// --- Initiate Room Transition ---
+show_debug_message("DEBUG (Warp Anim End): Calling room_goto(" + room_get_name(target_rm) + ")");
+if (room_exists(target_rm)) {
+    room_goto(target_rm);
+} else {
+    show_debug_message("ERROR (Warp Anim End): Target room doesn't exist! Cannot transition.");
+    // Decide fallback behavior - maybe go to a default room?
+    // room_goto(rm_welcome_room);
 }
 
-// Go to the target room
-room_goto(target_rm);
-
-// Destroy self *after* initiating room transition, allowing Alarm 0 to potentially trigger
-instance_destroy(); // <<< ADD THIS
+// --- Destroy this temporary warp effect object ---
+// This runs AFTER room_goto starts the transition process
+instance_destroy();
+show_debug_message("DEBUG (Warp Anim End): obj_warp instance destroyed.");
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_warp
 File: Step_0.gml
 // Step Event for obj_warp
@@ -7058,9 +7100,9 @@ if (room == target_rm && image_index < 1) {
 }
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_warp_block
 File: Alarm_0.gml
-/// Alarm[0] Event - Reset Warp Cooldown
+/// Alarm[0] Event - Reset PLAYER Warp Cooldown
 global.warp_cooldown = false;
-show_debug_message("DEBUG: Warp cooldown reset.");
+show_debug_message("DEBUG (Warp Block " + string(id) + "): Player warp cooldown finished.");
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_warp_block
 File: Create_0.gml
 target_rm = 0;
@@ -7095,70 +7137,50 @@ if (instance_exists(obj_warp)) {
 }
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_warp_block
 File: Step_0.gml
-/// Step Event for obj_warp_block - REVISED LOGIC
-
-// Skip if a warp is in progress or cooldown is active
-if (instance_exists(obj_warp)) {
-    show_debug_message("DEBUG Warp Block: Warp already in progress, skipping.");
-    exit;
-}
-if (global.warp_cooldown) {
-    if (instance_exists(global.player_instance) && place_meeting(x, y, global.player_instance)) {
-        show_debug_message("DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.");
-    }
-    exit;
+/// Step Event for obj_warp_block - Player Only Warp
+// Skip if a warp is already in progress or player cooldown is active
+if (instance_exists(obj_warp) || global.warp_cooldown) {
+    exit; // Do nothing if already warping or on cooldown
 }
 
-// Initialize variables for warp handling
-var _warp_instance = noone;
-var _warp_target_face = target_face;
-
-// Check for player collision
+// Check ONLY for the global player instance collision
 if (instance_exists(global.player_instance) && place_meeting(x, y, global.player_instance)) {
-    _warp_instance = global.player_instance;
+
+    show_debug_message("DEBUG: Player detected on warp block " + string(id) + ". Initiating warp.");
+
+    // --- Room Validation ---
+    if (!room_exists(target_rm)) {
+        show_debug_message("ERROR: Target room invalid (" + string(target_rm) + "). Defaulting to current room.");
+        target_rm = room; // Default to current room if target is invalid
+    } else {
+        show_debug_message("DEBUG: Valid target room: " + room_get_name(target_rm));
+    }
+
+    // --- Determine Player Face ---
+    var _warp_target_face = target_face; // Default from block properties
+    // Use player's current face if the variable exists
     if (variable_instance_exists(global.player_instance, "face")) {
         _warp_target_face = global.player_instance.face;
     }
-    show_debug_message("DEBUG: Player detected. Prioritizing warp.");
-}
 
-// Check for polar bear collision (only if player is not warping)
-if (_warp_instance == noone) {
-    var _polar_bear = instance_place(x, y, obj_polarbear);
-    if (_polar_bear != noone) {
-        _warp_instance = _polar_bear;
-        _warp_target_face = _polar_bear.current_direction;
-        show_debug_message("DEBUG: Polar Bear detected on obj_warp_block. Warping.");
-    }
-}
-
-// Create warp instance if a target was found
-if (_warp_instance != noone) {
-    // Validate and assign target room
-    if (!variable_instance_exists(id, "target_rm") || !room_exists(target_rm)) {
-        target_rm = room; // Fallback to the current room
-        show_debug_message("DEBUG: Invalid target room. Defaulting to current room.");
-    } else {
-        show_debug_message("DEBUG: Valid target room identified: " + string(target_rm));
-    }
-
-    // Prevent duplicate player instances during polar bear warps
-    if (_warp_instance.object_index == obj_polarbear && instance_exists(global.player_instance)) {
-        show_debug_message("DEBUG: Polar bear warp detected. Ensuring no duplication.");
-        global.player_instance.destroy();
-    }
-
-    show_debug_message("Creating obj_warp for instance: " + string(_warp_instance) + " (" + object_get_name(_warp_instance.object_index) + ")");
+    // --- Create the Temporary Warp Effect/Trigger Instance ---
+    // Ensure the target layer exists (safety check)
+    if (!layer_exists("Instances")) { layer_create(0, "Instances"); }
     var warp_inst = instance_create_layer(x, y, "Instances", obj_warp);
-    warp_inst.target_instance = _warp_instance;
-    warp_inst.target_face = _warp_target_face;
-    warp_inst.target_rm = target_rm; // Assign the validated target room
-    warp_inst.target_x = target_x; // Assign the target x-coordinate
-    warp_inst.target_y = target_y; // Assign the target y-coordinate
+    warp_inst.target_instance = global.player_instance; // Tell warp obj who triggered
+    warp_inst.target_rm = target_rm;
+    warp_inst.target_x = target_x;
+    warp_inst.target_y = target_y;
+    warp_inst.target_face = _warp_target_face; // Pass face direction
 
-    // Activate cooldown and set timer for reset
-    global.warp_cooldown = true;
-    alarm[0] = room_speed * 2; // 2-second cooldown
+    // --- Set PLAYER Cooldown and Start Alarm on THIS Warp Block ---
+    global.warp_cooldown = true; // Activate the global cooldown
+    alarm[0] = room_speed * 2; // Set 2-second cooldown using THIS warp_block's Alarm 0
+    show_debug_message("DEBUG: Player warp initiated. Cooldown started (2s). Alarm[0] set on warp block " + string(id));
+
+    // --- Player Visibility during warp (Optional: Hide player during effect) ---
+    // global.player_instance.visible = false; // Uncomment if you want player to hide during warp visual
+
 }
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_warp_map
 File: Create_0.gml

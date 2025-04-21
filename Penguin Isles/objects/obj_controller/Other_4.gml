@@ -64,6 +64,17 @@ if (!layer_exists("Instances")) { layer_create(0, "Instances"); }
 
 var _new_player = instance_create_layer(start_x, start_y, "Instances", player_obj);
 
+// --- SAFETY CHECK: Destroy duplicate player instances ---
+if (instance_exists(_new_player)) {
+    with(obj_player_base) { // Check parent type
+        // Destroy any instance that IS a player type but NOT the newly created one, and NOT the controller itself
+        if (id != _new_player && id != other.id && object_index != obj_controller) {
+            show_debug_message("CONTROLLER ROOM START (Safety): Destroying potentially duplicate player instance: ID " + string(id) + " (" + object_get_name(object_index) + ")");
+            instance_destroy(id);
+        }
+    }
+}
+
 // --- 4. Assign and Verify Global Player Instance ---
 // Ensure global.player_instance *definitely* points to the new instance or noone.
 if (instance_exists(_new_player)) {

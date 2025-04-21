@@ -49,7 +49,7 @@ action_duration = 0;
 sit_delay = 0;
 image_index = 0;              // Current animation frame
 image_speed = 0;              // Animation speed
-
+action_has_spawned_projectile = false;
 
 // Frame data and sprite maps for special actions
 action_frame_data = ds_map_create();

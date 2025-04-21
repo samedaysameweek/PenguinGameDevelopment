@@ -1,4 +1,3 @@
-/// Alarm[0] Event
+/// Alarm[0] Event - Reset PLAYER Warp Cooldown
 global.warp_cooldown = false;
-show_debug_message("DEBUG: Warp cooldown finished. Warping allowed again.");
-instance_destroy(); // Destroy the warp object itself after cooldown
+show_debug_message("DEBUG (Warp Block): Player warp cooldown finished.");

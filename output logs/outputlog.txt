@@ -1,7 +1,7 @@
 Setting scheduler resolution to 1
 DirectX11: Using hardware device
 Resizing swap chain...
-Collision Event time(microsecs)=10
+Collision Event time(microsecs)=11
 Variable_Global_Init()
 PrepareGame()
 Audio_Init()
@@ -21,9 +21,9 @@ Done ObjectLists
 Done Extension_Initialize
 About to startroom
 Number of buttons found: 3
-Total memory used = 12498915 (0x00beb7e3) bytes 11.92MB
-Free memory = 5994040 (0x005b7638) bytes 5.72MB
-Peak memory used = 13305534 (0x00cb06be) bytes 12.69MB
+Total memory used = 12492747 (0x00be9fcb) bytes 11.91MB
+Free memory = 5994056 (0x005b7648) bytes 5.72MB
+Peak memory used = 13304810 (0x00cb03ea) bytes 12.69MB
 **********************************.
 Entering main loop.
 **********************************.
@@ -97,118 +97,14 @@ Set camera view size to 288x216, border (0,0)
 Camera follow player ref instance 100663 INSTANT.
 CONTROLLER ROOM START: Finished setup for room: rm_welcome_room
 DEBUG: Resetting repair flag...
-DEBUG: Polar Bear detected on obj_warp_block. Warping.
-DEBUG: Valid target room identified: ref room rm_plaza
-DEBUG: Polar bear warp detected. Ensuring no duplication.
-ERROR!!! :: ############################################################################################
-ERROR in action number 1
-of  Step Event0 for object obj_warp_block:
-Variable <unknown_object>.destroy(100893, -2147483648) not set before reading it.
- at gml_Object_obj_warp_block_Step_0 (line 51) -         global.player_instance.destroy();
-############################################################################################
-gml_Object_obj_warp_block_Step_0 (line 51)
-
-Setting scheduler resolution to 1
-DirectX11: Using hardware device
-Resizing swap chain...
-Collision Event time(microsecs)=10
-Variable_Global_Init()
-PrepareGame()
-Audio_Init()
-Audio group 0 -> Loaded
-Attempting to set gamepadcount to 12
-Game_Prepare()
-Script_Prepare() 
-TimeLine_Prepare() 
-Object_Prepare() 
-Room_Prepare() 
-Finished PrepareGame() 
-Run_Start
-Done g_EffectsManager.Init()
-Done RenderStateManager
-CreateColPairs took 0.000000s 4 usecs for 126 object types obj_col_numb=0 physobjcount=1 resizes 0 final size 1
-Done ObjectLists
-Done Extension_Initialize
-About to startroom
-Number of buttons found: 3
-Total memory used = 12490315 (0x00be964b) bytes 11.91MB
-Free memory = 5994040 (0x005b7638) bytes 5.72MB
-Peak memory used = 13305534 (0x00cb06be) bytes 12.69MB
-**********************************.
-Entering main loop.
-**********************************.
-obj_menu_button: Start button selected. Setting is_loading_game=false.
-obj_menu_button: New Game selected. Setting is_loading_game=false.
-obj_menu_button: Play button selected. Setting is_loading_game=false.
---- Running scr_initialize_item_data ---
-Defined global.item_definitions struct.
-Created global.item_index_map
-Created global.item_type_map
-Created global.item_sprite_map
-Created global.item_object_map
-Ensured item lookup maps exist.
-Populated item lookup maps (Index, Type, Sprite, Object).
---- Finished scr_initialize_item_data ---
-obj_controller Create: Executed scr_initialize_item_data.
---- Running init_globals (Refactored) ---
-Ensured global.inventory_expanded exists.
-Ensured global.game_paused exists.
-Ensured global.is_pause_menu_active exists.
-Ensured global.player_controls_enabled exists.
-Ensured global.colour_picker_active exists.
-Ensured global.party_hat_visible exists.
-Ensured global.beta_hat_visible exists.
-Ensured global.skin_switching exists.
-Ensured global.following_puffles list exists.
-Ensured global.room_states map exists.
-Ensured global.active_quests list exists.
-Ensured global.completed_quests list exists.
-Ensured global.inventory array exists (Size 42).
-Ensured global.equipped_items map exists with slots.
-init_globals: global.camera variable does not exist. Creating camera.
-init_globals: Created new global.camera. ID: 193
-init_globals: Setting default values for NEW GAME.
-Finished setting default values via init_globals.
-Initialized global.is_game_paused in obj_controller Create.
-obj_player Create: Applying initial player color: 52479
-obj_player: Initialized. Driving state: 0
-Restored player color: 52479
-Player instance created: ref instance 100653
-obj_controller created with ID: ref instance 100014
-obj_controller Create event executed
-DEBUG: obj_initializer Create Event START
-DEBUG: global.following_puffles already exists.
-DEBUG: global.equipped_items already exists.
-obj_inventory Create: Initialized with size 42
-DEBUG: obj_inventory created.
-DEBUG: obj_map_icon created.
-DEBUG: obj_initializer Create Event FINISHED
-UI Manager initialized.
-rm_init: Creation Code Started.
-rm_init: global.target_room does NOT exist before check.
-rm_init: Not loading game. Proceeding to next room (New Game).
-rm_init: Creation Code Finished.
-obj_controller Room End: Transitioning from room: rm_init
-Skipping room state save: Non-gameplay room (rm_init).
-Spawn Point marker created at (146, 155)
-CONTROLLER ROOM START: Entering room: rm_welcome_room
-CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
-CONTROLLER ROOM START (Default): Final default/spawn pos (146,155) Face: 3
-CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
-CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
-obj_player Create: Applying initial player color: 52479
-obj_player: Initialized. Driving state: 0
-Created player instance: ref instance 100663 skin: player at (146,155)
-CONTROLLER ROOM START: Calling load_room_state for: rm_welcome_room (Is Fresh Load: 0)
-Attempting to load state for room: rm_welcome_room (Fresh Load: 0)
-Skipping instance destruction (Normal Room Entry).
-No state found for room: rm_welcome_room in global.room_states.
-Set camera view size to 288x216, border (0,0)
-Camera follow player ref instance 100663 INSTANT.
-CONTROLLER ROOM START: Finished setup for room: rm_welcome_room
-DEBUG: Resetting repair flag...
-DEBUG: Stored player position: (146, 155)
-Switching to map room...
+DEBUG: Player detected on warp block ref instance 100037. Initiating warp.
+DEBUG: Valid target room: rm_plaza
+obj_warp initialized (Persistent: 0). Target Room: 0
+DEBUG: Player warp initiated. Cooldown started (2s). Alarm[0] set on warp block ref instance 100037
+DEBUG (Warp Anim End): Animation ended. Target Instance: ref instance 100663
+DEBUG (Warp Anim End): Setting global warp targets for player.
+DEBUG (Warp Anim End): Calling room_goto(rm_plaza)
+DEBUG (Warp Anim End): obj_warp instance destroyed.
 obj_controller Room End: Transitioning from room: rm_welcome_room
 Saving runtime state for leaving room: rm_welcome_room
 Room End WITH DEBUG: --- Start Instance Check ---
@@ -252,10 +148,36 @@ Room End WITH DEBUG: --- End Instance Check ---
 Room End DEBUG: Finished checking instances. Collected 18 savable states.
 Adding new room state array for: rm_welcome_room with size: 18
 Finished saving runtime state for room: rm_welcome_room
+CONTROLLER ROOM START: Entering room: rm_plaza
+CONTROLLER ROOM START (Warp): Using PLAYER warp target pos (255,360).
+CONTROLLER ROOM START: Clearing player warp target variables.
+CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
+obj_player Create: Applying initial player color: 52479
+obj_player: Initialized. Driving state: 0
+CONTROLLER ROOM START (Safety): Destroying potentially duplicate player instance: ID ref instance 100663 (obj_player)
+Created player instance: ref instance 100665 skin: player at (255,360)
+CONTROLLER ROOM START: Calling load_room_state for: rm_plaza (Is Fresh Load: 0)
+Attempting to load state for room: rm_plaza (Fresh Load: 0)
+Skipping instance destruction (Normal Room Entry).
+No state found for room: rm_plaza in global.room_states.
+Set camera view size to 288x216, border (0,0)
+Camera follow player ref instance 100665 INSTANT.
+CONTROLLER ROOM START: Finished setup for room: rm_plaza
+DEBUG: Stored player position: (206, 277)
+Switching to map room...
+obj_controller Room End: Transitioning from room: rm_plaza
+Saving runtime state for leaving room: rm_plaza
+Room End WITH DEBUG: --- Start Instance Check ---
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100137 (obj_boxpuffleo_item)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100137
+Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100182 (obj_tube)
+Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100182
+Room End WITH DEBUG: --- End Instance Check ---
+Room End DEBUG: Finished checking instances. Collected 2 savable states.
+Adding new room state array for: rm_plaza with size: 2
+Finished saving runtime state for room: rm_plaza
 CONTROLLER ROOM START: Entering room: rm_map
 CONTROLLER ROOM START: Non-gameplay room detected...
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
 DEBUG: UI Room detected. Player instance hidden.
 DEBUG: UI Room detected. Player instance hidden.
 DEBUG: UI Room detected. Player instance hidden.
@@ -321,7 +243,7 @@ DEBUG: UI Room detected. Player instance hidden.
 DEBUG: UI Room detected. Player instance hidden.
 DEBUG: UI Room detected. Player instance hidden.
 Warping to Room: ref room rm_beach at (255, 130)
-obj_warp initialized (Persistent: 1). Target Room: 0
+obj_warp initialized (Persistent: 0). Target Room: 0
 obj_controller Room End: Transitioning from room: rm_map
 Skipping room state save: Non-gameplay room (rm_map).
 CONTROLLER ROOM START: Entering room: rm_beach
@@ -331,70 +253,18 @@ CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC wa
 CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
 obj_player Create: Applying initial player color: 52479
 obj_player: Initialized. Driving state: 0
-Created player instance: ref instance 100665 skin: player at (250,200)
+CONTROLLER ROOM START (Safety): Destroying potentially duplicate player instance: ID ref instance 100665 (obj_player)
+Created player instance: ref instance 100667 skin: player at (250,200)
 CONTROLLER ROOM START: Calling load_room_state for: rm_beach (Is Fresh Load: 0)
 Attempting to load state for room: rm_beach (Fresh Load: 0)
 Skipping instance destruction (Normal Room Entry).
 No state found for room: rm_beach in global.room_states.
 Set camera view size to 288x216, border (0,0)
-Camera follow player ref instance 100665 INSTANT.
+Camera follow player ref instance 100667 INSTANT.
 CONTROLLER ROOM START: Finished setup for room: rm_beach
-DEBUG: Player detected. Prioritizing warp.
-DEBUG: Valid target room identified: ref room rm_dock
-Creating obj_warp for instance: ref instance 100665 (obj_player)
-obj_warp initialized (Persistent: 1). Target Room: 0
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG Warp Block: Warp already in progress, skipping.
-DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100665
-DEBUG (Warp Anim End): Moving instance: ref instance 100665 (obj_player) before room transition.
-DEBUG (Warp Anim End): Animation ended. Processing warp for target_instance: ref instance 100665
-DEBUG (Warp Anim End): Moving instance: ref instance 100665 (obj_player) before room transition.
-DEBUG (Warp Anim End): Instance ref instance 100665 moved.
-DEBUG (Warp Anim End): Stored PLAYER warp target pos.
+Game Paused
+Calling game_end from obj_pause_menu Quit Game button
+###game_end###0
 obj_controller Room End: Transitioning from room: rm_beach
 Saving runtime state for leaving room: rm_beach
 Room End WITH DEBUG: --- Start Instance Check ---
@@ -408,367 +278,6 @@ Room End WITH DEBUG: --- End Instance Check ---
 Room End DEBUG: Finished checking instances. Collected 3 savable states.
 Adding new room state array for: rm_beach with size: 3
 Finished saving runtime state for room: rm_beach
-CONTROLLER ROOM START: Entering room: rm_dock
-CONTROLLER ROOM START (Warp): Using PLAYER warp target pos (30,192).
-CONTROLLER ROOM START: Clearing player warp target variables.
-CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
-obj_player Create: Applying initial player color: 52479
-obj_player: Initialized. Driving state: 0
-Created player instance: ref instance 100667 skin: player at (30,192)
-CONTROLLER ROOM START: Calling load_room_state for: rm_dock (Is Fresh Load: 0)
-Attempting to load state for room: rm_dock (Fresh Load: 0)
-Skipping instance destruction (Normal Room Entry).
-No state found for room: rm_dock in global.room_states.
-Set camera view size to 288x216, border (0,0)
-Camera follow player ref instance 100667 INSTANT.
-CONTROLLER ROOM START: Finished setup for room: rm_dock
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-DEBUG: Snowball (ref instance 100670) colliding with Polar Bear (ref instance 100089)
-Polar Bear instance exists. Setting mood to angry.
-DEBUG: Snowball (ref instance 100669) colliding with Polar Bear (ref instance 100089)
-Polar Bear instance exists. Setting mood to angry.
-PB Angry: Starting throw. Sprite: spr_polarbear_snowballupright_sheet
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-DEBUG: Snowball (ref instance 100673) colliding with Polar Bear (ref instance 100089)
-Polar Bear instance exists. Setting mood to angry.
-DEBUG: Snowball (ref instance 100672) colliding with Polar Bear (ref instance 100089)
-Polar Bear instance exists. Setting mood to angry.
-PB Angry: Starting throw. Sprite: spr_polarbear_snowballupright_sheet
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Polar Bear threw snowball!
-DEBUG: Snowball (ref instance 100677) colliding with Polar Bear (ref instance 100089)
-Polar Bear instance exists. Setting mood to angry.
-PB Angry: Starting throw. Sprite: spr_polarbear_snowballupright_sheet
-Polar Bear threw snowball!
-DEBUG: Snowball (ref instance 100678) colliding with Polar Bear (ref instance 100089)
-Polar Bear instance exists. Setting mood to angry.
-PB Angry: Starting throw. Sprite: spr_polarbear_snowballupright_sheet
-Polar Bear threw snowball!
-DEBUG: Snowball (ref instance 100679) colliding with Polar Bear (ref instance 100089)
-Polar Bear instance exists. Setting mood to angry.
-Polar Bear calmed down (out of range).
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-DEBUG Warp Block: Player colliding but global.warp_cooldown is TRUE.
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-DEBUG: Snowball (ref instance 100682) colliding with Polar Bear (ref instance 100089)
-Polar Bear instance exists. Setting mood to angry.
-DEBUG: Snowball (ref instance 100681) colliding with Polar Bear (ref instance 100089)
-Polar Bear instance exists. Setting mood to angry.
-Polar Bear calmed down (out of range).
-DEBUG: Stored player position: (483, 172)
-Switching to map room...
-obj_controller Room End: Transitioning from room: rm_dock
-Saving runtime state for leaving room: rm_dock
-Room End WITH DEBUG: --- Start Instance Check ---
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100610 (obj_tube)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100610
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100609 (obj_tube)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100609
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100608 (obj_tube)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100608
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100607 (obj_icetruck)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100607
-Room End WITH DEBUG: --- End Instance Check ---
-Room End DEBUG: Finished checking instances. Collected 4 savable states.
-Adding new room state array for: rm_dock with size: 4
-Finished saving runtime state for room: rm_dock
-CONTROLLER ROOM START: Entering room: rm_map
-CONTROLLER ROOM START: Non-gameplay room detected...
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-DEBUG: UI Room detected. Player instance hidden.
-Warping to Room: ref room rm_snow_fort at (255, 130)
-obj_warp initialized (Persistent: 1). Target Room: 0
-obj_controller Room End: Transitioning from room: rm_map
-Skipping room state save: Non-gameplay room (rm_map).
-CONTROLLER ROOM START: Entering room: rm_snow_fort
-CONTROLLER ROOM START (Default): Not loading and warp_target_x is undefined. Setting defaults first...
-CONTROLLER ROOM START (Default): Final default/spawn pos (250,200) Face: 3
-CONTROLLER ROOM START: Global warp targets were already undefined (Likely NPC warp).
-CONTROLLER ROOM START: Explicitly set global.player_instance = noone before creation.
-obj_player Create: Applying initial player color: 52479
-obj_player: Initialized. Driving state: 0
-Created player instance: ref instance 100684 skin: player at (250,200)
-CONTROLLER ROOM START: Calling load_room_state for: rm_snow_fort (Is Fresh Load: 0)
-Attempting to load state for room: rm_snow_fort (Fresh Load: 0)
-Skipping instance destruction (Normal Room Entry).
-No state found for room: rm_snow_fort in global.room_states.
-Set camera view size to 288x216, border (0,0)
-Camera follow player ref instance 100684 INSTANT.
-CONTROLLER ROOM START: Finished setup for room: rm_snow_fort
-DEBUG: Resetting repair flag...
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-DEBUG: Snowball (ref instance 100708) colliding with Polar Bear (ref instance 100089)
-Polar Bear instance exists. Setting mood to angry.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-DEBUG: Snowball (ref instance 100716) colliding with Polar Bear (ref instance 100089)
-Polar Bear instance exists. Setting mood to angry.
-PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-DEBUG: Snowball (ref instance 100715) colliding with Polar Bear (ref instance 100089)
-Polar Bear instance exists. Setting mood to angry.
-DEBUG: Snowball (ref instance 100713) colliding with Polar Bear (ref instance 100089)
-Polar Bear instance exists. Setting mood to angry.
-PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-Player Action: Starting throw
-DEBUG: Snowball (ref instance 100720) colliding with Polar Bear (ref instance 100089)
-Polar Bear instance exists. Setting mood to angry.
-PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-Player Action: Action 'none' finished by animation loop.
-DEBUG: Snowball (ref instance 100719) colliding with Polar Bear (ref instance 100089)
-Polar Bear instance exists. Setting mood to angry.
-DEBUG: Snowball (ref instance 100717) colliding with Polar Bear (ref instance 100089)
-Polar Bear instance exists. Setting mood to angry.
-PB Angry: Starting throw. Sprite: spr_polarbear_snowballdownright_sheet
-Game Paused
-Calling game_end from obj_pause_menu Quit Game button
-###game_end###0
-obj_controller Room End: Transitioning from room: rm_snow_fort
-Saving runtime state for leaving room: rm_snow_fort
-Room End WITH DEBUG: --- Start Instance Check ---
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100294 (obj_icetruck_broken)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100294
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100292 (obj_tube)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100292
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100291 (obj_tube)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100291
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100290 (obj_tube)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100290
-Room End WITH DEBUG: >>> Preparing to save state for: ref instance 100289 (obj_tube)
-Room End WITH DEBUG: +++ Successfully pushed state for ref instance 100289
-Room End WITH DEBUG: --- End Instance Check ---
-Room End DEBUG: Finished checking instances. Collected 5 savable states.
-Adding new room state array for: rm_snow_fort with size: 5
-Finished saving runtime state for room: rm_snow_fort
 Attempting to set gamepadcount to 0
 Script_Free called with 188 and global 25
 Unsetting previous scheduler resolution of 1
