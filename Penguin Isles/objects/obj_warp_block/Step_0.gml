@@ -46,14 +46,9 @@ if (_warp_instance != noone) {
     }
 
     // Prevent duplicate player instances during polar bear warps
-    if (_warp_instance.object_index == obj_polarbear) {
-        if (instance_exists(global.player_instance)) {
-            show_debug_message("DEBUG: Checking for duplicate player instance during polar bear warp.");
-            if (instance_exists(global.player_instance)) {
-                global.player_instance.destroy();
-                show_debug_message("DEBUG: Destroyed duplicate player instance during polar bear warp.");
-            }
-        }
+    if (_warp_instance.object_index == obj_polarbear && instance_exists(global.player_instance)) {
+        show_debug_message("DEBUG: Polar bear warp detected. Ensuring no duplication.");
+        global.player_instance.destroy();
     }
 
     show_debug_message("Creating obj_warp for instance: " + string(_warp_instance) + " (" + object_get_name(_warp_instance.object_index) + ")");
@@ -64,5 +59,7 @@ if (_warp_instance != noone) {
     warp_inst.target_x = target_x; // Assign the target x-coordinate
     warp_inst.target_y = target_y; // Assign the target y-coordinate
 
-    global.warp_cooldown = true; // Activate cooldown
+    // Activate cooldown and set timer for reset
+    global.warp_cooldown = true;
+    alarm[0] = room_speed * 2; // 2-second cooldown
 }

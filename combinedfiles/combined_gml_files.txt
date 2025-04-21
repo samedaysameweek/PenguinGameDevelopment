@@ -7057,6 +7057,11 @@ if (room == target_rm && image_index < 1) {
     instance_destroy();
 }
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_warp_block
+File: Alarm_0.gml
+/// Alarm[0] Event - Reset Warp Cooldown
+global.warp_cooldown = false;
+show_debug_message("DEBUG: Warp cooldown reset.");
+Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_warp_block
 File: Create_0.gml
 target_rm = 0;
 target_x = 0;
@@ -7138,14 +7143,9 @@ if (_warp_instance != noone) {
     }
 
     // Prevent duplicate player instances during polar bear warps
-    if (_warp_instance.object_index == obj_polarbear) {
-        if (instance_exists(global.player_instance)) {
-            show_debug_message("DEBUG: Checking for duplicate player instance during polar bear warp.");
-            if (instance_exists(global.player_instance)) {
-                global.player_instance.destroy();
-                show_debug_message("DEBUG: Destroyed duplicate player instance during polar bear warp.");
-            }
-        }
+    if (_warp_instance.object_index == obj_polarbear && instance_exists(global.player_instance)) {
+        show_debug_message("DEBUG: Polar bear warp detected. Ensuring no duplication.");
+        global.player_instance.destroy();
     }
 
     show_debug_message("Creating obj_warp for instance: " + string(_warp_instance) + " (" + object_get_name(_warp_instance.object_index) + ")");
@@ -7156,7 +7156,9 @@ if (_warp_instance != noone) {
     warp_inst.target_x = target_x; // Assign the target x-coordinate
     warp_inst.target_y = target_y; // Assign the target y-coordinate
 
-    global.warp_cooldown = true; // Activate cooldown
+    // Activate cooldown and set timer for reset
+    global.warp_cooldown = true;
+    alarm[0] = room_speed * 2; // 2-second cooldown
 }
 Folder: D:\PenguinIsleProject\Penguin Isles\objects\obj_warp_map
 File: Create_0.gml

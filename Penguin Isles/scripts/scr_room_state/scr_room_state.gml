@@ -17,8 +17,7 @@ function load_room_state(room_id, is_fresh_load) {
         show_debug_message("Destroying existing savable instances (Fresh Load)...");
         with (all) {
             if (variable_instance_exists(id, "is_savable") && is_savable &&
-                 id != global.player_instance && object_index != obj_controller && object_index != obj_ui_manager &&
-                 (object_index != obj_polarbear || !instance_exists(global.player_instance)))
+                 id != global.player_instance && object_index != obj_controller && object_index != obj_ui_manager)
              { instance_destroy(); /* Log if needed */ }
         }
         show_debug_message("Finished destroying old instances (Fresh Load).");
